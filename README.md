@@ -1,15 +1,17 @@
 # Yogur
 
-    #make init
+    make init
     
-    #make all
+    make all
 
-    #make run < inputfile
+    make run < inputfile
 
-    #make test < test.pl
+    make test < test.pl
 
-    #The repo has been updated with a complete and throughout example of CUP and JLex usage.
-    #If you wish to try something just replace the example.* with your desired name in the makefile or name them example.* or w/e
+    The repo has been updated with a complete and throughout example of CUP and JLex usage.
+
+    If you wish to try something just replace the example.* with your desired name in the makefile or name them example.* or w/e
     
-    
+    Language of examples:
+    https://en.wikipedia.org/wiki/PL/0
     
