@@ -14,14 +14,14 @@ lex: example.lex
 
 build: sym.java parser.java Yylex.java
 	$(JAVAC) Program.java
-	$(JAVAC) sym.java parser.java Yylex.java
+	$(JAVAC) -cp $(CLASSPATH) sym.java parser.java Yylex.java
 
 all:
 	$(JAVA) -jar java_cup_jars/java-cup-11b.jar example.cup
 	$(JAVA) JLex.Main example.lex
 	mv example.lex.java Yylex.java
-	$(JAVAC) Program.java
 	
+	$(JAVAC) Program.java
 	$(JAVAC) -cp $(CLASSPATH) sym.java parser.java Yylex.java
 
 run:
