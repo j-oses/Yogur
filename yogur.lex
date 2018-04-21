@@ -1,6 +1,56 @@
 import java_cup.runtime.Symbol;
 %%
 %cup
+%eofval{
+  return sym.EOF;
+%eofval}
+
+letra = ([A-Z]|[a-z])
+digito = [0-9]
+entero = [\+,\-]?{digito}*
+separador = [\t\b\r\n]
+delimitador = $
+comentario = //[^\n]*
+abrircom = /\*
+cerrarcom = \*/
+identificador = {letra}({letra}|{digito}|_)*
+identificadorTipo = [A-Z]({letra}|{digito}|_)*
+
+opAsignacion = \=
+opSuma = \+
+opResta = \-
+opProducto = \*
+opDivision = /
+opAnd = (and)|(&&)
+opOr = (or)|(\|\|)
+opNot = !|(not)
+opAcceso = \.
+opRange = :
+opEq = \=\=
+opGeq = >\=
+opGreater = >
+opLeq = <\=
+opLess = <
+
+corcheteApertura = \[
+corcheteCierre = \]
+parentesisApertura = \(
+parentesisCierre = \)
+bloqueApertura = \{
+bloqueCierre = \}
+
+true = true
+false = false
+def = def
+var = var
+class = class
+if = if
+else = else
+while = while
+for = for
+in = in
+to = to
+
 %%
 
 "var"			{return new Symbol(sym.VAR); }
@@ -37,4 +87,4 @@ import java_cup.runtime.Symbol;
 [a-zA-Z]+ 		{return new Symbol(sym.ID, yytext()); }
 
 [ \t\r\n\f]			{/* ignore white space */}
-. {System.err.println("Illegal character: "+yytext());}
+. {System.err.println("Illegal character: " + yytext());}
