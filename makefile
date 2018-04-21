@@ -41,6 +41,4 @@ vclean:
 	-rm Yylex.java
 	-rm parser.java
 	-rm sym.java
-	-rm java_cup/*.class
-	-rm java_cup/runtime/*.class
 	-rm JLex/*.class
