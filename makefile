@@ -8,9 +8,9 @@ init:
 parse: example.cup
 	$(JAVA) -jar java_cup_jars/java-cup-11b-runtime.jar example.cup
 	
-lex: example.lex
-	$(JAVA) JLex.Main example.lex
-	mv example.lex.java Yylex.java
+lex: yogur.lex
+	$(JAVA) JLex.Main yogur.lex
+	mv yogur.lex.java YogurLex.java
 
 build: sym.java parser.java Yylex.java
 	$(JAVAC) Program.java

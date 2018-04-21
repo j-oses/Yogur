@@ -7,30 +7,31 @@ import java_cup.runtime.Symbol;
 
 letra = ([A-Z]|[a-z])
 digito = [0-9]
-entero = [\+,\-]?{digito}*
-separador = [\t\b\r\n]
-delimitador = $
-comentario = //[^\n]*
-abrircom = /\*
-cerrarcom = \*/
+entero = [\+,\-]?{digito}+
+boolean = ((true)|(false))
+separador = [ \t\b\r]
+delimitador = \n
+comentarioLinea = //[^\n]*
+comentarioMultilinea = /\*(.|\n)*\*/
 identificador = {letra}({letra}|{digito}|_)*
 identificadorTipo = [A-Z]({letra}|{digito}|_)*
 
-opAsignacion = \=
+opAsignacion = "="
 opSuma = \+
 opResta = \-
 opProducto = \*
 opDivision = /
-opAnd = (and)|(&&)
-opOr = (or)|(\|\|)
-opNot = !|(not)
+opMod = %
+opAnd = ((and)|(&&))
+opOr = ((or)|(\|\|))
+opNot = (\!|(not))
 opAcceso = \.
 opRange = :
-opEq = \=\=
-opGeq = >\=
-opGreater = >
-opLeq = <\=
-opLess = <
+opEq = "=="
+opGeq = ">="
+opGreater = ">"
+opLeq = "<="
+opLess = "<"
 
 corcheteApertura = \[
 corcheteCierre = \]
@@ -39,8 +40,6 @@ parentesisCierre = \)
 bloqueApertura = \{
 bloqueCierre = \}
 
-true = true
-false = false
 def = def
 var = var
 class = class
@@ -53,38 +52,48 @@ to = to
 
 %%
 
-"var"			{return new Symbol(sym.VAR); }
-"if"			{return new Symbol(sym.IF); }
-"while"			{return new Symbol(sym.WHILE); }
-"for"			{return new Symbol(sym.FOR); }
-"print"			{return new Symbol(sym.PRINT); }
+{entero}				{return new Symbol(sym.INT, new Integer(yytext())); }
+{boolean}				{return new Symbol(sym.BOOL, new Boolean(yytext())); }
+{identificador} 		{return new Symbol(sym.ID, yytext()); }
+{identificadorTipo}		{return new Symbol(sym.TYPE, yytext()); }
+{delimitador}			{return new Symbol(sym.DELIMITER); }
+{comentarioLinea}		{}
+{comentarioMultilinea}	{}
+{separador}				{}
 
-"=="			{return new Symbol(sym.EQ); }
-"#"				{return new Symbol(sym.NEQ); }
-"<"				{return new Symbol(sym.LT); }
-"<="			{return new Symbol(sym.LTE); }
-">"				{return new Symbol(sym.GT); }
-">="			{return new Symbol(sym.GTE); }
 
-"("				{return new Symbol(sym.LPAREN); }
-")"				{return new Symbol(sym.RPAREN); }
-"["				{return new Symbol(sym.LSQUARE); }
-"]"				{return new Symbol(sym.RSQUARE); }
-"{"				{return new Symbol(sym.LBRACKET); }
-"}"				{return new Symbol(sym.RBRACKET); }
+{opAsignacion}			{return new Symbol(sym.ASIGN); }
+{opSuma}				{return new Symbol(sym.SUM); }
+{opResta}				{return new Symbol(sym.SUBS); }
+{opProducto}			{return new Symbol(sym.PROD); }
+{opDivision}			{return new Symbol(sym.DIV); }
+{opMod}					{return new Symbol(sym.MOD); }
+{opAnd}					{return new Symbol(sym.AND); }
+{opOr}					{return new Symbol(sym.OR); }
+{opNot}					{return new Symbol(sym.NOT); }
+{opAcceso}				{return new Symbol(sym.ACCESS); }
+{opRange}				{return new Symbol(sym.RANGE); }
+{opEq}					{return new Symbol(sym.EQ); }
+{opGeq}					{return new Symbol(sym.GEQ); }
+{opGreater}				{return new Symbol(sym.GT); }
+{opLeq}					{return new Symbol(sym.LEQ); }
+{opLess}				{return new Symbol(sym.LT); }
 
-","				{return new Symbol(sym.COMMA); }
-":"             {return new Symbol(sym.COLON); }
-";"				{return new Symbol(sym.SEMICOLON); }
-"="			    {return new Symbol(sym.ASSIGN); }
-"+"				{return new Symbol(sym.PLUS); }
-"-"				{return new Symbol(sym.MINUS); }
-"*"				{return new Symbol(sym.MULT); }
-"/"				{return new Symbol(sym.DIV); }
-"."				{return new Symbol(sym.PERIOD); }
+{corcheteApertura}		{return new Symbol(sym.LSQUARE); }
+{corcheteCierre}		{return new Symbol(sym.RSQUARE); }
+{parentesisApertura}	{return new Symbol(sym.LPAREN); }
+{parentesisCierre}		{return new Symbol(sym.RPAREN); }
+{bloqueApertura}		{return new Symbol(sym.LBRACKET); }
+{bloqueCierre}			{return new Symbol(sym.RBRACKET); }
 
-[0-9]+			{return new Symbol(sym.INT, new Integer(yytext())); }
-[a-zA-Z]+ 		{return new Symbol(sym.ID, yytext()); }
+{def}					{return new Symbol(sym.DEF); }
+{var}					{return new Symbol(sym.VAR); }
+{class}					{return new Symbol(sym.CLASS); }
+{if}					{return new Symbol(sym.IF); }
+{else}					{return new Symbol(sym.ELSE); }
+{while}					{return new Symbol(sym.WHILE); }
+{for}					{return new Symbol(sym.FOR); }
+{in}					{return new Symbol(sym.IN); }
+{to}					{return new Symbol(sym.TO); }
 
-[ \t\r\n\f]			{/* ignore white space */}
 . {System.err.println("Illegal character: " + yytext());}
