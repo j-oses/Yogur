@@ -1,0 +1,20 @@
+var a: Int = 3
+var b: Int = 5
+
+var c: Bool = true
+
+while (a == b) && true {
+	
+}
+
+var d: Int[10]
+
+def patata(arg1: Int, arg2: Bool) {
+	
+}
+
+class Class {
+	var e: Int[10]
+	e[:4]
+	e[5:]
+}
