@@ -5,16 +5,19 @@ CLASSPATH = "java_cup_jars/java-cup-11b.jar:java_cup_jars/java-cup-11b-runtime.j
 init:
 	$(JAVAC) JLex/*.java
 
-parse: example.cup
-	$(JAVA) -jar java_cup_jars/java-cup-11b-runtime.jar example.cup
+parse: yogur.cup YogurLex.java
+	$(JAVA) -cp java_cup_jars/java-cup-11b.jar java_cup.Main yogur.cup
+	mv parser.java IntelliJ/src/yogur/cup/parser.java
+	mv sym.java IntelliJ/src/yogur/cup/sym.java
 	
 lex: yogur.lex
 	$(JAVA) JLex.Main yogur.lex
+	cp yogur.lex.java IntelliJ/src/yogur/jlex/YogurLex.java
 	mv yogur.lex.java YogurLex.java
 
-build: sym.java parser.java Yylex.java
+build: sym.java parser.java YogurLex.java
 	$(JAVAC) Program.java
-	$(JAVAC) -cp $(CLASSPATH) sym.java parser.java Yylex.java
+	$(JAVAC) -cp $(CLASSPATH) sym.java parser.java YogurLex.java
 
 all:
 	$(JAVA) -jar java_cup_jars/java-cup-11b.jar example.cup

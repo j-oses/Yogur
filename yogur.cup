@@ -1,0 +1,26 @@
+package yogur.cup;
+
+import java_cup.runtime.*;
+import java.util.*;
+
+import yogur.lex.YogurLex;
+
+action code {:
+:}
+
+scan with {: return getScanner().next_token(); :};
+
+parser code {:
+	public static void main (String args[]) throws Exception{
+		new parser(new YogurLex(System.in)).parse();
+	}
+:}
+
+terminal INT, BOOL, ID, TYPE, DELIMITER, COMMA;
+terminal ASSIGN, SUM, SUBS, PROD, DIV, MOD, AND, OR, NOT, ACCESS, RANGE, EQ, NEQ, GEQ, GT, LEQ, LT;
+terminal LPAREN, RPAREN, LSQUARE, RSQUARE, LBRACKET, RBRACKET;
+terminal DEF, VAR, CLASS, IF, ELSE, WHILE, FOR, IN, TO;
+
+non terminal Program;
+
+Program ::= INT;

@@ -1,9 +1,13 @@
+package yogur.jlex;
+
 import java_cup.runtime.Symbol;
+import yogur.cup.sym;
 %%
 %cup
 %eofval{
-  return sym.EOF;
+  return new Symbol(sym.EOF);
 %eofval}
+%class YogurLex
 
 letra = ([A-Z]|[a-z])
 digito = [0-9]
@@ -15,6 +19,7 @@ comentarioLinea = //[^\n]*
 comentarioMultilinea = /\*(.|\n)*\*/
 identificador = {letra}({letra}|{digito}|_)*
 identificadorTipo = [A-Z]({letra}|{digito}|_)*
+coma = \,
 
 opAsignacion = "="
 opSuma = \+
@@ -28,6 +33,7 @@ opNot = (\!|(not))
 opAcceso = \.
 opRange = :
 opEq = "=="
+opNeq = "!="
 opGeq = ">="
 opGreater = ">"
 opLeq = "<="
@@ -60,9 +66,9 @@ to = to
 {comentarioLinea}		{}
 {comentarioMultilinea}	{}
 {separador}				{}
+{coma}					{return new Symbol(sym.COMMA); }
 
-
-{opAsignacion}			{return new Symbol(sym.ASIGN); }
+{opAsignacion}			{return new Symbol(sym.ASSIGN); }
 {opSuma}				{return new Symbol(sym.SUM); }
 {opResta}				{return new Symbol(sym.SUBS); }
 {opProducto}			{return new Symbol(sym.PROD); }
@@ -74,6 +80,7 @@ to = to
 {opAcceso}				{return new Symbol(sym.ACCESS); }
 {opRange}				{return new Symbol(sym.RANGE); }
 {opEq}					{return new Symbol(sym.EQ); }
+{opNeq}					{return new Symbol(sym.NEQ); }
 {opGeq}					{return new Symbol(sym.GEQ); }
 {opGreater}				{return new Symbol(sym.GT); }
 {opLeq}					{return new Symbol(sym.LEQ); }
