@@ -238,14 +238,14 @@ public class YogurLex implements java_cup.runtime.Scanner {
 		/* 43 */ YY_NO_ANCHOR,
 		/* 44 */ YY_NO_ANCHOR,
 		/* 45 */ YY_NO_ANCHOR,
-		/* 46 */ YY_NOT_ACCEPT,
-		/* 47 */ YY_NO_ANCHOR,
+		/* 46 */ YY_NO_ANCHOR,
+		/* 47 */ YY_NOT_ACCEPT,
 		/* 48 */ YY_NO_ANCHOR,
 		/* 49 */ YY_NO_ANCHOR,
 		/* 50 */ YY_NO_ANCHOR,
 		/* 51 */ YY_NO_ANCHOR,
-		/* 52 */ YY_NOT_ACCEPT,
-		/* 53 */ YY_NO_ANCHOR,
+		/* 52 */ YY_NO_ANCHOR,
+		/* 53 */ YY_NOT_ACCEPT,
 		/* 54 */ YY_NO_ANCHOR,
 		/* 55 */ YY_NO_ANCHOR,
 		/* 56 */ YY_NO_ANCHOR,
@@ -273,37 +273,38 @@ public class YogurLex implements java_cup.runtime.Scanner {
 		/* 78 */ YY_NO_ANCHOR,
 		/* 79 */ YY_NO_ANCHOR,
 		/* 80 */ YY_NO_ANCHOR,
-		/* 81 */ YY_NO_ANCHOR
+		/* 81 */ YY_NO_ANCHOR,
+		/* 82 */ YY_NO_ANCHOR
 	};
 	private int yy_cmap[] = unpackFromString(1,130,
 "19:8,21:2,20,19:2,17,19:18,21,28,19:3,25,26,19,35,36,18,23,39,24,32,16,40:1" +
 "0,30,19,34,22,33,19:2,43:26,29,19,31,19,44,19,5,42,7,1,2,3,42,12,10,42:2,8," +
 "42,14,13,42:2,6,9,15,41,4,11,42:3,37,27,38,19:2,0:2")[0];
 
-	private int yy_rmap[] = unpackFromString(1,82,
-"0,1,2,3,1:4,4,5:2,1,6,7,8,1:2,9,10,1:4,5:2,11,12:4,13,1:7,12:5,14,12:2,14,1" +
-"5,16,12,1,12,17,18,19,20,21,12,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36" +
-",37,38,39,40,41,12,42,43,44")[0];
+	private int yy_rmap[] = unpackFromString(1,83,
+"0,1,2,3,1:4,4,5,6,1,7,8,9,1:2,10,11,1:4,5:2,12,13:4,14,1:8,13:5,15,13:2,15," +
+"16,17,13,1,13,18,19,20,21,22,13,23,24,25,26,27,28,29,30,31,32,33,34,35,36,3" +
+"7,38,39,40,41,42,13,43,44,45")[0];
 
-	private int yy_nxt[][] = unpackFromString(45,45,
-"1,2,73,75,76,77,78,79,78:2,47,80,78,53,81,55,3,4,5,6,7,4,8,9,10,11,48,54,12" +
-",13,14,15,16,17,18,19,20,21,22,23,24,78:2,25,6,-1:46,78,56,78:13,-1:24,57,7" +
-"8:2,57:2,-1:16,30,-1,46,-1:48,31,-1:62,24,-1:26,33,-1:52,34,-1:45,35,-1:35," +
-"36,-1:44,37,-1:23,25:15,-1:24,25:5,-1,78:15,-1:24,57,78:2,57:2,-1,30:19,-1," +
-"30:24,-1,46:16,-1,52,46:26,-1,78:2,26,78:10,27,78,-1:24,57,78:2,57:2,-1:26," +
-"32,-1:19,46:15,43,-1,52,46:26,-1,78:5,28,78:9,-1:24,57,78:2,57:2,-1:27,50,-" +
-"1:18,78:5,66,78:6,29,78:2,-1:24,57,78:2,57:2,-1,78:2,38,78:12,-1:24,57,78:2" +
-",57:2,-1,78:8,67,78:6,-1:24,57,78:2,57:2,-1,78:7,68,78:7,-1:24,57,78:2,57:2" +
-",-1,78:5,39,78:9,-1:24,57,78:2,57:2,-1,78:5,40,78:9,-1:24,57,78:2,57:2,-1,5" +
-"1,78:14,-1:24,57,78:2,57:2,-1,78:4,74,78:10,-1:24,57,78:2,57:2,-1,78:9,69,7" +
-"8:5,-1:24,57,78:2,57:2,-1,78:14,49,-1:24,57,78:2,57:2,-1,78:15,-1:24,57,70," +
-"78,57:2,-1,78,41,78:13,-1:24,57,78:2,57:2,-1,78:8,70,78:6,-1:24,57,78:2,57:" +
-"2,-1,78:7,72,78:7,-1:24,57,78:2,57:2,-1,78,42,78:13,-1:24,57,78:2,57:2,-1,7" +
-"8:8,44,78:6,-1:24,57,78:2,57:2,-1,78,45,78:13,-1:24,57,78:2,57:2,-1,78:7,58" +
-",78:7,-1:24,57,78:2,57:2,-1,78:8,71,78:6,-1:24,57,78:2,57:2,-1,78:4,59,78:7" +
-",60,78:2,-1:24,57,78:2,57:2,-1,78:4,61,78:10,-1:24,57,78:2,57:2,-1,78:13,62" +
-",78,-1:24,57,78:2,57:2,-1,78:7,63,78:7,-1:24,57,78:2,57:2,-1,78:11,64,78:3," +
-"-1:24,57,78:2,57:2,-1,78:12,65,78:2,-1:24,57,78:2,57:2");
+	private int yy_nxt[][] = unpackFromString(46,45,
+"1,2,74,76,77,78,79,80,79:2,48,81,79,54,82,56,3,4,5,6,7,4,8,9,10,11,49,55,12" +
+",13,14,15,16,17,18,19,20,21,22,23,24,79:2,25,6,-1:46,79,57,79:13,-1:24,58,7" +
+"9:2,58:2,-1:16,30,-1,47,-1:48,31,-1:62,24,-1:37,32,-1:6,24,-1:26,34,-1:52,3" +
+"5,-1:45,36,-1:35,37,-1:44,38,-1:23,25:15,-1:24,25:5,-1,79:15,-1:24,58,79:2," +
+"58:2,-1,30:19,-1,30:24,-1,47:16,-1,53,47:26,-1,79:2,26,79:10,27,79,-1:24,58" +
+",79:2,58:2,-1:26,33,-1:19,47:15,44,-1,53,47:26,-1,79:5,28,79:9,-1:24,58,79:" +
+"2,58:2,-1:27,51,-1:18,79:5,67,79:6,29,79:2,-1:24,58,79:2,58:2,-1,79:2,39,79" +
+":12,-1:24,58,79:2,58:2,-1,79:8,68,79:6,-1:24,58,79:2,58:2,-1,79:7,69,79:7,-" +
+"1:24,58,79:2,58:2,-1,79:5,40,79:9,-1:24,58,79:2,58:2,-1,79:5,41,79:9,-1:24," +
+"58,79:2,58:2,-1,52,79:14,-1:24,58,79:2,58:2,-1,79:4,75,79:10,-1:24,58,79:2," +
+"58:2,-1,79:9,70,79:5,-1:24,58,79:2,58:2,-1,79:14,50,-1:24,58,79:2,58:2,-1,7" +
+"9:15,-1:24,58,71,79,58:2,-1,79,42,79:13,-1:24,58,79:2,58:2,-1,79:8,71,79:6," +
+"-1:24,58,79:2,58:2,-1,79:7,73,79:7,-1:24,58,79:2,58:2,-1,79,43,79:13,-1:24," +
+"58,79:2,58:2,-1,79:8,45,79:6,-1:24,58,79:2,58:2,-1,79,46,79:13,-1:24,58,79:" +
+"2,58:2,-1,79:7,59,79:7,-1:24,58,79:2,58:2,-1,79:8,72,79:6,-1:24,58,79:2,58:" +
+"2,-1,79:4,60,79:7,61,79:2,-1:24,58,79:2,58:2,-1,79:4,62,79:10,-1:24,58,79:2" +
+",58:2,-1,79:13,63,79,-1:24,58,79:2,58:2,-1,79:7,64,79:7,-1:24,58,79:2,58:2," +
+"-1,79:11,65,79:3,-1:24,58,79:2,58:2,-1,79:12,66,79:2,-1:24,58,79:2,58:2");
 
 	public java_cup.runtime.Symbol next_token ()
 		throws java.io.IOException {
@@ -475,91 +476,91 @@ public class YogurLex implements java_cup.runtime.Scanner {
 					case -32:
 						break;
 					case 32:
-						{return new Symbol(sym.AND); }
+						{return new Symbol(sym.ARROW); }
 					case -33:
 						break;
 					case 33:
-						{return new Symbol(sym.NEQ); }
+						{return new Symbol(sym.AND); }
 					case -34:
 						break;
 					case 34:
-						{return new Symbol(sym.LRANGE); }
+						{return new Symbol(sym.NEQ); }
 					case -35:
 						break;
 					case 35:
-						{return new Symbol(sym.RRANGE); }
+						{return new Symbol(sym.LRANGE); }
 					case -36:
 						break;
 					case 36:
-						{return new Symbol(sym.GEQ); }
+						{return new Symbol(sym.RRANGE); }
 					case -37:
 						break;
 					case 37:
-						{return new Symbol(sym.LEQ); }
+						{return new Symbol(sym.GEQ); }
 					case -38:
 						break;
 					case 38:
-						{return new Symbol(sym.DEF); }
+						{return new Symbol(sym.LEQ); }
 					case -39:
 						break;
 					case 39:
-						{return new Symbol(sym.FOR); }
+						{return new Symbol(sym.DEF); }
 					case -40:
 						break;
 					case 40:
-						{return new Symbol(sym.VAR); }
+						{return new Symbol(sym.FOR); }
 					case -41:
 						break;
 					case 41:
-						{return new Symbol(sym.ELSE); }
+						{return new Symbol(sym.VAR); }
 					case -42:
 						break;
 					case 42:
-						{return new Symbol(sym.BOOL, new Boolean(yytext())); }
+						{return new Symbol(sym.ELSE); }
 					case -43:
 						break;
 					case 43:
-						{}
+						{return new Symbol(sym.BOOL, new Boolean(yytext())); }
 					case -44:
 						break;
 					case 44:
-						{return new Symbol(sym.CLASS); }
+						{}
 					case -45:
 						break;
 					case 45:
-						{return new Symbol(sym.WHILE); }
+						{return new Symbol(sym.CLASS); }
 					case -46:
 						break;
-					case 47:
-						{return new Symbol(sym.ID, yytext()); }
+					case 46:
+						{return new Symbol(sym.WHILE); }
 					case -47:
 						break;
 					case 48:
-						{System.err.println("Illegal character: " + yytext());}
+						{return new Symbol(sym.ID, yytext()); }
 					case -48:
 						break;
 					case 49:
-						{return new Symbol(sym.NOT); }
+						{System.err.println("Illegal character: " + yytext());}
 					case -49:
 						break;
 					case 50:
-						{return new Symbol(sym.OR); }
+						{return new Symbol(sym.NOT); }
 					case -50:
 						break;
 					case 51:
-						{return new Symbol(sym.AND); }
+						{return new Symbol(sym.OR); }
 					case -51:
 						break;
-					case 53:
-						{return new Symbol(sym.ID, yytext()); }
+					case 52:
+						{return new Symbol(sym.AND); }
 					case -52:
 						break;
 					case 54:
-						{System.err.println("Illegal character: " + yytext());}
+						{return new Symbol(sym.ID, yytext()); }
 					case -53:
 						break;
 					case 55:
-						{return new Symbol(sym.ID, yytext()); }
+						{System.err.println("Illegal character: " + yytext());}
 					case -54:
 						break;
 					case 56:
@@ -665,6 +666,10 @@ public class YogurLex implements java_cup.runtime.Scanner {
 					case 81:
 						{return new Symbol(sym.ID, yytext()); }
 					case -80:
+						break;
+					case 82:
+						{return new Symbol(sym.ID, yytext()); }
+					case -81:
 						break;
 					default:
 						yy_error(YY_E_INTERNAL,false);

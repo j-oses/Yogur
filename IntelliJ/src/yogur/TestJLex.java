@@ -11,9 +11,9 @@ import java.io.File;
 
 public class TestJLex {
     public static void main(String args[]) {
-		try {
-			File file = new File("./../examples/simple.yogur");
-			FileInputStream is = new FileInputStream(file);
+		File file = new File("./../examples/simple.yogur");
+
+		try (FileInputStream is = new FileInputStream(file)) {
 			YogurLex ylex = new YogurLex(is);
 
 			Symbol token = ylex.next_token();

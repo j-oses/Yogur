@@ -31,7 +31,7 @@ opMod = %
 opAnd = ((and)|(&&))
 opOr = ((or)|(\|\|))
 opNot = (\!|(not))
-opAcceso = \.
+opDot = \.
 opLRange = \[:
 opRRange = :\]
 opEq = "=="
@@ -41,6 +41,7 @@ opGreater = ">"
 opLeq = "<="
 opLess = "<"
 opColon = :
+opArrow = "->"
 
 corcheteApertura = \[
 corcheteCierre = \]
@@ -86,7 +87,7 @@ to = to
 {opNot}					{return new Symbol(sym.NOT); }
 {opLRange}				{return new Symbol(sym.LRANGE); }
 {opRRange}				{return new Symbol(sym.RRANGE); }
-{opAcceso}				{return new Symbol(sym.ACCESS); }
+{opDot}					{return new Symbol(sym.DOT); }
 {opEq}					{return new Symbol(sym.EQ); }
 {opNeq}					{return new Symbol(sym.NEQ); }
 {opGeq}					{return new Symbol(sym.GEQ); }
@@ -94,6 +95,7 @@ to = to
 {opLeq}					{return new Symbol(sym.LEQ); }
 {opLess}				{return new Symbol(sym.LT); }
 {opColon}				{return new Symbol(sym.COLON); }
+{opArrow}				{return new Symbol(sym.ARROW); }
 
 {corcheteApertura}		{return new Symbol(sym.LSQUARE); }
 {corcheteCierre}		{return new Symbol(sym.RSQUARE); }
