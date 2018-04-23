@@ -12,7 +12,7 @@ scan with {: return getScanner().next_token(); :};
 
 parser code {:
 	public static void main (String args[]) throws Exception{
-		new parser(new YogurLex(System.in)).parse();
+		new YogurParser(new YogurLex(System.in)).parse();
 	}
 :}
 
@@ -24,15 +24,14 @@ terminal DEF, VAR, CLASS, IF, ELSE, WHILE, FOR, IN, TO;
 non terminal S, Inst, Dec, DVar, DProc, DFunc, DClass, Block;
 non terminal If, While, For, Ass;
 non terminal Exp, Exp1, Exp2, Exp3, Exp4, Exp5, Exp6, Exp7;
-non terminal VarType, VarId, DotVar, Index, LIndex, FuncId, ArgList, Args, Arg, ClassBody, BlockBody, Elsif, Else;
+non terminal VarType, VarId, DotId, Index, FuncCall, CommaExp, FuncId, ArgList, Args, Arg, ClassBody, BlockBody, Elsif, Else;
 
 
-
-S ::= S DELIMITER Inst | S DELIMITER Dec | S DELIMITER DClass | Inst | Dec | DClass;
+S ::= S DELIMITER Inst | S DELIMITER Dec | S DELIMITER DClass | S DELIMITER | Inst | Dec | DClass | ;
 Inst ::= If | While | For | Ass | Block | DVar;
 Dec ::= DProc | DFunc;
 
-DVar ::= VAR Arg;
+DVar ::= VAR Arg | VAR Arg ASSIGN Exp;
 DProc ::= DEF FuncId LPAREN ArgList RPAREN Block;
 DFunc ::= DEF FuncId LPAREN ArgList RPAREN ARROW Arg Block;
 DClass ::= CLASS TYPE LBRACKET ClassBody RBRACKET;
@@ -52,13 +51,14 @@ Exp3 ::= Exp3 LT Exp4 | Exp3 LEQ Exp4 | Exp3 GT Exp4 | Exp3 GEQ Exp4 | Exp4;
 Exp4 ::= Exp4 EQ Exp5 | Exp4 NEQ Exp5 | Exp5;
 Exp5 ::= Exp5 AND Exp6 | Exp6;
 Exp6 ::= Exp6 OR Exp7 | Exp7;
-Exp7 ::= LPAREN Exp RPAREN | VarId | INT | BOOL;
+Exp7 ::= LPAREN Exp RPAREN | VarId | FuncCall | INT | BOOL;
 
-VarType ::= VarType LSQUARE Exp RSQUARE | TYPE;
-VarId ::= VarId Index | DotVar;
-DotVar ::= DotVar DOT ID | ID;
-Index ::= LIndex Exp RSQUARE | LSQUARE Exp RRANGE;
-LIndex ::= LSQUARE | LRANGE | LSQUARE Exp COLON;
+VarType ::= VarType LSQUARE INT RSQUARE | TYPE;
+VarId ::= VarId Index | DotId;
+DotId ::= DotId DOT ID | ID;
+Index ::= LSQUARE Exp RSQUARE | LSQUARE Exp RRANGE | LRANGE Exp RSQUARE | LSQUARE Exp COLON Exp RSQUARE;
+FuncCall ::= DotId LPAREN CommaExp RPAREN | DotId LPAREN RPAREN;
+CommaExp ::= CommaExp COMMA Exp | Exp;
 FuncId ::= ID;
 ArgList ::= Args | ;
 Args ::= Args COMMA Arg;

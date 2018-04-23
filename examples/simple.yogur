@@ -3,6 +3,7 @@ var b: Int = 5
 
 var c: Bool = true
 
+/*
 while (a == b) && true {
 	
 }
@@ -15,6 +16,10 @@ def patata(arg1: Int, arg2: Bool) {
 
 class Class {
 	var e: Int[10]
-	e[:4]
-	e[5:]
+	
+	def classPatata(arg1: Int) -> arg2: Bool {
+		c = c + 1
+		b = b || b
+	}
 }
+*/

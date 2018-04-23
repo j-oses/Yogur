@@ -6,8 +6,8 @@ init:
 	$(JAVAC) JLex/*.java
 
 parse: yogur.cup YogurLex.java
-	$(JAVA) -cp java_cup_jars/java-cup-11b.jar java_cup.Main yogur.cup
-	mv parser.java IntelliJ/src/yogur/cup/parser.java
+	$(JAVA) -cp java_cup_jars/java-cup-11b.jar java_cup.Main -parser YogurParser yogur.cup
+	mv YogurParser.java IntelliJ/src/yogur/cup/YogurParser.java
 	mv sym.java IntelliJ/src/yogur/cup/sym.java
 	
 lex: yogur.lex

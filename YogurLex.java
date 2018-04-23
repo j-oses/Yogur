@@ -412,7 +412,7 @@ public class YogurLex implements java_cup.runtime.Scanner {
 					case -16:
 						break;
 					case 16:
-						{return new Symbol(sym.ACCESS); }
+						{return new Symbol(sym.DOT); }
 					case -17:
 						break;
 					case 17:
