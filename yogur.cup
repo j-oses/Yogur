@@ -64,4 +64,4 @@ ArgList ::= Args | ;
 Args ::= Args COMMA Arg;
 Arg ::= ID COLON VarType;
 ClassBody ::= ClassBody DELIMITER Dec | ClassBody DELIMITER DVar | Dec | DVar;
-BlockBody ::= BlockBody DELIMITER DVar | BlockBody DELIMITER Inst | DVar | Inst;
+BlockBody ::= BlockBody DELIMITER Inst | Inst;
