@@ -74,47 +74,47 @@ If ::= IF Exp:exp Block:b Else:elsee		{: RESULT = new IfStructure((Expression)ex
 Else ::= ELSE If:ife						{: RESULT = new Block((Block)ife); :}
 	| ELSE Block:b							{: RESULT = b; :}
 ;
-While ::= WHILE Exp:e Block:b				{: RESULT = new WhileStructure((Expression)e, (Block)b; :}
+While ::= WHILE Exp:e Block:b				{: RESULT = new WhileStructure((Expression)e, (Block)b); :}
 ;
 For ::= FOR ID:id IN Exp:start TO Exp:end Block:b		{: RESULT = new ForStructure(new SimpleIdentifier((String)id), (Expression)start, (Expression)end, (Block)b); :}
 ;
-Ass ::= VarId:id ASSIGN Exp:e				{: RESULT = new Assignation((VarIdentifier)id, (Expression)e) :}
+Ass ::= VarId:id ASSIGN Exp:e				{: RESULT = new Assignation((VarIdentifier)id, (Expression)e); :}
 ;
 
-Exp ::= SUBS Exp
-	| NOT Exp
-	| Exp1
+Exp ::= SUBS Exp:e				{: RESULT = new UnaryOperation((Expression)e, UnaryOperation.Operator.NEG); :}
+	| NOT Exp:e					{: RESULT = new UnaryOperation((Expression)e, UnaryOperation.Operator.NOT); :}
+	| Exp1:e					{: RESULT = e; :}
 ;
-Exp1 ::= Exp1 PROD Exp2
-	| Exp1 DIV Exp2
-	| Exp1 MOD Exp2
-	| Exp2
+Exp1 ::= Exp1:e1 PROD Exp2:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.PROD); :}
+	| Exp1:e1 DIV Exp2:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.DIV); :}
+	| Exp1:e1 MOD Exp2:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.MOD); :}
+	| Exp2:e					{: RESULT = e; :}
 ;
-Exp2 ::= Exp2 SUM Exp3
-	| Exp2 SUBS Exp3
-	| Exp3
+Exp2 ::= Exp2:e1 SUM Exp3:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.SUM); :}	
+	| Exp2:e1 SUBS Exp3:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.SUBS); :}
+	| Exp3:e					{: RESULT = e; :}
 ;
-Exp3 ::= Exp3 LT Exp4
-	| Exp3 LEQ Exp4
-	| Exp3 GT Exp4
-	| Exp3 GEQ Exp4
-	| Exp4
+Exp3 ::= Exp3:e1 LT Exp4:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.LT); :}
+	| Exp3:e1 LEQ Exp4:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.LEQ); :}
+	| Exp3:e1 GT Exp4:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.GT); :}
+	| Exp3:e1 GEQ Exp4:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.GEQ); :}
+	| Exp4:e					{: RESULT = e; :}
 ;
-Exp4 ::= Exp4 EQ Exp5
-	| Exp4 NEQ Exp5
-	| Exp5
+Exp4 ::= Exp4:e1 EQ Exp5:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.EQ); :}
+	| Exp4:e1 NEQ Exp5:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.NEQ); :}
+	| Exp5:e					{: RESULT = e; :}
 ;
-Exp5 ::= Exp5 AND Exp6
-	| Exp6
+Exp5 ::= Exp5:e1 AND Exp6:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.AND); :}
+	| Exp6:e					{: RESULT = e; :}
 ;
-Exp6 ::= Exp6 OR Exp7
-	| Exp7
+Exp6 ::= Exp6:e1 OR Exp7:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.OR); :}
+	| Exp7:e					{: RESULT = e; :}
 ;
-Exp7 ::= LPAREN Exp RPAREN
-	| VarId
-	| FuncCall
-	| INT
-	| BOOL
+Exp7 ::= LPAREN Exp:e RPAREN	{: RESULT = e; :}
+	| VarId:id					{: RESULT = id; :}
+	| FuncCall:funcc			{: RESULT = funcc; :}
+	| INT:intLit				{: RESULT = new Constant(intLit); :}
+	| BOOL:boolLit				{: RESULT = new Constant(boolLit); :}
 ;
 
 VarType ::= VarType LSQUARE INT RSQUARE

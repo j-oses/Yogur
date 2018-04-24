@@ -791,7 +791,7 @@ class CUP$YogurParser$actions {
 		int bleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
-		 RESULT = new WhileStructure((Expression)e, (Block)b; 
+		 RESULT = new WhileStructure((Expression)e, (Block)b); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("While",9, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -827,7 +827,7 @@ class CUP$YogurParser$actions {
 		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
 		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
-		 RESULT = new Assignation((VarIdentifier)id, (Expression)e) 
+		 RESULT = new Assignation((VarIdentifier)id, (Expression)e); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Ass",11, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -836,7 +836,10 @@ class CUP$YogurParser$actions {
           case 29: // Exp ::= SUBS Exp 
             {
               Object RESULT =null;
-
+		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new UnaryOperation((Expression)e, UnaryOperation.Operator.NEG); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp",12, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -845,7 +848,10 @@ class CUP$YogurParser$actions {
           case 30: // Exp ::= NOT Exp 
             {
               Object RESULT =null;
-
+		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new UnaryOperation((Expression)e, UnaryOperation.Operator.NOT); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp",12, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -854,7 +860,10 @@ class CUP$YogurParser$actions {
           case 31: // Exp ::= Exp1 
             {
               Object RESULT =null;
-
+		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = e; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp",12, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -863,7 +872,13 @@ class CUP$YogurParser$actions {
           case 32: // Exp1 ::= Exp1 PROD Exp2 
             {
               Object RESULT =null;
-
+		int e1left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.PROD); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp1",13, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -872,7 +887,13 @@ class CUP$YogurParser$actions {
           case 33: // Exp1 ::= Exp1 DIV Exp2 
             {
               Object RESULT =null;
-
+		int e1left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.DIV); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp1",13, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -881,7 +902,13 @@ class CUP$YogurParser$actions {
           case 34: // Exp1 ::= Exp1 MOD Exp2 
             {
               Object RESULT =null;
-
+		int e1left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.MOD); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp1",13, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -890,7 +917,10 @@ class CUP$YogurParser$actions {
           case 35: // Exp1 ::= Exp2 
             {
               Object RESULT =null;
-
+		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = e; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp1",13, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -899,7 +929,13 @@ class CUP$YogurParser$actions {
           case 36: // Exp2 ::= Exp2 SUM Exp3 
             {
               Object RESULT =null;
-
+		int e1left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.SUM); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp2",14, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -908,7 +944,13 @@ class CUP$YogurParser$actions {
           case 37: // Exp2 ::= Exp2 SUBS Exp3 
             {
               Object RESULT =null;
-
+		int e1left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.SUBS); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp2",14, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -917,7 +959,10 @@ class CUP$YogurParser$actions {
           case 38: // Exp2 ::= Exp3 
             {
               Object RESULT =null;
-
+		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = e; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp2",14, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -926,7 +971,13 @@ class CUP$YogurParser$actions {
           case 39: // Exp3 ::= Exp3 LT Exp4 
             {
               Object RESULT =null;
-
+		int e1left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.LT); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp3",15, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -935,7 +986,13 @@ class CUP$YogurParser$actions {
           case 40: // Exp3 ::= Exp3 LEQ Exp4 
             {
               Object RESULT =null;
-
+		int e1left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.LEQ); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp3",15, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -944,7 +1001,13 @@ class CUP$YogurParser$actions {
           case 41: // Exp3 ::= Exp3 GT Exp4 
             {
               Object RESULT =null;
-
+		int e1left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.GT); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp3",15, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -953,7 +1016,13 @@ class CUP$YogurParser$actions {
           case 42: // Exp3 ::= Exp3 GEQ Exp4 
             {
               Object RESULT =null;
-
+		int e1left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.GEQ); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp3",15, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -962,7 +1031,10 @@ class CUP$YogurParser$actions {
           case 43: // Exp3 ::= Exp4 
             {
               Object RESULT =null;
-
+		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = e; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp3",15, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -971,7 +1043,13 @@ class CUP$YogurParser$actions {
           case 44: // Exp4 ::= Exp4 EQ Exp5 
             {
               Object RESULT =null;
-
+		int e1left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.EQ); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp4",16, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -980,7 +1058,13 @@ class CUP$YogurParser$actions {
           case 45: // Exp4 ::= Exp4 NEQ Exp5 
             {
               Object RESULT =null;
-
+		int e1left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.NEQ); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp4",16, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -989,7 +1073,10 @@ class CUP$YogurParser$actions {
           case 46: // Exp4 ::= Exp5 
             {
               Object RESULT =null;
-
+		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = e; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp4",16, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -998,7 +1085,13 @@ class CUP$YogurParser$actions {
           case 47: // Exp5 ::= Exp5 AND Exp6 
             {
               Object RESULT =null;
-
+		int e1left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.AND); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp5",17, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1007,7 +1100,10 @@ class CUP$YogurParser$actions {
           case 48: // Exp5 ::= Exp6 
             {
               Object RESULT =null;
-
+		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = e; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp5",17, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1016,7 +1112,13 @@ class CUP$YogurParser$actions {
           case 49: // Exp6 ::= Exp6 OR Exp7 
             {
               Object RESULT =null;
-
+		int e1left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.OR); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp6",18, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1025,7 +1127,10 @@ class CUP$YogurParser$actions {
           case 50: // Exp6 ::= Exp7 
             {
               Object RESULT =null;
-
+		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = e; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp6",18, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1034,7 +1139,10 @@ class CUP$YogurParser$actions {
           case 51: // Exp7 ::= LPAREN Exp RPAREN 
             {
               Object RESULT =null;
-
+		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).value;
+		 RESULT = e; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp7",19, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1043,7 +1151,10 @@ class CUP$YogurParser$actions {
           case 52: // Exp7 ::= VarId 
             {
               Object RESULT =null;
-
+		int idleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object id = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = id; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp7",19, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1052,7 +1163,10 @@ class CUP$YogurParser$actions {
           case 53: // Exp7 ::= FuncCall 
             {
               Object RESULT =null;
-
+		int funccleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int funccright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object funcc = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = funcc; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp7",19, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1061,7 +1175,10 @@ class CUP$YogurParser$actions {
           case 54: // Exp7 ::= INT 
             {
               Object RESULT =null;
-
+		int intLitleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int intLitright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object intLit = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new Constant(intLit); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp7",19, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1070,7 +1187,10 @@ class CUP$YogurParser$actions {
           case 55: // Exp7 ::= BOOL 
             {
               Object RESULT =null;
-
+		int boolLitleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int boolLitright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object boolLit = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new Constant(boolLit); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Exp7",19, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
