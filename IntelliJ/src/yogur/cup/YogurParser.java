@@ -11,6 +11,7 @@ import yogur.error.CompilationException;
 import yogur.tree.*;
 import yogur.tree.declaration.*;
 import yogur.tree.expression.*;
+import yogur.tree.expression.identifier.*;
 import yogur.tree.statement.*;
 import java_cup.runtime.XMLElement;
 
@@ -812,7 +813,7 @@ class CUP$YogurParser$actions {
 		int bleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
 		int bright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
 		Object b = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
-		 RESULT = new ForStructure(new SimpleIdentifier((String)id), (Expression)start, (Expression)end, (Block)b); 
+		 RESULT = new ForStructure(new BaseIdentifier((String)id), (Expression)start, (Expression)end, (Block)b); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("For",10, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-6)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1199,7 +1200,13 @@ class CUP$YogurParser$actions {
           case 56: // VarType ::= VarType LSQUARE INT RSQUARE 
             {
               Object RESULT =null;
-
+		int tleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-3)).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-3)).right;
+		Object t = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-3)).value;
+		int ileft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).right;
+		Object i = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).value;
+		 RESULT = new ArrayType((Type)t, (Integer)i); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("VarType",20, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-3)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1208,7 +1215,10 @@ class CUP$YogurParser$actions {
           case 57: // VarType ::= TYPE 
             {
               Object RESULT =null;
-
+		int tleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int tright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object t = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new BaseType((String)t); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("VarType",20, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1217,7 +1227,13 @@ class CUP$YogurParser$actions {
           case 58: // VarId ::= VarId Index 
             {
               Object RESULT =null;
-
+		int idleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).right;
+		Object id = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).value;
+		int ileft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object i = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new ArrayIdentifier((VarIdentifier)id, (ArrayIndex)i); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("VarId",21, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1226,7 +1242,10 @@ class CUP$YogurParser$actions {
           case 59: // VarId ::= DotId 
             {
               Object RESULT =null;
-
+		int didleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int didright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object did = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = did; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("VarId",21, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1235,7 +1254,13 @@ class CUP$YogurParser$actions {
           case 60: // DotId ::= DotId DOT ID 
             {
               Object RESULT =null;
-
+		int idsleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int idsright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object ids = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int idleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object id = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new DotIdentifier((DotIdentifier)ids, (BaseIdentifier)id); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("DotId",22, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1244,7 +1269,10 @@ class CUP$YogurParser$actions {
           case 61: // DotId ::= ID 
             {
               Object RESULT =null;
-
+		int idleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object id = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new BaseIdentifier((String)id); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("DotId",22, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1253,7 +1281,10 @@ class CUP$YogurParser$actions {
           case 62: // Index ::= LSQUARE Exp RSQUARE 
             {
               Object RESULT =null;
-
+		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).value;
+		 RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.INDEX); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Index",23, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1262,7 +1293,10 @@ class CUP$YogurParser$actions {
           case 63: // Index ::= LSQUARE Exp RRANGE 
             {
               Object RESULT =null;
-
+		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).value;
+		 RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.LEFT_RANGE); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Index",23, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1271,7 +1305,10 @@ class CUP$YogurParser$actions {
           case 64: // Index ::= LRANGE Exp RSQUARE 
             {
               Object RESULT =null;
-
+		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).value;
+		 RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.RIGHT_RANGE); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Index",23, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -1280,7 +1317,13 @@ class CUP$YogurParser$actions {
           case 65: // Index ::= LSQUARE Exp COLON Exp RSQUARE 
             {
               Object RESULT =null;
-
+		int e1left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-3)).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-3)).right;
+		Object e1 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-3)).value;
+		int e2left = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).right;
+		Object e2 = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).value;
+		 RESULT = new ArrayIndex((Expression)e1, (Expression)e2, ArrayIndex.AccessType.LEFT_RIGHT_RANGE); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Index",23, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-4)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;

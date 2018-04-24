@@ -7,6 +7,7 @@ import yogur.error.CompilationException;
 import yogur.tree.*;
 import yogur.tree.declaration.*;
 import yogur.tree.expression.*;
+import yogur.tree.expression.identifier.*;
 import yogur.tree.statement.*;
 
 action code {:
@@ -76,7 +77,7 @@ Else ::= ELSE If:ife						{: RESULT = new Block((Block)ife); :}
 ;
 While ::= WHILE Exp:e Block:b				{: RESULT = new WhileStructure((Expression)e, (Block)b); :}
 ;
-For ::= FOR ID:id IN Exp:start TO Exp:end Block:b		{: RESULT = new ForStructure(new SimpleIdentifier((String)id), (Expression)start, (Expression)end, (Block)b); :}
+For ::= FOR ID:id IN Exp:start TO Exp:end Block:b		{: RESULT = new ForStructure(new BaseIdentifier((String)id), (Expression)start, (Expression)end, (Block)b); :}
 ;
 Ass ::= VarId:id ASSIGN Exp:e				{: RESULT = new Assignation((VarIdentifier)id, (Expression)e); :}
 ;
@@ -117,19 +118,19 @@ Exp7 ::= LPAREN Exp:e RPAREN	{: RESULT = e; :}
 	| BOOL:boolLit				{: RESULT = new Constant(boolLit); :}
 ;
 
-VarType ::= VarType LSQUARE INT RSQUARE
-	| TYPE
+VarType ::= VarType:t LSQUARE INT:i RSQUARE		{: RESULT = new ArrayType((Type)t, (Integer)i); :}
+	| TYPE:t									{: RESULT = new BaseType((String)t); :}
 ;
-VarId ::= VarId Index
-	| DotId
+VarId ::= VarId:id Index:i		{: RESULT = new ArrayIdentifier((VarIdentifier)id, (ArrayIndex)i); :}
+	| DotId:did					{: RESULT = did; :}
 ;
-DotId ::= DotId DOT ID
-	| ID
+DotId ::= DotId:ids DOT ID:id	{: RESULT = new DotIdentifier((DotIdentifier)ids, (BaseIdentifier)id); :}
+	| ID:id						{: RESULT = new BaseIdentifier((String)id); :}
 ;
-Index ::= LSQUARE Exp RSQUARE
-	| LSQUARE Exp RRANGE
-	| LRANGE Exp RSQUARE
-	| LSQUARE Exp COLON Exp RSQUARE
+Index ::= LSQUARE Exp:e RSQUARE				{: RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.INDEX); :}
+	| LSQUARE Exp:e RRANGE					{: RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.LEFT_RANGE); :}
+	| LRANGE Exp:e RSQUARE					{: RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.RIGHT_RANGE); :}
+	| LSQUARE Exp:e1 COLON Exp:e2 RSQUARE	{: RESULT = new ArrayIndex((Expression)e1, (Expression)e2, ArrayIndex.AccessType.LEFT_RIGHT_RANGE); :}
 ;
 FuncCall ::= DotId LPAREN CommaExp RPAREN
 	| DotId LPAREN RPAREN

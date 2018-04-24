@@ -1,9 +1,7 @@
 package yogur.tree.statement;
 
 import yogur.tree.expression.Expression;
-import yogur.tree.expression.VarIdentifier;
-
-import javax.lang.model.element.VariableElement;
+import yogur.tree.expression.identifier.VarIdentifier;
 
 public class Assignation implements Statement {
 	private VarIdentifier varId;
