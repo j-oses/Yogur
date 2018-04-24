@@ -124,4 +124,4 @@ to = to
 {delimitador}			{return new CustomSymbol(sym.DELIMITER, yyline); }
 {coma}					{return new CustomSymbol(sym.COMMA, yyline); }
 
-. { exceptions.add(new CompilationException(yytext(), yyline, CompilationException.Scope.LexicalAnalyzer)); }
+. { exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", yyline, CompilationException.Scope.LexicalAnalyzer)); }

@@ -1,12 +1,12 @@
 package yogur;
 
 import java_cup.runtime.Symbol;
+import yogur.cup.YogurParser;
 import yogur.cup.sym;
 import yogur.jlex.YogurLex;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.File;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 
 public class TestJLex {
     public static void main(String args[]) {
@@ -20,7 +20,15 @@ public class TestJLex {
 				System.out.println(sym.terminalNames[token.sym] + " ");
 				token = ylex.next_token();
 			}
-		} catch (IOException e) {
+
+			/*
+			YogurLex ylex2 = new YogurLex(new ByteArrayInputStream("$".getBytes(StandardCharsets.UTF_8)));
+			ylex2.next_token();
+			for (Exception e: ylex2.getExceptions()) {
+				throw e;
+			}
+			*/
+		} catch (Exception e) {
 			System.err.println("Parsing error");
 			e.printStackTrace();
 		}

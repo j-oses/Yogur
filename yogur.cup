@@ -4,6 +4,7 @@ import java_cup.runtime.*;
 import java.util.*;
 
 import yogur.jlex.YogurLex;
+import yogur.error.CompilationException;
 
 action code {:
 :}
@@ -11,8 +12,14 @@ action code {:
 scan with {: return getScanner().next_token(); :};
 
 parser code {:
-	public static void main (String args[]) throws Exception{
-		new YogurParser(new YogurLex(System.in)).parse();
+	private List<CompilationException> exceptions = new ArrayList<>();
+
+	public List<CompilationException> getExceptions() {
+		return exceptions;
+	}
+
+	public void syntax_error(Symbol symbol) {
+		exceptions.add(new CompilationException(symbol, CompilationException.Scope.SyntacticalAnalyzer));
 	}
 :}
 
