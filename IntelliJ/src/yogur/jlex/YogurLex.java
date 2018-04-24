@@ -21,6 +21,9 @@ public class YogurLex implements java_cup.runtime.Scanner {
 	public List<CompilationException> getExceptions() {
 		return exceptions;
 	}
+	private int line() {
+		return yyline + 1;
+	}
 	private java.io.BufferedReader yy_reader;
 	private int yy_buffer_index;
 	private int yy_buffer_read;
@@ -350,7 +353,7 @@ public class YogurLex implements java_cup.runtime.Scanner {
 			yy_next_state = yy_nxt[yy_rmap[yy_state]][yy_cmap[yy_lookahead]];
 			if (YY_EOF == yy_lookahead && true == yy_initial) {
 
-	return new CustomSymbol(sym.EOF, yyline);
+	return new CustomSymbol(sym.EOF, line());
 			}
 			if (YY_F != yy_next_state) {
 				yy_state = yy_next_state;
@@ -377,11 +380,11 @@ public class YogurLex implements java_cup.runtime.Scanner {
 					case -2:
 						break;
 					case 2:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -3:
 						break;
 					case 3:
-						{return new CustomSymbol(sym.DIV, yyline); }
+						{return new CustomSymbol(sym.DIV, line()); }
 					case -4:
 						break;
 					case 4:
@@ -389,103 +392,103 @@ public class YogurLex implements java_cup.runtime.Scanner {
 					case -5:
 						break;
 					case 5:
-						{return new CustomSymbol(sym.PROD, yyline); }
+						{return new CustomSymbol(sym.PROD, line()); }
 					case -6:
 						break;
 					case 6:
-						{ exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", yyline, CompilationException.Scope.LexicalAnalyzer)); }
+						{ exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", line(), CompilationException.Scope.LexicalAnalyzer)); }
 					case -7:
 						break;
 					case 7:
-						{return new CustomSymbol(sym.DELIMITER, yyline); }
+						{return new CustomSymbol(sym.DELIMITER, line()); }
 					case -8:
 						break;
 					case 8:
-						{return new CustomSymbol(sym.ASSIGN, yyline); }
+						{return new CustomSymbol(sym.ASSIGN, line()); }
 					case -9:
 						break;
 					case 9:
-						{return new CustomSymbol(sym.SUM, yyline); }
+						{return new CustomSymbol(sym.SUM, line()); }
 					case -10:
 						break;
 					case 10:
-						{return new CustomSymbol(sym.SUBS, yyline); }
+						{return new CustomSymbol(sym.SUBS, line()); }
 					case -11:
 						break;
 					case 11:
-						{return new CustomSymbol(sym.MOD, yyline); }
+						{return new CustomSymbol(sym.MOD, line()); }
 					case -12:
 						break;
 					case 12:
-						{return new CustomSymbol(sym.NOT, yyline); }
+						{return new CustomSymbol(sym.NOT, line()); }
 					case -13:
 						break;
 					case 13:
-						{return new CustomSymbol(sym.LSQUARE, yyline); }
+						{return new CustomSymbol(sym.LSQUARE, line()); }
 					case -14:
 						break;
 					case 14:
-						{return new CustomSymbol(sym.COLON, yyline); }
+						{return new CustomSymbol(sym.COLON, line()); }
 					case -15:
 						break;
 					case 15:
-						{return new CustomSymbol(sym.RSQUARE, yyline); }
+						{return new CustomSymbol(sym.RSQUARE, line()); }
 					case -16:
 						break;
 					case 16:
-						{return new CustomSymbol(sym.DOT, yyline); }
+						{return new CustomSymbol(sym.DOT, line()); }
 					case -17:
 						break;
 					case 17:
-						{return new CustomSymbol(sym.GT, yyline); }
+						{return new CustomSymbol(sym.GT, line()); }
 					case -18:
 						break;
 					case 18:
-						{return new CustomSymbol(sym.LT, yyline); }
+						{return new CustomSymbol(sym.LT, line()); }
 					case -19:
 						break;
 					case 19:
-						{return new CustomSymbol(sym.LPAREN, yyline); }
+						{return new CustomSymbol(sym.LPAREN, line()); }
 					case -20:
 						break;
 					case 20:
-						{return new CustomSymbol(sym.RPAREN, yyline); }
+						{return new CustomSymbol(sym.RPAREN, line()); }
 					case -21:
 						break;
 					case 21:
-						{return new CustomSymbol(sym.LBRACKET, yyline); }
+						{return new CustomSymbol(sym.LBRACKET, line()); }
 					case -22:
 						break;
 					case 22:
-						{return new CustomSymbol(sym.RBRACKET, yyline); }
+						{return new CustomSymbol(sym.RBRACKET, line()); }
 					case -23:
 						break;
 					case 23:
-						{return new CustomSymbol(sym.INT, new Integer(yytext()), yyline); }
+						{return new CustomSymbol(sym.INT, new Integer(yytext()), line()); }
 					case -24:
 						break;
 					case 24:
-						{return new CustomSymbol(sym.TYPE, yytext(), yyline); }
+						{return new CustomSymbol(sym.TYPE, yytext(), line()); }
 					case -25:
 						break;
 					case 25:
-						{return new CustomSymbol(sym.COMMA, yyline); }
+						{return new CustomSymbol(sym.COMMA, line()); }
 					case -26:
 						break;
 					case 26:
-						{return new CustomSymbol(sym.IF, yyline); }
+						{return new CustomSymbol(sym.IF, line()); }
 					case -27:
 						break;
 					case 27:
-						{return new CustomSymbol(sym.IN, yyline); }
+						{return new CustomSymbol(sym.IN, line()); }
 					case -28:
 						break;
 					case 28:
-						{return new CustomSymbol(sym.OR, yyline); }
+						{return new CustomSymbol(sym.OR, line()); }
 					case -29:
 						break;
 					case 29:
-						{return new CustomSymbol(sym.TO, yyline); }
+						{return new CustomSymbol(sym.TO, line()); }
 					case -30:
 						break;
 					case 30:
@@ -493,55 +496,55 @@ public class YogurLex implements java_cup.runtime.Scanner {
 					case -31:
 						break;
 					case 31:
-						{return new CustomSymbol(sym.EQ, yyline); }
+						{return new CustomSymbol(sym.EQ, line()); }
 					case -32:
 						break;
 					case 32:
-						{return new CustomSymbol(sym.ARROW, yyline); }
+						{return new CustomSymbol(sym.ARROW, line()); }
 					case -33:
 						break;
 					case 33:
-						{return new CustomSymbol(sym.AND, yyline); }
+						{return new CustomSymbol(sym.AND, line()); }
 					case -34:
 						break;
 					case 34:
-						{return new CustomSymbol(sym.NEQ, yyline); }
+						{return new CustomSymbol(sym.NEQ, line()); }
 					case -35:
 						break;
 					case 35:
-						{return new CustomSymbol(sym.LRANGE, yyline); }
+						{return new CustomSymbol(sym.LRANGE, line()); }
 					case -36:
 						break;
 					case 36:
-						{return new CustomSymbol(sym.RRANGE, yyline); }
+						{return new CustomSymbol(sym.RRANGE, line()); }
 					case -37:
 						break;
 					case 37:
-						{return new CustomSymbol(sym.GEQ, yyline); }
+						{return new CustomSymbol(sym.GEQ, line()); }
 					case -38:
 						break;
 					case 38:
-						{return new CustomSymbol(sym.LEQ, yyline); }
+						{return new CustomSymbol(sym.LEQ, line()); }
 					case -39:
 						break;
 					case 39:
-						{return new CustomSymbol(sym.DEF, yyline); }
+						{return new CustomSymbol(sym.DEF, line()); }
 					case -40:
 						break;
 					case 40:
-						{return new CustomSymbol(sym.FOR, yyline); }
+						{return new CustomSymbol(sym.FOR, line()); }
 					case -41:
 						break;
 					case 41:
-						{return new CustomSymbol(sym.VAR, yyline); }
+						{return new CustomSymbol(sym.VAR, line()); }
 					case -42:
 						break;
 					case 42:
-						{return new CustomSymbol(sym.ELSE, yyline); }
+						{return new CustomSymbol(sym.ELSE, line()); }
 					case -43:
 						break;
 					case 43:
-						{return new CustomSymbol(sym.BOOL, new Boolean(yytext()), yyline); }
+						{return new CustomSymbol(sym.BOOL, new Boolean(yytext()), line()); }
 					case -44:
 						break;
 					case 44:
@@ -549,147 +552,147 @@ public class YogurLex implements java_cup.runtime.Scanner {
 					case -45:
 						break;
 					case 45:
-						{return new CustomSymbol(sym.CLASS, yyline); }
+						{return new CustomSymbol(sym.CLASS, line()); }
 					case -46:
 						break;
 					case 46:
-						{return new CustomSymbol(sym.WHILE, yyline); }
+						{return new CustomSymbol(sym.WHILE, line()); }
 					case -47:
 						break;
 					case 48:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -48:
 						break;
 					case 49:
-						{ exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", yyline, CompilationException.Scope.LexicalAnalyzer)); }
+						{ exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", line(), CompilationException.Scope.LexicalAnalyzer)); }
 					case -49:
 						break;
 					case 50:
-						{return new CustomSymbol(sym.NOT, yyline); }
+						{return new CustomSymbol(sym.NOT, line()); }
 					case -50:
 						break;
 					case 51:
-						{return new CustomSymbol(sym.OR, yyline); }
+						{return new CustomSymbol(sym.OR, line()); }
 					case -51:
 						break;
 					case 52:
-						{return new CustomSymbol(sym.AND, yyline); }
+						{return new CustomSymbol(sym.AND, line()); }
 					case -52:
 						break;
 					case 54:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -53:
 						break;
 					case 55:
-						{ exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", yyline, CompilationException.Scope.LexicalAnalyzer)); }
+						{ exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", line(), CompilationException.Scope.LexicalAnalyzer)); }
 					case -54:
 						break;
 					case 56:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -55:
 						break;
 					case 57:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -56:
 						break;
 					case 58:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -57:
 						break;
 					case 59:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -58:
 						break;
 					case 60:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -59:
 						break;
 					case 61:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -60:
 						break;
 					case 62:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -61:
 						break;
 					case 63:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -62:
 						break;
 					case 64:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -63:
 						break;
 					case 65:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -64:
 						break;
 					case 66:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -65:
 						break;
 					case 67:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -66:
 						break;
 					case 68:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -67:
 						break;
 					case 69:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -68:
 						break;
 					case 70:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -69:
 						break;
 					case 71:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -70:
 						break;
 					case 72:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -71:
 						break;
 					case 73:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -72:
 						break;
 					case 74:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -73:
 						break;
 					case 75:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -74:
 						break;
 					case 76:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -75:
 						break;
 					case 77:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -76:
 						break;
 					case 78:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -77:
 						break;
 					case 79:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -78:
 						break;
 					case 80:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -79:
 						break;
 					case 81:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -80:
 						break;
 					case 82:
-						{return new CustomSymbol(sym.ID, yytext(), yyline); }
+						{return new CustomSymbol(sym.ID, yytext(), line()); }
 					case -81:
 						break;
 					default:

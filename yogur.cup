@@ -3,8 +3,11 @@ package yogur.cup;
 import java_cup.runtime.*;
 import java.util.*;
 
-import yogur.jlex.YogurLex;
 import yogur.error.CompilationException;
+import yogur.tree.*;
+import yogur.tree.declaration.*;
+import yogur.tree.expression.*;
+import yogur.tree.statement.*;
 
 action code {:
 :}
@@ -34,40 +37,120 @@ non terminal Exp, Exp1, Exp2, Exp3, Exp4, Exp5, Exp6, Exp7;
 non terminal VarType, VarId, DotId, Index, FuncCall, CommaExp, FuncId, ArgList, Args, Arg, ClassBody, BlockBody, Else;
 
 
-S ::= S DELIMITER Inst | S DELIMITER Dec | S DELIMITER DClass | S DELIMITER | Inst | Dec | DClass | ;
-Inst ::= If | While | For | Ass | Block | DVar;
-Dec ::= DProc | DFunc;
+S ::= S:p DELIMITER Inst:i				{: RESULT = new Program((Program)p, (StatementOrDeclaration)i); :}
+	| S:p DELIMITER Dec:d				{: RESULT = new Program((Program)p, (StatementOrDeclaration)d); :}
+	| S:p DELIMITER DClass:d			{: RESULT = new Program((Program)p, (StatementOrDeclaration)d); :}
+	| S:p DELIMITER						{: RESULT = p; :}
+	| Inst:i							{: RESULT = new Program((StatementOrDeclaration)i); :}
+	| Dec:d 							{: RESULT = new Program((StatementOrDeclaration)d); :}
+	| DClass:d 							{: RESULT = new Program((StatementOrDeclaration)d); :}
+	| 									{: RESULT = new Program(); :}
+;
+Inst ::= If:i							{: RESULT = i; :}
+	| While:i							{: RESULT = i; :}
+	| For:i								{: RESULT = i; :}
+	| Ass:i								{: RESULT = i; :}
+	| Block:i							{: RESULT = i; :}
+	| DVar:i							{: RESULT = i; :}
+;
+Dec ::= DProc:d							{: RESULT = d; :}
+	| DFunc:d							{: RESULT = d; :}
+;
 
-DVar ::= VAR Arg | VAR Arg ASSIGN Exp;
-DProc ::= DEF FuncId LPAREN ArgList RPAREN Block;
-DFunc ::= DEF FuncId LPAREN ArgList RPAREN ARROW Arg Block;
-DClass ::= CLASS TYPE LBRACKET ClassBody RBRACKET;
-Block ::= LBRACKET BlockBody RBRACKET;
+DVar ::= VAR Arg
+	| VAR Arg ASSIGN Exp
+;
+DProc ::= DEF FuncId LPAREN ArgList RPAREN Block
+;
+DFunc ::= DEF FuncId LPAREN ArgList RPAREN ARROW Arg Block
+;
+DClass ::= CLASS TYPE LBRACKET ClassBody RBRACKET
+;
+Block ::= LBRACKET BlockBody RBRACKET
+;
 
-If ::= IF Exp Block Else;
-Else ::= ELSE If | ELSE Block;
-While ::= WHILE Exp Block;
-For ::= FOR ID IN Exp TO Exp Block;
-Ass ::= VarId ASSIGN Exp;
+If ::= IF Exp:exp Block:b Else:elsee		{: RESULT = new IfStructure((Expression)exp, (Block)b, (Block)elsee); :}
+;
+Else ::= ELSE If:ife						{: RESULT = new Block((Block)ife); :}
+	| ELSE Block:b							{: RESULT = b; :}
+;
+While ::= WHILE Exp:e Block:b				{: RESULT = new WhileStructure((Expression)e, (Block)b; :}
+;
+For ::= FOR ID:id IN Exp:start TO Exp:end Block:b		{: RESULT = new ForStructure(new SimpleIdentifier((String)id), (Expression)start, (Expression)end, (Block)b); :}
+;
+Ass ::= VarId:id ASSIGN Exp:e				{: RESULT = new Assignation((VarIdentifier)id, (Expression)e) :}
+;
 
-Exp ::= SUBS Exp | NOT Exp | Exp1;
-Exp1 ::= Exp1 PROD Exp2 | Exp1 DIV Exp2 | Exp1 MOD Exp2 | Exp2;
-Exp2 ::= Exp2 SUM Exp3 | Exp2 SUBS Exp3 | Exp3;
-Exp3 ::= Exp3 LT Exp4 | Exp3 LEQ Exp4 | Exp3 GT Exp4 | Exp3 GEQ Exp4 | Exp4;
-Exp4 ::= Exp4 EQ Exp5 | Exp4 NEQ Exp5 | Exp5;
-Exp5 ::= Exp5 AND Exp6 | Exp6;
-Exp6 ::= Exp6 OR Exp7 | Exp7;
-Exp7 ::= LPAREN Exp RPAREN | VarId | FuncCall | INT | BOOL;
+Exp ::= SUBS Exp
+	| NOT Exp
+	| Exp1
+;
+Exp1 ::= Exp1 PROD Exp2
+	| Exp1 DIV Exp2
+	| Exp1 MOD Exp2
+	| Exp2
+;
+Exp2 ::= Exp2 SUM Exp3
+	| Exp2 SUBS Exp3
+	| Exp3
+;
+Exp3 ::= Exp3 LT Exp4
+	| Exp3 LEQ Exp4
+	| Exp3 GT Exp4
+	| Exp3 GEQ Exp4
+	| Exp4
+;
+Exp4 ::= Exp4 EQ Exp5
+	| Exp4 NEQ Exp5
+	| Exp5
+;
+Exp5 ::= Exp5 AND Exp6
+	| Exp6
+;
+Exp6 ::= Exp6 OR Exp7
+	| Exp7
+;
+Exp7 ::= LPAREN Exp RPAREN
+	| VarId
+	| FuncCall
+	| INT
+	| BOOL
+;
 
-VarType ::= VarType LSQUARE INT RSQUARE | TYPE;
-VarId ::= VarId Index | DotId;
-DotId ::= DotId DOT ID | ID;
-Index ::= LSQUARE Exp RSQUARE | LSQUARE Exp RRANGE | LRANGE Exp RSQUARE | LSQUARE Exp COLON Exp RSQUARE;
-FuncCall ::= DotId LPAREN CommaExp RPAREN | DotId LPAREN RPAREN;
-CommaExp ::= CommaExp COMMA Exp | Exp;
-FuncId ::= ID;
-ArgList ::= Args | ;
-Args ::= Args COMMA Arg;
-Arg ::= ID COLON VarType;
-ClassBody ::= ClassBody DELIMITER Dec | ClassBody DELIMITER DVar | Dec | DVar;
-BlockBody ::= BlockBody DELIMITER Inst | Inst;
+VarType ::= VarType LSQUARE INT RSQUARE
+	| TYPE
+;
+VarId ::= VarId Index
+	| DotId
+;
+DotId ::= DotId DOT ID
+	| ID
+;
+Index ::= LSQUARE Exp RSQUARE
+	| LSQUARE Exp RRANGE
+	| LRANGE Exp RSQUARE
+	| LSQUARE Exp COLON Exp RSQUARE
+;
+FuncCall ::= DotId LPAREN CommaExp RPAREN
+	| DotId LPAREN RPAREN
+;
+CommaExp ::= CommaExp COMMA Exp
+	| Exp
+;
+FuncId ::= ID
+;
+ArgList ::= Args
+	| 
+;
+Args ::= Args COMMA Arg
+;
+Arg ::= ID COLON VarType
+;
+ClassBody ::= ClassBody DELIMITER Dec
+	| ClassBody DELIMITER DVar
+	| Dec
+	| DVar
+;
+BlockBody ::= BlockBody DELIMITER Inst
+	| Inst
+;

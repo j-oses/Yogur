@@ -6,6 +6,10 @@ import java.util.List;
 public class Program {
 	private List<StatementOrDeclaration> instructions;
 
+	public Program() {
+		instructions = new ArrayList<>();
+	}
+
 	public Program(StatementOrDeclaration s) {
 		instructions = new ArrayList<>();
 		instructions.add(s);

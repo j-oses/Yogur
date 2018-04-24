@@ -7,8 +7,11 @@ package yogur.cup;
 
 import java_cup.runtime.*;
 import java.util.*;
-import yogur.jlex.YogurLex;
 import yogur.error.CompilationException;
+import yogur.tree.*;
+import yogur.tree.declaration.*;
+import yogur.tree.expression.*;
+import yogur.tree.statement.*;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -474,7 +477,13 @@ class CUP$YogurParser$actions {
           case 0: // S ::= S DELIMITER Inst 
             {
               Object RESULT =null;
-
+		int pleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object p = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int ileft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object i = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new Program((Program)p, (StatementOrDeclaration)i); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("S",0, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -497,7 +506,13 @@ class CUP$YogurParser$actions {
           case 2: // S ::= S DELIMITER Dec 
             {
               Object RESULT =null;
-
+		int pleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object p = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int dleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int dright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object d = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new Program((Program)p, (StatementOrDeclaration)d); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("S",0, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -506,7 +521,13 @@ class CUP$YogurParser$actions {
           case 3: // S ::= S DELIMITER DClass 
             {
               Object RESULT =null;
-
+		int pleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object p = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int dleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int dright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object d = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new Program((Program)p, (StatementOrDeclaration)d); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("S",0, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -515,7 +536,10 @@ class CUP$YogurParser$actions {
           case 4: // S ::= S DELIMITER 
             {
               Object RESULT =null;
-
+		int pleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).left;
+		int pright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).right;
+		Object p = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).value;
+		 RESULT = p; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("S",0, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -524,7 +548,10 @@ class CUP$YogurParser$actions {
           case 5: // S ::= Inst 
             {
               Object RESULT =null;
-
+		int ileft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object i = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new Program((StatementOrDeclaration)i); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("S",0, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -533,7 +560,10 @@ class CUP$YogurParser$actions {
           case 6: // S ::= Dec 
             {
               Object RESULT =null;
-
+		int dleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int dright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object d = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new Program((StatementOrDeclaration)d); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("S",0, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -542,7 +572,10 @@ class CUP$YogurParser$actions {
           case 7: // S ::= DClass 
             {
               Object RESULT =null;
-
+		int dleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int dright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object d = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new Program((StatementOrDeclaration)d); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("S",0, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -551,7 +584,7 @@ class CUP$YogurParser$actions {
           case 8: // S ::= 
             {
               Object RESULT =null;
-
+		 RESULT = new Program(); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("S",0, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -560,7 +593,10 @@ class CUP$YogurParser$actions {
           case 9: // Inst ::= If 
             {
               Object RESULT =null;
-
+		int ileft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object i = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = i; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Inst",1, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -569,7 +605,10 @@ class CUP$YogurParser$actions {
           case 10: // Inst ::= While 
             {
               Object RESULT =null;
-
+		int ileft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object i = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = i; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Inst",1, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -578,7 +617,10 @@ class CUP$YogurParser$actions {
           case 11: // Inst ::= For 
             {
               Object RESULT =null;
-
+		int ileft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object i = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = i; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Inst",1, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -587,7 +629,10 @@ class CUP$YogurParser$actions {
           case 12: // Inst ::= Ass 
             {
               Object RESULT =null;
-
+		int ileft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object i = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = i; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Inst",1, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -596,7 +641,10 @@ class CUP$YogurParser$actions {
           case 13: // Inst ::= Block 
             {
               Object RESULT =null;
-
+		int ileft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object i = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = i; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Inst",1, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -605,7 +653,10 @@ class CUP$YogurParser$actions {
           case 14: // Inst ::= DVar 
             {
               Object RESULT =null;
-
+		int ileft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int iright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object i = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = i; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Inst",1, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -614,7 +665,10 @@ class CUP$YogurParser$actions {
           case 15: // Dec ::= DProc 
             {
               Object RESULT =null;
-
+		int dleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int dright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object d = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = d; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Dec",2, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -623,7 +677,10 @@ class CUP$YogurParser$actions {
           case 16: // Dec ::= DFunc 
             {
               Object RESULT =null;
-
+		int dleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int dright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object d = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = d; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Dec",2, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -686,7 +743,16 @@ class CUP$YogurParser$actions {
           case 23: // If ::= IF Exp Block Else 
             {
               Object RESULT =null;
-
+		int expleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int expright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object exp = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).right;
+		Object b = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).value;
+		int elseeleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int elseeright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object elsee = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new IfStructure((Expression)exp, (Block)b, (Block)elsee); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("If",8, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-3)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -695,7 +761,10 @@ class CUP$YogurParser$actions {
           case 24: // Else ::= ELSE If 
             {
               Object RESULT =null;
-
+		int ifeleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int iferight = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object ife = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new Block((Block)ife); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Else",32, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -704,7 +773,10 @@ class CUP$YogurParser$actions {
           case 25: // Else ::= ELSE Block 
             {
               Object RESULT =null;
-
+		int bleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object b = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = b; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Else",32, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -713,7 +785,13 @@ class CUP$YogurParser$actions {
           case 26: // While ::= WHILE Exp Block 
             {
               Object RESULT =null;
-
+		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object b = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new WhileStructure((Expression)e, (Block)b; 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("While",9, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -722,7 +800,19 @@ class CUP$YogurParser$actions {
           case 27: // For ::= FOR ID IN Exp TO Exp Block 
             {
               Object RESULT =null;
-
+		int idleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-5)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-5)).right;
+		Object id = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-5)).value;
+		int startleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-3)).left;
+		int startright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-3)).right;
+		Object start = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-3)).value;
+		int endleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).left;
+		int endright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).right;
+		Object end = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-1)).value;
+		int bleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int bright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object b = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new ForStructure(new SimpleIdentifier((String)id), (Expression)start, (Expression)end, (Block)b); 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("For",10, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-6)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
@@ -731,7 +821,13 @@ class CUP$YogurParser$actions {
           case 28: // Ass ::= VarId ASSIGN Exp 
             {
               Object RESULT =null;
-
+		int idleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).right;
+		Object id = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)).value;
+		int eleft = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).left;
+		int eright = ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()).right;
+		Object e = (Object)((java_cup.runtime.Symbol) CUP$YogurParser$stack.peek()).value;
+		 RESULT = new Assignation((VarIdentifier)id, (Expression)e) 
               CUP$YogurParser$result = parser.getSymbolFactory().newSymbol("Ass",11, ((java_cup.runtime.Symbol)CUP$YogurParser$stack.elementAt(CUP$YogurParser$top-2)), ((java_cup.runtime.Symbol)CUP$YogurParser$stack.peek()), RESULT);
             }
           return CUP$YogurParser$result;
