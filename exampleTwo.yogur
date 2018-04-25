@@ -1,0 +1,5 @@
+var fact : int = 1
+var n : int = 5
+while n > 1 {
+    fact = fact * n
+n=n-1 }
