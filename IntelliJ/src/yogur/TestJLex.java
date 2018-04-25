@@ -20,14 +20,6 @@ public class TestJLex {
 				System.out.println(sym.terminalNames[token.sym] + " ");
 				token = ylex.next_token();
 			}
-
-			/*
-			YogurLex ylex2 = new YogurLex(new ByteArrayInputStream("$".getBytes(StandardCharsets.UTF_8)));
-			ylex2.next_token();
-			for (Exception e: ylex2.getExceptions()) {
-				throw e;
-			}
-			*/
 		} catch (Exception e) {
 			System.err.println("Parsing error");
 			e.printStackTrace();
