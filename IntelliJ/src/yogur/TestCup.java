@@ -9,16 +9,17 @@ import java.io.FileInputStream;
 
 public class TestCup {
 	public static void main(String args[]) {
-		File file = new File("./../examples/simple.yogur");
+		File file = new File("./../examples/exampleTwo.yogur");
+		YogurParser p = null;
 
 		try (FileInputStream is = new FileInputStream(file)) {
 			YogurLex jlex = new YogurLex(is);
-			YogurParser p = new YogurParser(jlex);
+			p = new YogurParser(jlex);
 
-			Symbol s = p.debug_parse();
+			Symbol s = p.parse();
 			System.out.println(s);
 		} catch (Exception e) {
-			System.err.println("Parsing error");
+			System.err.println("Parsing error " + p.getExceptions());
 			e.printStackTrace();
 		}
 	}
