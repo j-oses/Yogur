@@ -32,7 +32,7 @@ digito = [0-9]
 entero = {digito}+
 boolean = ((true)|(false))
 separador = [ \t\b\r]
-delimitador = \n
+delimitador = ({separador}*\n{separador}*)+
 comentarioLinea = //[^\n]*
 comentarioMultilinea = /\*(.|\n)*\*/
 identificador = [a-z]({letra}|{digito}|_)*
@@ -64,8 +64,8 @@ corcheteApertura = \[
 corcheteCierre = \]
 parentesisApertura = \(
 parentesisCierre = \)
-bloqueApertura = \{
-bloqueCierre = \}
+bloqueApertura = \{({separador}*\n{separador}*)*
+bloqueCierre = ({separador}*\n{separador}*)*\}
 
 def = def
 var = var
@@ -91,7 +91,6 @@ to = to
 
 {comentarioLinea}		{}
 {comentarioMultilinea}	{}
-{separador}				{}
 
 {opAsignacion}			{return new CustomSymbol(sym.ASSIGN, line()); }
 {opSuma}				{return new CustomSymbol(sym.SUM, line()); }
@@ -127,5 +126,6 @@ to = to
 {identificadorTipo}		{return new CustomSymbol(sym.TYPE, yytext(), line()); }
 {delimitador}			{return new CustomSymbol(sym.DELIMITER, line()); }
 {coma}					{return new CustomSymbol(sym.COMMA, line()); }
+{separador}				{}
 
 . { exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", line(), CompilationException.Scope.LexicalAnalyzer)); }
