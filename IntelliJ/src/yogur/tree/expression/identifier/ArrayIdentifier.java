@@ -2,7 +2,7 @@ package yogur.tree.expression.identifier;
 
 import yogur.tree.ArrayType;
 
-public class ArrayIdentifier {
+public class ArrayIdentifier implements VarIdentifier {
 	private VarIdentifier internalId;
 	private ArrayIndex index;
 

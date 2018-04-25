@@ -8,8 +8,8 @@
     var cont : Container
     cont.two = 2
     cont.one = 1
-    var estaeluno : bool = false
-    var estaeldos : bool = false
+    var estaeluno : Bool = false
+    var estaeldos : Bool = false
     var numbers : Int[4]
     numbers[0] = 1
     numbers[1] = 2

@@ -35,7 +35,7 @@ terminal DEF, VAR, CLASS, IF, ELSE, WHILE, FOR, IN, TO;
 non terminal S, Inst, Dec, DVar, DProc, DFunc, DClass, Block;
 non terminal If, While, For, Ass;
 non terminal Exp, Exp1, Exp2, Exp3, Exp4, Exp5, Exp6, Exp7;
-non terminal VarType, VarId, DotId, Index, FuncCall, CommaExp, FuncId, ArgList, Args, Arg, ClassBody, BlockBody, Else;
+non terminal VarType, VarId, DotId, Index, FuncCall, CommaExp, ArgList, Args, Arg, ClassBody, BlockBody, Else;
 
 
 S ::= S:p DELIMITER Inst:i				{: RESULT = new Program((Program)p, (StatementOrDeclaration)i); :}
@@ -58,22 +58,23 @@ Dec ::= DProc:d							{: RESULT = d; :}
 	| DFunc:d							{: RESULT = d; :}
 ;
 
-DVar ::= VAR Arg
-	| VAR Arg ASSIGN Exp
+DVar ::= VAR Arg:a														{: RESULT = new VarDeclaration((Argument)a); :}
+	| VAR Arg:a ASSIGN Exp:e											{: RESULT = new VarDeclaration((Argument)a, (Expression)e); :}
 ;
-DProc ::= DEF FuncId LPAREN ArgList RPAREN Block
+DProc ::= DEF ID:id LPAREN ArgList:args RPAREN Block:b					{: RESULT = new FuncDeclaration((String)id, (List<Argument>)args, (Block)b); :}
 ;
-DFunc ::= DEF FuncId LPAREN ArgList RPAREN ARROW Arg Block
+DFunc ::= DEF ID:id LPAREN ArgList:args RPAREN ARROW Arg:rarg Block:b	{: RESULT = new FuncDeclaration((String)id, (List<Argument>)args, (Argument)rarg, (Block)b); :}
 ;
-DClass ::= CLASS TYPE LBRACKET ClassBody RBRACKET
+DClass ::= CLASS TYPE:t LBRACKET ClassBody:insts RBRACKET				{: RESULT = new ClassDeclaration(new BaseType((String)t), (List<FunctionOrVarDeclaration>)insts); :}
 ;
-Block ::= LBRACKET BlockBody RBRACKET
+Block ::= LBRACKET BlockBody:insts RBRACKET								{: RESULT = new Block((List<Statement>)insts); :}
 ;
 
 If ::= IF Exp:exp Block:b Else:elsee		{: RESULT = new IfStructure((Expression)exp, (Block)b, (Block)elsee); :}
 ;
-Else ::= ELSE If:ife						{: RESULT = new Block((Block)ife); :}
+Else ::= ELSE If:ife						{: List<Statement> insts = new ArrayList<Statement>(); insts.add((IfStructure)ife); RESULT = new Block(insts); :}
 	| ELSE Block:b							{: RESULT = b; :}
+	| 										{: RESULT = null; :}
 ;
 While ::= WHILE Exp:e Block:b				{: RESULT = new WhileStructure((Expression)e, (Block)b); :}
 ;
@@ -124,34 +125,33 @@ VarType ::= VarType:t LSQUARE INT:i RSQUARE		{: RESULT = new ArrayType((Type)t, 
 VarId ::= VarId:id Index:i		{: RESULT = new ArrayIdentifier((VarIdentifier)id, (ArrayIndex)i); :}
 	| DotId:did					{: RESULT = did; :}
 ;
-DotId ::= DotId:ids DOT ID:id	{: RESULT = new DotIdentifier((DotIdentifier)ids, (BaseIdentifier)id); :}
-	| ID:id						{: RESULT = new BaseIdentifier((String)id); :}
+DotId ::= DotId:ids DOT ID:id	{: RESULT = new DotIdentifier((DotIdentifier)ids, new BaseIdentifier((String)id)); :}
+	| ID:id						{: RESULT = new DotIdentifier(new BaseIdentifier((String)id)); :}
 ;
 Index ::= LSQUARE Exp:e RSQUARE				{: RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.INDEX); :}
 	| LSQUARE Exp:e RRANGE					{: RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.LEFT_RANGE); :}
 	| LRANGE Exp:e RSQUARE					{: RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.RIGHT_RANGE); :}
 	| LSQUARE Exp:e1 COLON Exp:e2 RSQUARE	{: RESULT = new ArrayIndex((Expression)e1, (Expression)e2, ArrayIndex.AccessType.LEFT_RIGHT_RANGE); :}
 ;
-FuncCall ::= DotId LPAREN CommaExp RPAREN
-	| DotId LPAREN RPAREN
+FuncCall ::= DotId:id LPAREN CommaExp:exps RPAREN	{: RESULT = new FunctionCall((DotIdentifier)id, (List<Expression>)exps); :}
+	| DotId:id LPAREN RPAREN						{: RESULT = new FunctionCall((DotIdentifier)id, new ArrayList<Expression>()); :}
 ;
-CommaExp ::= CommaExp COMMA Exp
-	| Exp
+CommaExp ::= CommaExp:exps COMMA Exp:e		{: ((List<Expression>)exps).add((Expression)e); RESULT = exps; :}
+	| Exp:e									{: RESULT = new ArrayList<Expression>(); ((List<Expression>)RESULT).add((Expression)e); :}
 ;
-FuncId ::= ID
+ArgList ::= Args:args						{: RESULT = args; :}
+	| 										{: RESULT = new ArrayList<Argument>(); :}
 ;
-ArgList ::= Args
-	| 
+Args ::= Args:args COMMA Arg:arg			{: ((List<Argument>)args).add((Argument)arg); RESULT = args; :}
+	| Arg:arg								{: RESULT = new ArrayList<Argument>(); ((List<Argument>)RESULT).add((Argument)arg); :}
 ;
-Args ::= Args COMMA Arg
+Arg ::= ID:id COLON VarType:t				{: RESULT = new Argument((String)id, (Type)t); :}
 ;
-Arg ::= ID COLON VarType
+ClassBody ::= ClassBody:b DELIMITER Dec:d	{: ((List<FunctionOrVarDeclaration>)b).add((FuncDeclaration)d); RESULT = b; :}
+	| ClassBody:b DELIMITER DVar:d			{: ((List<FunctionOrVarDeclaration>)b).add((VarDeclaration)d); RESULT = b; :}
+	| Dec:d									{: RESULT = new ArrayList<FunctionOrVarDeclaration>(); ((List<FunctionOrVarDeclaration>)RESULT).add((FuncDeclaration)d); :}
+	| DVar:d								{: RESULT = new ArrayList<FunctionOrVarDeclaration>(); ((List<FunctionOrVarDeclaration>)RESULT).add((VarDeclaration)d); :}
 ;
-ClassBody ::= ClassBody DELIMITER Dec
-	| ClassBody DELIMITER DVar
-	| Dec
-	| DVar
-;
-BlockBody ::= BlockBody DELIMITER Inst
-	| Inst
+BlockBody ::= BlockBody:is DELIMITER Inst:i			{: ((List<Statement>)is).add((Statement)i); RESULT = is; :}
+	| Inst:i										{: RESULT = new ArrayList<Statement>(); ((List<Statement>)RESULT).add((Statement)i); :}
 ;

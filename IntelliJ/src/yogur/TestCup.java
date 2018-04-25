@@ -9,7 +9,7 @@ import java.io.FileInputStream;
 
 public class TestCup {
 	public static void main(String args[]) {
-		File file = new File("./../examples/exampleTwo.yogur");
+		File file = new File("./../examples/exampleOne.yogur");
 		YogurParser p = null;
 
 		try (FileInputStream is = new FileInputStream(file)) {

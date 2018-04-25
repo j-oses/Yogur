@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 public class TestJLex {
     public static void main(String args[]) {
-		File file = new File("./../examples/whitespaces.yogur");
+		File file = new File("./../examples/exampleOne.yogur");
 
 		try (FileInputStream is = new FileInputStream(file)) {
 			YogurLex ylex = new YogurLex(is);
