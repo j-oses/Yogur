@@ -6,10 +6,34 @@ import yogur.jlex.YogurLex;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.time.format.TextStyle;
 
 public class TestCup {
+
+	private static String TESTDIR = "./../tests/";
+
 	public static void main(String args[]) {
-		File file = new File("./../examples/exampleOne.yogur");
+		File file = new File("./../tests/exampleOne.yogur");
+
+		//testAll();
+		testFile(file);
+	}
+	public static void testAll(){
+		File dir = new File(TESTDIR);
+
+		File[] directoryListing = dir.listFiles();
+		if (directoryListing != null) {
+			for (File file : directoryListing) {
+				testFile(file);
+
+			}
+
+		} else{
+			System.err.println("Empty testing directory");
+		}
+
+	}
+	public static void testFile(File file) {
 		YogurParser p = null;
 
 		try (FileInputStream is = new FileInputStream(file)) {
@@ -22,5 +46,6 @@ public class TestCup {
 			System.err.println("Parsing error " + p.getExceptions());
 			e.printStackTrace();
 		}
+
 	}
 }
