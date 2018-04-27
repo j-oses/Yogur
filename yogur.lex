@@ -6,6 +6,7 @@ import yogur.error.CompilationException;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 %%
 %cup
 %eofval{
@@ -15,8 +16,21 @@ import java.util.ArrayList;
 %public
 %unicode
 %line
+%init{
+	reservedWords.put("def", sym.DEF);
+	reservedWords.put("var", sym.VAR);
+	reservedWords.put("class", sym.CLASS);
+	reservedWords.put("if", sym.IF);
+	reservedWords.put("else", sym.ELSE);
+	reservedWords.put("while", sym.WHILE);
+	reservedWords.put("for", sym.FOR);
+	reservedWords.put("in", sym.IN);
+	reservedWords.put("to", sym.TO);
+%init}
 %{
 	private List<CompilationException> exceptions = new ArrayList<>();
+
+	private HashMap<String, Integer> reservedWords = new HashMap<>();
 
 	public List<CompilationException> getExceptions() {
 		return exceptions;
@@ -67,27 +81,16 @@ parentesisCierre = \)
 bloqueApertura = \{({separador}*\n{separador}*)*
 bloqueCierre = ({separador}*\n{separador}*)*\}
 
-def = def
-var = var
-class = class
-if = if
-else = else
-while = while
-for = for
-in = in
-to = to
-
 %%
 
-{def}					{return new CustomSymbol(sym.DEF, line()); }
-{var}					{return new CustomSymbol(sym.VAR, line()); }
-{class}					{return new CustomSymbol(sym.CLASS, line()); }
-{if}					{return new CustomSymbol(sym.IF, line()); }
-{else}					{return new CustomSymbol(sym.ELSE, line()); }
-{while}					{return new CustomSymbol(sym.WHILE, line()); }
-{for}					{return new CustomSymbol(sym.FOR, line()); }
-{in}					{return new CustomSymbol(sym.IN, line()); }
-{to}					{return new CustomSymbol(sym.TO, line()); }
+{entero}				{return new CustomSymbol(sym.INT, new Integer(yytext()), line()); }
+{boolean}				{return new CustomSymbol(sym.BOOL, new Boolean(yytext()), line()); }
+{identificador} 		{if (reservedWords.containsKey(yytext())) {
+							return new CustomSymbol(reservedWords.get(yytext()), line());
+						} else {
+							return new CustomSymbol(sym.ID, yytext(), line());
+						}}
+{identificadorTipo}		{return new CustomSymbol(sym.TYPE, yytext(), line()); }
 
 {comentarioLinea}		{}
 {comentarioMultilinea}	{}
@@ -120,10 +123,6 @@ to = to
 {bloqueApertura}		{return new CustomSymbol(sym.LBRACKET, line()); }
 {bloqueCierre}			{return new CustomSymbol(sym.RBRACKET, line()); }
 
-{entero}				{return new CustomSymbol(sym.INT, new Integer(yytext()), line()); }
-{boolean}				{return new CustomSymbol(sym.BOOL, new Boolean(yytext()), line()); }
-{identificador} 		{return new CustomSymbol(sym.ID, yytext(), line()); }
-{identificadorTipo}		{return new CustomSymbol(sym.TYPE, yytext(), line()); }
 {delimitador}			{return new CustomSymbol(sym.DELIMITER, line()); }
 {coma}					{return new CustomSymbol(sym.COMMA, line()); }
 {separador}				{}
