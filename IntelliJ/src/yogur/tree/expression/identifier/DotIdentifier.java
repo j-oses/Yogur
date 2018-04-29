@@ -1,17 +1,13 @@
 package yogur.tree.expression.identifier;
 
-import java.util.ArrayList;
-import java.util.List;
+import yogur.tree.expression.Expression;
 
 public class DotIdentifier implements VarIdentifier {
-	private List<BaseIdentifier> identifiers = new ArrayList<>();
+	private Expression expression;
+	private String identifier;
 
-	public DotIdentifier(BaseIdentifier baseId) {
-		identifiers.add(baseId);
-	}
-
-	public DotIdentifier(DotIdentifier id, BaseIdentifier baseId) {
-		identifiers = id.identifiers;
-		identifiers.add(baseId);
+	public DotIdentifier(Expression left, String right) {
+		this.expression = left;
+		this.identifier = right;
 	}
 }

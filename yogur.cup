@@ -6,6 +6,7 @@ import java.util.*;
 import yogur.error.CompilationException;
 import yogur.tree.*;
 import yogur.tree.declaration.*;
+import yogur.tree.declaration.declarator.*;
 import yogur.tree.expression.*;
 import yogur.tree.expression.identifier.*;
 import yogur.tree.statement.*;
@@ -34,8 +35,9 @@ terminal DEF, VAR, CLASS, IF, ELSE, WHILE, FOR, IN, TO;
 
 non terminal S, Inst, Dec, DVar, DProc, DFunc, DClass, Block;
 non terminal If, While, For, Ass;
-non terminal Exp, Exp1, Exp2, Exp3, Exp4, Exp5, Exp6, Exp7;
-non terminal VarType, VarId, DotId, Index, FuncCall, CommaExp, ArgList, Args, Arg, ClassBody, BlockBody, Else;
+non terminal Exp, Exp0, Exp1, Exp2, Exp3, Exp4, Exp5, Exp6, Exp7;
+non terminal Declarator, Declarator0;
+non terminal VarType, Index, CommaExp, ArgList, Args, Arg, ClassBody, BlockBody, Else;
 
 
 S ::= S:p DELIMITER Inst:i				{: RESULT = new Program((Program)p, (StatementOrDeclaration)i); :}
@@ -78,13 +80,27 @@ Else ::= ELSE If:ife						{: List<Statement> insts = new ArrayList<Statement>();
 ;
 While ::= WHILE Exp:e Block:b				{: RESULT = new WhileStructure((Expression)e, (Block)b); :}
 ;
-For ::= FOR ID:id IN Exp:start TO Exp:end Block:b		{: RESULT = new ForStructure(new BaseIdentifier((String)id), (Expression)start, (Expression)end, (Block)b); :}
+For ::= FOR ID:id IN Exp:start TO Exp:end Block:b		{: RESULT = new ForStructure(new BaseDeclarator((String)id), (Expression)start, (Expression)end, (Block)b); :}
 ;
-Ass ::= VarId:id ASSIGN Exp:e				{: RESULT = new Assignation((VarIdentifier)id, (Expression)e); :}
+Ass ::= Declarator:d ASSIGN Exp:e				{: RESULT = new Assignation((Declarator)d, (Expression)e); :}
 ;
 
-Exp ::= SUBS Exp:e				{: RESULT = new UnaryOperation((Expression)e, UnaryOperation.Operator.NEG); :}
-	| NOT Exp:e					{: RESULT = new UnaryOperation((Expression)e, UnaryOperation.Operator.NOT); :}
+Declarator ::= Declarator:d DOT ID:id			{: RESULT = new DotDeclarator((Declarator)d, (String)id); :}
+	| Declarator:d Index:i						{: RESULT = new ArrayDeclarator((Declarator)d, (ArrayIndex)i); :}
+	| Declarator0:d								{: RESULT = d; :}
+;
+Declarator0 ::= LPAREN Declarator:d RPAREN		{: RESULT = d; :}
+	| ID:id										{: RESULT = new BaseDeclarator((String)id); :}
+;
+
+Exp ::= Exp:e DOT ID:id					{: RESULT = new DotIdentifier((Expression)e, (String)id); :}
+	| Exp:e Index:i						{: RESULT = new ArrayIdentifier((Expression)e, (ArrayIndex)i); :}
+	| Exp:e LPAREN CommaExp:exps RPAREN	{: RESULT = new FunctionCall((Expression)e, (List<Expression>)exps); :}
+	| Exp:e LPAREN RPAREN				{: RESULT = new FunctionCall((Expression)e, new ArrayList<Expression>()); :}
+	| Exp0:e							{: RESULT = e; :}
+;
+Exp0 ::= SUBS Exp0:e			{: RESULT = new UnaryOperation((Expression)e, UnaryOperation.Operator.NEG); :}
+	| NOT Exp0:e				{: RESULT = new UnaryOperation((Expression)e, UnaryOperation.Operator.NOT); :}
 	| Exp1:e					{: RESULT = e; :}
 ;
 Exp1 ::= Exp1:e1 PROD Exp2:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.PROD); :}
@@ -113,8 +129,7 @@ Exp6 ::= Exp6:e1 OR Exp7:e2		{: RESULT = new BinaryOperation((Expression)e1, (Ex
 	| Exp7:e					{: RESULT = e; :}
 ;
 Exp7 ::= LPAREN Exp:e RPAREN	{: RESULT = e; :}
-	| VarId:id					{: RESULT = id; :}
-	| FuncCall:funcc			{: RESULT = funcc; :}
+	| ID:id						{: RESULT = new BaseIdentifier((String)id); :}
 	| INT:intLit				{: RESULT = new Constant(intLit); :}
 	| BOOL:boolLit				{: RESULT = new Constant(boolLit); :}
 ;
@@ -122,19 +137,10 @@ Exp7 ::= LPAREN Exp:e RPAREN	{: RESULT = e; :}
 VarType ::= VarType:t LSQUARE INT:i RSQUARE		{: RESULT = new ArrayType((Type)t, (Integer)i); :}
 	| TYPE:t									{: RESULT = new BaseType((String)t); :}
 ;
-VarId ::= VarId:id Index:i		{: RESULT = new ArrayIdentifier((VarIdentifier)id, (ArrayIndex)i); :}
-	| DotId:did					{: RESULT = did; :}
-;
-DotId ::= DotId:ids DOT ID:id	{: RESULT = new DotIdentifier((DotIdentifier)ids, new BaseIdentifier((String)id)); :}
-	| ID:id						{: RESULT = new DotIdentifier(new BaseIdentifier((String)id)); :}
-;
 Index ::= LSQUARE Exp:e RSQUARE				{: RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.INDEX); :}
 	| LSQUARE Exp:e RRANGE					{: RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.LEFT_RANGE); :}
 	| LRANGE Exp:e RSQUARE					{: RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.RIGHT_RANGE); :}
 	| LSQUARE Exp:e1 COLON Exp:e2 RSQUARE	{: RESULT = new ArrayIndex((Expression)e1, (Expression)e2, ArrayIndex.AccessType.LEFT_RIGHT_RANGE); :}
-;
-FuncCall ::= DotId:id LPAREN CommaExp:exps RPAREN	{: RESULT = new FunctionCall((DotIdentifier)id, (List<Expression>)exps); :}
-	| DotId:id LPAREN RPAREN						{: RESULT = new FunctionCall((DotIdentifier)id, new ArrayList<Expression>()); :}
 ;
 CommaExp ::= CommaExp:exps COMMA Exp:e		{: ((List<Expression>)exps).add((Expression)e); RESULT = exps; :}
 	| Exp:e									{: RESULT = new ArrayList<Expression>(); ((List<Expression>)RESULT).add((Expression)e); :}

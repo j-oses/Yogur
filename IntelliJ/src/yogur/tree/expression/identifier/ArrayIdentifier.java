@@ -1,13 +1,14 @@
 package yogur.tree.expression.identifier;
 
 import yogur.tree.ArrayType;
+import yogur.tree.expression.Expression;
 
 public class ArrayIdentifier implements VarIdentifier {
-	private VarIdentifier internalId;
+	private Expression leftExpression;
 	private ArrayIndex index;
 
-	public ArrayIdentifier(VarIdentifier internalId, ArrayIndex index) {
-		this.internalId = internalId;
+	public ArrayIdentifier(Expression expression, ArrayIndex index) {
+		this.leftExpression = expression;
 		this.index = index;
 	}
 }

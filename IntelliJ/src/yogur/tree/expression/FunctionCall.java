@@ -5,11 +5,11 @@ import yogur.tree.expression.identifier.DotIdentifier;
 import java.util.List;
 
 public class FunctionCall implements Expression {
-	private DotIdentifier identifier;
+	private Expression function;
 	private List<Expression> expressions;
 
-	public FunctionCall(DotIdentifier identifier, List<Expression> expressions) {
-		this.identifier = identifier;
+	public FunctionCall(Expression function, List<Expression> expressions) {
+		this.function = function;
 		this.expressions = expressions;
 	}
 }
