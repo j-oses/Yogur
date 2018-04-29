@@ -1,18 +1,19 @@
 package yogur.tree.declaration;
 
 import yogur.tree.Type;
+import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.tree.expression.identifier.BaseIdentifier;
 
 public class Argument {
-	private BaseIdentifier identifier;
+	private BaseDeclarator declarator;
 	private Type type;
 
-	public Argument(String identifier, Type type) {
-		this(new BaseIdentifier(identifier), type);
+	public Argument(String declarator, Type type) {
+		this(new BaseDeclarator(declarator), type);
 	}
 
-	public Argument(BaseIdentifier identifier, Type type) {
-		this.identifier = identifier;
+	public Argument(BaseDeclarator declarator, Type type) {
+		this.declarator = declarator;
 		this.type = type;
 	}
 }

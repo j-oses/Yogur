@@ -6,12 +6,12 @@ tolo = -(7+2)
 tolo = -7+2
 tolo = tolo * -2
 
-var tolome : Bool = True && False
-tolome = True and False
-tolome = tolome || True
-tolome = tolome or False
-tolome = !True
-tolome = not True or (!False and True)
+var tolome : Bool = true && false
+tolome = true and false
+tolome = tolome || true
+tolome = tolome or false
+tolome = !true
+tolome = not true or (!false and true)
 tolome = 5 > 2
 tolome = 5 <= -7
 tolome = 7 == 2

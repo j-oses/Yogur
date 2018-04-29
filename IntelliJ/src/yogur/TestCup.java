@@ -13,7 +13,7 @@ public class TestCup {
 	private static String TESTDIR = "./../tests/";
 
 	public static void main(String args[]) {
-		File file = new File("./../tests/exampleOne.yogur");
+		File file = new File("./../tests/02_Expressions.yogur");
 
 		testAll();
 		//testFile(file);
@@ -43,7 +43,7 @@ public class TestCup {
 			Symbol s = p.parse();
 			System.out.println(s);
 		} catch (Exception e) {
-			System.err.println("Parsing error " + p.getExceptions());
+			System.err.println("Parsing error " + p.getExceptions() + " on file " + file.getName());
 			e.printStackTrace();
 		}
 

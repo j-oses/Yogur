@@ -1,0 +1,4 @@
+var x: Int = -a + 1
+var x: Int = a[2] + 1
+var y: Int = (a.b)[2] + a.b[4]
+var z: Int = ((a == b) || (c && d)) - a.b.c.d(4,5) % c[2].d[2]

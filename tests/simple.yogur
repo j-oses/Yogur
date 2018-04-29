@@ -3,7 +3,6 @@ var b: Int = 5
 
 var c: Bool = true
 
-/*
 while (a == b) && true {
 	
 }
@@ -22,4 +21,3 @@ class Class {
 		b = b || b
 	}
 }
-*/

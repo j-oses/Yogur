@@ -269,44 +269,49 @@ public class YogurLex implements java_cup.runtime.Scanner {
 		/* 39 */ YY_NO_ANCHOR,
 		/* 40 */ YY_NO_ANCHOR,
 		/* 41 */ YY_NO_ANCHOR,
-		/* 42 */ YY_NOT_ACCEPT,
+		/* 42 */ YY_NO_ANCHOR,
 		/* 43 */ YY_NO_ANCHOR,
-		/* 44 */ YY_NOT_ACCEPT,
+		/* 44 */ YY_NO_ANCHOR,
 		/* 45 */ YY_NOT_ACCEPT,
 		/* 46 */ YY_NO_ANCHOR,
 		/* 47 */ YY_NO_ANCHOR,
-		/* 48 */ YY_NO_ANCHOR,
+		/* 48 */ YY_NOT_ACCEPT,
 		/* 49 */ YY_NO_ANCHOR,
-		/* 50 */ YY_NO_ANCHOR,
+		/* 50 */ YY_NOT_ACCEPT,
 		/* 51 */ YY_NO_ANCHOR,
 		/* 52 */ YY_NO_ANCHOR,
 		/* 53 */ YY_NO_ANCHOR,
 		/* 54 */ YY_NO_ANCHOR,
 		/* 55 */ YY_NO_ANCHOR,
-		/* 56 */ YY_NO_ANCHOR
+		/* 56 */ YY_NO_ANCHOR,
+		/* 57 */ YY_NO_ANCHOR,
+		/* 58 */ YY_NO_ANCHOR,
+		/* 59 */ YY_NO_ANCHOR
 	};
 	private int yy_cmap[] = unpackFromString(1,65538,
-"16:8,37:2,17,16:2,14,16:18,37,27,16:3,21,24,16,34,35,15,19,39,20,31,13,1:10" +
-",29,16,33,18,32,16:2,11:26,28,16,30,16,12,16,7,10:2,23,5,6,10:5,8,10,22,25," +
-"10:2,3,9,2,4,10:5,36,26,38,16:65410,0:2")[0];
+"4:8,37:2,5,4:2,2,4:18,37,17,4:3,9,13,4,34,35,3,7,39,8,22,1,25:10,20,4,24,6," +
+"23,4:2,32:26,19,4,21,4,33,4,10,31:2,12,27,28,31:5,29,31,11,14,31:2,15,30,18" +
+",26,31:5,36,16,38,4:65410,0:2")[0];
 
-	private int yy_rmap[] = unpackFromString(1,57,
-"0,1,2,3,4,1,5,6,1,7,8,1,9,1,10,11,12,1:2,13,14,1:2,15,1:2,16,1:9,17,18:2,19" +
-",20,21,6,22,15,23,24,17,25,26,27,28,17,29,30,31,32")[0];
+	private int yy_rmap[] = unpackFromString(1,60,
+"0,1,2,3,1:2,4,5,1,6,1,7,8,9,10,1:2,11,12,13,14,1:2,15,1:2,16,1:3,17,1:5,18," +
+"17,18,19,20,17,21,17,1,3,22,23,15,17,24,25,26,27,28,29,30,17,31,32")[0];
 
 	private int yy_nxt[][] = unpackFromString(33,40,
-"1,2,3,52:3,53,54,52:3,4,5,6,7,8,5,9,10,11,12,13,55,52,40,56,43,14,15,16,17," +
-"18,19,20,21,22,23,7,24,25,-1:41,2,-1:39,52:2,46,52:7,47:2,-1:9,52:2,-1,52,-" +
-"1:15,4:12,-1:9,4:2,-1,4,-1:27,26,-1,38,-1:38,42,-1:2,9,-1:19,42,-1:16,9,-1:" +
-"2,9,-1:19,9,24,-1:19,27,-1:53,28,-1:25,31,-1:50,32,-1:40,33,-1:27,34,-1:39," +
-"35,-1:35,44,-1:2,41,-1:19,44,-1:3,26:16,-1,26:22,-1,52:10,47:2,-1:9,52:2,-1" +
-",52,-1:15,38:13,-1,45,38:24,-1,52:4,36,52:5,47:2,-1:9,52:2,-1,52,-1:38,29,-" +
-"1:29,41,-1:2,41,-1:19,41,-1:28,30,-1:14,38:12,37,-1,45,38:24,-1,52:3,39,52:" +
-"6,47:2,-1:9,52:2,-1,52,-1:15,52:7,51,52:2,47:2,-1:9,52:2,-1,52,-1:15,52:10," +
-"47:2,-1:9,52,47,-1,52,-1:15,52,47,52:8,47:2,-1:9,52:2,-1,52,-1:15,52:8,39,5" +
-"2,47:2,-1:9,52:2,-1,52,-1:15,52:6,48,52:3,47:2,-1:9,52:2,-1,52,-1:15,52:10," +
-"47:2,-1:9,49,52,-1,52,-1:15,52:10,47:2,-1:9,52:2,-1,50,-1:15,52:2,47,52:7,4" +
-"7:2,-1:9,52:2,-1,52,-1:14");
+"1,2,3,4,5,6,7,8,9,10,11,56,57,39,40,57,46,12,58,13,14,15,16,17,18,19,57:2,5" +
+"9,57:3,20,5,21,22,23,3,24,25,-1:41,26,-1,38,-1:38,45,-1:2,6,-1:31,45,-1:4,6" +
+",-1:2,6,-1:31,6,24,-1:7,27,-1:56,28,-1:26,57,47,57,-1,57:2,-1:2,57,-1:6,49," +
+"57:6,49:2,-1:12,31,-1:53,32,-1:40,33,-1:24,34,-1:39,35,-1:58,19,-1:24,20:3," +
+"-1,20:2,-1:2,20,-1:6,20:9,-1:8,48,-1:2,42,-1:31,48,-1:3,26:4,-1,26:34,-1:10" +
+",57:3,-1,57:2,-1:2,57,-1:6,49,57:6,49:2,-1:7,38,-1,50,38:36,-1:13,29,-1:36," +
+"57:3,-1,57,30,-1:2,57,-1:6,49,57:6,49:2,-1:8,42,-1:2,42,-1:31,42,-1:18,44,-" +
+"1:33,57:2,43,-1,57:2,-1:2,57,-1:6,49,57:6,49:2,-1:7,36,-1,50,38:36,-1:10,57" +
+":3,-1,57:2,-1:2,41,-1:6,49,57:6,49:2,-1:16,57:3,-1,57:2,-1:2,57,-1:6,49,54," +
+"57:5,49:2,-1:16,57:3,-1,57:2,-1:2,57,-1:6,49,57:3,55,57:2,49:2,-1:16,57:3,-" +
+"1,57:2,-1:2,57,-1:6,49,57,37,57:4,49:2,-1:16,57:3,-1,57:2,-1:2,57,-1:6,49,5" +
+"7:4,54,57,49:2,-1:16,57:3,-1,51,57,-1:2,57,-1:6,49,57:6,49:2,-1:16,57:3,-1," +
+"57,52,-1:2,57,-1:6,49,57:6,49:2,-1:16,53,57:2,-1,57:2,-1:2,57,-1:6,49,57:6," +
+"49:2,-1:6");
 
 	public java_cup.runtime.Symbol next_token ()
 		throws java.io.IOException {
@@ -358,19 +363,15 @@ public class YogurLex implements java_cup.runtime.Scanner {
 					case -2:
 						break;
 					case 2:
-						{return new CustomSymbol(sym.INT, new Integer(yytext()), line()); }
+						{return new CustomSymbol(sym.DIV, line()); }
 					case -3:
 						break;
 					case 3:
-						{if (reservedWords.containsKey(yytext())) {
-							return new CustomSymbol(reservedWords.get(yytext()), line());
-						} else {
-							return new CustomSymbol(sym.ID, yytext(), line());
-						}}
+						{}
 					case -4:
 						break;
 					case 4:
-						{return new CustomSymbol(sym.TYPE, yytext(), line()); }
+						{return new CustomSymbol(sym.PROD, line()); }
 					case -5:
 						break;
 					case 5:
@@ -378,63 +379,67 @@ public class YogurLex implements java_cup.runtime.Scanner {
 					case -6:
 						break;
 					case 6:
-						{return new CustomSymbol(sym.DIV, line()); }
+						{return new CustomSymbol(sym.DELIMITER, line()); }
 					case -7:
 						break;
 					case 7:
-						{}
+						{return new CustomSymbol(sym.ASSIGN, line()); }
 					case -8:
 						break;
 					case 8:
-						{return new CustomSymbol(sym.PROD, line()); }
+						{return new CustomSymbol(sym.SUM, line()); }
 					case -9:
 						break;
 					case 9:
-						{return new CustomSymbol(sym.DELIMITER, line()); }
+						{return new CustomSymbol(sym.SUBS, line()); }
 					case -10:
 						break;
 					case 10:
-						{return new CustomSymbol(sym.ASSIGN, line()); }
+						{return new CustomSymbol(sym.MOD, line()); }
 					case -11:
 						break;
 					case 11:
-						{return new CustomSymbol(sym.SUM, line()); }
+						{if (reservedWords.containsKey(yytext())) {
+							return new CustomSymbol(reservedWords.get(yytext()), line());
+						} else {
+							return new CustomSymbol(sym.ID, yytext(), line());
+						}}
 					case -12:
 						break;
 					case 12:
-						{return new CustomSymbol(sym.SUBS, line()); }
+						{return new CustomSymbol(sym.NOT, line()); }
 					case -13:
 						break;
 					case 13:
-						{return new CustomSymbol(sym.MOD, line()); }
+						{return new CustomSymbol(sym.LSQUARE, line()); }
 					case -14:
 						break;
 					case 14:
-						{return new CustomSymbol(sym.NOT, line()); }
+						{return new CustomSymbol(sym.COLON, line()); }
 					case -15:
 						break;
 					case 15:
-						{return new CustomSymbol(sym.LSQUARE, line()); }
+						{return new CustomSymbol(sym.RSQUARE, line()); }
 					case -16:
 						break;
 					case 16:
-						{return new CustomSymbol(sym.COLON, line()); }
+						{return new CustomSymbol(sym.DOT, line()); }
 					case -17:
 						break;
 					case 17:
-						{return new CustomSymbol(sym.RSQUARE, line()); }
+						{return new CustomSymbol(sym.GT, line()); }
 					case -18:
 						break;
 					case 18:
-						{return new CustomSymbol(sym.DOT, line()); }
+						{return new CustomSymbol(sym.LT, line()); }
 					case -19:
 						break;
 					case 19:
-						{return new CustomSymbol(sym.GT, line()); }
+						{return new CustomSymbol(sym.INT, new Integer(yytext()), line()); }
 					case -20:
 						break;
 					case 20:
-						{return new CustomSymbol(sym.LT, line()); }
+						{return new CustomSymbol(sym.TYPE, yytext(), line()); }
 					case -21:
 						break;
 					case 21:
@@ -498,40 +503,44 @@ public class YogurLex implements java_cup.runtime.Scanner {
 					case -36:
 						break;
 					case 36:
-						{return new CustomSymbol(sym.BOOL, new Boolean(yytext()), line()); }
+						{}
 					case -37:
 						break;
 					case 37:
-						{}
+						{return new CustomSymbol(sym.BOOL, new Boolean(yytext()), line()); }
 					case -38:
 						break;
 					case 39:
-						{if (reservedWords.containsKey(yytext())) {
-							return new CustomSymbol(reservedWords.get(yytext()), line());
-						} else {
-							return new CustomSymbol(sym.ID, yytext(), line());
-						}}
+						{ exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", line(), CompilationException.Scope.LexicalAnalyzer)); }
 					case -39:
 						break;
 					case 40:
-						{ exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", line(), CompilationException.Scope.LexicalAnalyzer)); }
-					case -40:
-						break;
-					case 41:
-						{return new CustomSymbol(sym.LBRACKET, line()); }
-					case -41:
-						break;
-					case 43:
-						{ exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", line(), CompilationException.Scope.LexicalAnalyzer)); }
-					case -42:
-						break;
-					case 46:
 						{if (reservedWords.containsKey(yytext())) {
 							return new CustomSymbol(reservedWords.get(yytext()), line());
 						} else {
 							return new CustomSymbol(sym.ID, yytext(), line());
 						}}
+					case -40:
+						break;
+					case 41:
+						{return new CustomSymbol(sym.NOT, line()); }
+					case -41:
+						break;
+					case 42:
+						{return new CustomSymbol(sym.LBRACKET, line()); }
+					case -42:
+						break;
+					case 43:
+						{return new CustomSymbol(sym.AND, line()); }
 					case -43:
+						break;
+					case 44:
+						{return new CustomSymbol(sym.OR, line()); }
+					case -44:
+						break;
+					case 46:
+						{ exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", line(), CompilationException.Scope.LexicalAnalyzer)); }
+					case -45:
 						break;
 					case 47:
 						{if (reservedWords.containsKey(yytext())) {
@@ -539,25 +548,9 @@ public class YogurLex implements java_cup.runtime.Scanner {
 						} else {
 							return new CustomSymbol(sym.ID, yytext(), line());
 						}}
-					case -44:
-						break;
-					case 48:
-						{if (reservedWords.containsKey(yytext())) {
-							return new CustomSymbol(reservedWords.get(yytext()), line());
-						} else {
-							return new CustomSymbol(sym.ID, yytext(), line());
-						}}
-					case -45:
-						break;
-					case 49:
-						{if (reservedWords.containsKey(yytext())) {
-							return new CustomSymbol(reservedWords.get(yytext()), line());
-						} else {
-							return new CustomSymbol(sym.ID, yytext(), line());
-						}}
 					case -46:
 						break;
-					case 50:
+					case 49:
 						{if (reservedWords.containsKey(yytext())) {
 							return new CustomSymbol(reservedWords.get(yytext()), line());
 						} else {
@@ -612,6 +605,30 @@ public class YogurLex implements java_cup.runtime.Scanner {
 							return new CustomSymbol(sym.ID, yytext(), line());
 						}}
 					case -53:
+						break;
+					case 57:
+						{if (reservedWords.containsKey(yytext())) {
+							return new CustomSymbol(reservedWords.get(yytext()), line());
+						} else {
+							return new CustomSymbol(sym.ID, yytext(), line());
+						}}
+					case -54:
+						break;
+					case 58:
+						{if (reservedWords.containsKey(yytext())) {
+							return new CustomSymbol(reservedWords.get(yytext()), line());
+						} else {
+							return new CustomSymbol(sym.ID, yytext(), line());
+						}}
+					case -55:
+						break;
+					case 59:
+						{if (reservedWords.containsKey(yytext())) {
+							return new CustomSymbol(reservedWords.get(yytext()), line());
+						} else {
+							return new CustomSymbol(sym.ID, yytext(), line());
+						}}
+					case -56:
 						break;
 					default:
 						yy_error(YY_E_INTERNAL,false);

@@ -83,15 +83,6 @@ bloqueCierre = ({separador}*\n{separador}*)*\}
 
 %%
 
-{entero}				{return new CustomSymbol(sym.INT, new Integer(yytext()), line()); }
-{boolean}				{return new CustomSymbol(sym.BOOL, new Boolean(yytext()), line()); }
-{identificador} 		{if (reservedWords.containsKey(yytext())) {
-							return new CustomSymbol(reservedWords.get(yytext()), line());
-						} else {
-							return new CustomSymbol(sym.ID, yytext(), line());
-						}}
-{identificadorTipo}		{return new CustomSymbol(sym.TYPE, yytext(), line()); }
-
 {comentarioLinea}		{}
 {comentarioMultilinea}	{}
 
@@ -115,6 +106,15 @@ bloqueCierre = ({separador}*\n{separador}*)*\}
 {opLess}				{return new CustomSymbol(sym.LT, line()); }
 {opColon}				{return new CustomSymbol(sym.COLON, line()); }
 {opArrow}				{return new CustomSymbol(sym.ARROW, line()); }
+
+{entero}				{return new CustomSymbol(sym.INT, new Integer(yytext()), line()); }
+{boolean}				{return new CustomSymbol(sym.BOOL, new Boolean(yytext()), line()); }
+{identificador} 		{if (reservedWords.containsKey(yytext())) {
+							return new CustomSymbol(reservedWords.get(yytext()), line());
+						} else {
+							return new CustomSymbol(sym.ID, yytext(), line());
+						}}
+{identificadorTipo}		{return new CustomSymbol(sym.TYPE, yytext(), line()); }
 
 {corcheteApertura}		{return new CustomSymbol(sym.LSQUARE, line()); }
 {corcheteCierre}		{return new CustomSymbol(sym.RSQUARE, line()); }

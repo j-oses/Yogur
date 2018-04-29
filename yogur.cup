@@ -90,40 +90,40 @@ Declarator0 ::= LPAREN Declarator:d RPAREN		{: RESULT = d; :}
 	| ID:id										{: RESULT = new BaseDeclarator((String)id); :}
 ;
 
-Exp ::= Exp:e DOT ID:id					{: RESULT = new DotIdentifier((Expression)e, (String)id); :}
-	| Exp:e Index:i						{: RESULT = new ArrayIdentifier((Expression)e, (ArrayIndex)i); :}
-	| Exp:e LPAREN CommaExp:exps RPAREN	{: RESULT = new FunctionCall((Expression)e, (List<Expression>)exps); :}
-	| Exp:e LPAREN RPAREN				{: RESULT = new FunctionCall((Expression)e, new ArrayList<Expression>()); :}
-	| Exp0:e							{: RESULT = e; :}
+Exp ::= Exp:e1 OR Exp0:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.OR); :}
+	| Exp0:e					{: RESULT = e; :}
 ;
-Exp0 ::= SUBS Exp0:e			{: RESULT = new UnaryOperation((Expression)e, UnaryOperation.Operator.NEG); :}
-	| NOT Exp0:e				{: RESULT = new UnaryOperation((Expression)e, UnaryOperation.Operator.NOT); :}
+Exp0 ::= Exp0:e1 AND Exp1:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.AND); :}
 	| Exp1:e					{: RESULT = e; :}
 ;
-Exp1 ::= Exp1:e1 PROD Exp2:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.PROD); :}
-	| Exp1:e1 DIV Exp2:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.DIV); :}
-	| Exp1:e1 MOD Exp2:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.MOD); :}
+Exp1 ::= Exp1:e1 EQ Exp2:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.EQ); :}
+	| Exp1:e1 NEQ Exp2:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.NEQ); :}
 	| Exp2:e					{: RESULT = e; :}
 ;
-Exp2 ::= Exp2:e1 SUM Exp3:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.SUM); :}	
-	| Exp2:e1 SUBS Exp3:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.SUBS); :}
+Exp2 ::= Exp2:e1 LT Exp3:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.LT); :}
+	| Exp2:e1 LEQ Exp3:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.LEQ); :}
+	| Exp2:e1 GT Exp3:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.GT); :}
+	| Exp2:e1 GEQ Exp3:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.GEQ); :}
 	| Exp3:e					{: RESULT = e; :}
 ;
-Exp3 ::= Exp3:e1 LT Exp4:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.LT); :}
-	| Exp3:e1 LEQ Exp4:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.LEQ); :}
-	| Exp3:e1 GT Exp4:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.GT); :}
-	| Exp3:e1 GEQ Exp4:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.GEQ); :}
+Exp3 ::= Exp3:e1 SUM Exp4:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.SUM); :}	
+	| Exp3:e1 SUBS Exp4:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.SUBS); :}
 	| Exp4:e					{: RESULT = e; :}
 ;
-Exp4 ::= Exp4:e1 EQ Exp5:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.EQ); :}
-	| Exp4:e1 NEQ Exp5:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.NEQ); :}
+Exp4 ::= Exp4:e1 PROD Exp5:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.PROD); :}
+	| Exp4:e1 DIV Exp5:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.DIV); :}
+	| Exp4:e1 MOD Exp5:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.MOD); :}
 	| Exp5:e					{: RESULT = e; :}
 ;
-Exp5 ::= Exp5:e1 AND Exp6:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.AND); :}
+Exp5 ::= SUBS Exp5:e			{: RESULT = new UnaryOperation((Expression)e, UnaryOperation.Operator.NEG); :}
+	| NOT Exp5:e				{: RESULT = new UnaryOperation((Expression)e, UnaryOperation.Operator.NOT); :}
 	| Exp6:e					{: RESULT = e; :}
 ;
-Exp6 ::= Exp6:e1 OR Exp7:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.OR); :}
-	| Exp7:e					{: RESULT = e; :}
+Exp6 ::= Exp6:e DOT ID:id					{: RESULT = new DotIdentifier((Expression)e, (String)id); :}
+	| Exp6:e Index:i						{: RESULT = new ArrayIdentifier((Expression)e, (ArrayIndex)i); :}
+	| Exp6:e LPAREN CommaExp:exps RPAREN	{: RESULT = new FunctionCall((Expression)e, (List<Expression>)exps); :}
+	| Exp6:e LPAREN RPAREN					{: RESULT = new FunctionCall((Expression)e, new ArrayList<Expression>()); :}
+	| Exp7:e								{: RESULT = e; :}
 ;
 Exp7 ::= LPAREN Exp:e RPAREN	{: RESULT = e; :}
 	| ID:id						{: RESULT = new BaseIdentifier((String)id); :}
@@ -157,4 +157,5 @@ ClassBody ::= ClassBody:b DELIMITER Dec:d	{: ((List<FunctionOrVarDeclaration>)b)
 ;
 BlockBody ::= BlockBody:is DELIMITER Inst:i			{: ((List<Statement>)is).add((Statement)i); RESULT = is; :}
 	| Inst:i										{: RESULT = new ArrayList<Statement>(); ((List<Statement>)RESULT).add((Statement)i); :}
+	|												{: RESULT = new ArrayList<Statement>(); :}
 ;
