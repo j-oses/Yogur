@@ -11,9 +11,6 @@ import yogur.tree.expression.*;
 import yogur.tree.expression.identifier.*;
 import yogur.tree.statement.*;
 
-action code {:
-:}
-
 scan with {: return getScanner().next_token(); :};
 
 parser code {:

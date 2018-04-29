@@ -452,9 +452,6 @@ public class YogurParser extends java_cup.runtime.lr_parser {
 /** Cup generated class to encapsulate user supplied action code.*/
 @SuppressWarnings({"rawtypes", "unchecked", "unused"})
 class CUP$YogurParser$actions {
-
-
-
   private final YogurParser parser;
 
   /** Constructor */

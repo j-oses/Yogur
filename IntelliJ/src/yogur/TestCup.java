@@ -15,9 +15,10 @@ public class TestCup {
 	public static void main(String args[]) {
 		File file = new File("./../tests/exampleOne.yogur");
 
-		//testAll();
-		testFile(file);
+		testAll();
+		//testFile(file);
 	}
+
 	public static void testAll(){
 		File dir = new File(TESTDIR);
 
@@ -25,14 +26,13 @@ public class TestCup {
 		if (directoryListing != null) {
 			for (File file : directoryListing) {
 				testFile(file);
-
 			}
-
 		} else{
 			System.err.println("Empty testing directory");
 		}
 
 	}
+
 	public static void testFile(File file) {
 		YogurParser p = null;
 
