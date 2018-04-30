@@ -10,6 +10,10 @@ public class BaseType implements Type {
 		this.name = name;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	@Override
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
 

@@ -11,30 +11,47 @@ public class IdIdentifier {
      * Las ausentes en searchId si Id no existe en ningún bloque.
      */
 
-    private Deque<Map<String, Declaration>> idMap = new ArrayDeque<>();
+	/**
+	 * Maps each class to its own identifier environment. Note that maps the null string
+	 * to the default, out-of-class identifier environment.
+	 */
+	private Map<String, Deque<Map<String, Declaration>>> classMap = new HashMap<>();
+
+    private String currentClass = null;
 
     public IdIdentifier() {
 		// The program is a "block"
+		classMap.put(null, new ArrayDeque<>());
     	openBlock();
 	}
 
 	public int getCurrentId() {
-		return idMap.size();
+		return classMap.get(currentClass).size();
 	}
 
     /**
      * Starts a new block
      */
 	public void openBlock() {
-        idMap.push(new HashMap<>());
+        classMap.get(currentClass).push(new HashMap<>());
     }
 
 	/**
 	 * Ends the current block
 	 */
 	public void closeBlock() {
-		idMap.pop();
+		classMap.get(currentClass).pop();
     }
+
+    public void openClass(String name) {
+		classMap.put(name, new ArrayDeque<>());
+		currentClass = name;
+		openBlock();
+	}
+
+	public void closeClass() {
+		currentClass = null;
+	}
 
 	/**
 	 * Añade el identificador id al bloque en curso y la posición
@@ -42,11 +59,19 @@ public class IdIdentifier {
 	 * puntero
 	 */
 	public void insertId(String id, Declaration declaration) throws CompilationException {
+		Deque<Map<String, Declaration>> deque = null;
+
+		deque = classMap.get(currentClass);
+
+		if (deque == null && currentClass != null) {
+			deque = classMap.get(null);
+		}
+
         // null check is preferable alas we don't store null
-        if (idMap.peek().get(id) != null) {
+        if (deque.peek().get(id) != null) {
             throw new CompilationException("Duplicate id detected: " + id, 0, CompilationException.Scope.IdentificatorIdentification);
         } else {
-            idMap.peek().put(id, declaration);
+			deque.peek().put(id, declaration);
         }
     }
 
@@ -57,13 +82,24 @@ public class IdIdentifier {
 		Declaration declaration = null;
 		int counter = getCurrentId();
 
-        for (Map<String, Declaration> hm: idMap) {
+        for (Map<String, Declaration> hm: classMap.get(currentClass)) {
             if (hm.get(id) != null) {
                 declaration = hm.get(id);
-                System.out.println(id + " exists, declared on " + declaration + ", level " + counter);
+                System.out.println(id + " exists, declared inside " + currentClass + ", level " + counter);
             }
             counter--;
         }
+
+        counter = classMap.get(null).size();
+        if (declaration == null && currentClass != null) {
+			for (Map<String, Declaration> hm : classMap.get(null)) {
+				if (hm.get(id) != null) {
+					declaration = hm.get(id);
+					System.out.println(id + " exists, declared globally" + ", level " + counter);
+				}
+				counter--;
+			}
+		}
 
         if (declaration == null) {
             throw new CompilationException(id + " doesn't exist in any block", 0, CompilationException.Scope.IdentificatorIdentification);

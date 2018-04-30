@@ -1,7 +1,7 @@
-/*class Container {
+class Container {
     var one : Int
     var two : Int
-}*/
+}
 def sum(one : Int, two : Int) -> result : Int {
     result = one + two
 }
