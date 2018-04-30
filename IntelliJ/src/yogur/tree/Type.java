@@ -1,4 +1,4 @@
 package yogur.tree;
 
-public interface Type {
+public interface Type extends AbstractTreeNode {
 }

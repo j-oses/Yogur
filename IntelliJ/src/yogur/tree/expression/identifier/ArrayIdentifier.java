@@ -1,6 +1,7 @@
 package yogur.tree.expression.identifier;
 
-import yogur.tree.ArrayType;
+import yogur.error.CompilationException;
+import yogur.ididentification.IdIdentifier;
 import yogur.tree.expression.Expression;
 
 public class ArrayIdentifier implements VarIdentifier {
@@ -10,5 +11,11 @@ public class ArrayIdentifier implements VarIdentifier {
 	public ArrayIdentifier(Expression expression, ArrayIndex index) {
 		this.leftExpression = expression;
 		this.index = index;
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+		leftExpression.performIdentifierAnalysis(table);
+		index.performIdentifierAnalysis(table);
 	}
 }

@@ -1,9 +1,9 @@
-class Container {
+/*class Container {
     var one : Int
     var two : Int
-}
-def sum(one : Int, two : Int) -> sum : Int {
-    sum = one + two
+}*/
+def sum(one : Int, two : Int) -> result : Int {
+    result = one + two
 }
 var cont : Container
 cont.two = 2

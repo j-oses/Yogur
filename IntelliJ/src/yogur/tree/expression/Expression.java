@@ -1,5 +1,7 @@
 package yogur.tree.expression;
 
-public interface Expression {
+import yogur.tree.AbstractTreeNode;
+
+public interface Expression extends AbstractTreeNode {
 
 }

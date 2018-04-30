@@ -1,8 +1,11 @@
 package yogur.tree.expression.identifier;
 
+import yogur.error.CompilationException;
+import yogur.ididentification.IdIdentifier;
+import yogur.tree.AbstractTreeNode;
 import yogur.tree.expression.Expression;
 
-public class ArrayIndex {
+public class ArrayIndex implements AbstractTreeNode {
 	public enum AccessType {
 		INDEX, LEFT_RANGE, RIGHT_RANGE, LEFT_RIGHT_RANGE
 	}
@@ -20,5 +23,13 @@ public class ArrayIndex {
 		this.offset = offset;
 		this.offset2 = offset2;
 		this.accessType = accessType;
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+		offset.performIdentifierAnalysis(table);
+		if (offset2 != null) {
+			offset2.performIdentifierAnalysis(table);
+		}
 	}
 }

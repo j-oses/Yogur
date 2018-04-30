@@ -1,8 +1,9 @@
 package yogur.tree.statement;
 
+import yogur.error.CompilationException;
+import yogur.ididentification.IdIdentifier;
 import yogur.tree.declaration.declarator.Declarator;
 import yogur.tree.expression.Expression;
-import yogur.tree.expression.identifier.VarIdentifier;
 
 public class Assignation implements Statement {
 	private Declarator declarator;
@@ -11,5 +12,11 @@ public class Assignation implements Statement {
 	public Assignation(Declarator declarator, Expression e) {
 		this.declarator = declarator;
 		this.expression = e;
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+		declarator.performIdentifierAnalysis(table);
+		expression.performIdentifierAnalysis(table);
 	}
 }

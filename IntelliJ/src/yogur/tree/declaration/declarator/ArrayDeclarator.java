@@ -1,6 +1,7 @@
 package yogur.tree.declaration.declarator;
 
-import yogur.tree.declaration.Declaration;
+import yogur.error.CompilationException;
+import yogur.ididentification.IdIdentifier;
 import yogur.tree.expression.identifier.ArrayIndex;
 
 public class ArrayDeclarator implements Declarator {
@@ -10,5 +11,11 @@ public class ArrayDeclarator implements Declarator {
 	public ArrayDeclarator(Declarator declarator, ArrayIndex index) {
 		this.declarator = declarator;
 		this.index = index;
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+		declarator.performIdentifierAnalysis(table);
+		index.performIdentifierAnalysis(table);
 	}
 }

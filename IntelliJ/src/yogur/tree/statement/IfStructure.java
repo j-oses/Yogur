@@ -1,5 +1,7 @@
 package yogur.tree.statement;
 
+import yogur.error.CompilationException;
+import yogur.ididentification.IdIdentifier;
 import yogur.tree.expression.Expression;
 
 public class IfStructure implements Statement {
@@ -15,5 +17,14 @@ public class IfStructure implements Statement {
 		this.condition = condition;
 		this.ifClause = ifClause;
 		this.elseClause = elseClause;
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+		condition.performIdentifierAnalysis(table);
+		ifClause.performIdentifierAnalysis(table);
+		if (elseClause != null) {
+			elseClause.performIdentifierAnalysis(table);
+		}
 	}
 }

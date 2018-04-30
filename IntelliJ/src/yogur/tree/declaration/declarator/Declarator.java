@@ -1,4 +1,6 @@
 package yogur.tree.declaration.declarator;
 
-public interface Declarator {
+import yogur.tree.AbstractTreeNode;
+
+public interface Declarator extends AbstractTreeNode {
 }

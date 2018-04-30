@@ -1,12 +1,14 @@
 package yogur.tree.declaration;
 
-import yogur.tree.expression.identifier.BaseIdentifier;
+import yogur.error.CompilationException;
+import yogur.ididentification.IdIdentifier;
+import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.tree.statement.Block;
 
 import java.util.List;
 
 public class FuncDeclaration implements FunctionOrVarDeclaration {
-	private BaseIdentifier identifier;
+	private BaseDeclarator declarator;
 	private List<Argument> arguments;
 	private Argument returnArg;		// May be null
 	private Block block;
@@ -15,10 +17,25 @@ public class FuncDeclaration implements FunctionOrVarDeclaration {
 		this(identifier, arguments, null, block);
 	}
 
-	public FuncDeclaration(String identifier, List<Argument> arguments, Argument returnArg, Block block) {
-		this.identifier = new BaseIdentifier(identifier);
+	public FuncDeclaration(String declarator, List<Argument> arguments, Argument returnArg, Block block) {
+		this.declarator = new BaseDeclarator(declarator);
 		this.arguments = arguments;
 		this.returnArg = returnArg;
 		this.block = block;
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+		table.insertId(declarator.getIdentifier(), this);
+		table.openBlock();
+		arguments.forEach((argument -> {
+			try {
+				argument.performIdentifierAnalysis(table);
+			} catch (CompilationException e) {
+				e.printStackTrace();
+			}
+		}));
+		returnArg.performIdentifierAnalysis(table);
+		block.performIdentifierAnalysis(table, false);
 	}
 }
