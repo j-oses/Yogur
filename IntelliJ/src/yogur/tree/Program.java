@@ -2,6 +2,7 @@ package yogur.tree;
 
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
+import yogur.typeidentification.TypeIdentifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,4 +34,16 @@ public class Program implements AbstractTreeNode {
 			}
 		});
 	}
+
+	@Override
+	public void performTypeAnalysis(TypeIdentifier table) throws CompilationException {
+		instructions.forEach(sta -> {
+			try {
+				sta.performTypeAnalysis(table);
+			} catch (CompilationException e) {
+				e.printStackTrace();
+			}
+		});
+	}
+
 }
