@@ -14,7 +14,8 @@ public class TestIdentifiers {
 	public static void main(String args[]) {
 		File file = new File("./../tests/exampleOne.yogur");
 
-		testFile(file);
+		//testFile(file);
+		testAll();
 	}
 
 	public static void testAll(){

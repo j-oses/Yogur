@@ -43,10 +43,15 @@ public class IdIdentifier {
 		classMap.get(currentClass).pop();
     }
 
-    public void openClass(String name) {
-		classMap.put(name, new ArrayDeque<>());
-		currentClass = name;
-		openBlock();
+    public void openClass(String name) throws CompilationException {
+
+		if (classMap.get(name) == null){
+			classMap.put(name, new ArrayDeque<>());
+			currentClass = name;
+			openBlock();
+		} else {
+			throw new CompilationException("Class name already exists: " + name, 0, CompilationException.Scope.IdentificatorIdentification);
+		}
 	}
 
 	public void closeClass() {
