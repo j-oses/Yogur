@@ -26,24 +26,15 @@ public class Program implements AbstractTreeNode {
 
 	@Override
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
-		instructions.forEach(sta -> {
-			try {
-				sta.performIdentifierAnalysis(table);
-			} catch (CompilationException e) {
-				e.printStackTrace();
-			}
-		});
+		for (StatementOrDeclaration i: instructions) {
+			i.performIdentifierAnalysis(table);
+		}
 	}
 
 	@Override
 	public void performTypeAnalysis(TypeIdentifier table) throws CompilationException {
-		instructions.forEach(sta -> {
-			try {
-				sta.performTypeAnalysis(table);
-			} catch (CompilationException e) {
-				e.printStackTrace();
-			}
-		});
+		for (StatementOrDeclaration i : instructions) {
+			i.performTypeAnalysis(table);
+		}
 	}
-
 }

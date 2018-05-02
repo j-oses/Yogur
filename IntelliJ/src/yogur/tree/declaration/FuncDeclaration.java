@@ -28,13 +28,9 @@ public class FuncDeclaration implements FunctionOrVarDeclaration {
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
 		table.insertId(declarator.getIdentifier(), this);
 		table.openBlock();
-		arguments.forEach((argument -> {
-			try {
-				argument.performIdentifierAnalysis(table);
-			} catch (CompilationException e) {
-				e.printStackTrace();
-			}
-		}));
+		for (Argument a: arguments) {
+			a.performIdentifierAnalysis(table);
+		}
 		returnArg.performIdentifierAnalysis(table);
 		block.performIdentifierAnalysis(table, false);
 	}

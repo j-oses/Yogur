@@ -20,12 +20,8 @@ public class FunctionCall implements Expression {
 	@Override
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
 		function.performIdentifierAnalysis(table);
-		expressions.forEach(e -> {
-			try {
-				e.performIdentifierAnalysis(table);
-			} catch (CompilationException e1) {
-				e1.printStackTrace();
-			}
-		});
+		for (Expression e: expressions) {
+			e.performIdentifierAnalysis(table);
+		}
 	}
 }

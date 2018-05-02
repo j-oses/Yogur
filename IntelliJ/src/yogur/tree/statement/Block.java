@@ -6,10 +6,10 @@ import yogur.ididentification.IdIdentifier;
 import java.util.List;
 
 public class Block implements Statement {
-	private List<Statement> statementList;
+	private List<Statement> statements;
 
 	public Block(List<Statement> s) {
-		statementList = s;
+		statements = s;
 	}
 
 	@Override
@@ -21,13 +21,9 @@ public class Block implements Statement {
 		if (open) {
 			table.openBlock();
 		}
-		statementList.forEach(s -> {
-			try {
-				s.performIdentifierAnalysis(table);
-			} catch (CompilationException e) {
-				e.printStackTrace();
-			}
-		});
+		for (Statement s: statements) {
+			s.performIdentifierAnalysis(table);
+		}
 		table.closeBlock();
 	}
 }
