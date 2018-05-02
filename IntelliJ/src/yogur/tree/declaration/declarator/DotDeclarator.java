@@ -2,6 +2,7 @@ package yogur.tree.declaration.declarator;
 
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
+import yogur.typeidentification.MetaType;
 
 public class DotDeclarator implements Declarator {
 	private Declarator declarator;
@@ -15,5 +16,10 @@ public class DotDeclarator implements Declarator {
 	@Override
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
 		declarator.performIdentifierAnalysis(table);
+	}
+
+	@Override
+	public MetaType performTypeAnalysis(IdIdentifier idTable) {
+		return null;
 	}
 }

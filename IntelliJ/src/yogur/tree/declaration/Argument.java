@@ -2,9 +2,9 @@ package yogur.tree.declaration;
 
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
-import yogur.tree.AbstractTreeNode;
-import yogur.tree.Type;
+import yogur.tree.type.Type;
 import yogur.tree.declaration.declarator.BaseDeclarator;
+import yogur.typeidentification.MetaType;
 
 public class Argument implements Declaration {
 	private BaseDeclarator declarator;
@@ -27,5 +27,10 @@ public class Argument implements Declaration {
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
 		table.insertId(declarator.getIdentifier(), this);
 		type.performIdentifierAnalysis(table);
+	}
+
+	@Override
+	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+		return type.performTypeAnalysis(idTable);
 	}
 }

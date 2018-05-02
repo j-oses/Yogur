@@ -4,6 +4,7 @@ import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.AbstractTreeNode;
 import yogur.tree.expression.Expression;
+import yogur.typeidentification.MetaType;
 
 public class ArrayIndex implements AbstractTreeNode {
 	public enum AccessType {
@@ -31,5 +32,10 @@ public class ArrayIndex implements AbstractTreeNode {
 		if (offset2 != null) {
 			offset2.performIdentifierAnalysis(table);
 		}
+	}
+
+	@Override
+	public MetaType performTypeAnalysis(IdIdentifier idTable) {
+		return null;
 	}
 }

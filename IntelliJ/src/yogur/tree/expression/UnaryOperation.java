@@ -2,6 +2,8 @@ package yogur.tree.expression;
 
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
+import yogur.tree.type.BaseType;
+import yogur.typeidentification.MetaType;
 
 public class UnaryOperation implements Expression {
 	public enum Operator {
@@ -19,5 +21,19 @@ public class UnaryOperation implements Expression {
 	@Override
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
 		expression.performIdentifierAnalysis(table);
+	}
+
+	@Override
+	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+		MetaType argType = expression.performTypeAnalysis(idTable);
+		MetaType expectedType = new BaseType(
+				operator.equals(Operator.NEG) ? BaseType.PredefinedType.Bool : BaseType.PredefinedType.Int);
+
+		if (expectedType.equals(argType)) {
+			return expectedType;
+		}
+
+		throw new CompilationException("Can not apply operator " + operator.name() + " to argument with type "
+				+ argType, CompilationException.Scope.TypeAnalyzer);
 	}
 }

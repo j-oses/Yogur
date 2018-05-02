@@ -1,13 +1,39 @@
 package yogur.tree.expression;
 
+import javafx.util.Pair;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
+import yogur.tree.type.BaseType;
+import yogur.typeidentification.MetaType;
+
+import javax.swing.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BinaryOperation implements Expression {
 	public enum Operator {
 		SUM, SUBS, PROD, DIV, MOD,
 		LT, LEQ, GT, GEQ, EQ, NEQ,
-		AND, OR
+		AND, OR;
+
+		static MetaType boolT = new BaseType(BaseType.PredefinedType.Bool.name());
+		static MetaType intT = new BaseType(BaseType.PredefinedType.Int.name());
+
+		public MetaType getReturnType() {
+			if (ordinal() < 5) {
+				return intT;
+			} else {
+				return boolT;
+			}
+		}
+
+		public MetaType getArgumentsType() {
+			if (ordinal() < 10) {
+				return intT;
+			} else {
+				return boolT;
+			}
+		}
 	}
 
 	private Expression left;
@@ -24,5 +50,18 @@ public class BinaryOperation implements Expression {
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
 		left.performIdentifierAnalysis(table);
 		right.performIdentifierAnalysis(table);
+	}
+
+	@Override
+	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+		MetaType argType = operator.getArgumentsType();
+		MetaType leftType = left.performTypeAnalysis(idTable);
+		MetaType rightType = right.performTypeAnalysis(idTable);
+		if (argType.equals(leftType) && argType.equals(rightType)) {
+			return operator.getReturnType();
+		}
+
+		throw new CompilationException("Can not apply operator " + operator.name() + " to arguments with types "
+				+ leftType + " and " + rightType, CompilationException.Scope.TypeAnalyzer);
 	}
 }

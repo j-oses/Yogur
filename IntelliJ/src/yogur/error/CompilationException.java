@@ -20,6 +20,10 @@ public class CompilationException extends ParseException {
 		this.scope = scope;
 	}
 
+	public CompilationException(String s, Scope scope) {
+		this(s, -1, scope);
+	}
+
 	public CompilationException(String s, int line, Scope scope) {
 		super(s, line);
 		this.scope = scope;

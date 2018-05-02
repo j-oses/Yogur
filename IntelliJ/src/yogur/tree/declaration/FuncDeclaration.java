@@ -4,7 +4,10 @@ import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.tree.statement.Block;
+import yogur.tree.type.FunctionType;
+import yogur.typeidentification.MetaType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FuncDeclaration implements FunctionOrVarDeclaration {
@@ -33,5 +36,15 @@ public class FuncDeclaration implements FunctionOrVarDeclaration {
 		}
 		returnArg.performIdentifierAnalysis(table);
 		block.performIdentifierAnalysis(table, false);
+	}
+
+	@Override
+	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+		List<MetaType> argTypes = new ArrayList<>();
+		for (Argument a: arguments) {
+			argTypes.add(a.performTypeAnalysis(idTable));
+		}
+		MetaType returnType = (returnArg != null) ? returnArg.performTypeAnalysis(idTable) : null;
+		return new FunctionType(argTypes, returnType);
 	}
 }

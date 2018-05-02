@@ -5,6 +5,7 @@ import yogur.ididentification.IdIdentifier;
 import yogur.tree.declaration.Argument;
 import yogur.tree.declaration.FunctionOrVarDeclaration;
 import yogur.tree.expression.Expression;
+import yogur.typeidentification.MetaType;
 
 public class VarDeclaration implements Statement, FunctionOrVarDeclaration {
 	Argument argument;
@@ -25,5 +26,23 @@ public class VarDeclaration implements Statement, FunctionOrVarDeclaration {
 		if (assignTo != null) {
 			assignTo.performIdentifierAnalysis(table);
 		}
+	}
+
+	@Override
+	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+		MetaType argType = argument.performTypeAnalysis(idTable);
+
+		if (assignTo == null) {
+			return null;
+		}
+
+		MetaType assType = assignTo.performTypeAnalysis(idTable);
+
+		if (argType.equals(assType)) {
+			return null;
+		}
+
+		throw new CompilationException("Assigning an expression of type: " + assType +
+				" to a variable of type: " + argType, CompilationException.Scope.TypeAnalyzer);
 	}
 }

@@ -2,8 +2,8 @@ package yogur.tree.declaration;
 
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
-import yogur.tree.BaseType;
-import yogur.tree.Type;
+import yogur.tree.type.BaseType;
+import yogur.typeidentification.MetaType;
 
 import java.util.List;
 
@@ -24,5 +24,10 @@ public class ClassDeclaration implements Declaration {
 			d.performIdentifierAnalysis(table);
 		}
 		table.closeClass();
+	}
+
+	@Override
+	public MetaType performTypeAnalysis(IdIdentifier idTable) {
+		return type.performTypeAnalysis(idTable);
 	}
 }

@@ -2,6 +2,7 @@ package yogur.tree.statement;
 
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
+import yogur.typeidentification.MetaType;
 
 import java.util.List;
 
@@ -25,5 +26,13 @@ public class Block implements Statement {
 			s.performIdentifierAnalysis(table);
 		}
 		table.closeBlock();
+	}
+
+	@Override
+	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+		for (Statement s: statements) {
+			s.performTypeAnalysis(idTable);
+		}
+		return null;
 	}
 }

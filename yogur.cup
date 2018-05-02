@@ -10,6 +10,7 @@ import yogur.tree.declaration.declarator.*;
 import yogur.tree.expression.*;
 import yogur.tree.expression.identifier.*;
 import yogur.tree.statement.*;
+import yogur.tree.type.*;
 
 scan with {: return getScanner().next_token(); :};
 

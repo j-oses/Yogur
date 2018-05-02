@@ -3,6 +3,7 @@ package yogur.tree.declaration.declarator;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.declaration.Declaration;
+import yogur.typeidentification.MetaType;
 
 public class BaseDeclarator implements Declarator {
 	private String identifier;
@@ -20,5 +21,10 @@ public class BaseDeclarator implements Declarator {
 	@Override
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
 		declaration = table.searchId(identifier);
+	}
+
+	@Override
+	public MetaType performTypeAnalysis(IdIdentifier idTable) {
+		return null;
 	}
 }

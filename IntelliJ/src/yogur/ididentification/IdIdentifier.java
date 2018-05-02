@@ -2,6 +2,7 @@ package yogur.ididentification;
 
 import yogur.error.CompilationException;
 import yogur.tree.declaration.Declaration;
+import yogur.tree.type.BaseType;
 
 import java.util.*;
 
@@ -44,18 +45,61 @@ public class IdIdentifier {
     }
 
     public void openClass(String name) throws CompilationException {
+		for (BaseType.PredefinedType typeStr: BaseType.PredefinedType.values()) {
+			if (typeStr.equals(name)) {
+				throw new CompilationException("Invalid redeclaration of type: " + typeStr,
+						CompilationException.Scope.IdentificatorIdentification);
+			}
+		}
 
 		if (classMap.get(name) == null){
 			classMap.put(name, new ArrayDeque<>());
 			currentClass = name;
 			openBlock();
 		} else {
-			throw new CompilationException("Class name already exists: " + name, 0, CompilationException.Scope.IdentificatorIdentification);
+			throw new CompilationException("Class name already exists: " + name,
+					CompilationException.Scope.IdentificatorIdentification);
 		}
 	}
 
 	public void closeClass() {
 		currentClass = null;
+	}
+
+	public boolean hasClassNamed(String name) {
+		return classMap.containsKey(name);
+	}
+
+	public Declaration searchIdOnClass(String id, String classStr) throws CompilationException {
+		Declaration declaration = null;
+		int counter = getCurrentId();
+
+		for (Map<String, Declaration> hm: classMap.get(classStr)) {
+			if (hm.get(id) != null) {
+				declaration = hm.get(id);
+				System.out.println(id + " exists, declared inside " + classStr + ", level " + counter);
+			}
+			counter--;
+		}
+
+		counter = classMap.get(null).size();
+		if (declaration == null && classStr != null) {
+			for (Map<String, Declaration> hm : classMap.get(null)) {
+				if (hm.get(id) != null) {
+					declaration = hm.get(id);
+					System.out.println(id + " exists, declared globally" + ", level " + counter);
+				}
+				counter--;
+			}
+		}
+
+		if (declaration == null) {
+			String forClass = (classStr != null) ? " for class " + classStr : "";
+			throw new CompilationException(id + " not found" + forClass,
+					CompilationException.Scope.IdentificatorIdentification);
+		}
+
+		return declaration;
 	}
 
 	/**
@@ -74,7 +118,8 @@ public class IdIdentifier {
 
         // null check is preferable alas we don't store null
         if (deque.peek().get(id) != null) {
-            throw new CompilationException("Duplicate id detected: " + id, 0, CompilationException.Scope.IdentificatorIdentification);
+            throw new CompilationException("Duplicate id detected: " + id,
+					CompilationException.Scope.IdentificatorIdentification);
         } else {
 			deque.peek().put(id, declaration);
         }
@@ -84,34 +129,6 @@ public class IdIdentifier {
 	 * Busca la aparición de definición más interna para id
      */
 	public Declaration searchId(String id) throws CompilationException {
-		Declaration declaration = null;
-		int counter = getCurrentId();
-
-        for (Map<String, Declaration> hm: classMap.get(currentClass)) {
-            if (hm.get(id) != null) {
-                declaration = hm.get(id);
-                System.out.println(id + " exists, declared inside " + currentClass + ", level " + counter);
-            }
-            counter--;
-        }
-
-        counter = classMap.get(null).size();
-        if (declaration == null && currentClass != null) {
-			for (Map<String, Declaration> hm : classMap.get(null)) {
-				if (hm.get(id) != null) {
-					declaration = hm.get(id);
-					System.out.println(id + " exists, declared globally" + ", level " + counter);
-				}
-				counter--;
-			}
-		}
-
-        if (declaration == null) {
-            throw new CompilationException(id + " doesn't exist in any block", 0, CompilationException.Scope.IdentificatorIdentification);
-        }
-
-        return declaration;
+		return this.searchIdOnClass(id, currentClass);
     }
-
-
 }

@@ -2,7 +2,10 @@ package yogur.tree.statement;
 
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
+import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.tree.expression.Expression;
+import yogur.tree.type.BaseType;
+import yogur.typeidentification.MetaType;
 
 public class IfStructure implements Statement {
 	private Expression condition;
@@ -26,5 +29,19 @@ public class IfStructure implements Statement {
 		if (elseClause != null) {
 			elseClause.performIdentifierAnalysis(table);
 		}
+	}
+
+	@Override
+	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+		MetaType condType = condition.performTypeAnalysis(idTable);
+		ifClause.performTypeAnalysis(idTable);
+		elseClause.performTypeAnalysis(idTable);
+
+		if (new BaseType(BaseType.PredefinedType.Bool).equals(condType)) {
+			return null;
+		}
+
+		throw new CompilationException("Invalid type on if condition: " + condType,
+				CompilationException.Scope.TypeAnalyzer);
 	}
 }
