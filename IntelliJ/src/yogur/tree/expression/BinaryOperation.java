@@ -10,7 +10,7 @@ import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BinaryOperation implements Expression {
+public class BinaryOperation extends Expression {
 	public enum Operator {
 		SUM, SUBS, PROD, DIV, MOD,
 		LT, LEQ, GT, GEQ, EQ, NEQ,
@@ -62,6 +62,6 @@ public class BinaryOperation implements Expression {
 		}
 
 		throw new CompilationException("Can not apply operator " + operator.name() + " to arguments with types "
-				+ leftType + " and " + rightType, CompilationException.Scope.TypeAnalyzer);
+				+ leftType + " and " + rightType, getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
 	}
 }

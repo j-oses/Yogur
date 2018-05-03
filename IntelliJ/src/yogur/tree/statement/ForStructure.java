@@ -10,7 +10,7 @@ import yogur.typeidentification.MetaType;
 
 import javax.swing.*;
 
-public class ForStructure implements Statement {
+public class ForStructure extends Statement {
 	private Argument argument;
 	private Expression start;
 	private Expression end;
@@ -39,11 +39,16 @@ public class ForStructure implements Statement {
 		MetaType endType = end.performTypeAnalysis(idTable);
 		block.performTypeAnalysis(idTable);
 
-		if (argType.equals(startType) && argType.equals(endType)) {
-			return null;
+		if (!argType.equals(startType)) {
+			throw new CompilationException("Invalid iteration limits on for loop start, with type: " + startType,
+					start.getLine(), start.getColumn(), CompilationException.Scope.TypeAnalyzer);
 		}
 
-		throw new CompilationException("Invalid iteration limits on for loop, with types: " + startType
-				+ " and " + endType, CompilationException.Scope.TypeAnalyzer);
+		if (!argType.equals(endType)) {
+			throw new CompilationException("Invalid iteration limits on for loop end, with type: " + endType,
+					end.getLine(), end.getColumn(), CompilationException.Scope.TypeAnalyzer);
+		}
+
+		return null;
 	}
 }

@@ -2,6 +2,7 @@ package yogur.tree.declaration;
 
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
+import yogur.tree.AbstractTreeNode;
 import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.tree.statement.Block;
 import yogur.typeidentification.FunctionType;
@@ -10,7 +11,7 @@ import yogur.typeidentification.MetaType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FuncDeclaration implements FunctionOrVarDeclaration {
+public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDeclaration, Declaration {
 	private BaseDeclarator declarator;
 	private List<Argument> arguments;
 	private Argument returnArg;		// May be null
@@ -34,7 +35,9 @@ public class FuncDeclaration implements FunctionOrVarDeclaration {
 		for (Argument a: arguments) {
 			a.performIdentifierAnalysis(table);
 		}
-		returnArg.performIdentifierAnalysis(table);
+		if (returnArg != null) {
+			returnArg.performIdentifierAnalysis(table);
+		}
 		block.performIdentifierAnalysis(table, false);
 	}
 

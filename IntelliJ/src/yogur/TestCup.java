@@ -6,6 +6,7 @@ import yogur.jlex.YogurLex;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.time.format.TextStyle;
 
 public class TestCup {
@@ -37,7 +38,7 @@ public class TestCup {
 		YogurParser p = null;
 
 		try (FileInputStream is = new FileInputStream(file)) {
-			YogurLex jlex = new YogurLex(is);
+			YogurLex jlex = new YogurLex(new InputStreamReader(is));
 			p = new YogurParser(jlex);
 
 			Symbol s = p.parse();

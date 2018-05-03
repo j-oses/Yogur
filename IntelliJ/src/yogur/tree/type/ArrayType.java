@@ -4,7 +4,7 @@ import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.typeidentification.MetaType;
 
-public class ArrayType implements Type {
+public class ArrayType extends Type {
 	private Type internalType;
 	private int size;
 

@@ -13,12 +13,8 @@ public class TypeAnalyzer {
         this.idTable = idTable;
     }
 
-    public Program decorateTree() {
-        try {
-            program.performTypeAnalysis(idTable);
-        } catch (CompilationException e) {
-            System.out.println(e.getMessage());
-        }
+    public Program decorateTree() throws CompilationException {
+        program.performTypeAnalysis(idTable);
 
         return program;
     }

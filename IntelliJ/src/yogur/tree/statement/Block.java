@@ -6,7 +6,7 @@ import yogur.typeidentification.MetaType;
 
 import java.util.List;
 
-public class Block implements Statement {
+public class Block extends Statement {
 	private List<Statement> statements;
 
 	public Block(List<Statement> s) {

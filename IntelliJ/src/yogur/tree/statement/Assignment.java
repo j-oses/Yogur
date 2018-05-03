@@ -8,11 +8,11 @@ import yogur.typeidentification.MetaType;
 
 import javax.swing.*;
 
-public class Assignation implements Statement {
+public class Assignment extends Statement {
 	private Declarator declarator;
 	private Expression expression;
 
-	public Assignation(Declarator declarator, Expression e) {
+	public Assignment(Declarator declarator, Expression e) {
 		this.declarator = declarator;
 		this.expression = e;
 	}
@@ -30,7 +30,8 @@ public class Assignation implements Statement {
 
 		if (!expType.equals(decType)) {
 			throw new CompilationException("Could not assign result of type " + expType
-					+ " to variable of type " + decType, CompilationException.Scope.TypeAnalyzer);
+					+ " to variable of type " + decType, getLine(), getColumn(),
+					CompilationException.Scope.TypeAnalyzer);
 		}
 
 		return null;

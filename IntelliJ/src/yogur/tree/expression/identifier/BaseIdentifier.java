@@ -9,7 +9,7 @@ import yogur.typeidentification.MetaType;
 
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
 
-public class BaseIdentifier implements VarIdentifier {
+public class BaseIdentifier extends VarIdentifier {
 	private String name;
 
 	private Declaration declaration;
@@ -24,7 +24,7 @@ public class BaseIdentifier implements VarIdentifier {
 
 	@Override
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
-		declaration = table.searchId(name);
+		declaration = table.searchId(name, getLine(), getColumn());
 	}
 
 	@Override

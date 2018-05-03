@@ -7,7 +7,7 @@ import yogur.typeidentification.MetaType;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Program implements AbstractTreeNode {
+public class Program extends AbstractTreeNode {
 	private List<StatementOrDeclaration> instructions;
 
 	public Program() {

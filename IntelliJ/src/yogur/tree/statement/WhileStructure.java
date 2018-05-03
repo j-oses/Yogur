@@ -6,7 +6,7 @@ import yogur.tree.expression.Expression;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
-public class WhileStructure implements Statement {
+public class WhileStructure extends Statement {
 	private Expression condition;
 	private Block block;
 
@@ -30,7 +30,7 @@ public class WhileStructure implements Statement {
 			return null;
 		}
 
-		throw new CompilationException("Invalid type on while condition: " + condType,
-				CompilationException.Scope.TypeAnalyzer);
+		throw new CompilationException("Invalid type on while condition: " + condType, condition.getLine(),
+				condition.getColumn(), CompilationException.Scope.TypeAnalyzer);
 	}
 }

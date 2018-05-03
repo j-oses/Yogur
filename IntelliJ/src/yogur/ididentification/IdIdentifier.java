@@ -70,7 +70,7 @@ public class IdIdentifier {
 		return classMap.containsKey(name);
 	}
 
-	public Declaration searchIdOnClass(String id, String classStr) throws CompilationException {
+	public Declaration searchIdOnClass(String id, String classStr, int line, int col) throws CompilationException {
 		Declaration declaration = null;
 		int counter = classMap.get(classStr).size();
 
@@ -83,8 +83,8 @@ public class IdIdentifier {
 		}
 
 		if (declaration == null) {
-			String forClass = (classStr != null) ? "for class " + classStr : "globally";
-			throw new CompilationException(id + " not found " + forClass,
+			String forClass = (classStr != null) ? ("for class " + classStr) : "globally";
+			throw new CompilationException(id + " not found " + forClass, line, col,
 					CompilationException.Scope.IdentificatorIdentification);
 		}
 
@@ -101,14 +101,14 @@ public class IdIdentifier {
 
 		deque = classMap.get(currentClass);
 
-		if (deque == null && currentClass != null) {
+		/*if (deque == null && currentClass != null) {
 			deque = classMap.get(null);
-		}
+		}*/
 
         // null check is preferable alas we don't store null
         if (deque.peek().get(id) != null) {
-            throw new CompilationException("Duplicate id detected: " + id,
-					CompilationException.Scope.IdentificatorIdentification);
+            throw new CompilationException("Duplicate id detected: " + id, declaration.getLine(),
+					declaration.getColumn(), CompilationException.Scope.IdentificatorIdentification);
         } else {
 			deque.peek().put(id, declaration);
         }
@@ -117,13 +117,15 @@ public class IdIdentifier {
     /**
 	 * Busca la aparición de definición más interna para id
      */
-	public Declaration searchId(String id) throws CompilationException {
-		Declaration dec = null;
+	public Declaration searchId(String id, int line, int col) throws CompilationException {
+		Declaration dec;
 		try {
-			dec = this.searchIdOnClass(id, currentClass);
+			dec = this.searchIdOnClass(id, currentClass, line, col);
 		} catch (CompilationException e) {
-			if (currentClass == null) {
-				dec = this.searchIdOnClass(id, null);
+			if (currentClass != null) {
+				dec = this.searchIdOnClass(id, null, line, col);
+			} else {
+				throw e;
 			}
 		}
 

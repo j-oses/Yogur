@@ -19,5 +19,6 @@ class Class {
 	def classPatata(arg1: Int) -> arg2: Bool {
 		c = c + 1
 		b = b || b
+		e = e + true
 	}
 }

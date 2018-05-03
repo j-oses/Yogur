@@ -656,19 +656,19 @@ public class YogurLex implements java_cup.runtime.Scanner {
             }
           case 35: break;
           case 2: 
-            { return new Symbol(sym.TYPE, line(), column(), yytext());
+            { return new Symbol(sym.TYPE, yytext(), line(), column());
             }
           case 36: break;
           case 3: 
             { if (reservedWords.containsKey(yytext())) {
 							return new Symbol(reservedWords.get(yytext()), line(), column());
 						} else {
-							return new Symbol(sym.ID, line(), column(), yytext());
+							return new Symbol(sym.ID, yytext(), line(), column());
 						}
             }
           case 37: break;
           case 4: 
-            { return new Symbol(sym.INT, line(), column(), new Integer(yytext()));
+            { return new Symbol(sym.INT, new Integer(yytext()), line(), column());
             }
           case 38: break;
           case 5: 
@@ -788,7 +788,7 @@ public class YogurLex implements java_cup.runtime.Scanner {
             }
           case 67: break;
           case 34: 
-            { return new Symbol(sym.BOOL, line(), column(), new Boolean(yytext()));
+            { return new Symbol(sym.BOOL, new Boolean(yytext()), line(), column());
             }
           case 68: break;
           default:

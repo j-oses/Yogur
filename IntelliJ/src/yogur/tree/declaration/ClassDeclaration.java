@@ -2,12 +2,13 @@ package yogur.tree.declaration;
 
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
+import yogur.tree.AbstractTreeNode;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
 import java.util.List;
 
-public class ClassDeclaration implements Declaration {
+public class ClassDeclaration extends AbstractTreeNode implements Declaration {
 	private BaseType type;
 	private List<FunctionOrVarDeclaration> declarations;
 
@@ -27,7 +28,13 @@ public class ClassDeclaration implements Declaration {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) {
-		return type.performTypeAnalysis(idTable);
+	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+		MetaType typeType = type.performTypeAnalysis(idTable);
+
+		for (FunctionOrVarDeclaration d: declarations) {
+			d.performTypeAnalysis(idTable);
+		}
+
+		return typeType;
 	}
 }

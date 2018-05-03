@@ -1,5 +1,5 @@
 package yogur.tree;
 
-public interface StatementOrDeclaration extends AbstractTreeNode {
+public interface StatementOrDeclaration extends AbstractTreeNodeInterface {
 
 }

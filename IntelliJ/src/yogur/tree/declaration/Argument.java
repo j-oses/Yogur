@@ -2,11 +2,12 @@ package yogur.tree.declaration;
 
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
+import yogur.tree.AbstractTreeNode;
 import yogur.tree.type.Type;
 import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.typeidentification.MetaType;
 
-public class Argument implements Declaration {
+public class Argument extends AbstractTreeNode implements Declaration {
 	private BaseDeclarator declarator;
 	private Type type;
 

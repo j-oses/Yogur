@@ -7,7 +7,7 @@ import yogur.tree.expression.Expression;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
-public class DotIdentifier implements VarIdentifier {
+public class DotIdentifier extends VarIdentifier {
 	private Expression expression;
 	private String identifier;
 
@@ -16,6 +16,11 @@ public class DotIdentifier implements VarIdentifier {
 	public DotIdentifier(Expression left, String right) {
 		this.expression = left;
 		this.identifier = right;
+	}
+
+	@Override
+	public Declaration getDeclaration() {
+		return declaration;
 	}
 
 	@Override
@@ -28,11 +33,11 @@ public class DotIdentifier implements VarIdentifier {
 		MetaType left = expression.performTypeAnalysis(idTable);
 		if (left instanceof BaseType) {
 			String name = ((BaseType) left).getName();
-			declaration = idTable.searchIdOnClass(identifier, name);
+			declaration = idTable.searchIdOnClass(identifier, name, getLine(), getColumn());
 			return declaration.performTypeAnalysis(idTable);
 		}
 
 		throw new CompilationException("Trying to member access (." + identifier + ") on a compound type " + left,
-				CompilationException.Scope.TypeAnalyzer);
+				getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
 	}
 }

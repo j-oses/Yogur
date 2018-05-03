@@ -34,6 +34,7 @@ terminal DEF, VAR, CLASS, IF, ELSE, WHILE, FOR, IN, TO;
 non terminal S, Inst, Dec, DVar, DProc, DFunc, DClass, Block;
 non terminal If, While, For, Ass;
 non terminal Exp, Exp0, Exp1, Exp2, Exp3, Exp4, Exp5, Exp6, Exp7;
+non terminal Op, Op0, Op1, Op2, Op3, Op4, Op5;
 non terminal Declarator, Declarator0;
 non terminal VarType, Index, CommaExp, ArgList, Args, Arg, ClassBody, BlockBody, Else;
 
@@ -58,14 +59,14 @@ Dec ::= DProc:d							{: RESULT = d; :}
 	| DFunc:d							{: RESULT = d; :}
 ;
 
-DVar ::= VAR Arg:a														{: RESULT = new VarDeclaration((Argument)a); :}
-	| VAR Arg:a ASSIGN Exp:e											{: RESULT = new VarDeclaration((Argument)a, (Expression)e); :}
+DVar ::= VAR Arg:a														{: RESULT = new VarDeclaration((Argument)a); ((AbstractTreeNode)RESULT).setLineCol(aleft, aright); :}
+	| VAR Arg:a ASSIGN Exp:e											{: RESULT = new VarDeclaration((Argument)a, (Expression)e); ((AbstractTreeNode)RESULT).setLineCol(aleft, aright); :}
 ;
-DProc ::= DEF ID:id LPAREN ArgList:args RPAREN Block:b					{: RESULT = new FuncDeclaration((String)id, (List<Argument>)args, (Block)b); :}
+DProc ::= DEF ID:id LPAREN ArgList:args RPAREN Block:b					{: RESULT = new FuncDeclaration((String)id, (List<Argument>)args, (Block)b); ((AbstractTreeNode)RESULT).setLineCol(idleft, idright); :}
 ;
-DFunc ::= DEF ID:id LPAREN ArgList:args RPAREN ARROW Arg:rarg Block:b	{: RESULT = new FuncDeclaration((String)id, (List<Argument>)args, (Argument)rarg, (Block)b); :}
+DFunc ::= DEF ID:id LPAREN ArgList:args RPAREN ARROW Arg:rarg Block:b	{: RESULT = new FuncDeclaration((String)id, (List<Argument>)args, (Argument)rarg, (Block)b); ((AbstractTreeNode)RESULT).setLineCol(idleft, idright); :}
 ;
-DClass ::= CLASS TYPE:t LBRACKET ClassBody:insts RBRACKET				{: RESULT = new ClassDeclaration(new BaseType((String)t), (List<FunctionOrVarDeclaration>)insts); :}
+DClass ::= CLASS TYPE:t LBRACKET ClassBody:insts RBRACKET				{: RESULT = new ClassDeclaration(new BaseType((String)t), (List<FunctionOrVarDeclaration>)insts); ((AbstractTreeNode)RESULT).setLineCol(tleft, tright); :}
 ;
 Block ::= LBRACKET BlockBody:insts RBRACKET								{: RESULT = new Block((List<Statement>)insts); :}
 ;
@@ -80,60 +81,75 @@ While ::= WHILE Exp:e Block:b				{: RESULT = new WhileStructure((Expression)e, (
 ;
 For ::= FOR ID:id IN Exp:start TO Exp:end Block:b		{: RESULT = new ForStructure(new BaseDeclarator((String)id), (Expression)start, (Expression)end, (Block)b); :}
 ;
-Ass ::= Declarator:d ASSIGN Exp:e				{: RESULT = new Assignation((Declarator)d, (Expression)e); :}
+Ass ::= Declarator:d ASSIGN:eq Exp:e			{: RESULT = new Assignment((Declarator)d, (Expression)e); ((AbstractTreeNode)RESULT).setLineCol(eqleft, eqright); :}
 ;
 
-Declarator ::= Declarator:d DOT ID:id			{: RESULT = new DotDeclarator((Declarator)d, (String)id); :}
-	| Declarator:d Index:i						{: RESULT = new ArrayDeclarator((Declarator)d, (ArrayIndex)i); :}
+Declarator ::= Declarator:d DOT:dt ID:id		{: RESULT = new DotDeclarator((Declarator)d, (String)id); ((AbstractTreeNode)RESULT).setLineCol(dtleft, dtright); :}
+	| Declarator:d Index:i						{: RESULT = new ArrayDeclarator((Declarator)d, (ArrayIndex)i); ((AbstractTreeNode)RESULT).setLineCol(ileft, iright); :}
 	| Declarator0:d								{: RESULT = d; :}
 ;
 Declarator0 ::= LPAREN Declarator:d RPAREN		{: RESULT = d; :}
-	| ID:id										{: RESULT = new BaseDeclarator((String)id); :}
+	| ID:id										{: RESULT = new BaseDeclarator((String)id); ((AbstractTreeNode)RESULT).setLineCol(idleft, idright); :}
 ;
 
-Exp ::= Exp:e1 OR Exp0:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.OR); :}
+Exp ::= Exp:e1 Op:o Exp0:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, (BinaryOperation.Operator)o); ((AbstractTreeNode)RESULT).setLineCol(oleft, oright); :}
 	| Exp0:e					{: RESULT = e; :}
 ;
-Exp0 ::= Exp0:e1 AND Exp1:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.AND); :}
+Exp0 ::= Exp0:e1 Op0:o Exp1:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, (BinaryOperation.Operator)o); ((AbstractTreeNode)RESULT).setLineCol(oleft, oright); :}
 	| Exp1:e					{: RESULT = e; :}
 ;
-Exp1 ::= Exp1:e1 EQ Exp2:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.EQ); :}
-	| Exp1:e1 NEQ Exp2:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.NEQ); :}
+Exp1 ::= Exp1:e1 Op1:o Exp2:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, (BinaryOperation.Operator)o); ((AbstractTreeNode)RESULT).setLineCol(oleft, oright); :}
 	| Exp2:e					{: RESULT = e; :}
 ;
-Exp2 ::= Exp2:e1 LT Exp3:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.LT); :}
-	| Exp2:e1 LEQ Exp3:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.LEQ); :}
-	| Exp2:e1 GT Exp3:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.GT); :}
-	| Exp2:e1 GEQ Exp3:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.GEQ); :}
+Exp2 ::= Exp2:e1 Op2:o Exp3:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, (BinaryOperation.Operator)o); ((AbstractTreeNode)RESULT).setLineCol(oleft, oright); :}
 	| Exp3:e					{: RESULT = e; :}
 ;
-Exp3 ::= Exp3:e1 SUM Exp4:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.SUM); :}	
-	| Exp3:e1 SUBS Exp4:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.SUBS); :}
+Exp3 ::= Exp3:e1 Op3:o Exp4:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, (BinaryOperation.Operator)o); ((AbstractTreeNode)RESULT).setLineCol(oleft, oright); :}	
 	| Exp4:e					{: RESULT = e; :}
 ;
-Exp4 ::= Exp4:e1 PROD Exp5:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.PROD); :}
-	| Exp4:e1 DIV Exp5:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.DIV); :}
-	| Exp4:e1 MOD Exp5:e2		{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, BinaryOperation.Operator.MOD); :}
+Exp4 ::= Exp4:e1 Op4:o Exp5:e2	{: RESULT = new BinaryOperation((Expression)e1, (Expression)e2, (BinaryOperation.Operator)o); ((AbstractTreeNode)RESULT).setLineCol(oleft, oright); :}
 	| Exp5:e					{: RESULT = e; :}
 ;
-Exp5 ::= SUBS Exp5:e			{: RESULT = new UnaryOperation((Expression)e, UnaryOperation.Operator.NEG); :}
-	| NOT Exp5:e				{: RESULT = new UnaryOperation((Expression)e, UnaryOperation.Operator.NOT); :}
+Exp5 ::= Op5:o Exp5:e			{: RESULT = new UnaryOperation((Expression)e, (UnaryOperation.Operator)o); ((AbstractTreeNode)RESULT).setLineCol(oleft, oright); :}
 	| Exp6:e					{: RESULT = e; :}
 ;
-Exp6 ::= Exp6:e DOT ID:id					{: RESULT = new DotIdentifier((Expression)e, (String)id); :}
-	| Exp6:e Index:i						{: RESULT = new ArrayIdentifier((Expression)e, (ArrayIndex)i); :}
-	| Exp6:e LPAREN CommaExp:exps RPAREN	{: RESULT = new FunctionCall((Expression)e, (List<Expression>)exps); :}
-	| Exp6:e LPAREN RPAREN					{: RESULT = new FunctionCall((Expression)e, new ArrayList<Expression>()); :}
+Exp6 ::= Exp6:e DOT:d ID:id					{: RESULT = new DotIdentifier((Expression)e, (String)id); ((AbstractTreeNode)RESULT).setLineCol(dleft, dright); :}
+	| Exp6:e Index:i						{: RESULT = new ArrayIdentifier((Expression)e, (ArrayIndex)i); ((AbstractTreeNode)RESULT).setLineCol(ileft, iright); :}
+	| Exp6:e LPAREN:l CommaExp:exps RPAREN	{: RESULT = new FunctionCall((Expression)e, (List<Expression>)exps); ((AbstractTreeNode)RESULT).setLineCol(lleft, lright); :}
+	| Exp6:e LPAREN:l RPAREN				{: RESULT = new FunctionCall((Expression)e, new ArrayList<Expression>()); ((AbstractTreeNode)RESULT).setLineCol(lleft, lright); :}
 	| Exp7:e								{: RESULT = e; :}
 ;
 Exp7 ::= LPAREN Exp:e RPAREN	{: RESULT = e; :}
-	| ID:id						{: RESULT = new BaseIdentifier((String)id); :}
-	| INT:intLit				{: RESULT = new Constant(intLit); :}
-	| BOOL:boolLit				{: RESULT = new Constant(boolLit); :}
+	| ID:id						{: RESULT = new BaseIdentifier((String)id); ((AbstractTreeNode)RESULT).setLineCol(idleft, idright); :}
+	| INT:intLit				{: RESULT = new Constant(intLit); ((AbstractTreeNode)RESULT).setLineCol(intLitleft, intLitright); :}
+	| BOOL:boolLit				{: RESULT = new Constant(boolLit); ((AbstractTreeNode)RESULT).setLineCol(boolLitleft, boolLitright); :}
+;
+
+Op ::= OR		{: RESULT = BinaryOperation.Operator.OR; :}
+;
+Op0 ::= AND		{: RESULT = BinaryOperation.Operator.AND; :}
+;
+Op1 ::= EQ		{: RESULT = BinaryOperation.Operator.EQ; :}
+	| NEQ		{: RESULT = BinaryOperation.Operator.NEQ; :}
+;
+Op2 ::= LT		{: RESULT = BinaryOperation.Operator.LT; :}
+	| LEQ		{: RESULT = BinaryOperation.Operator.LEQ; :}
+	| GT		{: RESULT = BinaryOperation.Operator.GT; :}
+	| GEQ		{: RESULT = BinaryOperation.Operator.GEQ; :}
+;
+Op3 ::=	SUM		{: RESULT = BinaryOperation.Operator.SUM; :}
+	| SUBS		{: RESULT = BinaryOperation.Operator.SUBS; :}
+;
+Op4 ::= PROD	{: RESULT = BinaryOperation.Operator.PROD; :}
+	| DIV		{: RESULT = BinaryOperation.Operator.DIV; :}
+	| MOD		{: RESULT = BinaryOperation.Operator.MOD; :}
+;
+Op5 ::= SUBS	{: RESULT = UnaryOperation.Operator.NEG; :}
+	| NOT		{: RESULT = UnaryOperation.Operator.NOT; :}
 ;
 
 VarType ::= VarType:t LSQUARE INT:i RSQUARE		{: RESULT = new ArrayType((Type)t, (Integer)i); :}
-	| TYPE:t									{: RESULT = new BaseType((String)t); :}
+	| TYPE:t									{: RESULT = new BaseType((String)t); ((AbstractTreeNode)RESULT).setLineCol(tleft, tright); :}
 ;
 Index ::= LSQUARE Exp:e RSQUARE				{: RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.INDEX); :}
 	| LSQUARE Exp:e RRANGE					{: RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.LEFT_RANGE); :}
@@ -149,7 +165,7 @@ ArgList ::= Args:args						{: RESULT = args; :}
 Args ::= Args:args COMMA Arg:arg			{: ((List<Argument>)args).add((Argument)arg); RESULT = args; :}
 	| Arg:arg								{: RESULT = new ArrayList<Argument>(); ((List<Argument>)RESULT).add((Argument)arg); :}
 ;
-Arg ::= ID:id COLON VarType:t				{: RESULT = new Argument((String)id, (Type)t); :}
+Arg ::= ID:id COLON:c VarType:t				{: RESULT = new Argument((String)id, (Type)t); ((AbstractTreeNode)RESULT).setLineCol(cleft, cright); :}
 ;
 ClassBody ::= ClassBody:b DELIMITER Dec:d	{: ((List<FunctionOrVarDeclaration>)b).add((FuncDeclaration)d); RESULT = b; :}
 	| ClassBody:b DELIMITER DVar:d			{: ((List<FunctionOrVarDeclaration>)b).add((VarDeclaration)d); RESULT = b; :}

@@ -3,6 +3,6 @@ package yogur.tree.type;
 import yogur.tree.AbstractTreeNode;
 import yogur.typeidentification.MetaType;
 
-public interface Type extends AbstractTreeNode, MetaType {
+public abstract class Type extends AbstractTreeNode implements MetaType {
 
 }

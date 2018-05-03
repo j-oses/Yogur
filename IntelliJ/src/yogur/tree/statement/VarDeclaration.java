@@ -7,9 +7,9 @@ import yogur.tree.declaration.FunctionOrVarDeclaration;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
 
-public class VarDeclaration implements Statement, FunctionOrVarDeclaration {
-	Argument argument;
-	Expression assignTo;	// May be null
+public class VarDeclaration extends Statement implements FunctionOrVarDeclaration {
+	private Argument argument;
+	private Expression assignTo;	// May be null
 
 	public VarDeclaration(Argument argument) {
 		this(argument, null);
@@ -43,6 +43,6 @@ public class VarDeclaration implements Statement, FunctionOrVarDeclaration {
 		}
 
 		throw new CompilationException("Assigning an expression of type: " + assType +
-				" to a variable of type: " + argType, CompilationException.Scope.TypeAnalyzer);
+				" to a variable of type: " + argType, getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
 	}
 }

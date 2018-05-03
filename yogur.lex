@@ -1,21 +1,23 @@
 package yogur.jlex;
 
+import java_cup.runtime.Symbol;
+
 import yogur.cup.sym;
-import yogur.cup.CustomSymbol;
 import yogur.error.CompilationException;
 
-import java.util.List;
+import java.util.List; 
 import java.util.ArrayList;
 import java.util.HashMap;
 %%
 %cup
 %eofval{
-	return new CustomSymbol(sym.EOF, line());
+	return new Symbol(sym.EOF, line(), column());
 %eofval}
 %class YogurLex
 %public
 %unicode
 %line
+%column
 %init{
 	reservedWords.put("def", sym.DEF);
 	reservedWords.put("var", sym.VAR);
@@ -39,6 +41,10 @@ import java.util.HashMap;
 	private int line() {
 		return yyline + 1;
 	}
+
+	private int column() {
+		return yycolumn + 1;
+	}
 %}
 
 letra = ([A-Z]|[a-z])
@@ -47,8 +53,8 @@ entero = {digito}+
 boolean = ((true)|(false))
 separador = [ \t\b\r]
 delimitador = ({separador}*\n{separador}*)+
-comentarioLinea = //[^\n]*
-comentarioMultilinea = /\*(.|\n)*\*/
+comentarioLinea = "//"[^\n]*
+comentarioMultilinea = "/*"(.|\n)*"*/"
 identificador = [a-z]({letra}|{digito}|_)*
 identificadorTipo = [A-Z]({letra}|{digito}|_)*
 coma = \,
@@ -57,7 +63,7 @@ opAsignacion = "="
 opSuma = \+
 opResta = \-
 opProducto = \*
-opDivision = /
+opDivision = "/"
 opMod = %
 opAnd = ((and)|(&&))
 opOr = ((or)|(\|\|))
@@ -86,45 +92,45 @@ bloqueCierre = ({separador}*\n{separador}*)*\}
 {comentarioLinea}		{}
 {comentarioMultilinea}	{}
 
-{opAsignacion}			{return new CustomSymbol(sym.ASSIGN, line()); }
-{opSuma}				{return new CustomSymbol(sym.SUM, line()); }
-{opResta}				{return new CustomSymbol(sym.SUBS, line()); }
-{opProducto}			{return new CustomSymbol(sym.PROD, line()); }
-{opDivision}			{return new CustomSymbol(sym.DIV, line()); }
-{opMod}					{return new CustomSymbol(sym.MOD, line()); }
-{opAnd}					{return new CustomSymbol(sym.AND, line()); }
-{opOr}					{return new CustomSymbol(sym.OR, line()); }
-{opNot}					{return new CustomSymbol(sym.NOT, line()); }
-{opLRange}				{return new CustomSymbol(sym.LRANGE, line()); }
-{opRRange}				{return new CustomSymbol(sym.RRANGE, line()); }
-{opDot}					{return new CustomSymbol(sym.DOT, line()); }
-{opEq}					{return new CustomSymbol(sym.EQ, line()); }
-{opNeq}					{return new CustomSymbol(sym.NEQ, line()); }
-{opGeq}					{return new CustomSymbol(sym.GEQ, line()); }
-{opGreater}				{return new CustomSymbol(sym.GT, line()); }
-{opLeq}					{return new CustomSymbol(sym.LEQ, line()); }
-{opLess}				{return new CustomSymbol(sym.LT, line()); }
-{opColon}				{return new CustomSymbol(sym.COLON, line()); }
-{opArrow}				{return new CustomSymbol(sym.ARROW, line()); }
+{opAsignacion}			{return new Symbol(sym.ASSIGN, line(), column()); }
+{opSuma}				{return new Symbol(sym.SUM, line(), column()); }
+{opResta}				{return new Symbol(sym.SUBS, line(), column()); }
+{opProducto}			{return new Symbol(sym.PROD, line(), column()); }
+{opDivision}			{return new Symbol(sym.DIV, line(), column()); }
+{opMod}					{return new Symbol(sym.MOD, line(), column()); }
+{opAnd}					{return new Symbol(sym.AND, line(), column()); }
+{opOr}					{return new Symbol(sym.OR, line(), column()); }
+{opNot}					{return new Symbol(sym.NOT, line(), column()); }
+{opLRange}				{return new Symbol(sym.LRANGE, line(), column()); }
+{opRRange}				{return new Symbol(sym.RRANGE, line(), column()); }
+{opDot}					{return new Symbol(sym.DOT, line(), column()); }
+{opEq}					{return new Symbol(sym.EQ, line(), column()); }
+{opNeq}					{return new Symbol(sym.NEQ, line(), column()); }
+{opGeq}					{return new Symbol(sym.GEQ, line(), column()); }
+{opGreater}				{return new Symbol(sym.GT, line(), column()); }
+{opLeq}					{return new Symbol(sym.LEQ, line(), column()); }
+{opLess}				{return new Symbol(sym.LT, line(), column()); }
+{opColon}				{return new Symbol(sym.COLON, line(), column()); }
+{opArrow}				{return new Symbol(sym.ARROW, line(), column()); }
 
-{entero}				{return new CustomSymbol(sym.INT, new Integer(yytext()), line()); }
-{boolean}				{return new CustomSymbol(sym.BOOL, new Boolean(yytext()), line()); }
+{entero}				{return new Symbol(sym.INT, line(), column(), new Integer(yytext())); }
+{boolean}				{return new Symbol(sym.BOOL, line(), column(), new Boolean(yytext())); }
 {identificador} 		{if (reservedWords.containsKey(yytext())) {
-							return new CustomSymbol(reservedWords.get(yytext()), line());
+							return new Symbol(reservedWords.get(yytext()), line(), column());
 						} else {
-							return new CustomSymbol(sym.ID, yytext(), line());
+							return new Symbol(sym.ID, line(), column(), yytext());
 						}}
-{identificadorTipo}		{return new CustomSymbol(sym.TYPE, yytext(), line()); }
+{identificadorTipo}		{return new Symbol(sym.TYPE, line(), column(), yytext()); }
 
-{corcheteApertura}		{return new CustomSymbol(sym.LSQUARE, line()); }
-{corcheteCierre}		{return new CustomSymbol(sym.RSQUARE, line()); }
-{parentesisApertura}	{return new CustomSymbol(sym.LPAREN, line()); }
-{parentesisCierre}		{return new CustomSymbol(sym.RPAREN, line()); }
-{bloqueApertura}		{return new CustomSymbol(sym.LBRACKET, line()); }
-{bloqueCierre}			{return new CustomSymbol(sym.RBRACKET, line()); }
+{corcheteApertura}		{return new Symbol(sym.LSQUARE, line(), column()); }
+{corcheteCierre}		{return new Symbol(sym.RSQUARE, line(), column()); }
+{parentesisApertura}	{return new Symbol(sym.LPAREN, line(), column()); }
+{parentesisCierre}		{return new Symbol(sym.RPAREN, line(), column()); }
+{bloqueApertura}		{return new Symbol(sym.LBRACKET, line(), column()); }
+{bloqueCierre}			{return new Symbol(sym.RBRACKET, line(), column()); }
 
-{delimitador}			{return new CustomSymbol(sym.DELIMITER, line()); }
-{coma}					{return new CustomSymbol(sym.COMMA, line()); }
+{delimitador}			{return new Symbol(sym.DELIMITER, line(), column()); }
+{coma}					{return new Symbol(sym.COMMA, line(), column()); }
 {separador}				{}
 
-. { exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", line(), CompilationException.Scope.LexicalAnalyzer)); }
+. { exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", line(), column(), CompilationException.Scope.LexicalAnalyzer)); }

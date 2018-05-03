@@ -4,13 +4,13 @@ import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.typeidentification.MetaType;
 
-public class BaseType implements Type {
+public class BaseType extends Type {
 	public enum PredefinedType {
 		Int, Bool;
 
 		public static boolean hasValue(String str) {
 			for (PredefinedType type: values()) {
-				if (type.equals(str)) {
+				if (type.name().equals(str)) {
 					return true;
 				}
 			}
@@ -42,7 +42,8 @@ public class BaseType implements Type {
 		if (PredefinedType.hasValue(name) || idTable.hasClassNamed(name)) {
 			return this;
 		}
-		throw new CompilationException("No type declared with name: " + name, CompilationException.Scope.TypeAnalyzer);
+		throw new CompilationException("No type declared with name: " + name, getLine(),
+				getColumn(), CompilationException.Scope.TypeAnalyzer);
 	}
 
 	@Override

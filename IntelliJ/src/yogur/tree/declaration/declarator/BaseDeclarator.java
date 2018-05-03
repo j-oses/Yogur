@@ -5,9 +5,12 @@ import yogur.ididentification.IdIdentifier;
 import yogur.tree.declaration.Declaration;
 import yogur.typeidentification.MetaType;
 
-public class BaseDeclarator implements Declarator {
+public class BaseDeclarator extends Declarator {
 	private String identifier;
 
+	/**
+	 * The declarator where the variable is declared.
+	 */
 	private Declaration declaration;
 
 	public BaseDeclarator(String identifier) {
@@ -20,11 +23,11 @@ public class BaseDeclarator implements Declarator {
 
 	@Override
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
-		declaration = table.searchId(identifier);
+		declaration = table.searchId(identifier, getLine(), getColumn());
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) {
-		return null;
+	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+		return declaration.performTypeAnalysis(idTable);
 	}
 }

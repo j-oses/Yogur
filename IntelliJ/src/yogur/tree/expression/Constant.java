@@ -5,7 +5,7 @@ import yogur.ididentification.IdIdentifier;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
-public class Constant implements Expression {
+public class Constant extends Expression {
 	Object value;
 
 	public Constant(Object value) {
@@ -24,7 +24,8 @@ public class Constant implements Expression {
 		} else if (value instanceof Boolean) {
 			return new BaseType(BaseType.PredefinedType.Bool);
 		} else {
-			throw new CompilationException("Invalid constant value: " + value, CompilationException.Scope.TypeAnalyzer);
+			throw new CompilationException("Invalid constant value: " + value,  getLine(), getColumn(),
+					CompilationException.Scope.TypeAnalyzer);
 		}
 	}
 }

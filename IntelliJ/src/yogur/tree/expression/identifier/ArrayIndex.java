@@ -4,9 +4,10 @@ import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.AbstractTreeNode;
 import yogur.tree.expression.Expression;
+import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
-public class ArrayIndex implements AbstractTreeNode {
+public class ArrayIndex extends AbstractTreeNode {
 	public enum AccessType {
 		INDEX, LEFT_RANGE, RIGHT_RANGE, LEFT_RIGHT_RANGE
 	}
@@ -26,6 +27,10 @@ public class ArrayIndex implements AbstractTreeNode {
 		this.accessType = accessType;
 	}
 
+	public boolean returnsSingleElement() {
+		return AccessType.INDEX.equals(accessType);
+	}
+
 	@Override
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
 		offset.performIdentifierAnalysis(table);
@@ -35,7 +40,21 @@ public class ArrayIndex implements AbstractTreeNode {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) {
+	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+		MetaType offsetType = offset.performTypeAnalysis(idTable);
+		MetaType intType = new BaseType(BaseType.PredefinedType.Int);
+
+		if (intType.equals(offsetType)) {
+			throw new CompilationException("Invalid subscript, with type: " + offsetType, offset.getLine(),
+					offset.getColumn(), CompilationException.Scope.TypeAnalyzer);
+		}
+
+		if (AccessType.LEFT_RIGHT_RANGE.equals(accessType)) {
+			MetaType offsetType2 = offset2.performTypeAnalysis(idTable);
+			throw new CompilationException("Invalid subscript, with type: " + offsetType, offset2.getLine(),
+					offset2.getColumn(), CompilationException.Scope.TypeAnalyzer);
+		}
+
 		return null;
 	}
 }
