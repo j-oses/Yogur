@@ -4,7 +4,7 @@ import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.tree.statement.Block;
-import yogur.tree.type.FunctionType;
+import yogur.typeidentification.FunctionType;
 import yogur.typeidentification.MetaType;
 
 import java.util.ArrayList;

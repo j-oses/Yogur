@@ -72,30 +72,19 @@ public class IdIdentifier {
 
 	public Declaration searchIdOnClass(String id, String classStr) throws CompilationException {
 		Declaration declaration = null;
-		int counter = getCurrentId();
+		int counter = classMap.get(classStr).size();
 
 		for (Map<String, Declaration> hm: classMap.get(classStr)) {
 			if (hm.get(id) != null) {
 				declaration = hm.get(id);
-				System.out.println(id + " exists, declared inside " + classStr + ", level " + counter);
+				System.out.println(id + " exists, declared inside " + classStr + ", at level " + counter);
 			}
 			counter--;
 		}
 
-		counter = classMap.get(null).size();
-		if (declaration == null && classStr != null) {
-			for (Map<String, Declaration> hm : classMap.get(null)) {
-				if (hm.get(id) != null) {
-					declaration = hm.get(id);
-					System.out.println(id + " exists, declared globally" + ", level " + counter);
-				}
-				counter--;
-			}
-		}
-
 		if (declaration == null) {
-			String forClass = (classStr != null) ? " for class " + classStr : "";
-			throw new CompilationException(id + " not found" + forClass,
+			String forClass = (classStr != null) ? "for class " + classStr : "globally";
+			throw new CompilationException(id + " not found " + forClass,
 					CompilationException.Scope.IdentificatorIdentification);
 		}
 
@@ -129,6 +118,15 @@ public class IdIdentifier {
 	 * Busca la aparición de definición más interna para id
      */
 	public Declaration searchId(String id) throws CompilationException {
-		return this.searchIdOnClass(id, currentClass);
+		Declaration dec = null;
+		try {
+			dec = this.searchIdOnClass(id, currentClass);
+		} catch (CompilationException e) {
+			if (currentClass == null) {
+				dec = this.searchIdOnClass(id, null);
+			}
+		}
+
+		return dec;
     }
 }

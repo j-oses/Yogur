@@ -1,8 +1,4 @@
-package yogur.tree.type;
-
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
-import yogur.typeidentification.MetaType;
+package yogur.typeidentification;
 
 import java.util.List;
 

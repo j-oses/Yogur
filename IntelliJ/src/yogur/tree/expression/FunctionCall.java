@@ -3,7 +3,7 @@ package yogur.tree.expression;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.declaration.Declaration;
-import yogur.tree.type.FunctionType;
+import yogur.typeidentification.FunctionType;
 import yogur.typeidentification.MetaType;
 import yogur.typeidentification.VoidType;
 
