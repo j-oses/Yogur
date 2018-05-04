@@ -1,0 +1,7 @@
+COMENTARIOS SOBRE LA ENTREGA:
+
+- Como te comentamos en clase el viernes, como ya hemos avanzado con las otras fases del compilador te entregamos todo lo que llevamos para no tener que separar el código de lo nuevo. A efectos de esto, de la parte de identificación de identificadores y análisis de tipos puede haber código sin pulir o incluso incompleto (aunque todo compila).
+
+- El código del árbol está en src/yogur/tree/* (paquete yogur.tree.*).
+
+- Nuestro analizador léxico tiene la sintaxis de JLex (pues empezamos a hacerlo con JLex) pero ha de ejecutarse con JFLex para que funcione la directiva %column.

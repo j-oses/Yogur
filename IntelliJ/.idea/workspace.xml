@@ -347,55 +347,6 @@
               <item name="yogur" type="462c0819:PsiDirectoryNode" />
               <item name="cup" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Yogur" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IntelliJ" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="yogur" type="462c0819:PsiDirectoryNode" />
-              <item name="tree" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Yogur" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IntelliJ" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="yogur" type="462c0819:PsiDirectoryNode" />
-              <item name="tree" type="462c0819:PsiDirectoryNode" />
-              <item name="declaration" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Yogur" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IntelliJ" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="yogur" type="462c0819:PsiDirectoryNode" />
-              <item name="tree" type="462c0819:PsiDirectoryNode" />
-              <item name="declaration" type="462c0819:PsiDirectoryNode" />
-              <item name="declarator" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Yogur" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IntelliJ" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="yogur" type="462c0819:PsiDirectoryNode" />
-              <item name="tree" type="462c0819:PsiDirectoryNode" />
-              <item name="expression" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Yogur" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IntelliJ" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="yogur" type="462c0819:PsiDirectoryNode" />
-              <item name="tree" type="462c0819:PsiDirectoryNode" />
-              <item name="expression" type="462c0819:PsiDirectoryNode" />
-              <item name="identifier" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Yogur" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IntelliJ" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="yogur" type="462c0819:PsiDirectoryNode" />
-              <item name="tree" type="462c0819:PsiDirectoryNode" />
-              <item name="statement" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
