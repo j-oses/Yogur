@@ -8,7 +8,8 @@ import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
 
-import javax.swing.*;
+import static yogur.error.CompilationException.Scope;
+import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 
 public class ForStructure extends Statement {
 	private Argument argument;
@@ -33,22 +34,22 @@ public class ForStructure extends Statement {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		MetaType argType = argument.performTypeAnalysis(idTable);
 		MetaType startType = start.performTypeAnalysis(idTable);
 		MetaType endType = end.performTypeAnalysis(idTable);
-		block.performTypeAnalysis(idTable);
 
 		if (!argType.equals(startType)) {
 			throw new CompilationException("Invalid iteration limits on for loop start, with type: " + startType,
-					start.getLine(), start.getColumn(), CompilationException.Scope.TypeAnalyzer);
+					start.getLine(), start.getColumn(), TypeAnalyzer);
 		}
 
 		if (!argType.equals(endType)) {
 			throw new CompilationException("Invalid iteration limits on for loop end, with type: " + endType,
-					end.getLine(), end.getColumn(), CompilationException.Scope.TypeAnalyzer);
+					end.getLine(), end.getColumn(), TypeAnalyzer);
 		}
 
+		block.performIdentifierAnalysis(idTable);
 		return null;
 	}
 }

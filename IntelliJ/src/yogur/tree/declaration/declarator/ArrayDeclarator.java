@@ -4,8 +4,10 @@ import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.expression.identifier.ArrayIndex;
 import yogur.tree.type.ArrayType;
-import yogur.tree.type.Type;
 import yogur.typeidentification.MetaType;
+
+import static yogur.error.CompilationException.Scope;
+import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 
 public class ArrayDeclarator extends Declarator {
 	private Declarator declarator;
@@ -23,7 +25,7 @@ public class ArrayDeclarator extends Declarator {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		MetaType leftType = declarator.performTypeAnalysis(idTable);
 		if (leftType instanceof ArrayType) {
 			if (index.returnsSingleElement()) {
@@ -34,6 +36,6 @@ public class ArrayDeclarator extends Declarator {
 		}
 
 		throw new CompilationException("Performing [] operator on a non-array type: " + leftType,
-				getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
+				getLine(), getColumn(), TypeAnalyzer);
 	}
 }

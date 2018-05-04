@@ -6,6 +6,7 @@ import yogur.typeidentification.MetaType;
 
 public interface AbstractTreeNodeInterface {
 	void performIdentifierAnalysis(IdIdentifier table) throws CompilationException;
+	MetaType analyzeType(IdIdentifier idTable) throws CompilationException;
 	MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException;
 
 	void setLine(int line);

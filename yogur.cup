@@ -1,3 +1,7 @@
+/* Jorge Osés Grijalba
+ * Álvaro Rodríguez García
+ */
+
 package yogur.cup;
 
 import java_cup.runtime.*;

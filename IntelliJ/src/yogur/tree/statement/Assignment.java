@@ -6,7 +6,8 @@ import yogur.tree.declaration.declarator.Declarator;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
 
-import javax.swing.*;
+import static yogur.error.CompilationException.Scope;
+import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 
 public class Assignment extends Statement {
 	private Declarator declarator;
@@ -24,14 +25,14 @@ public class Assignment extends Statement {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		MetaType decType = declarator.performTypeAnalysis(idTable);
 		MetaType expType = expression.performTypeAnalysis(idTable);
 
 		if (!expType.equals(decType)) {
 			throw new CompilationException("Could not assign result of type " + expType
 					+ " to variable of type " + decType, getLine(), getColumn(),
-					CompilationException.Scope.TypeAnalyzer);
+					TypeAnalyzer);
 		}
 
 		return null;

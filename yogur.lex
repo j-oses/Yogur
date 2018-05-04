@@ -1,3 +1,7 @@
+/* Jorge Osés Grijalba
+ * Álvaro Rodríguez García
+ */
+
 package yogur.jlex;
 
 import java_cup.runtime.Symbol;

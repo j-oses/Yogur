@@ -28,10 +28,10 @@ public class ClassDeclaration extends AbstractTreeNode implements Declaration {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		MetaType typeType = type.performTypeAnalysis(idTable);
 
-		for (FunctionOrVarDeclaration d: declarations) {
+		for (FunctionOrVarDeclaration d : declarations) {
 			d.performTypeAnalysis(idTable);
 		}
 

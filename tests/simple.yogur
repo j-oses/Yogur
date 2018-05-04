@@ -1,7 +1,7 @@
 var a: Int = 3
 var b: Int = 5
 
-var c: Bool = true
+var c: Int = 0
 
 while (a == b) && true {
 	
@@ -18,7 +18,8 @@ class Class {
 	
 	def classPatata(arg1: Int) -> arg2: Bool {
 		c = c + 1
-		b = b || b
-		e = e + true
+		b = b % b
+		e[b] = e[3]
+		arg2 = c == b
 	}
 }

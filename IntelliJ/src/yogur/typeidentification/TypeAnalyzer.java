@@ -14,7 +14,7 @@ public class TypeAnalyzer {
     }
 
     public Program decorateTree() throws CompilationException {
-        program.performTypeAnalysis(idTable);
+		program.performTypeAnalysis(idTable);
 
         return program;
     }

@@ -5,6 +5,13 @@ import yogur.ididentification.IdIdentifier;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
+import static yogur.error.CompilationException.Scope;
+import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.tree.expression.UnaryOperation.Operator.NOT;
+import static yogur.tree.type.BaseType.PredefinedType;
+import static yogur.tree.type.BaseType.PredefinedType.Bool;
+import static yogur.tree.type.BaseType.PredefinedType.Int;
+
 public class UnaryOperation extends Expression {
 	public enum Operator {
 		NEG, NOT
@@ -24,16 +31,16 @@ public class UnaryOperation extends Expression {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		MetaType argType = expression.performTypeAnalysis(idTable);
 		MetaType expectedType = new BaseType(
-				operator.equals(Operator.NOT) ? BaseType.PredefinedType.Bool : BaseType.PredefinedType.Int);
+				operator.equals(NOT) ? Bool : Int);
 
 		if (expectedType.equals(argType)) {
 			return expectedType;
 		}
 
 		throw new CompilationException("Can not apply operator " + operator.name() + " to argument with type "
-				+ argType, getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
+				+ argType, getLine(), getColumn(), TypeAnalyzer);
 	}
 }

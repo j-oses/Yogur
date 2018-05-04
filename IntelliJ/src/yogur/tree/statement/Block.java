@@ -29,7 +29,7 @@ public class Block extends Statement {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		for (Statement s: statements) {
 			s.performTypeAnalysis(idTable);
 		}

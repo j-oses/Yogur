@@ -42,12 +42,17 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		List<MetaType> argTypes = new ArrayList<>();
 		for (Argument a: arguments) {
 			argTypes.add(a.performTypeAnalysis(idTable));
 		}
 		MetaType returnType = (returnArg != null) ? returnArg.performTypeAnalysis(idTable) : null;
-		return new FunctionType(argTypes, returnType);
+
+		// We have to save the metatype before visiting the block to enable recursion.
+		// If we don't do that, the program will enter on an infinite loop.
+		metaType = new FunctionType(argTypes, returnType);
+		block.performTypeAnalysis(idTable);
+		return metaType;
 	}
 }

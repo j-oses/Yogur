@@ -31,7 +31,7 @@ public class Argument extends AbstractTreeNode implements Declaration {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		return type.performTypeAnalysis(idTable);
 	}
 }

@@ -38,7 +38,7 @@ public class BaseType extends Type {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		if (PredefinedType.hasValue(name) || idTable.hasClassNamed(name)) {
 			return this;
 		}

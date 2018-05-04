@@ -7,6 +7,9 @@ import yogur.tree.expression.Expression;
 import yogur.tree.type.ArrayType;
 import yogur.typeidentification.MetaType;
 
+import static yogur.error.CompilationException.Scope;
+import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+
 public class ArrayIdentifier extends VarIdentifier {
 	private Expression leftExpression;
 	private ArrayIndex index;
@@ -28,7 +31,7 @@ public class ArrayIdentifier extends VarIdentifier {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		MetaType leftType = leftExpression.performTypeAnalysis(idTable);
 		if (leftType instanceof ArrayType) {
 			if (index.returnsSingleElement()) {
@@ -39,6 +42,6 @@ public class ArrayIdentifier extends VarIdentifier {
 		}
 
 		throw new CompilationException("Performing [] operator on a non-array type: " + leftType,
-				getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
+				getLine(), getColumn(), TypeAnalyzer);
 	}
 }

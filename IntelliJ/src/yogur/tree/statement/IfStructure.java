@@ -2,10 +2,14 @@ package yogur.tree.statement;
 
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
-import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
+
+import static yogur.error.CompilationException.Scope;
+import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.tree.type.BaseType.PredefinedType;
+import static yogur.tree.type.BaseType.PredefinedType.Bool;
 
 public class IfStructure extends Statement {
 	private Expression condition;
@@ -32,18 +36,18 @@ public class IfStructure extends Statement {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		MetaType condType = condition.performTypeAnalysis(idTable);
 		ifClause.performTypeAnalysis(idTable);
 		if (elseClause != null) {
 			elseClause.performTypeAnalysis(idTable);
 		}
 
-		if (new BaseType(BaseType.PredefinedType.Bool).equals(condType)) {
+		if (new BaseType(Bool).equals(condType)) {
 			return null;
 		}
 
 		throw new CompilationException("Invalid type on if condition: " + condType, condition.getLine(),
-				condition.getColumn(), CompilationException.Scope.TypeAnalyzer);
+				condition.getColumn(), TypeAnalyzer);
 	}
 }

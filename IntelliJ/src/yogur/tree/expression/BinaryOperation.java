@@ -1,14 +1,12 @@
 package yogur.tree.expression;
 
-import javafx.util.Pair;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
-import javax.swing.*;
-import java.util.HashMap;
-import java.util.Map;
+import static yogur.error.CompilationException.Scope;
+import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 
 public class BinaryOperation extends Expression {
 	public enum Operator {
@@ -53,15 +51,16 @@ public class BinaryOperation extends Expression {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		MetaType argType = operator.getArgumentsType();
 		MetaType leftType = left.performTypeAnalysis(idTable);
 		MetaType rightType = right.performTypeAnalysis(idTable);
+
 		if (argType.equals(leftType) && argType.equals(rightType)) {
 			return operator.getReturnType();
 		}
 
 		throw new CompilationException("Can not apply operator " + operator.name() + " to arguments with types "
-				+ leftType + " and " + rightType, getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
+				+ leftType + " and " + rightType, getLine(), getColumn(), TypeAnalyzer);
 	}
 }

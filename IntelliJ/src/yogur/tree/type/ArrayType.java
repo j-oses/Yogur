@@ -23,7 +23,7 @@ public class ArrayType extends Type {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) {
+	public MetaType analyzeType(IdIdentifier idTable) {
 		return this;
 	}
 

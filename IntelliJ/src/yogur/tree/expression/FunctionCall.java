@@ -10,6 +10,9 @@ import yogur.typeidentification.VoidType;
 
 import java.util.List;
 
+import static yogur.error.CompilationException.Scope;
+import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+
 public class FunctionCall extends Expression {
 	private Expression function;
 	private List<Expression> expressions;
@@ -30,22 +33,22 @@ public class FunctionCall extends Expression {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		MetaType type = function.performTypeAnalysis(idTable);
 
 		if (type instanceof FunctionType) {
 			if (function instanceof VarIdentifier) {
-				declaration = ((VarIdentifier)function).getDeclaration();
+				declaration = ((VarIdentifier) function).getDeclaration();
 			}
 
-			FunctionType fType = (FunctionType)type;
+			FunctionType fType = (FunctionType) type;
 			int i = 0;
 
-			for (Expression exp: expressions) {
+			for (Expression exp : expressions) {
 				MetaType argType = exp.performTypeAnalysis(idTable);
 				if (!fType.isValidArgument(i, argType)) {
-					throw new CompilationException("Invalid function argument with type: "
-							+ argType, getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
+					throw new CompilationException("Invalid function " + (i + 1) + "th argument with type: "
+							+ argType, getLine(), getColumn(), TypeAnalyzer);
 				}
 				i++;
 			}
@@ -54,6 +57,6 @@ public class FunctionCall extends Expression {
 		}
 
 		throw new CompilationException("Trying to call a function on the non-function object with type: " + type,
-				getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
+				getLine(), getColumn(), TypeAnalyzer);
 	}
 }

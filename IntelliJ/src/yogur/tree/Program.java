@@ -32,7 +32,7 @@ public class Program extends AbstractTreeNode {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		for (StatementOrDeclaration s: instructions) {
 			s.performTypeAnalysis(idTable);
 		}

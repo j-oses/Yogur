@@ -6,6 +6,9 @@ import yogur.tree.expression.Expression;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
+import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.tree.type.BaseType.PredefinedType.Bool;
+
 public class WhileStructure extends Statement {
 	private Expression condition;
 	private Block block;
@@ -22,15 +25,16 @@ public class WhileStructure extends Statement {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		MetaType condType = condition.performTypeAnalysis(idTable);
-		block.performTypeAnalysis(idTable);
 
-		if (new BaseType(BaseType.PredefinedType.Bool).equals(condType)) {
-			return null;
+		if (!new BaseType(Bool).equals(condType)) {
+			throw new CompilationException("Invalid type on while condition: " + condType, condition.getLine(),
+					condition.getColumn(), TypeAnalyzer);
 		}
 
-		throw new CompilationException("Invalid type on while condition: " + condType, condition.getLine(),
-				condition.getColumn(), CompilationException.Scope.TypeAnalyzer);
+		block.performTypeAnalysis(idTable);
+
+		return null;
 	}
 }

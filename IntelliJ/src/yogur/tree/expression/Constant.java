@@ -18,7 +18,7 @@ public class Constant extends Expression {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		if (value instanceof Integer) {
 			return new BaseType(BaseType.PredefinedType.Int);
 		} else if (value instanceof Boolean) {

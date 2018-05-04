@@ -27,7 +27,7 @@ public class BaseDeclarator extends Declarator {
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		return declaration.performTypeAnalysis(idTable);
 	}
 }
