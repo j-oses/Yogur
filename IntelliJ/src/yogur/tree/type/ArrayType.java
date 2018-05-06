@@ -17,6 +17,10 @@ public class ArrayType extends Type {
 		return internalType;
 	}
 
+	public Type getBaseType() {
+		return internalType.getBaseType();
+	}
+
 	@Override
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
 		internalType.performIdentifierAnalysis(table);

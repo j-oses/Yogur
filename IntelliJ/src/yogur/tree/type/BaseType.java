@@ -33,6 +33,11 @@ public class BaseType extends Type {
 	}
 
 	@Override
+	Type getBaseType() {
+		return this;
+	}
+
+	@Override
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
 		// Do nothing
 	}
@@ -58,5 +63,14 @@ public class BaseType extends Type {
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	@Override
+	public int sizeOf() {
+		if (PredefinedType.hasValue(name)) {
+			return 1;
+		} else {
+
+		}
 	}
 }

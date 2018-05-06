@@ -10,4 +10,9 @@ public class VoidType implements MetaType {
 	public String toString() {
 		return "void";
 	}
+
+	@Override
+	public int sizeOf() {
+		return 0;
+	}
 }

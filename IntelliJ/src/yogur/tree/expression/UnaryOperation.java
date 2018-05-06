@@ -1,9 +1,12 @@
 package yogur.tree.expression;
 
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
@@ -42,5 +45,12 @@ public class UnaryOperation extends Expression {
 
 		throw new CompilationException("Can not apply operator " + operator.name() + " to argument with type "
 				+ argType, getLine(), getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void generateCode(PMachineOutputStream stream) throws IOException {
+		String inst = (Operator.NEG.equals(operator)) ? "neg" : "not";
+		expression.generateCode(stream);
+		stream.appendInstruction(inst);
 	}
 }

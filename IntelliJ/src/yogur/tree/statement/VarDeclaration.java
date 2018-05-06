@@ -14,6 +14,8 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 	private Argument argument;
 	private Expression assignTo;	// May be null
 
+	private int size;
+
 	public VarDeclaration(Argument argument) {
 		this(argument, null);
 	}
@@ -21,6 +23,10 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 	public VarDeclaration(Argument argument, Expression assignTo) {
 		this.argument = argument;
 		this.assignTo = assignTo;
+	}
+
+	public int getSize() {
+		return size;
 	}
 
 	@Override
@@ -47,5 +53,12 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 
 		throw new CompilationException("Assigning an expression of type: " + assType +
 				" to a variable of type: " + argType, getLine(), getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+		MetaType type = super.performTypeAnalysis(idTable);
+		size = type.sizeOf();
+		return type;
 	}
 }

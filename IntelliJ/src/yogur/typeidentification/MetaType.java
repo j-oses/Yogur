@@ -5,4 +5,5 @@ package yogur.typeidentification;
  * valid, declarable types on a program.
  */
 public interface MetaType {
+	int sizeOf();
 }

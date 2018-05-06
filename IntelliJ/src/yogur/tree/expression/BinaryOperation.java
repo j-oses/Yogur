@@ -1,9 +1,14 @@
 package yogur.tree.expression;
 
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
@@ -34,6 +39,23 @@ public class BinaryOperation extends Expression {
 		}
 	}
 
+	static Map<Operator, String> instructionName = new HashMap<>();
+
+	static {
+		instructionName.put(Operator.SUM, "add");
+		instructionName.put(Operator.SUBS, "sub");
+		instructionName.put(Operator.PROD, "mul");
+		instructionName.put(Operator.DIV, "div");
+		instructionName.put(Operator.LT, "les");
+		instructionName.put(Operator.LEQ, "leq");
+		instructionName.put(Operator.GT, "grt");
+		instructionName.put(Operator.GEQ, "geq");
+		instructionName.put(Operator.EQ, "equ");
+		instructionName.put(Operator.NEQ, "neq");
+		instructionName.put(Operator.AND, "and");
+		instructionName.put(Operator.OR, "or");
+	}
+
 	private Expression left;
 	private Expression right;
 	private Operator operator;
@@ -62,5 +84,21 @@ public class BinaryOperation extends Expression {
 
 		throw new CompilationException("Can not apply operator " + operator.name() + " to arguments with types "
 				+ leftType + " and " + rightType, getLine(), getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void generateCode(PMachineOutputStream stream) throws IOException {
+		if (operator.equals(Operator.MOD)) {
+			Expression generatedExp = new BinaryOperation(left,
+					new BinaryOperation(right,
+							new BinaryOperation(left, right, operator.DIV),
+							Operator.PROD),
+					Operator.SUBS);
+			generatedExp.generateCode(stream);
+		} else {
+			left.generateCode(stream);
+			right.generateCode(stream);
+			stream.appendInstruction(instructionName.get(operator));
+		}
 	}
 }
