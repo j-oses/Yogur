@@ -1,5 +1,9 @@
 package yogur.tree;
 
-public interface StatementOrDeclaration extends AbstractTreeNodeInterface {
+import yogur.codegen.PMachineOutputStream;
 
+import java.io.IOException;
+
+public interface StatementOrDeclaration extends AbstractTreeNodeInterface {
+	void generateCode(PMachineOutputStream stream) throws IOException;
 }

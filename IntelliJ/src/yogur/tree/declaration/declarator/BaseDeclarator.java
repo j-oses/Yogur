@@ -1,9 +1,12 @@
 package yogur.tree.declaration.declarator;
 
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.declaration.Declaration;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 public class BaseDeclarator extends Declarator {
 	private String identifier;
@@ -29,5 +32,10 @@ public class BaseDeclarator extends Declarator {
 	@Override
 	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		return declaration.performTypeAnalysis(idTable);
+	}
+
+	@Override
+	public void generateCodeL(PMachineOutputStream stream) throws IOException {
+		stream.appendInstruction("ldc", null /* FIXME: Missing rho */);
 	}
 }

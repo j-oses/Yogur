@@ -1,10 +1,13 @@
 package yogur.tree.statement;
 
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 import static yogur.tree.type.BaseType.PredefinedType.Bool;
@@ -36,5 +39,17 @@ public class WhileStructure extends Statement {
 		block.performTypeAnalysis(idTable);
 
 		return null;
+	}
+
+	@Override
+	public void generateCode(PMachineOutputStream stream) throws IOException {
+		String start = stream.generateUnusedLabel();
+		String end = stream.generateUnusedLabel();
+
+		stream.appendLabel(start);
+		stream.appendInstruction("fjp", end);
+		block.generateCode(stream);
+		stream.appendInstruction("ujp", start);
+		stream.appendLabel(end);
 	}
 }

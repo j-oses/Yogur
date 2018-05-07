@@ -1,12 +1,16 @@
 package yogur.tree.statement;
 
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
+import yogur.tree.expression.identifier.BaseIdentifier;
 import yogur.tree.type.BaseType;
 import yogur.tree.declaration.Argument;
 import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
@@ -51,5 +55,29 @@ public class ForStructure extends Statement {
 
 		block.performIdentifierAnalysis(idTable);
 		return null;
+	}
+
+	@Override
+	public void generateCode(PMachineOutputStream stream) throws IOException {
+		String startLabel = stream.generateUnusedLabel();
+		String endLabel = stream.generateUnusedLabel();
+		BaseIdentifier iId = new BaseIdentifier(argument.getDeclarator().getIdentifier());	// FIXME: Needs a declaration
+
+		// Initial i value
+		argument.getDeclarator().generateCodeL(stream);
+		start.generateCodeR(stream);
+		stream.appendInstruction("sto");
+
+		// Condition checking
+		stream.appendLabel(startLabel);
+		iId.generateCodeR(stream);
+		end.generateCodeR(stream);
+		stream.appendInstruction("leq");
+		stream.appendInstruction("fjp", end);
+
+		// Body and loop
+		block.generateCode(stream);
+		stream.appendInstruction("ujp", start);
+		stream.appendLabel(endLabel);
 	}
 }

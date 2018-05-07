@@ -1,9 +1,11 @@
 package yogur.tree.statement;
 
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.typeidentification.MetaType;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Block extends Statement {
@@ -34,5 +36,12 @@ public class Block extends Statement {
 			s.performTypeAnalysis(idTable);
 		}
 		return null;
+	}
+
+	@Override
+	public void generateCode(PMachineOutputStream stream) throws IOException {
+		for (Statement s: statements) {
+			s.generateCode(stream);
+		}
 	}
 }

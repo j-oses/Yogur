@@ -7,4 +7,5 @@ import yogur.tree.StatementOrDeclaration;
 import yogur.typeidentification.MetaType;
 
 public interface Declaration extends StatementOrDeclaration {
+
 }

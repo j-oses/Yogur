@@ -8,10 +8,8 @@ import yogur.typeidentification.MetaType;
 
 import java.io.IOException;
 
-import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 import static yogur.tree.expression.UnaryOperation.Operator.NOT;
-import static yogur.tree.type.BaseType.PredefinedType;
 import static yogur.tree.type.BaseType.PredefinedType.Bool;
 import static yogur.tree.type.BaseType.PredefinedType.Int;
 
@@ -48,9 +46,9 @@ public class UnaryOperation extends Expression {
 	}
 
 	@Override
-	public void generateCode(PMachineOutputStream stream) throws IOException {
+	public void generateCodeR(PMachineOutputStream stream) throws IOException {
 		String inst = (Operator.NEG.equals(operator)) ? "neg" : "not";
-		expression.generateCode(stream);
+		expression.generateCodeR(stream);
 		stream.appendInstruction(inst);
 	}
 }

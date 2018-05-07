@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 
 public class BinaryOperation extends Expression {
@@ -87,17 +86,17 @@ public class BinaryOperation extends Expression {
 	}
 
 	@Override
-	public void generateCode(PMachineOutputStream stream) throws IOException {
+	public void generateCodeR(PMachineOutputStream stream) throws IOException {
 		if (operator.equals(Operator.MOD)) {
 			Expression generatedExp = new BinaryOperation(left,
 					new BinaryOperation(right,
 							new BinaryOperation(left, right, operator.DIV),
 							Operator.PROD),
 					Operator.SUBS);
-			generatedExp.generateCode(stream);
+			generatedExp.generateCodeR(stream);
 		} else {
-			left.generateCode(stream);
-			right.generateCode(stream);
+			left.generateCodeR(stream);
+			right.generateCodeR(stream);
 			stream.appendInstruction(instructionName.get(operator));
 		}
 	}

@@ -11,7 +11,6 @@ public interface AbstractTreeNodeInterface {
 	void performIdentifierAnalysis(IdIdentifier table) throws CompilationException;
 	MetaType analyzeType(IdIdentifier idTable) throws CompilationException;
 	MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException;
-	void generateCode(PMachineOutputStream stream) throws IOException;
 
 	void setLine(int line);
 

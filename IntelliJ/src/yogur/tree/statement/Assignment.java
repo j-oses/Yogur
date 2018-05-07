@@ -1,10 +1,13 @@
 package yogur.tree.statement;
 
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.declaration.declarator.Declarator;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
@@ -36,5 +39,12 @@ public class Assignment extends Statement {
 		}
 
 		return null;
+	}
+
+	@Override
+	public void generateCode(PMachineOutputStream stream) throws IOException {
+		declarator.generateCodeL(stream);
+		expression.generateCodeR(stream);
+		stream.appendInstruction("sto");
 	}
 }

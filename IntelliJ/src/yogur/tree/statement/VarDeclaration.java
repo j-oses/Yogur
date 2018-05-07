@@ -1,11 +1,14 @@
 package yogur.tree.statement;
 
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.declaration.Argument;
 import yogur.tree.declaration.FunctionOrVarDeclaration;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;

@@ -1,10 +1,13 @@
 package yogur.tree.statement;
 
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
@@ -49,5 +52,26 @@ public class IfStructure extends Statement {
 
 		throw new CompilationException("Invalid type on if condition: " + condType, condition.getLine(),
 				condition.getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void generateCode(PMachineOutputStream stream) throws IOException {
+		String elseLabel = stream.generateUnusedLabel();
+		String endLabel = stream.generateUnusedLabel();
+
+		condition.generateCodeR(stream);
+		stream.appendInstruction("fjp", elseLabel);
+		ifClause.generateCode(stream);
+
+		if (elseClause != null) {
+			stream.appendInstruction("ujp", endLabel);
+		}
+
+		stream.appendLabel(elseLabel);
+
+		if (elseClause != null) {
+			elseClause.generateCode(stream);
+			stream.appendLabel(endLabel);
+		}
 	}
 }

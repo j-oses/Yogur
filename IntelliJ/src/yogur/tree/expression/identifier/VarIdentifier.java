@@ -13,7 +13,7 @@ public abstract class VarIdentifier extends Expression {
 	public abstract int getOffset();
 
 	@Override
-	public void generateCode(PMachineOutputStream stream) throws IOException {
-		stream.appendInstruction("ldc", getOffset());
+	public void generateCodeR(PMachineOutputStream stream) {
+
 	}
 }

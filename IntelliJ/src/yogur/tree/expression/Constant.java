@@ -33,7 +33,7 @@ public class Constant extends Expression {
 	}
 
 	@Override
-	public void generateCode(PMachineOutputStream stream) throws IOException {
+	public void generateCodeR(PMachineOutputStream stream) throws IOException {
 		if (metaType.equals(new BaseType(BaseType.PredefinedType.Bool))) {
 			stream.appendInstruction("ldc", (Boolean)value);
 		} else {

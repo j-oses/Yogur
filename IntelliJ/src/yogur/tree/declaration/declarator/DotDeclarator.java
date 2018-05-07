@@ -1,10 +1,13 @@
 package yogur.tree.declaration.declarator;
 
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.declaration.Declaration;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
@@ -36,5 +39,11 @@ public class DotDeclarator extends Declarator {
 
 		throw new CompilationException("Trying to member access (." + identifier + ") on a compound type " + left,
 				getLine(), getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void generateCodeL(PMachineOutputStream stream) throws IOException {
+		declarator.generateCodeL(stream);
+		stream.appendInstruction("inc", null /* FIXME: Missing rho */);
 	}
 }

@@ -33,6 +33,14 @@ public class ArrayIndex extends AbstractTreeNode {
 		this.accessType = accessType;
 	}
 
+	public Expression getOffset() {
+		return offset;
+	}
+
+	public Expression getOffset2() {
+		return offset2;
+	}
+
 	public boolean returnsSingleElement() {
 		return AccessType.INDEX.equals(accessType);
 	}

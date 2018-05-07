@@ -5,6 +5,8 @@ import java.io.*;
 public class PMachineOutputStream extends FileWriter {
 	private int lineCount = 0;
 
+	private int nextLabel = 0;
+
 	public PMachineOutputStream(String fileName) throws IOException {
 		super(fileName);
 	}
@@ -27,7 +29,8 @@ public class PMachineOutputStream extends FileWriter {
 
 
 	public void appendInstruction(String name, Object... arguments) throws IOException {
-		this.appendComment(String.valueOf(lineCount), true);
+		this.append(padLeft("{" + String.valueOf(lineCount) + "}", 7));
+
 		this.append(name);
 		for (Object o: arguments) {
 			this.append(" " + o);
@@ -36,11 +39,36 @@ public class PMachineOutputStream extends FileWriter {
 		lineCount++;
 	}
 
+	public void appendLabel(String name) throws IOException {
+		this.append(name + ":\n");
+	}
+
+	public String generateUnusedLabel() {
+		String label = "l" + nextLabel;
+		nextLabel++;
+		return label;
+	}
+
+	public String appendUnusedLabel() throws IOException {
+		String label = generateUnusedLabel();
+		appendLabel(label);
+		return label;
+	}
+
 	public void appendComment(String string, boolean forceMultiline) throws IOException {
 		if (forceMultiline || string.contains("\n")) {
 			this.append("{" + string + "}");
 		} else {
 			this.append("\\\\" + string + "\n");
 		}
+	}
+
+	private String padLeft(String s, int n) {
+		return String.format("%1$" + n + "s", s);
+	}
+
+	@Override
+	public void close() throws IOException {
+		this.appendInstruction("stp");
 	}
 }
