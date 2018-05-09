@@ -9,7 +9,6 @@ import yogur.typeidentification.MetaType;
 
 import java.io.IOException;
 
-import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 
 public class Assignment extends Statement {
@@ -39,6 +38,12 @@ public class Assignment extends Statement {
 		}
 
 		return null;
+	}
+
+	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		expression.performMemoryAnalysis(currentOffset, currentDepth);
+		return currentOffset;
 	}
 
 	@Override

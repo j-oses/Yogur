@@ -11,6 +11,8 @@ public class Argument extends AbstractTreeNode implements Declaration {
 	private BaseDeclarator declarator;
 	private Type type;
 
+	private int offset;
+
 	public Argument(String declarator, Type type) {
 		this(new BaseDeclarator(declarator), type);
 	}
@@ -24,6 +26,10 @@ public class Argument extends AbstractTreeNode implements Declaration {
 		return declarator;
 	}
 
+	public int getOffset() {
+		return offset;
+	}
+
 	@Override
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
 		table.insertId(declarator.getIdentifier(), this);
@@ -33,5 +39,11 @@ public class Argument extends AbstractTreeNode implements Declaration {
 	@Override
 	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		return type.performTypeAnalysis(idTable);
+	}
+
+	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		offset = currentOffset;
+		return offset + type.sizeOf();
 	}
 }

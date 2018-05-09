@@ -46,6 +46,12 @@ public class UnaryOperation extends Expression {
 	}
 
 	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		expression.performMemoryAnalysis(currentOffset, currentDepth);
+		return currentOffset;
+	}
+
+	@Override
 	public void generateCodeR(PMachineOutputStream stream) throws IOException {
 		String inst = (Operator.NEG.equals(operator)) ? "neg" : "not";
 		expression.generateCodeR(stream);

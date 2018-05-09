@@ -58,6 +58,15 @@ public class ForStructure extends Statement {
 	}
 
 	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		int offset = argument.performMemoryAnalysis(currentOffset, currentDepth);
+		start.performMemoryAnalysis(offset, currentDepth);
+		end.performMemoryAnalysis(offset, currentDepth);
+		offset = block.performMemoryAnalysis(offset, currentDepth);
+		return offset;
+	}
+
+	@Override
 	public void generateCode(PMachineOutputStream stream) throws IOException {
 		String startLabel = stream.generateUnusedLabel();
 		String endLabel = stream.generateUnusedLabel();

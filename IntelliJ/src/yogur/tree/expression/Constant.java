@@ -33,6 +33,11 @@ public class Constant extends Expression {
 	}
 
 	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		return currentOffset;
+	}
+
+	@Override
 	public void generateCodeR(PMachineOutputStream stream) throws IOException {
 		if (metaType.equals(new BaseType(BaseType.PredefinedType.Bool))) {
 			stream.appendInstruction("ldc", (Boolean)value);

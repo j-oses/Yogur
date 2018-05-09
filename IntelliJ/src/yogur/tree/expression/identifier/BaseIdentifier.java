@@ -9,6 +9,7 @@ public class BaseIdentifier extends VarIdentifier {
 	private String name;
 
 	private Declaration declaration;
+	private int nestedDepth;
 
 	public BaseIdentifier(String name) {
 		this.name = name;
@@ -16,6 +17,14 @@ public class BaseIdentifier extends VarIdentifier {
 
 	public Declaration getDeclaration() {
 		return declaration;
+	}
+
+	public int getUseNestedDepth() {
+		return nestedDepth;
+	}
+
+	public int getDefNestedDepth() {
+		return declaration.getNestedDepth();
 	}
 
 	@Override
@@ -26,5 +35,11 @@ public class BaseIdentifier extends VarIdentifier {
 	@Override
 	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		return declaration.performTypeAnalysis(idTable);
+	}
+
+	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		nestedDepth = currentDepth;
+		return currentOffset;
 	}
 }

@@ -71,4 +71,13 @@ public class ArrayIndex extends AbstractTreeNode {
 
 		return null;
 	}
+
+	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		offset.performMemoryAnalysis(currentOffset, currentDepth);
+		if (offset2 != null) {
+			offset2.performMemoryAnalysis(currentOffset, currentDepth);
+		}
+		return currentOffset;
+	}
 }

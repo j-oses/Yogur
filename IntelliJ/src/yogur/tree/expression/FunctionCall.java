@@ -59,4 +59,13 @@ public class FunctionCall extends Expression {
 		throw new CompilationException("Trying to call a function on the non-function object with type: " + type,
 				getLine(), getColumn(), TypeAnalyzer);
 	}
+
+	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		function.performMemoryAnalysis(currentOffset, currentDepth);
+		for (Expression e: expressions) {
+			e.performMemoryAnalysis(currentOffset, currentDepth);
+		}
+		return currentOffset;
+	}
 }

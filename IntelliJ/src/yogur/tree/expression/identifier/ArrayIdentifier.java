@@ -44,4 +44,11 @@ public class ArrayIdentifier extends VarIdentifier {
 		throw new CompilationException("Performing [] operator on a non-array type: " + leftType,
 				getLine(), getColumn(), TypeAnalyzer);
 	}
+
+	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		leftExpression.performMemoryAnalysis(currentOffset, currentDepth);
+		index.performMemoryAnalysis(currentOffset, currentDepth);
+		return currentOffset;
+	}
 }

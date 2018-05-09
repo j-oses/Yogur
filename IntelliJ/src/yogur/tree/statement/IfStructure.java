@@ -19,10 +19,6 @@ public class IfStructure extends Statement {
 	private Block ifClause;
 	private Block elseClause;	// May be null
 
-	public IfStructure(Expression condition, Block ifClause) {
-		this(condition, ifClause, null);
-	}
-
 	public IfStructure(Expression condition, Block ifClause, Block elseClause) {
 		this.condition = condition;
 		this.ifClause = ifClause;
@@ -52,6 +48,17 @@ public class IfStructure extends Statement {
 
 		throw new CompilationException("Invalid type on if condition: " + condType, condition.getLine(),
 				condition.getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		int offset = currentOffset;
+		offset = condition.performMemoryAnalysis(offset, currentDepth);
+		offset = ifClause.performMemoryAnalysis(offset, currentDepth);
+		if (elseClause != null) {
+			offset = elseClause.performMemoryAnalysis(offset, currentDepth);
+		}
+		return offset;
 	}
 
 	@Override

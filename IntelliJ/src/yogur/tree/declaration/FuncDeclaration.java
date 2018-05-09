@@ -17,6 +17,8 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 	private Argument returnArg;		// May be null
 	private Block block;
 
+	private int frameSize;
+
 	public FuncDeclaration(String identifier, List<Argument> arguments, Block block) {
 		this(identifier, arguments, null, block);
 	}
@@ -26,6 +28,10 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 		this.arguments = arguments;
 		this.returnArg = returnArg;
 		this.block = block;
+	}
+
+	public int getFrameSize() {
+		return frameSize;
 	}
 
 	@Override
@@ -54,5 +60,13 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 		metaType = new FunctionType(argTypes, returnType);
 		block.performTypeAnalysis(idTable);
 		return metaType;
+	}
+
+	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		int offset = 5 + arguments.size();
+		block.performMemoryAnalysis(offset, currentDepth + 1);
+		frameSize = offset + block.getMaxSize();
+		return currentOffset;
 	}
 }

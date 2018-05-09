@@ -51,4 +51,13 @@ public class ClassDeclaration extends AbstractTreeNode implements Declaration {
 
 		return typeType;
 	}
+
+	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		int offset = 0;
+		for (FunctionOrVarDeclaration declaration: declarations) {
+			offset = declaration.performMemoryAnalysis(offset, currentDepth);
+		}
+		return currentOffset;
+	}
 }

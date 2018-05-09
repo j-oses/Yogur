@@ -86,6 +86,13 @@ public class BinaryOperation extends Expression {
 	}
 
 	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		left.performMemoryAnalysis(currentOffset, currentDepth);
+		right.performMemoryAnalysis(currentOffset, currentDepth);
+		return currentOffset;
+	}
+
+	@Override
 	public void generateCodeR(PMachineOutputStream stream) throws IOException {
 		if (operator.equals(Operator.MOD)) {
 			Expression generatedExp = new BinaryOperation(left,

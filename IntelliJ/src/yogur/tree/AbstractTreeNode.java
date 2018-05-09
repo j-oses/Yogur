@@ -23,6 +23,12 @@ public abstract class AbstractTreeNode implements AbstractTreeNodeInterface {
 		return getMetaType();
 	}
 
+	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		// Default implementation does nothing
+		return currentOffset;
+	}
+
 	public void setLine(int line) {
 		this.line = line;
 	}

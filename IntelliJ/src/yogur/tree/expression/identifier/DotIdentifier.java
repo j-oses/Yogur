@@ -42,4 +42,10 @@ public class DotIdentifier extends VarIdentifier {
 		throw new CompilationException("Trying to member access (." + identifier + ") on a compound type " + left,
 				getLine(), getColumn(), TypeAnalyzer);
 	}
+
+	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		expression.performMemoryAnalysis(currentOffset, currentDepth);
+		return currentOffset;
+	}
 }

@@ -18,6 +18,7 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 	private Expression assignTo;	// May be null
 
 	private int size;
+	private int nestingDepth;
 
 	public VarDeclaration(Argument argument) {
 		this(argument, null);
@@ -30,6 +31,10 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 
 	public int getSize() {
 		return size;
+	}
+
+	public int getNestingDepth() {
+		return nestingDepth;
 	}
 
 	@Override
@@ -63,5 +68,15 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 		MetaType type = super.performTypeAnalysis(idTable);
 		size = type.sizeOf();
 		return type;
+	}
+
+	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		nestingDepth = currentDepth;
+		currentOffset = argument.performMemoryAnalysis(currentOffset, currentDepth);
+		if (assignTo != null) {
+			currentOffset = assignTo.performMemoryAnalysis(currentOffset, currentDepth);
+		}
+		return currentOffset;
 	}
 }

@@ -3,7 +3,6 @@ package yogur.tree;
 import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
-import yogur.tree.statement.Statement;
 import yogur.typeidentification.MetaType;
 
 import java.io.IOException;
@@ -40,6 +39,15 @@ public class Program extends AbstractTreeNode {
 			s.performTypeAnalysis(idTable);
 		}
 		return null;
+	}
+
+	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		int offset = currentOffset;
+		for (StatementOrDeclaration s: statements) {
+			offset = s.performMemoryAnalysis(offset, currentDepth);
+		}
+		return offset;
 	}
 
 	public void generateCode(PMachineOutputStream stream) throws IOException {

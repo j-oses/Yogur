@@ -11,8 +11,20 @@ import java.util.List;
 public class Block extends Statement {
 	private List<Statement> statements;
 
+	private int decSize;	// Size of declarations on its level
+
 	public Block(List<Statement> s) {
 		statements = s;
+	}
+
+	public int getMaxSize() {
+		int max = -1;
+		for (Statement s: statements) {
+			if (s instanceof Block) {
+				max = Math.max(max, ((Block) s).getMaxSize());
+			}
+		}
+		return max + decSize;
 	}
 
 	@Override
@@ -36,6 +48,16 @@ public class Block extends Statement {
 			s.performTypeAnalysis(idTable);
 		}
 		return null;
+	}
+
+	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		int offset = currentOffset;
+		for (Statement s: statements) {
+			offset = s.performMemoryAnalysis(offset, currentDepth);
+		}
+		decSize = offset - currentOffset;
+		return currentOffset;
 	}
 
 	@Override

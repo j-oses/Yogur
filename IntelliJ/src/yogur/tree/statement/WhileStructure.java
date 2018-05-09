@@ -42,6 +42,13 @@ public class WhileStructure extends Statement {
 	}
 
 	@Override
+	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
+		currentOffset = condition.performMemoryAnalysis(currentOffset, currentDepth);
+		currentOffset = block.performMemoryAnalysis(currentOffset, currentDepth);
+		return currentOffset;
+	}
+
+	@Override
 	public void generateCode(PMachineOutputStream stream) throws IOException {
 		String start = stream.generateUnusedLabel();
 		String end = stream.generateUnusedLabel();
