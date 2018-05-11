@@ -37,6 +37,10 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 		return nestingDepth;
 	}
 
+	public int getOffset() {
+		return argument.getOffset();
+	}
+
 	@Override
 	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
 		argument.performIdentifierAnalysis(table);

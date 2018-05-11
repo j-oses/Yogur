@@ -9,11 +9,4 @@ import java.io.IOException;
 
 public abstract class VarIdentifier extends Expression {
 	public abstract Declaration getDeclaration();
-
-	public abstract int getOffset();
-
-	@Override
-	public void generateCodeR(PMachineOutputStream stream) {
-
-	}
 }

@@ -2,7 +2,10 @@ package yogur.tree.type;
 
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
+import yogur.tree.declaration.Declaration;
 import yogur.typeidentification.MetaType;
+
+import java.util.Map;
 
 public class BaseType extends Type {
 	public enum PredefinedType {
@@ -19,6 +22,8 @@ public class BaseType extends Type {
 	}
 
 	private String name;
+
+	private Map<String, Declaration> classInfo;
 
 	public BaseType(String name) {
 		this.name = name;
@@ -45,6 +50,7 @@ public class BaseType extends Type {
 	@Override
 	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
 		if (PredefinedType.hasValue(name) || idTable.hasClassNamed(name)) {
+			classInfo = idTable.getClassInfo(name);
 			return this;
 		}
 		throw new CompilationException("No type declared with name: " + name, getLine(),
@@ -70,7 +76,8 @@ public class BaseType extends Type {
 		if (PredefinedType.hasValue(name)) {
 			return 1;
 		} else {
-
+			// FIXME: Return a value
+			return -1;
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package yogur.tree.expression;
 
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.declaration.Declaration;
@@ -8,6 +9,7 @@ import yogur.typeidentification.FunctionType;
 import yogur.typeidentification.MetaType;
 import yogur.typeidentification.VoidType;
 
+import java.io.IOException;
 import java.util.List;
 
 import static yogur.error.CompilationException.Scope;
@@ -67,5 +69,10 @@ public class FunctionCall extends Expression {
 			e.performMemoryAnalysis(currentOffset, currentDepth);
 		}
 		return currentOffset;
+	}
+
+	@Override
+	public void generateCodeR(PMachineOutputStream stream) {
+		// FIXME: Unimplemented method stub
 	}
 }

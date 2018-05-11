@@ -91,6 +91,10 @@ public class IdIdentifier {
 		return declaration;
 	}
 
+	public Map<String, Declaration> getClassInfo(String name) {
+		return new HashMap<>(classMap.get(name).peek());
+	}
+
 	/**
 	 * Añade el identificador id al bloque en curso y la posición
 	 * del árbol donde está su aparición de definición

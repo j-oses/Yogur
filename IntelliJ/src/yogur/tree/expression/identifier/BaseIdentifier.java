@@ -3,6 +3,7 @@ package yogur.tree.expression.identifier;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.declaration.Declaration;
+import yogur.tree.statement.VarDeclaration;
 import yogur.typeidentification.MetaType;
 
 public class BaseIdentifier extends VarIdentifier {
@@ -24,7 +25,7 @@ public class BaseIdentifier extends VarIdentifier {
 	}
 
 	public int getDefNestedDepth() {
-		return declaration.getNestedDepth();
+		return (declaration instanceof VarDeclaration) ? ((VarDeclaration)declaration).getNestingDepth() : -1;
 	}
 
 	@Override

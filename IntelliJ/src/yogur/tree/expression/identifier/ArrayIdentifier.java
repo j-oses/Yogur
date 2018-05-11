@@ -1,11 +1,14 @@
 package yogur.tree.expression.identifier;
 
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdIdentifier;
 import yogur.tree.declaration.Declaration;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.ArrayType;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
@@ -50,5 +53,10 @@ public class ArrayIdentifier extends VarIdentifier {
 		leftExpression.performMemoryAnalysis(currentOffset, currentDepth);
 		index.performMemoryAnalysis(currentOffset, currentDepth);
 		return currentOffset;
+	}
+
+	@Override
+	public void generateCodeR(PMachineOutputStream stream) {
+		// FIXME: Unimplemented method stub
 	}
 }

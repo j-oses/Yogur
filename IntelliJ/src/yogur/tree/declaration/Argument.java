@@ -46,4 +46,6 @@ public class Argument extends AbstractTreeNode implements Declaration {
 		offset = currentOffset;
 		return offset + type.sizeOf();
 	}
+
+
 }
