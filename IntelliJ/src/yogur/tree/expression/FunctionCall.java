@@ -1,7 +1,7 @@
 package yogur.tree.expression;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.tree.expression.identifier.VarIdentifier;
 import yogur.typeidentification.FunctionType;
@@ -10,7 +10,6 @@ import yogur.typeidentification.VoidType;
 
 import java.util.List;
 
-import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 
 public class FunctionCall extends Expression {
@@ -25,7 +24,7 @@ public class FunctionCall extends Expression {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		function.performIdentifierAnalysis(table);
 		for (Expression e: expressions) {
 			e.performIdentifierAnalysis(table);
@@ -33,7 +32,7 @@ public class FunctionCall extends Expression {
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
 		MetaType type = function.performTypeAnalysis(idTable);
 
 		if (type instanceof FunctionType) {

@@ -1,7 +1,7 @@
 package yogur.tree.type;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.typeidentification.MetaType;
 
 public class ArrayType extends Type {
@@ -18,13 +18,8 @@ public class ArrayType extends Type {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		internalType.performIdentifierAnalysis(table);
-	}
-
-	@Override
-	public MetaType analyzeType(IdIdentifier idTable) {
-		return this;
 	}
 
 	@Override

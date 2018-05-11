@@ -35,7 +35,7 @@ terminal ASSIGN, SUM, SUBS, PROD, DIV, MOD, AND, OR, NOT, DOT, LRANGE, RRANGE, E
 terminal LPAREN, RPAREN, LSQUARE, RSQUARE, LBRACKET, RBRACKET;
 terminal DEF, VAR, CLASS, IF, ELSE, WHILE, FOR, IN, TO;
 
-non terminal S, Inst, Dec, DVar, DProc, DFunc, DClass, Block;
+non terminal S, Inst, Dec, DVar, DVarN, DProc, DFunc, DClass, Block;
 non terminal If, While, For, Ass;
 non terminal Exp, Exp0, Exp1, Exp2, Exp3, Exp4, Exp5, Exp6, Exp7;
 non terminal Op, Op0, Op1, Op2, Op3, Op4, Op5;
@@ -66,11 +66,13 @@ Dec ::= DProc:d							{: RESULT = d; :}
 DVar ::= VAR Arg:a														{: RESULT = new VarDeclaration((Argument)a); ((AbstractTreeNode)RESULT).setLineCol(aleft, aright); :}
 	| VAR Arg:a ASSIGN Exp:e											{: RESULT = new VarDeclaration((Argument)a, (Expression)e); ((AbstractTreeNode)RESULT).setLineCol(aleft, aright); :}
 ;
+DVarN ::= VAR Arg:a														{: RESULT = new VarDeclaration((Argument)a); ((AbstractTreeNode)RESULT).setLineCol(aleft, aright); :}
+;
 DProc ::= DEF ID:id LPAREN ArgList:args RPAREN Block:b					{: RESULT = new FuncDeclaration((String)id, (List<Argument>)args, (Block)b); ((AbstractTreeNode)RESULT).setLineCol(idleft, idright); :}
 ;
 DFunc ::= DEF ID:id LPAREN ArgList:args RPAREN ARROW Arg:rarg Block:b	{: RESULT = new FuncDeclaration((String)id, (List<Argument>)args, (Argument)rarg, (Block)b); ((AbstractTreeNode)RESULT).setLineCol(idleft, idright); :}
 ;
-DClass ::= CLASS TYPE:t LBRACKET ClassBody:insts RBRACKET				{: RESULT = new ClassDeclaration(new BaseType((String)t), (List<FunctionOrVarDeclaration>)insts); ((AbstractTreeNode)RESULT).setLineCol(tleft, tright); :}
+DClass ::= CLASS TYPE:t LBRACKET ClassBody:insts RBRACKET				{: RESULT = new ClassDeclaration((String)t, (List<FunctionOrVarDeclaration>)insts); ((AbstractTreeNode)RESULT).setLineCol(tleft, tright); :}
 ;
 Block ::= LBRACKET BlockBody:insts RBRACKET								{: RESULT = new Block((List<Statement>)insts); :}
 ;
@@ -153,7 +155,7 @@ Op5 ::= SUBS	{: RESULT = UnaryOperation.Operator.NEG; :}
 ;
 
 VarType ::= VarType:t LSQUARE INT:i RSQUARE		{: RESULT = new ArrayType((Type)t, (Integer)i); :}
-	| TYPE:t									{: RESULT = new BaseType((String)t); ((AbstractTreeNode)RESULT).setLineCol(tleft, tright); :}
+	| TYPE:t									{: RESULT = Type.fromName((String)t); ((AbstractTreeNode)RESULT).setLineCol(tleft, tright); :}
 ;
 Index ::= LSQUARE Exp:e RSQUARE				{: RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.INDEX); :}
 	| LSQUARE Exp:e RRANGE					{: RESULT = new ArrayIndex((Expression)e, ArrayIndex.AccessType.LEFT_RANGE); :}
@@ -172,9 +174,9 @@ Args ::= Args:args COMMA Arg:arg			{: ((List<Argument>)args).add((Argument)arg);
 Arg ::= ID:id COLON:c VarType:t				{: RESULT = new Argument((String)id, (Type)t); ((AbstractTreeNode)RESULT).setLineCol(cleft, cright); :}
 ;
 ClassBody ::= ClassBody:b DELIMITER Dec:d	{: ((List<FunctionOrVarDeclaration>)b).add((FuncDeclaration)d); RESULT = b; :}
-	| ClassBody:b DELIMITER DVar:d			{: ((List<FunctionOrVarDeclaration>)b).add((VarDeclaration)d); RESULT = b; :}
+	| ClassBody:b DELIMITER DVarN:d			{: ((List<FunctionOrVarDeclaration>)b).add((VarDeclaration)d); RESULT = b; :}
 	| Dec:d									{: RESULT = new ArrayList<FunctionOrVarDeclaration>(); ((List<FunctionOrVarDeclaration>)RESULT).add((FuncDeclaration)d); :}
-	| DVar:d								{: RESULT = new ArrayList<FunctionOrVarDeclaration>(); ((List<FunctionOrVarDeclaration>)RESULT).add((VarDeclaration)d); :}
+	| DVarN:d								{: RESULT = new ArrayList<FunctionOrVarDeclaration>(); ((List<FunctionOrVarDeclaration>)RESULT).add((VarDeclaration)d); :}
 ;
 BlockBody ::= BlockBody:is DELIMITER Inst:i			{: ((List<Statement>)is).add((Statement)i); RESULT = is; :}
 	| Inst:i										{: RESULT = new ArrayList<Statement>(); ((List<Statement>)RESULT).add((Statement)i); :}

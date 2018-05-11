@@ -1,7 +1,7 @@
 package yogur.tree.expression;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
@@ -13,12 +13,12 @@ public class Constant extends Expression {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		// Do nothing
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
 		if (value instanceof Integer) {
 			return new BaseType(BaseType.PredefinedType.Int);
 		} else if (value instanceof Boolean) {

@@ -1,7 +1,7 @@
 package yogur.tree.statement;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.typeidentification.MetaType;
 
 import java.util.List;
@@ -14,11 +14,11 @@ public class Block extends Statement {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		performIdentifierAnalysis(table, true);
 	}
 
-	public void performIdentifierAnalysis(IdIdentifier table, boolean open) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table, boolean open) throws CompilationException {
 		if (open) {
 			table.openBlock();
 		}
@@ -29,7 +29,7 @@ public class Block extends Statement {
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
 		for (Statement s: statements) {
 			s.performTypeAnalysis(idTable);
 		}

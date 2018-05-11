@@ -1,13 +1,12 @@
 package yogur.tree.expression.identifier;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.ArrayType;
 import yogur.typeidentification.MetaType;
 
-import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 
 public class ArrayIdentifier extends VarIdentifier {
@@ -25,13 +24,13 @@ public class ArrayIdentifier extends VarIdentifier {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		leftExpression.performIdentifierAnalysis(table);
 		index.performIdentifierAnalysis(table);
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
 		MetaType leftType = leftExpression.performTypeAnalysis(idTable);
 		if (leftType instanceof ArrayType) {
 			if (index.returnsSingleElement()) {

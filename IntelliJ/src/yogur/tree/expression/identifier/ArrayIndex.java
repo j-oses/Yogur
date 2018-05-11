@@ -1,16 +1,14 @@
 package yogur.tree.expression.identifier;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
-import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 import static yogur.tree.expression.identifier.ArrayIndex.AccessType.LEFT_RIGHT_RANGE;
-import static yogur.tree.type.BaseType.PredefinedType;
 import static yogur.tree.type.BaseType.PredefinedType.Int;
 
 public class ArrayIndex extends AbstractTreeNode {
@@ -38,7 +36,7 @@ public class ArrayIndex extends AbstractTreeNode {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		offset.performIdentifierAnalysis(table);
 		if (offset2 != null) {
 			offset2.performIdentifierAnalysis(table);
@@ -46,7 +44,7 @@ public class ArrayIndex extends AbstractTreeNode {
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
 		MetaType offsetType = offset.performTypeAnalysis(idTable);
 		MetaType intType = new BaseType(Int);
 

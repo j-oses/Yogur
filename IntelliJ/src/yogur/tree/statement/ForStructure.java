@@ -1,14 +1,13 @@
 package yogur.tree.statement;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.type.BaseType;
 import yogur.tree.declaration.Argument;
 import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
 
-import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 
 public class ForStructure extends Statement {
@@ -25,7 +24,7 @@ public class ForStructure extends Statement {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		table.openBlock();
 		argument.performIdentifierAnalysis(table);
 		start.performIdentifierAnalysis(table);
@@ -34,7 +33,7 @@ public class ForStructure extends Statement {
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
 		MetaType argType = argument.performTypeAnalysis(idTable);
 		MetaType startType = start.performTypeAnalysis(idTable);
 		MetaType endType = end.performTypeAnalysis(idTable);
@@ -49,7 +48,7 @@ public class ForStructure extends Statement {
 					end.getLine(), end.getColumn(), TypeAnalyzer);
 		}
 
-		block.performIdentifierAnalysis(idTable);
+		block.performTypeAnalysis(idTable);
 		return null;
 	}
 }

@@ -14,10 +14,10 @@ public class TestTypes {
 	private static String TESTDIR = "./../tests/";
 
 	public static void main(String args[]) {
-		File file = new File("./../tests/simple.yogur");
+		File file = new File("./../tests/exampleOne.yogur");
 
-		testFile(file);
-		//testAll();
+		//testFile(file);
+		testAll();
 	}
 
 	public static void testAll(){

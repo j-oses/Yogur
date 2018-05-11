@@ -1,7 +1,7 @@
 package yogur.tree.statement;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
@@ -19,13 +19,13 @@ public class WhileStructure extends Statement {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		condition.performIdentifierAnalysis(table);
 		block.performIdentifierAnalysis(table);
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
 		MetaType condType = condition.performTypeAnalysis(idTable);
 
 		if (!new BaseType(Bool).equals(condType)) {

@@ -1,7 +1,7 @@
 package yogur.tree;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.typeidentification.MetaType;
 
 public abstract class AbstractTreeNode implements AbstractTreeNodeInterface {
@@ -10,12 +10,12 @@ public abstract class AbstractTreeNode implements AbstractTreeNodeInterface {
 
 	protected MetaType metaType;
 
-	public abstract void performIdentifierAnalysis(IdIdentifier table) throws CompilationException;
+	public abstract void performIdentifierAnalysis(IdentifierTable table) throws CompilationException;
 
-	public abstract MetaType analyzeType(IdIdentifier idTable) throws CompilationException;
+	public abstract MetaType analyzeType(IdentifierTable idTable) throws CompilationException;
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
+	public MetaType performTypeAnalysis(IdentifierTable idTable) throws CompilationException {
 		if (getMetaType() == null) {
 			metaType = analyzeType(idTable);
 		}

@@ -1,10 +1,10 @@
 package yogur.tree.expression.identifier;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.tree.expression.Expression;
-import yogur.tree.type.BaseType;
+import yogur.tree.type.ClassType;
 import yogur.typeidentification.MetaType;
 
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
@@ -26,16 +26,16 @@ public class DotIdentifier extends VarIdentifier {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		expression.performIdentifierAnalysis(table);
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
 		MetaType left = expression.performTypeAnalysis(idTable);
-		if (left instanceof BaseType) {
-			String name = ((BaseType) left).getName();
-			declaration = idTable.searchIdOnClass(identifier, name, getLine(), getColumn());
+		if (left instanceof ClassType) {
+			ClassType classT = (ClassType) left;
+			declaration = classT.getDeclaration().getDeclaration(identifier);
 			return declaration.performTypeAnalysis(idTable);
 		}
 

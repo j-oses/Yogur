@@ -1,7 +1,7 @@
 package yogur.tree.declaration;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
 import yogur.tree.type.Type;
 import yogur.tree.declaration.declarator.BaseDeclarator;
@@ -25,13 +25,13 @@ public class Argument extends AbstractTreeNode implements Declaration {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		table.insertId(declarator.getIdentifier(), this);
 		type.performIdentifierAnalysis(table);
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
 		return type.performTypeAnalysis(idTable);
 	}
 }

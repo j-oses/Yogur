@@ -1,12 +1,11 @@
 package yogur.tree.statement;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.declarator.Declarator;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
 
-import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 
 public class Assignment extends Statement {
@@ -19,13 +18,13 @@ public class Assignment extends Statement {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		declarator.performIdentifierAnalysis(table);
 		expression.performIdentifierAnalysis(table);
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
 		MetaType decType = declarator.performTypeAnalysis(idTable);
 		MetaType expType = expression.performTypeAnalysis(idTable);
 

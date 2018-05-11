@@ -1,14 +1,12 @@
 package yogur.tree.expression;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
-import static yogur.error.CompilationException.Scope;
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 import static yogur.tree.expression.UnaryOperation.Operator.NOT;
-import static yogur.tree.type.BaseType.PredefinedType;
 import static yogur.tree.type.BaseType.PredefinedType.Bool;
 import static yogur.tree.type.BaseType.PredefinedType.Int;
 
@@ -26,12 +24,12 @@ public class UnaryOperation extends Expression {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		expression.performIdentifierAnalysis(table);
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
 		MetaType argType = expression.performTypeAnalysis(idTable);
 		MetaType expectedType = new BaseType(
 				operator.equals(NOT) ? Bool : Int);

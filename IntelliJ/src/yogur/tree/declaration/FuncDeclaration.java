@@ -1,7 +1,7 @@
 package yogur.tree.declaration;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
 import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.tree.statement.Block;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDeclaration, Declaration {
-	private BaseDeclarator declarator;
+	private String identifier;
 	private List<Argument> arguments;
 	private Argument returnArg;		// May be null
 	private Block block;
@@ -21,16 +21,29 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 		this(identifier, arguments, null, block);
 	}
 
-	public FuncDeclaration(String declarator, List<Argument> arguments, Argument returnArg, Block block) {
-		this.declarator = new BaseDeclarator(declarator);
+	public FuncDeclaration(String identifier, List<Argument> arguments, Argument returnArg, Block block) {
+		this.identifier = identifier;
 		this.arguments = arguments;
 		this.returnArg = returnArg;
 		this.block = block;
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
-		table.insertId(declarator.getIdentifier(), this);
+	public String getName() {
+		return identifier;
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
+		performInsertIdentifierAnalysis(table);
+		performBodyIdentifierAnalysis(table);
+	}
+
+	public void performInsertIdentifierAnalysis(IdentifierTable table) throws CompilationException {
+		table.insertId(identifier, this);
+	}
+
+	public void performBodyIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		table.openBlock();
 		for (Argument a: arguments) {
 			a.performIdentifierAnalysis(table);
@@ -38,11 +51,11 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 		if (returnArg != null) {
 			returnArg.performIdentifierAnalysis(table);
 		}
-		block.performIdentifierAnalysis(table, false);
+		block.performIdentifierAnalysis(table, false);	// Closes the block
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
 		List<MetaType> argTypes = new ArrayList<>();
 		for (Argument a: arguments) {
 			argTypes.add(a.performTypeAnalysis(idTable));

@@ -1,7 +1,7 @@
 package yogur.tree.type;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.typeidentification.MetaType;
 
 public class BaseType extends Type {
@@ -18,32 +18,23 @@ public class BaseType extends Type {
 		}
 	}
 
-	private String name;
+	private PredefinedType type;
 
 	public BaseType(String name) {
-		this.name = name;
+		this.type = PredefinedType.valueOf(name);
 	}
 
 	public BaseType(PredefinedType preType) {
-		this(preType.name());
+		this.type = preType;
 	}
 
 	public String getName() {
-		return name;
+		return type.name();
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		// Do nothing
-	}
-
-	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
-		if (PredefinedType.hasValue(name) || idTable.hasClassNamed(name)) {
-			return this;
-		}
-		throw new CompilationException("No type declared with name: " + name, getLine(),
-				getColumn(), CompilationException.Scope.TypeAnalyzer);
 	}
 
 	@Override
@@ -52,11 +43,11 @@ public class BaseType extends Type {
 			return false;
 		}
 		BaseType other = (BaseType)obj;
-		return other.name.equals(name);
+		return other.type.equals(type);
 	}
 
 	@Override
 	public String toString() {
-		return name;
+		return type.name();
 	}
 }

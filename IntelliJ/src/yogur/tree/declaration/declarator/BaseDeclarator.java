@@ -1,7 +1,7 @@
 package yogur.tree.declaration.declarator;
 
 import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.typeidentification.MetaType;
 
@@ -22,12 +22,12 @@ public class BaseDeclarator extends Declarator {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		declaration = table.searchId(identifier, getLine(), getColumn());
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
 		return declaration.performTypeAnalysis(idTable);
 	}
 }
