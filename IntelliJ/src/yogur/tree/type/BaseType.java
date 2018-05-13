@@ -33,6 +33,11 @@ public class BaseType extends Type {
 	}
 
 	@Override
+	public int getSize() {
+		return 1;
+	}
+
+	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		// Do nothing
 	}

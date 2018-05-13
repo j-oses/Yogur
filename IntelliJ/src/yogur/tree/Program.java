@@ -1,5 +1,6 @@
 package yogur.tree;
 
+import yogur.codegen.IntegerReference;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.typeidentification.MetaType;
@@ -37,5 +38,12 @@ public class Program extends AbstractTreeNode {
 			s.performTypeAnalysis(idTable);
 		}
 		return null;
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset) {
+		for (StatementOrDeclaration s: instructions) {
+			s.performMemoryAssignment(currentOffset);
+		}
 	}
 }

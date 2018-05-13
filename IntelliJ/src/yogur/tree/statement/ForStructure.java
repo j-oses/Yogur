@@ -1,5 +1,6 @@
 package yogur.tree.statement;
 
+import yogur.codegen.IntegerReference;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.type.BaseType;
@@ -50,5 +51,11 @@ public class ForStructure extends Statement {
 
 		block.performTypeAnalysis(idTable);
 		return null;
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset) {
+		argument.performMemoryAssignment(currentOffset);
+		block.performMemoryAssignment(currentOffset);
 	}
 }

@@ -1,5 +1,6 @@
 package yogur.tree.statement;
 
+import yogur.codegen.IntegerReference;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.declarator.Declarator;
@@ -35,5 +36,10 @@ public class Assignment extends Statement {
 		}
 
 		return null;
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset) {
+		// Do nothing
 	}
 }

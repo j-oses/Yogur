@@ -1,5 +1,6 @@
 package yogur.tree.expression.identifier;
 
+import yogur.codegen.IntegerReference;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
@@ -60,5 +61,10 @@ public class ArrayIndex extends AbstractTreeNode {
 		}
 
 		return null;
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset) {
+		// Do nothing
 	}
 }

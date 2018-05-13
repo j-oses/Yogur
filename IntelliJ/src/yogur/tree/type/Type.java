@@ -1,5 +1,6 @@
 package yogur.tree.type;
 
+import yogur.codegen.IntegerReference;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
@@ -18,5 +19,10 @@ public abstract class Type extends AbstractTreeNode implements MetaType {
 	@Override
 	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
 		return this;
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset) {
+		// Do nothing
 	}
 }

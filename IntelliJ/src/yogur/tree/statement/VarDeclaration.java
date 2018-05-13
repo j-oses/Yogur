@@ -1,5 +1,6 @@
 package yogur.tree.statement;
 
+import yogur.codegen.IntegerReference;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Argument;
@@ -25,6 +26,11 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 	@Override
 	public String getName() {
 		return argument.getDeclarator().getIdentifier();
+	}
+
+	@Override
+	public String getDeclarationDescription() {
+		return "Var declaration";
 	}
 
 	@Override
@@ -61,5 +67,10 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 
 		throw new CompilationException("Assigning an expression of type: " + assType +
 				" to a variable of type: " + argType, getLine(), getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset) {
+		argument.performMemoryAssignment(currentOffset);
 	}
 }

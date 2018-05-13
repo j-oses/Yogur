@@ -1,9 +1,13 @@
 package yogur.tree.expression;
 
+import yogur.codegen.IntegerReference;
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 public class Constant extends Expression {
 	Object value;
@@ -26,6 +30,15 @@ public class Constant extends Expression {
 		} else {
 			throw new CompilationException("Invalid constant value: " + value,  getLine(), getColumn(),
 					CompilationException.Scope.TypeAnalyzer);
+		}
+	}
+
+	@Override
+	public void generateCodeR(PMachineOutputStream stream) throws IOException {
+		if (value instanceof Integer) {
+			stream.appendInstruction("ldc", String.valueOf((int)value));
+		} else {
+			stream.appendInstruction("ldc", (boolean)value ? "true" : "false");
 		}
 	}
 }

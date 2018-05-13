@@ -25,6 +25,11 @@ public class FunctionType implements MetaType {
 	}
 
 	@Override
+	public int getSize() {
+		return 0;
+	}
+
+	@Override
 	public boolean equals(Object obj) {
 		if (obj == null || !(obj instanceof FunctionType)) {
 			return false;

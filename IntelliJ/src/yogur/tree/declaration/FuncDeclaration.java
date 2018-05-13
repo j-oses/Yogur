@@ -1,5 +1,6 @@
 package yogur.tree.declaration;
 
+import yogur.codegen.IntegerReference;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
@@ -31,6 +32,11 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 	@Override
 	public String getName() {
 		return identifier;
+	}
+
+	@Override
+	public String getDeclarationDescription() {
+		return "Function declaration";
 	}
 
 	@Override
@@ -67,5 +73,20 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 		metaType = new FunctionType(argTypes, returnType);
 		block.performTypeAnalysis(idTable);
 		return metaType;
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset) {
+		// FIXME: May (and will) change when functions are implemented
+		IntegerReference internalOffset = new IntegerReference(0);
+
+		for (Argument a: arguments) {
+			a.performMemoryAssignment(internalOffset);
+		}
+
+		if (returnArg != null) {
+			returnArg.performMemoryAssignment(internalOffset);
+		}
+		block.performMemoryAssignment(internalOffset);
 	}
 }

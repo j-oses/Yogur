@@ -1,5 +1,6 @@
 package yogur.tree.expression;
 
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
@@ -8,6 +9,7 @@ import yogur.typeidentification.FunctionType;
 import yogur.typeidentification.MetaType;
 import yogur.typeidentification.VoidType;
 
+import java.io.IOException;
 import java.util.List;
 
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
@@ -57,5 +59,10 @@ public class FunctionCall extends Expression {
 
 		throw new CompilationException("Trying to call a function on the non-function object with type: " + type,
 				getLine(), getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void generateCodeR(PMachineOutputStream stream) {
+		// FIXME: Fill when functions are implemented
 	}
 }

@@ -1,5 +1,6 @@
 package yogur.tree.declaration;
 
+import yogur.codegen.IntegerReference;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
@@ -17,6 +18,7 @@ public class ClassDeclaration extends AbstractTreeNode implements Declaration {
 	private List<FunctionOrVarDeclaration> declarations;
 
 	private Map<String, Declaration> declarationMap;
+	private int size = 0;
 
 	public ClassDeclaration(String name, List<FunctionOrVarDeclaration> declarations) {
 		this.name = name;
@@ -25,6 +27,15 @@ public class ClassDeclaration extends AbstractTreeNode implements Declaration {
 
 	public String getName() {
 		return name;
+	}
+
+	public int getSize() {
+		return size;
+	}
+
+	@Override
+	public String getDeclarationDescription() {
+		return "Class declaration";
 	}
 
 	public Declaration getDeclaration(String id) throws CompilationException {
@@ -64,9 +75,21 @@ public class ClassDeclaration extends AbstractTreeNode implements Declaration {
 		MetaType type = new ClassType(this);
 
 		for (FunctionOrVarDeclaration d : declarations) {
-			d.performTypeAnalysis(idTable);
+			MetaType decType = d.performTypeAnalysis(idTable);
+			if (d instanceof VarDeclaration) {
+				size += decType.getSize();
+			}
 		}
 
 		return type;
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset) {
+		IntegerReference internalOffset = new IntegerReference(0);
+
+		for (FunctionOrVarDeclaration d: declarations) {
+			d.performMemoryAssignment(internalOffset);
+		}
 	}
 }

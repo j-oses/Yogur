@@ -25,6 +25,11 @@ public class ClassType extends Type {
 		return name;
 	}
 
+	@Override
+	public int getSize() {
+		return declaration.getSize();
+	}
+
 	public ClassDeclaration getDeclaration() {
 		return declaration;
 	}

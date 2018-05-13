@@ -1,11 +1,15 @@
 package yogur.tree.expression.identifier;
 
+import yogur.codegen.IntegerReference;
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.ArrayType;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 
@@ -42,5 +46,10 @@ public class ArrayIdentifier extends VarIdentifier {
 
 		throw new CompilationException("Performing [] operator on a non-array type: " + leftType,
 				getLine(), getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void generateCodeR(PMachineOutputStream stream) throws IOException {
+		// FIXME: will change with complex identifiers
 	}
 }

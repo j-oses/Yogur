@@ -1,5 +1,6 @@
 package yogur.tree.statement;
 
+import yogur.codegen.IntegerReference;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.expression.Expression;
@@ -36,5 +37,10 @@ public class WhileStructure extends Statement {
 		block.performTypeAnalysis(idTable);
 
 		return null;
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset) {
+		block.performMemoryAssignment(currentOffset);
 	}
 }

@@ -18,6 +18,11 @@ public class ArrayType extends Type {
 	}
 
 	@Override
+	public int getSize() {
+		return size * internalType.getSize();
+	}
+
+	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		internalType.performIdentifierAnalysis(table);
 	}

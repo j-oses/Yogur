@@ -1,5 +1,6 @@
 package yogur.tree.statement;
 
+import yogur.codegen.IntegerReference;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.expression.Expression;
@@ -47,5 +48,13 @@ public class IfStructure extends Statement {
 
 		throw new CompilationException("Invalid type on if condition: " + condType, condition.getLine(),
 				condition.getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset) {
+		ifClause.performMemoryAssignment(currentOffset);
+		if (elseClause != null) {
+			elseClause.performMemoryAssignment(currentOffset);
+		}
 	}
 }

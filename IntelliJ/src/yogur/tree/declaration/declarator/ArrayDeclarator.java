@@ -1,5 +1,6 @@
 package yogur.tree.declaration.declarator;
 
+import yogur.codegen.IntegerReference;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.expression.identifier.ArrayIndex;

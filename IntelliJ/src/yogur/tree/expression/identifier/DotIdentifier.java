@@ -1,11 +1,14 @@
 package yogur.tree.expression.identifier;
 
+import yogur.codegen.PMachineOutputStream;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.ClassType;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 import static yogur.error.CompilationException.Scope.TypeAnalyzer;
 
@@ -41,5 +44,10 @@ public class DotIdentifier extends VarIdentifier {
 
 		throw new CompilationException("Trying to member access (." + identifier + ") on a compound type " + left,
 				getLine(), getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void generateCodeR(PMachineOutputStream stream) throws IOException {
+		// FIXME: will change with complex identifiers
 	}
 }

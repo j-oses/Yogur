@@ -1,5 +1,6 @@
 package yogur.tree.statement;
 
+import yogur.codegen.IntegerReference;
 import yogur.error.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.typeidentification.MetaType;
@@ -34,5 +35,12 @@ public class Block extends Statement {
 			s.performTypeAnalysis(idTable);
 		}
 		return null;
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset) {
+		for (Statement s: statements) {
+			s.performMemoryAssignment(currentOffset);
+		}
 	}
 }
