@@ -39,7 +39,7 @@ public class TestCodeGen {
 
 	public static void testFile(File file) {
 		YogurParser p = null;
-		
+
 		try (FileInputStream is = new FileInputStream(file)) {
 			YogurLex jlex = new YogurLex(new InputStreamReader(is));
 			p = new YogurParser(jlex);

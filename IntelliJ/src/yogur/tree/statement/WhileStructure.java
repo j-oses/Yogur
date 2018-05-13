@@ -1,11 +1,14 @@
 package yogur.tree.statement;
 
 import yogur.codegen.IntegerReference;
+import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 import static yogur.tree.type.BaseType.PredefinedType.Bool;
@@ -42,5 +45,17 @@ public class WhileStructure extends Statement {
 	@Override
 	public void performMemoryAssignment(IntegerReference currentOffset) {
 		block.performMemoryAssignment(currentOffset);
+	}
+
+	@Override
+	public void generateCode(PMachineOutputStream stream) throws IOException {
+		String labelStart = stream.generateLabelWithUnusedId("while");
+		String labelEnd = stream.generateLabel("endWhile");
+
+		stream.appendLabel(labelStart);
+		stream.appendInstruction("fjp", labelEnd);
+		block.generateCode(stream);
+		stream.appendInstruction("ujp", labelStart);
+		stream.appendLabel(labelEnd);
 	}
 }

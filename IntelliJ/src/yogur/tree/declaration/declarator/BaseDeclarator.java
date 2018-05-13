@@ -1,5 +1,7 @@
 package yogur.tree.declaration.declarator;
 
+import yogur.tree.expression.identifier.BaseIdentifier;
+import yogur.tree.type.BaseType;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;

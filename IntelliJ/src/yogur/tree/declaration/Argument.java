@@ -1,6 +1,7 @@
 package yogur.tree.declaration;
 
 import yogur.codegen.IntegerReference;
+import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
@@ -53,5 +54,10 @@ public class Argument extends AbstractTreeNode implements Declaration {
 		offset = currentOffset.getValue();
 		currentOffset.add(type.getSize());
 		Log.debug("Assigned offset " + offset + " to variable " + declarator.getIdentifier() + " with size " + type.getSize());
+	}
+
+	@Override
+	public void generateCode(PMachineOutputStream stream) {
+		// Do nothing
 	}
 }

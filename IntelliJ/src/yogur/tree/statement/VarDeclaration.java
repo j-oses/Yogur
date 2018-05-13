@@ -1,12 +1,15 @@
 package yogur.tree.statement;
 
 import yogur.codegen.IntegerReference;
+import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Argument;
 import yogur.tree.declaration.FunctionOrVarDeclaration;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
@@ -72,5 +75,14 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 	@Override
 	public void performMemoryAssignment(IntegerReference currentOffset) {
 		argument.performMemoryAssignment(currentOffset);
+	}
+
+	@Override
+	public void generateCode(PMachineOutputStream stream) throws IOException {
+		if (assignTo != null) {
+			argument.getDeclarator().generateCodeL(stream);
+			assignTo.generateCodeR(stream);
+			stream.appendInstruction("sto");
+		}
 	}
 }

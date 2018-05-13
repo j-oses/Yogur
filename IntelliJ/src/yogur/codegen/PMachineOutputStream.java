@@ -5,7 +5,7 @@ import java.io.*;
 public class PMachineOutputStream extends FileWriter {
 	private int lineCount = 0;
 
-	private int nextLabel = 0;
+	private int currentLabel = 0;
 
 	public PMachineOutputStream(String fileName) throws IOException {
 		super(fileName);
@@ -43,16 +43,17 @@ public class PMachineOutputStream extends FileWriter {
 		this.append(name + ":\n");
 	}
 
-	public String generateUnusedLabel() {
-		String label = "l" + nextLabel;
-		nextLabel++;
-		return label;
+	public int unusedLabelId() {
+		currentLabel++;
+		return currentLabel;
 	}
 
-	public String appendUnusedLabel() throws IOException {
-		String label = generateUnusedLabel();
-		appendLabel(label);
-		return label;
+	public String generateLabel(String prefix) {
+		return prefix + currentLabel;
+	}
+
+	public String generateLabelWithUnusedId(String prefix) {
+		return prefix + unusedLabelId();
 	}
 
 	public void appendComment(String string, boolean forceMultiline) throws IOException {

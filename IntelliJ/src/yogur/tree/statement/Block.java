@@ -1,10 +1,12 @@
 package yogur.tree.statement;
 
 import yogur.codegen.IntegerReference;
+import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.typeidentification.MetaType;
 
+import java.io.IOException;
 import java.util.List;
 
 public class Block extends Statement {
@@ -41,6 +43,13 @@ public class Block extends Statement {
 	public void performMemoryAssignment(IntegerReference currentOffset) {
 		for (Statement s: statements) {
 			s.performMemoryAssignment(currentOffset);
+		}
+	}
+
+	@Override
+	public void generateCode(PMachineOutputStream stream) throws IOException {
+		for (Statement s: statements) {
+			s.generateCode(stream);
 		}
 	}
 }

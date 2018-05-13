@@ -1,11 +1,14 @@
 package yogur.tree.statement;
 
 import yogur.codegen.IntegerReference;
+import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.declarator.Declarator;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
@@ -41,5 +44,12 @@ public class Assignment extends Statement {
 	@Override
 	public void performMemoryAssignment(IntegerReference currentOffset) {
 		// Do nothing
+	}
+
+	@Override
+	public void generateCode(PMachineOutputStream stream) throws IOException {
+		declarator.generateCodeL(stream);
+		expression.generateCodeR(stream);
+		stream.appendInstruction("sto");
 	}
 }

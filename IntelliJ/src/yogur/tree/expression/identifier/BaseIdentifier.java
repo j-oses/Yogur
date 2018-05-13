@@ -18,6 +18,16 @@ public class BaseIdentifier extends VarIdentifier {
 		this.name = name;
 	}
 
+	/**
+	 * To be used internally to mock a base identifier. A node created with this constructor is not
+	 * expected to be inserted in the tree.
+	 * @param argument the declaration associated to this identifier.
+	 */
+	public BaseIdentifier(Argument argument) {
+		this.name = argument.getDeclarator().getIdentifier();
+		this.declaration = argument;
+	}
+
 	public Declaration getDeclaration() {
 		return declaration;
 	}
