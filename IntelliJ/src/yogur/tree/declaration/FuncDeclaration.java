@@ -1,10 +1,9 @@
 package yogur.tree.declaration;
 
 import yogur.codegen.IntegerReference;
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
-import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.tree.statement.Block;
 import yogur.typeidentification.FunctionType;
 import yogur.typeidentification.MetaType;

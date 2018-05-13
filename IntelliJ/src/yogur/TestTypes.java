@@ -5,6 +5,7 @@ import yogur.ididentification.IdentifierAnalyzer;
 import yogur.jlex.YogurLex;
 import yogur.tree.Program;
 import yogur.typeidentification.TypeAnalyzer;
+import yogur.utils.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,8 +42,21 @@ public class TestTypes {
 		try (FileInputStream is = new FileInputStream(file)) {
 			YogurLex jlex = new YogurLex(new InputStreamReader(is));
 			p = new YogurParser(jlex);
-
 			Program prog = (Program)p.parse().value;
+
+			if (!jlex.getExceptions().isEmpty()) {
+				for (Exception e: jlex.getExceptions()) {
+					Log.error(e);
+				}
+				return;
+			}
+
+			if (!p.getExceptions().isEmpty()) {
+				for (Exception e: jlex.getExceptions()) {
+					Log.error(e);
+				}
+				return;
+			}
 
 			IdentifierAnalyzer identifierAnalyzer = new IdentifierAnalyzer(prog);
 			identifierAnalyzer.decorateTree();
@@ -52,8 +66,7 @@ public class TestTypes {
 
 			System.out.println("Success!" + prog);
 		} catch (Exception e) {
-			System.err.println("Parsing error " + p.getExceptions() + " on file " + file.getName());
-			e.printStackTrace();
+			Log.error(e);
 		}
 	}
 }

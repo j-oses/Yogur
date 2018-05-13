@@ -1,6 +1,6 @@
 package yogur.ididentification;
 
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.tree.declaration.Declaration;
 import yogur.tree.type.BaseType;
 

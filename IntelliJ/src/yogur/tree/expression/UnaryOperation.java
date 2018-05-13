@@ -1,14 +1,14 @@
 package yogur.tree.expression;
 
 import yogur.codegen.PMachineOutputStream;
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
 import java.io.IOException;
 
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 import static yogur.tree.expression.UnaryOperation.Operator.NOT;
 import static yogur.tree.type.BaseType.PredefinedType.Bool;
 import static yogur.tree.type.BaseType.PredefinedType.Int;

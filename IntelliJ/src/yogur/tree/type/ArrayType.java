@@ -1,8 +1,7 @@
 package yogur.tree.type;
 
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
-import yogur.typeidentification.MetaType;
 
 public class ArrayType extends Type {
 	private Type internalType;

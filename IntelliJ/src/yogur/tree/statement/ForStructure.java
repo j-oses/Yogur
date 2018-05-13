@@ -1,7 +1,7 @@
 package yogur.tree.statement;
 
 import yogur.codegen.IntegerReference;
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.type.BaseType;
 import yogur.tree.declaration.Argument;
@@ -9,7 +9,7 @@ import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
 
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class ForStructure extends Statement {
 	private Argument argument;

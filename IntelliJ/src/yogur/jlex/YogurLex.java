@@ -9,7 +9,7 @@ package yogur.jlex;
 import java_cup.runtime.Symbol;
 
 import yogur.cup.sym;
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 
 import java.util.List; 
 import java.util.ArrayList;

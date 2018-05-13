@@ -7,7 +7,7 @@ package yogur.cup;
 
 import java_cup.runtime.*;
 import java.util.*;
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.tree.*;
 import yogur.tree.declaration.*;
 import yogur.tree.declaration.declarator.*;
@@ -15,7 +15,6 @@ import yogur.tree.expression.*;
 import yogur.tree.expression.identifier.*;
 import yogur.tree.statement.*;
 import yogur.tree.type.*;
-import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */

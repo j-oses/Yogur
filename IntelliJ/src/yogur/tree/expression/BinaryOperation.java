@@ -1,7 +1,7 @@
 package yogur.tree.expression;
 
 import yogur.codegen.PMachineOutputStream;
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class BinaryOperation extends Expression {
 	public enum Operator {

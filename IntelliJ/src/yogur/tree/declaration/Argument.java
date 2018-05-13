@@ -1,12 +1,13 @@
 package yogur.tree.declaration;
 
 import yogur.codegen.IntegerReference;
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
 import yogur.tree.type.Type;
 import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.typeidentification.MetaType;
+import yogur.utils.Log;
 
 public class Argument extends AbstractTreeNode implements Declaration {
 	private BaseDeclarator declarator;
@@ -51,6 +52,6 @@ public class Argument extends AbstractTreeNode implements Declaration {
 	public void performMemoryAssignment(IntegerReference currentOffset) {
 		offset = currentOffset.getValue();
 		currentOffset.add(type.getSize());
-		System.out.println("Assigned offset " + offset + " to variable " + declarator.getIdentifier() + " with size " + type.getSize());
+		Log.debug("Assigned offset " + offset + " to variable " + declarator.getIdentifier() + " with size " + type.getSize());
 	}
 }

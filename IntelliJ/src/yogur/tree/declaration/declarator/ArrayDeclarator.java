@@ -1,13 +1,12 @@
 package yogur.tree.declaration.declarator;
 
-import yogur.codegen.IntegerReference;
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.expression.identifier.ArrayIndex;
 import yogur.tree.type.ArrayType;
 import yogur.typeidentification.MetaType;
 
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class ArrayDeclarator extends Declarator {
 	private Declarator declarator;

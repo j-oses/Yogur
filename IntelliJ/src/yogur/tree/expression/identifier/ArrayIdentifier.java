@@ -1,8 +1,7 @@
 package yogur.tree.expression.identifier;
 
-import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.tree.expression.Expression;
@@ -11,7 +10,7 @@ import yogur.typeidentification.MetaType;
 
 import java.io.IOException;
 
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class ArrayIdentifier extends VarIdentifier {
 	private Expression leftExpression;

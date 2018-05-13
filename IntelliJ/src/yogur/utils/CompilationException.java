@@ -1,4 +1,4 @@
-package yogur.error;
+package yogur.utils;
 
 import java_cup.runtime.Symbol;
 
@@ -48,4 +48,6 @@ public class CompilationException extends IOException {
 		}
 		return lineString + scope.name() + " error - " + super.getMessage();
 	}
+
+
 }

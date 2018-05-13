@@ -3,6 +3,7 @@ package yogur;
 import java_cup.runtime.Symbol;
 import yogur.cup.sym;
 import yogur.jlex.YogurLex;
+import yogur.utils.Log;
 
 import java.io.*;
 
@@ -17,6 +18,13 @@ public class TestJLex {
 			while (token.sym != sym.EOF) {
 				System.out.println(sym.terminalNames[token.sym] + " " + token.left);
 				token = (Symbol) ylex.next_token();
+			}
+
+			if (!ylex.getExceptions().isEmpty()) {
+				for (Exception e : ylex.getExceptions()) {
+					Log.error(e);
+				}
+				return;
 			}
 		} catch (Exception e) {
 			System.err.println("Parsing error");

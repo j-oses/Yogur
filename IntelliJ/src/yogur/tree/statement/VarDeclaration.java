@@ -1,14 +1,14 @@
 package yogur.tree.statement;
 
 import yogur.codegen.IntegerReference;
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Argument;
 import yogur.tree.declaration.FunctionOrVarDeclaration;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
 
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class VarDeclaration extends Statement implements FunctionOrVarDeclaration {
 	private Argument argument;

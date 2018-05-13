@@ -1,13 +1,13 @@
 package yogur.tree.declaration;
 
 import yogur.codegen.IntegerReference;
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
 import yogur.tree.statement.VarDeclaration;
-import yogur.tree.type.BaseType;
 import yogur.tree.type.ClassType;
 import yogur.typeidentification.MetaType;
+import yogur.utils.Log;
 
 import java.util.HashMap;
 import java.util.List;
@@ -87,9 +87,12 @@ public class ClassDeclaration extends AbstractTreeNode implements Declaration {
 	@Override
 	public void performMemoryAssignment(IntegerReference currentOffset) {
 		IntegerReference internalOffset = new IntegerReference(0);
+		Log.debug("Entering class memory assignment for class " + name);
 
 		for (FunctionOrVarDeclaration d: declarations) {
 			d.performMemoryAssignment(internalOffset);
 		}
+
+		Log.debug("Exiting class memory assignment for class " + name);
 	}
 }

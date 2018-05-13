@@ -1,13 +1,13 @@
 package yogur.tree.declaration.declarator;
 
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.tree.statement.VarDeclaration;
 import yogur.tree.type.ClassType;
 import yogur.typeidentification.MetaType;
 
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class DotDeclarator extends Declarator {
 	private Declarator declarator;

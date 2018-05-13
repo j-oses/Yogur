@@ -1,13 +1,13 @@
 package yogur.tree.statement;
 
 import yogur.codegen.IntegerReference;
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 import static yogur.tree.type.BaseType.PredefinedType.Bool;
 
 public class IfStructure extends Statement {

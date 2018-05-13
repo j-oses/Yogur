@@ -1,11 +1,9 @@
 package yogur.tree.type;
 
-import yogur.error.CompilationException;
-import yogur.ididentification.IdentifierAnalyzer;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.ClassDeclaration;
 import yogur.tree.declaration.Declaration;
-import yogur.typeidentification.MetaType;
 
 public class ClassType extends Type {
 	private String name;

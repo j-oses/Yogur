@@ -1,6 +1,6 @@
 package yogur.typeidentification;
 
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.Program;
 

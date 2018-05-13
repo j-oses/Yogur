@@ -1,7 +1,7 @@
 package yogur.tree.expression;
 
 import yogur.codegen.PMachineOutputStream;
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.tree.expression.identifier.VarIdentifier;
@@ -9,10 +9,9 @@ import yogur.typeidentification.FunctionType;
 import yogur.typeidentification.MetaType;
 import yogur.typeidentification.VoidType;
 
-import java.io.IOException;
 import java.util.List;
 
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class FunctionCall extends Expression {
 	private Expression function;

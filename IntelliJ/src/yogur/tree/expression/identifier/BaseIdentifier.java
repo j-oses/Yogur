@@ -1,7 +1,7 @@
 package yogur.tree.expression.identifier;
 
 import yogur.codegen.PMachineOutputStream;
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Argument;
 import yogur.tree.declaration.Declaration;

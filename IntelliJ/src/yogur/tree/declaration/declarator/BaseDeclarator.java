@@ -1,6 +1,6 @@
 package yogur.tree.declaration.declarator;
 
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.typeidentification.MetaType;
