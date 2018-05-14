@@ -1,11 +1,14 @@
 package yogur.tree.declaration.declarator;
 
+import yogur.codegen.PMachineOutputStream;
 import yogur.tree.expression.identifier.BaseIdentifier;
 import yogur.tree.type.BaseType;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.typeidentification.MetaType;
+
+import java.io.IOException;
 
 public class BaseDeclarator extends Declarator {
 	private String identifier;
@@ -31,5 +34,10 @@ public class BaseDeclarator extends Declarator {
 	@Override
 	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
 		return declaration.performTypeAnalysis(idTable);
+	}
+
+	@Override
+	public void generateCodeL(PMachineOutputStream stream) {
+		// FIXME: Generate code
 	}
 }
