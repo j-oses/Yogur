@@ -197,10 +197,10 @@ Arg ::= ID:id COLON:c VarType:t				{: RESULT = new Argument(id, t); RESULT.setLi
 ;
 ClassBody ::= ClassBody:b DELIMITER Dec:d	{: b.add(d); RESULT = b; :}
 	| ClassBody:b DELIMITER DVarN:d			{: b.add(d); RESULT = b; :}
-	| Dec:d									{: RESULT = new ArrayList<FunctionOrVarDeclaration>(); RESULT.add(d); :}
-	| DVarN:d								{: RESULT = new ArrayList<FunctionOrVarDeclaration>(); RESULT.add(d); :}
+	| Dec:d									{: RESULT = new ArrayList<>(); RESULT.add(d); :}
+	| DVarN:d								{: RESULT = new ArrayList<>(); RESULT.add(d); :}
 ;
 BlockBody ::= BlockBody:is DELIMITER Inst:i			{: is.add(i); RESULT = is; :}
-	| Inst:i										{: RESULT = new ArrayList<Statement>(); RESULT.add(i); :}
-	|												{: RESULT = new ArrayList<Statement>(); :}
+	| Inst:i										{: RESULT = new ArrayList<>(); RESULT.add(i); :}
+	|												{: RESULT = new ArrayList<>(); :}
 ;
