@@ -36,6 +36,10 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 		return "Var declaration";
 	}
 
+	public int getOffset() {
+		return argument.getOffset();
+	}
+
 	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		performInsertIdentifierAnalysis(table);

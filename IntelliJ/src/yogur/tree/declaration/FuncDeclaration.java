@@ -1,6 +1,7 @@
 package yogur.tree.declaration;
 
 import yogur.codegen.IntegerReference;
+import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
@@ -8,6 +9,7 @@ import yogur.tree.statement.Block;
 import yogur.typeidentification.FunctionType;
 import yogur.typeidentification.MetaType;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,5 +89,10 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 			returnArg.performMemoryAssignment(internalOffset);
 		}
 		block.performMemoryAssignment(internalOffset);
+	}
+
+	@Override
+	public void generateCode(PMachineOutputStream stream) {
+		// FIXME: Generate code
 	}
 }

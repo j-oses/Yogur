@@ -5,20 +5,24 @@ import yogur.ididentification.IdentifierTable;
 
 public class ArrayType extends Type {
 	private Type internalType;
-	private int size;
+	private int length;
 
-	public ArrayType(Type t, int size) {
+	public ArrayType(Type t, int length) {
 		this.internalType = t;
-		this.size = size;
+		this.length = length;
 	}
 
 	public Type getInternalType() {
 		return internalType;
 	}
 
+	public int getLength() {
+		return length;
+	}
+
 	@Override
 	public int getSize() {
-		return size * internalType.getSize();
+		return length * internalType.getSize();
 	}
 
 	@Override

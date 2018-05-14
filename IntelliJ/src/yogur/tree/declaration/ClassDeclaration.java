@@ -1,6 +1,7 @@
 package yogur.tree.declaration;
 
 import yogur.codegen.IntegerReference;
+import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
@@ -9,6 +10,7 @@ import yogur.tree.type.ClassType;
 import yogur.typeidentification.MetaType;
 import yogur.utils.Log;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -94,5 +96,10 @@ public class ClassDeclaration extends AbstractTreeNode implements Declaration {
 		}
 
 		Log.debug("Exiting class memory assignment for class " + name);
+	}
+
+	@Override
+	public void generateCode(PMachineOutputStream stream) {
+		// FIXME: Generate the code
 	}
 }

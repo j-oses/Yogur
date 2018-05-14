@@ -16,6 +16,9 @@ public class ArrayIdentifier extends VarIdentifier {
 	private Expression leftExpression;
 	private ArrayIndex index;
 
+	int length;
+	int elementSize;
+
 	public ArrayIdentifier(Expression expression, ArrayIndex index) {
 		this.leftExpression = expression;
 		this.index = index;
@@ -37,7 +40,11 @@ public class ArrayIdentifier extends VarIdentifier {
 		MetaType leftType = leftExpression.performTypeAnalysis(idTable);
 		if (leftType instanceof ArrayType) {
 			if (index.returnsSingleElement()) {
-				return ((ArrayType) leftType).getInternalType();
+				ArrayType leftT = (ArrayType)leftType;
+				MetaType internalType = leftT.getInternalType();
+				length = leftT.getLength();
+				elementSize = internalType.getSize();
+				return internalType;
 			} else {
 				return leftType;
 			}
@@ -49,6 +56,14 @@ public class ArrayIdentifier extends VarIdentifier {
 
 	@Override
 	public void generateCodeR(PMachineOutputStream stream) throws IOException {
-		// FIXME: will change with complex identifiers
+		leftExpression.generateCodeR(stream);
+		generateCodeI(stream);
+	}
+
+	public void generateCodeI(PMachineOutputStream stream) throws IOException {
+		// TODO: We will suppose all indices are singular
+		index.getOffset().generateCodeR(stream);
+		stream.appendInstruction("chk", 0, length - 1);
+		stream.appendInstruction("ixa", elementSize);
 	}
 }

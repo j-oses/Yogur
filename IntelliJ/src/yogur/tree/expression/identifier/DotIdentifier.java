@@ -1,6 +1,8 @@
 package yogur.tree.expression.identifier;
 
 import yogur.codegen.PMachineOutputStream;
+import yogur.tree.declaration.Argument;
+import yogur.tree.type.ArrayType;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
@@ -48,6 +50,11 @@ public class DotIdentifier extends VarIdentifier {
 
 	@Override
 	public void generateCodeR(PMachineOutputStream stream) throws IOException {
-		// FIXME: will change with complex identifiers
+		expression.generateCodeR(stream);
+		if (declaration instanceof Argument) {
+			stream.appendInstruction("inc", ((Argument)declaration).getOffset());
+		} else {
+			// FIXME: Currently does nothing for a function
+		}
 	}
 }

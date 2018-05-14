@@ -44,7 +44,6 @@ public class BaseIdentifier extends VarIdentifier {
 
 	@Override
 	public void generateCodeR(PMachineOutputStream stream) throws IOException {
-		// FIXME: will change with complex identifiers
 		if (declaration instanceof Argument) {
 			stream.appendInstruction("ldc", ((Argument)declaration).getOffset());
 		} else {

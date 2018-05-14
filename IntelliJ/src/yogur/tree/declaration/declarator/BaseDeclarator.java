@@ -1,6 +1,7 @@
 package yogur.tree.declaration.declarator;
 
 import yogur.codegen.PMachineOutputStream;
+import yogur.tree.declaration.Argument;
 import yogur.tree.expression.identifier.BaseIdentifier;
 import yogur.tree.type.BaseType;
 import yogur.utils.CompilationException;
@@ -8,6 +9,7 @@ import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.typeidentification.MetaType;
 
+import javax.swing.*;
 import java.io.IOException;
 
 public class BaseDeclarator extends Declarator {
@@ -16,7 +18,7 @@ public class BaseDeclarator extends Declarator {
 	/**
 	 * The declarator where the variable is declared.
 	 */
-	private Declaration declaration;
+	private Argument declaration;
 
 	public BaseDeclarator(String identifier) {
 		this.identifier = identifier;
@@ -28,7 +30,14 @@ public class BaseDeclarator extends Declarator {
 
 	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
-		declaration = table.searchId(identifier, getLine(), getColumn());
+		Declaration dec = table.searchId(identifier, getLine(), getColumn());
+		if (dec instanceof Argument) {
+			declaration = (Argument)dec;
+		} else {
+			throw new CompilationException("Expected a var declaration instead of a "
+					+ declaration.getDeclarationDescription(), getLine(), getColumn(),
+					CompilationException.Scope.IdentificatorIdentification);
+		}
 	}
 
 	@Override
@@ -37,7 +46,7 @@ public class BaseDeclarator extends Declarator {
 	}
 
 	@Override
-	public void generateCodeL(PMachineOutputStream stream) {
-		// FIXME: Generate code
+	public void generateCodeL(PMachineOutputStream stream) throws IOException {
+		stream.appendInstruction("ldc", declaration.getOffset());
 	}
 }
