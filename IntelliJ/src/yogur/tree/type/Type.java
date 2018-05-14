@@ -21,7 +21,7 @@ public abstract class Type extends AbstractTreeNode implements MetaType {
 	}
 
 	@Override
-	public void performMemoryAssignment(IntegerReference currentOffset) {
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		// Do nothing
 	}
 }

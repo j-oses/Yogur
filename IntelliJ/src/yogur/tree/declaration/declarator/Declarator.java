@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public abstract class Declarator extends AbstractTreeNode {
 	@Override
-	public void performMemoryAssignment(IntegerReference currentOffset) {
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		// Do nothing
 	}
 

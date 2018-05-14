@@ -9,4 +9,6 @@ public interface FunctionOrVarDeclaration extends Declaration {
 	void performBodyIdentifierAnalysis(IdentifierTable table) throws CompilationException;
 
 	String getName();
+
+	void setIsDeclaredOnClass(boolean declaredOnClass);
 }

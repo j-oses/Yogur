@@ -15,6 +15,8 @@ public class Argument extends AbstractTreeNode implements Declaration {
 	private Type type;
 
 	private int offset;
+	private int nestingDepth;
+	private boolean declaredOnClass = false;
 
 	public Argument(String declarator, Type type) {
 		this(new BaseDeclarator(declarator), type);
@@ -31,6 +33,13 @@ public class Argument extends AbstractTreeNode implements Declaration {
 
 	public int getOffset() {
 		return offset;
+	}
+
+	public void setDeclaredOnClass(boolean declaredOnClass) {
+		this.declaredOnClass = declaredOnClass;
+		if (declaredOnClass) {
+			Log.debug("Set declaredOnClass to true for variable " + declarator.getIdentifier());
+		}
 	}
 
 	@Override
@@ -50,10 +59,12 @@ public class Argument extends AbstractTreeNode implements Declaration {
 	}
 
 	@Override
-	public void performMemoryAssignment(IntegerReference currentOffset) {
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		offset = currentOffset.getValue();
 		currentOffset.add(type.getSize());
+		this.nestingDepth = nestingDepth.getValue();
 		Log.debug("Assigned offset " + offset + " to variable " + declarator.getIdentifier() + " with size " + type.getSize());
+		Log.debug("Assigned nesting depth " + this.nestingDepth + " to variable " + declarator.getIdentifier());
 	}
 
 	@Override

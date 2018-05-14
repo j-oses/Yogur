@@ -41,6 +41,11 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 	}
 
 	@Override
+	public void setIsDeclaredOnClass(boolean declaredOnClass) {
+		argument.setDeclaredOnClass(declaredOnClass);
+	}
+
+	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		performInsertIdentifierAnalysis(table);
 		performBodyIdentifierAnalysis(table);
@@ -77,8 +82,8 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 	}
 
 	@Override
-	public void performMemoryAssignment(IntegerReference currentOffset) {
-		argument.performMemoryAssignment(currentOffset);
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		argument.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 
 	@Override

@@ -42,7 +42,7 @@ public class Assignment extends Statement {
 	}
 
 	@Override
-	public void performMemoryAssignment(IntegerReference currentOffset) {
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		// Do nothing
 	}
 

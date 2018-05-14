@@ -40,9 +40,9 @@ public class Block extends Statement {
 	}
 
 	@Override
-	public void performMemoryAssignment(IntegerReference currentOffset) {
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		for (Statement s: statements) {
-			s.performMemoryAssignment(currentOffset);
+			s.performMemoryAssignment(currentOffset, nestingDepth);
 		}
 	}
 

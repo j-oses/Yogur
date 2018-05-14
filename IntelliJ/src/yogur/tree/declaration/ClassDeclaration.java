@@ -10,7 +10,6 @@ import yogur.tree.type.ClassType;
 import yogur.typeidentification.MetaType;
 import yogur.utils.Log;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +59,7 @@ public class ClassDeclaration extends AbstractTreeNode implements Declaration {
 		// and then we perform the analysis on the rest if needed.
 		for (FunctionOrVarDeclaration d: declarations) {
 			d.performInsertIdentifierAnalysis(table);
+			d.setIsDeclaredOnClass(true);
 
 			// We save the declarations in a map to make querying easier
 			declarationMap.put(d.getName(), d);
@@ -87,12 +87,12 @@ public class ClassDeclaration extends AbstractTreeNode implements Declaration {
 	}
 
 	@Override
-	public void performMemoryAssignment(IntegerReference currentOffset) {
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		IntegerReference internalOffset = new IntegerReference(0);
 		Log.debug("Entering class memory assignment for class " + name);
 
 		for (FunctionOrVarDeclaration d: declarations) {
-			d.performMemoryAssignment(internalOffset);
+			d.performMemoryAssignment(internalOffset, nestingDepth);
 		}
 
 		Log.debug("Exiting class memory assignment for class " + name);

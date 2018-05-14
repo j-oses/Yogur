@@ -66,7 +66,7 @@ public class TestCodeGen {
 			TypeAnalyzer typeAnalyzer = new TypeAnalyzer(prog, identifierAnalyzer.getIdentifierTable());
 			typeAnalyzer.decorateTree();
 
-			prog.performMemoryAssignment(new IntegerReference(0));
+			prog.performMemoryAssignment(new IntegerReference(0), new IntegerReference(0));
 
 			System.out.println("Success!" + prog);
 		} catch (Exception e) {

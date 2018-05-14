@@ -68,7 +68,7 @@ public class ArrayIndex extends AbstractTreeNode {
 	}
 
 	@Override
-	public void performMemoryAssignment(IntegerReference currentOffset) {
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		// Do nothing
 	}
 }

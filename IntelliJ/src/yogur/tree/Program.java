@@ -41,9 +41,9 @@ public class Program extends AbstractTreeNode {
 	}
 
 	@Override
-	public void performMemoryAssignment(IntegerReference currentOffset) {
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		for (StatementOrDeclaration s: instructions) {
-			s.performMemoryAssignment(currentOffset);
+			s.performMemoryAssignment(currentOffset, nestingDepth);
 		}
 	}
 }

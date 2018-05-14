@@ -9,7 +9,6 @@ import yogur.tree.statement.Block;
 import yogur.typeidentification.FunctionType;
 import yogur.typeidentification.MetaType;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +17,8 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 	private List<Argument> arguments;
 	private Argument returnArg;		// May be null
 	private Block block;
+
+	private boolean declaredOnClass = false;
 
 	public FuncDeclaration(String identifier, List<Argument> arguments, Block block) {
 		this(identifier, arguments, null, block);
@@ -38,6 +39,11 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 	@Override
 	public String getDeclarationDescription() {
 		return "Function declaration";
+	}
+
+	@Override
+	public void setIsDeclaredOnClass(boolean declaredOnClass) {
+		this.declaredOnClass = declaredOnClass;
 	}
 
 	@Override
@@ -77,18 +83,19 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 	}
 
 	@Override
-	public void performMemoryAssignment(IntegerReference currentOffset) {
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		// FIXME: May (and will) change when functions are implemented
 		IntegerReference internalOffset = new IntegerReference(0);
+		IntegerReference internalDepth = new IntegerReference(nestingDepth.getValue() + 1);
 
 		for (Argument a: arguments) {
-			a.performMemoryAssignment(internalOffset);
+			a.performMemoryAssignment(internalOffset, internalDepth);
 		}
 
 		if (returnArg != null) {
-			returnArg.performMemoryAssignment(internalOffset);
+			returnArg.performMemoryAssignment(internalOffset, internalDepth);
 		}
-		block.performMemoryAssignment(internalOffset);
+		block.performMemoryAssignment(internalOffset, internalDepth);
 	}
 
 	@Override

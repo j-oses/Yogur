@@ -43,8 +43,8 @@ public class WhileStructure extends Statement {
 	}
 
 	@Override
-	public void performMemoryAssignment(IntegerReference currentOffset) {
-		block.performMemoryAssignment(currentOffset);
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		block.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 
 	@Override
