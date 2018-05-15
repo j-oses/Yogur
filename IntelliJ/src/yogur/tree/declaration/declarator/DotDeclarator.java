@@ -1,5 +1,6 @@
 package yogur.tree.declaration.declarator;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
@@ -47,6 +48,11 @@ public class DotDeclarator extends Declarator {
 
 		throw new CompilationException("Trying to member access (." + identifier + ") on a compound type " + left,
 				getLine(), getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		declarator.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 
 	@Override

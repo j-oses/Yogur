@@ -84,6 +84,9 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 	@Override
 	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		argument.performMemoryAssignment(currentOffset, nestingDepth);
+		if (assignTo != null) {
+			assignTo.performMemoryAssignment(currentOffset, nestingDepth);
+		}
 	}
 
 	@Override

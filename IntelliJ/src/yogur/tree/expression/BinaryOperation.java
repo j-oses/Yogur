@@ -1,5 +1,6 @@
 package yogur.tree.expression;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
@@ -83,6 +84,12 @@ public class BinaryOperation extends Expression {
 
 		throw new CompilationException("Can not apply operator " + operator.name() + " to arguments with types "
 				+ leftType + " and " + rightType, getLine(), getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		left.performMemoryAssignment(currentOffset, nestingDepth);
+		right.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 
 	@Override

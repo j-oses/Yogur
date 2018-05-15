@@ -7,10 +7,5 @@ import yogur.tree.AbstractTreeNode;
 import java.io.IOException;
 
 public abstract class Declarator extends AbstractTreeNode {
-	@Override
-	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
-		// Do nothing
-	}
-
 	public abstract void generateCodeL(PMachineOutputStream stream) throws IOException;
 }

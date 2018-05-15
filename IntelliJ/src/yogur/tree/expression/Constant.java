@@ -1,5 +1,6 @@
 package yogur.tree.expression;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
@@ -30,6 +31,11 @@ public class Constant extends Expression {
 			throw new CompilationException("Invalid constant value: " + value,  getLine(), getColumn(),
 					CompilationException.Scope.TypeAnalyzer);
 		}
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		// Do nothing
 	}
 
 	@Override

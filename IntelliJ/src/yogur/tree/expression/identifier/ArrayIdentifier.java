@@ -1,5 +1,6 @@
 package yogur.tree.expression.identifier;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
@@ -52,6 +53,11 @@ public class ArrayIdentifier extends VarIdentifier {
 
 		throw new CompilationException("Performing [] operator on a non-array type: " + leftType,
 				getLine(), getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		leftExpression.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 
 	@Override

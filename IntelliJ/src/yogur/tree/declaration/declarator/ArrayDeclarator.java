@@ -1,5 +1,6 @@
 package yogur.tree.declaration.declarator;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
@@ -46,6 +47,12 @@ public class ArrayDeclarator extends Declarator {
 
 		throw new CompilationException("Performing [] operator on a non-array type: " + leftType,
 				getLine(), getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		declarator.performMemoryAssignment(currentOffset, nestingDepth);;
+		index.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package yogur.tree.expression;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
@@ -58,6 +59,14 @@ public class FunctionCall extends Expression {
 
 		throw new CompilationException("Trying to call a function on the non-function object with type: " + type,
 				getLine(), getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		function.performMemoryAssignment(currentOffset, nestingDepth);
+		for (Expression e: expressions) {
+			e.performMemoryAssignment(currentOffset, nestingDepth);
+		}
 	}
 
 	@Override

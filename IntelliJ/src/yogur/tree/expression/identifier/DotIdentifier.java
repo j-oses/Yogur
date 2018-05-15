@@ -1,5 +1,6 @@
 package yogur.tree.expression.identifier;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.tree.declaration.Argument;
 import yogur.tree.type.ArrayType;
@@ -46,6 +47,11 @@ public class DotIdentifier extends VarIdentifier {
 
 		throw new CompilationException("Trying to member access (." + identifier + ") on a compound type " + left,
 				getLine(), getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		expression.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 
 	@Override

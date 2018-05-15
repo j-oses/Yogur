@@ -1,5 +1,6 @@
 package yogur.tree.expression;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
@@ -43,6 +44,11 @@ public class UnaryOperation extends Expression {
 
 		throw new CompilationException("Can not apply operator " + operator.name() + " to argument with type "
 				+ argType, getLine(), getColumn(), TypeAnalyzer);
+	}
+
+	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		expression.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 
 	@Override

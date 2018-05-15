@@ -62,6 +62,8 @@ public class ForStructure extends Statement {
 	@Override
 	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		argument.performMemoryAssignment(currentOffset, nestingDepth);
+		start.performMemoryAssignment(currentOffset, nestingDepth);
+		end.performMemoryAssignment(currentOffset, nestingDepth);
 		block.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 

@@ -69,6 +69,9 @@ public class ArrayIndex extends AbstractTreeNode {
 
 	@Override
 	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
-		// Do nothing
+		offset.performMemoryAssignment(currentOffset, nestingDepth);
+		if (offset2 != null) {
+			offset2.performMemoryAssignment(currentOffset, nestingDepth);
+		}
 	}
 }

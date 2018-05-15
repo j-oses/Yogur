@@ -1,5 +1,6 @@
 package yogur.tree.expression.identifier;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
@@ -13,6 +14,7 @@ public class BaseIdentifier extends VarIdentifier {
 	private String name;
 
 	private Declaration declaration;
+	private int nestingDepth;
 
 	public BaseIdentifier(String name) {
 		this.name = name;
@@ -43,9 +45,15 @@ public class BaseIdentifier extends VarIdentifier {
 	}
 
 	@Override
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		this.nestingDepth = nestingDepth.getValue();
+	}
+
+	@Override
 	public void generateCodeR(PMachineOutputStream stream) throws IOException {
 		if (declaration instanceof Argument) {
-			stream.appendInstruction("ldc", ((Argument)declaration).getOffset());
+			Argument arg = (Argument)declaration;
+			stream.appendInstruction("ldc", arg.getOffset());
 		} else {
 			// FIXME: Currently does nothing for a function
 		}

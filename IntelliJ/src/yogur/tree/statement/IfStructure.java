@@ -55,6 +55,7 @@ public class IfStructure extends Statement {
 
 	@Override
 	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		condition.performMemoryAssignment(currentOffset, nestingDepth);
 		ifClause.performMemoryAssignment(currentOffset, nestingDepth);
 		if (elseClause != null) {
 			elseClause.performMemoryAssignment(currentOffset, nestingDepth);
