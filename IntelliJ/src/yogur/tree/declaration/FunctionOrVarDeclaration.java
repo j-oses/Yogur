@@ -10,5 +10,5 @@ public interface FunctionOrVarDeclaration extends Declaration {
 
 	String getName();
 
-	void setIsDeclaredOnClass(boolean declaredOnClass);
+	void setDeclaredOnClass(ClassDeclaration clazz);
 }

@@ -33,8 +33,8 @@ public class UnaryOperation extends Expression {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
-		MetaType argType = expression.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType argType = expression.performTypeAnalysis();
 		MetaType expectedType = new BaseType(
 				operator.equals(NOT) ? Bool : Int);
 

@@ -49,8 +49,8 @@ public class ArrayIndex extends AbstractTreeNode {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
-		MetaType offsetType = offset.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType offsetType = offset.performTypeAnalysis();
 		MetaType intType = new BaseType(Int);
 
 		if (intType.equals(offsetType)) {
@@ -59,7 +59,7 @@ public class ArrayIndex extends AbstractTreeNode {
 		}
 
 		if (LEFT_RIGHT_RANGE.equals(accessType)) {
-			MetaType offsetType2 = offset2.performTypeAnalysis(idTable);
+			MetaType offsetType2 = offset2.performTypeAnalysis();
 			throw new CompilationException("Invalid subscript, with type: " + offsetType2, offset2.getLine(),
 					offset2.getColumn(), TypeAnalyzer);
 		}

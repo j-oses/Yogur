@@ -38,11 +38,11 @@ public class IfStructure extends Statement {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
-		MetaType condType = condition.performTypeAnalysis(idTable);
-		ifClause.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType condType = condition.performTypeAnalysis();
+		ifClause.performTypeAnalysis();
 		if (elseClause != null) {
-			elseClause.performTypeAnalysis(idTable);
+			elseClause.performTypeAnalysis();
 		}
 
 		if (new BaseType(Bool).equals(condType)) {

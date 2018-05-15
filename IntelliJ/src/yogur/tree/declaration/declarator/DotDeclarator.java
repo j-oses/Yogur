@@ -30,8 +30,8 @@ public class DotDeclarator extends Declarator {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
-		MetaType left = declarator.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType left = declarator.performTypeAnalysis();
 		if (left instanceof ClassType) {
 			ClassType classT = (ClassType) left;
 			Declaration tempDec = classT.getDeclaration().getDeclaration(identifier);
@@ -43,7 +43,7 @@ public class DotDeclarator extends Declarator {
 						getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
 			}
 
-			return declaration.performTypeAnalysis(idTable);
+			return declaration.performTypeAnalysis();
 		}
 
 		throw new CompilationException("Trying to member access (." + identifier + ") on a compound type " + left,

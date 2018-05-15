@@ -37,8 +37,8 @@ public class ArrayIdentifier extends VarIdentifier {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
-		MetaType leftType = leftExpression.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType leftType = leftExpression.performTypeAnalysis();
 		if (leftType instanceof ArrayType) {
 			if (index.returnsSingleElement()) {
 				ArrayType leftT = (ArrayType)leftType;

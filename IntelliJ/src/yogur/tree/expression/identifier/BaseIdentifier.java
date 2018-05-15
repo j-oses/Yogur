@@ -2,6 +2,7 @@ package yogur.tree.expression.identifier;
 
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
+import yogur.tree.declaration.FuncDeclaration;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Argument;
@@ -41,8 +42,8 @@ public class BaseIdentifier extends VarIdentifier {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
-		return declaration.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		return declaration.performTypeAnalysis();
 	}
 
 	@Override
@@ -55,7 +56,13 @@ public class BaseIdentifier extends VarIdentifier {
 	public void generateCodeR(PMachineOutputStream stream) throws IOException {
 		if (declaration instanceof Argument) {
 			Argument arg = (Argument)declaration;
-			stream.appendInstruction("ldc", arg.getOffset());
+			int offset = arg.getOffset();
+
+			if (arg.isDeclaredOnClass()) {
+				offset += FuncDeclaration.START_PARAMETER_INDEX;
+			}
+
+			stream.appendInstruction("lda", nestingDepth - arg.getNestingDepth(), offset);
 		} else {
 			// FIXME: Currently does nothing for a function
 		}

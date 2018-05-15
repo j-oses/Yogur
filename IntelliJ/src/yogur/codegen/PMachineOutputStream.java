@@ -29,7 +29,7 @@ public class PMachineOutputStream extends FileWriter {
 
 
 	public void appendInstruction(String name, Object... arguments) throws IOException {
-		this.append(padLeft("{" + String.valueOf(lineCount) + "}", 7));
+		this.append(" " + padRight("{" + String.valueOf(lineCount) + "}", 7));
 
 		this.append(name);
 		for (Object o: arguments) {
@@ -60,12 +60,12 @@ public class PMachineOutputStream extends FileWriter {
 		if (forceMultiline || string.contains("\n")) {
 			this.append("{" + string + "}");
 		} else {
-			this.append("\\\\" + string + "\n");
+			this.append("\\\\ " + string + "\n");
 		}
 	}
 
-	private String padLeft(String s, int n) {
-		return String.format("%1$" + n + "s", s);
+	private String padRight(String s, int n) {
+		return String.format("%1$-" + n + "s", s);
 	}
 
 	@Override

@@ -6,15 +6,13 @@ import yogur.tree.Program;
 
 public class TypeAnalyzer {
     private Program program;
-    private IdentifierTable idTable;
 
-    public TypeAnalyzer(Program program, IdentifierTable idTable) {
+    public TypeAnalyzer(Program program) {
         this.program = program;
-        this.idTable = idTable;
     }
 
     public Program decorateTree() throws CompilationException {
-		program.performTypeAnalysis(idTable);
+		program.performTypeAnalysis();
 
         return program;
     }

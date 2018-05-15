@@ -2,6 +2,7 @@ package yogur.tree.declaration;
 
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
+import yogur.tree.type.BaseType;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
@@ -9,6 +10,7 @@ import yogur.tree.statement.Block;
 import yogur.typeidentification.FunctionType;
 import yogur.typeidentification.MetaType;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,12 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 	private Argument returnArg;		// May be null
 	private Block block;
 
-	private boolean declaredOnClass = false;
+	private ClassDeclaration declaredOnClass = null;
+	private int frameStaticLength;
+	private static final int MAX_DEPTH_LOCAL_STACK = 1024;
+	private String label;
+	public static final int START_PARAMETER_INDEX = 5;
+	private int formalParameterLength;
 
 	public FuncDeclaration(String identifier, List<Argument> arguments, Block block) {
 		this(identifier, arguments, null, block);
@@ -42,8 +49,24 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 	}
 
 	@Override
-	public void setIsDeclaredOnClass(boolean declaredOnClass) {
-		this.declaredOnClass = declaredOnClass;
+	public void setDeclaredOnClass(ClassDeclaration clazz) {
+		this.declaredOnClass = clazz;
+	}
+
+	public ClassDeclaration getDeclaredOnClass() {
+		return declaredOnClass;
+	}
+
+	public boolean getIsDeclaredOnClass() {
+		return declaredOnClass != null;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public int getFormalParameterLength() {
+		return formalParameterLength;
 	}
 
 	@Override
@@ -68,38 +91,76 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
+	public MetaType analyzeType() throws CompilationException {
 		List<MetaType> argTypes = new ArrayList<>();
 		for (Argument a: arguments) {
-			argTypes.add(a.performTypeAnalysis(idTable));
+			argTypes.add(a.performTypeAnalysis());
 		}
-		MetaType returnType = (returnArg != null) ? returnArg.performTypeAnalysis(idTable) : null;
+		MetaType returnType = null;
+		if (returnArg != null) {
+			returnType = returnArg.performTypeAnalysis();
+
+			if (!(returnType instanceof BaseType)) {
+				throw new CompilationException("Function is returning a non-predefined type " + returnType,
+						getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
+			}
+		}
 
 		// We have to save the metatype before visiting the block to enable recursion.
 		// If we don't do that, the program will enter on an infinite loop.
 		metaType = new FunctionType(argTypes, returnType);
-		block.performTypeAnalysis(idTable);
+		block.performTypeAnalysis();
 		return metaType;
 	}
 
 	@Override
 	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
-		// FIXME: May (and will) change when functions are implemented
-		IntegerReference internalOffset = new IntegerReference(0);
+		// The normal arguments are given words from index 5
+		IntegerReference internalOffset = new IntegerReference(START_PARAMETER_INDEX);
 		IntegerReference internalDepth = new IntegerReference(nestingDepth.getValue() + 1);
+
+		if (returnArg != null) {
+			// The return argument has the first word of the frame
+			returnArg.performMemoryAssignment(new IntegerReference(0), internalDepth);
+		}
+
+		if (getIsDeclaredOnClass()) {
+			// Will take the class as the first parameter
+			internalOffset.add(declaredOnClass.getSize());
+		}
 
 		for (Argument a: arguments) {
 			a.performMemoryAssignment(internalOffset, internalDepth);
 		}
 
-		if (returnArg != null) {
-			returnArg.performMemoryAssignment(internalOffset, internalDepth);
-		}
+		formalParameterLength = internalOffset.getValue() - START_PARAMETER_INDEX;
+
 		block.performMemoryAssignment(internalOffset, internalDepth);
+
+		frameStaticLength = internalOffset.getValue();
 	}
 
 	@Override
-	public void generateCode(PMachineOutputStream stream) {
-		// FIXME: Generate code
+	public void generateCode(PMachineOutputStream stream) throws IOException {
+		// Our procedures may be intermingled with normal code, so we generate them with a jump
+		String endLabel = stream.generateLabelWithUnusedId("endFun");
+		label = stream.generateLabel("fun");
+
+		stream.appendInstruction("ujp", endLabel);
+		stream.appendComment("def " + identifier, false);
+
+		// Actual function code
+		stream.appendLabel(label);
+		stream.appendInstruction("ssp", frameStaticLength);
+		stream.appendInstruction("sep", MAX_DEPTH_LOCAL_STACK);
+		block.generateCode(stream);
+
+		if (returnArg == null) {
+			stream.appendInstruction("retp");
+		} else {
+			stream.appendInstruction("retf");
+		}
+
+		stream.appendLabel(endLabel);
 	}
 }

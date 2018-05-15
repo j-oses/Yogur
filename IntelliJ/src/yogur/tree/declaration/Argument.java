@@ -10,13 +10,15 @@ import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.typeidentification.MetaType;
 import yogur.utils.Log;
 
+import java.io.IOException;
+
 public class Argument extends AbstractTreeNode implements Declaration {
 	private BaseDeclarator declarator;
 	private Type type;
 
 	private int offset;
 	private int nestingDepth;
-	private boolean declaredOnClass = false;
+	private ClassDeclaration declaredOnClass = null;
 
 	public Argument(String declarator, Type type) {
 		this(new BaseDeclarator(declarator), type);
@@ -35,9 +37,17 @@ public class Argument extends AbstractTreeNode implements Declaration {
 		return offset;
 	}
 
-	public void setDeclaredOnClass(boolean declaredOnClass) {
-		this.declaredOnClass = declaredOnClass;
-		if (declaredOnClass) {
+	public int getNestingDepth() {
+		return nestingDepth;
+	}
+
+	public boolean isDeclaredOnClass() {
+		return declaredOnClass != null;
+	}
+
+	public void setDeclaredOnClass(ClassDeclaration clazz) {
+		this.declaredOnClass = clazz;
+		if (isDeclaredOnClass()) {
 			Log.debug("Set declaredOnClass to true for variable " + declarator.getIdentifier());
 		}
 	}
@@ -50,12 +60,13 @@ public class Argument extends AbstractTreeNode implements Declaration {
 	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		table.insertId(declarator.getIdentifier(), this);
+		declarator.performIdentifierAnalysis(table);
 		type.performIdentifierAnalysis(table);
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
-		return type.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		return type.performTypeAnalysis();
 	}
 
 	@Override

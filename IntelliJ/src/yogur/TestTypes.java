@@ -61,7 +61,7 @@ public class TestTypes {
 			IdentifierAnalyzer identifierAnalyzer = new IdentifierAnalyzer(prog);
 			identifierAnalyzer.decorateTree();
 
-			TypeAnalyzer typeAnalyzer = new TypeAnalyzer(prog, identifierAnalyzer.getIdentifierTable());
+			TypeAnalyzer typeAnalyzer = new TypeAnalyzer(prog);
 			typeAnalyzer.decorateTree();
 
 			System.out.println("Success!" + prog);

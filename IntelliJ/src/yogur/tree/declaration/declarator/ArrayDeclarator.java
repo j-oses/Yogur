@@ -31,8 +31,8 @@ public class ArrayDeclarator extends Declarator {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
-		MetaType leftType = declarator.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType leftType = declarator.performTypeAnalysis();
 		if (leftType instanceof ArrayType) {
 			if (index.returnsSingleElement()) {
 				ArrayType leftT = (ArrayType)leftType;
@@ -51,7 +51,7 @@ public class ArrayDeclarator extends Declarator {
 
 	@Override
 	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
-		declarator.performMemoryAssignment(currentOffset, nestingDepth);;
+		declarator.performMemoryAssignment(currentOffset, nestingDepth);
 		index.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 

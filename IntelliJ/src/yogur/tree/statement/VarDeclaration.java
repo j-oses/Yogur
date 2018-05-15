@@ -2,6 +2,7 @@ package yogur.tree.statement;
 
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
+import yogur.tree.declaration.ClassDeclaration;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Argument;
@@ -41,8 +42,12 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 	}
 
 	@Override
-	public void setIsDeclaredOnClass(boolean declaredOnClass) {
-		argument.setDeclaredOnClass(declaredOnClass);
+	public void setDeclaredOnClass(ClassDeclaration clazz) {
+		argument.setDeclaredOnClass(clazz);
+	}
+
+	public boolean isDeclaredOnClass() {
+		return argument.isDeclaredOnClass();
 	}
 
 	@Override
@@ -64,14 +69,14 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
-		MetaType argType = argument.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType argType = argument.performTypeAnalysis();
 
 		if (assignTo == null) {
 			return argType;
 		}
 
-		MetaType assType = assignTo.performTypeAnalysis(idTable);
+		MetaType assType = assignTo.performTypeAnalysis();
 
 		if (argType.equals(assType)) {
 			return argType;

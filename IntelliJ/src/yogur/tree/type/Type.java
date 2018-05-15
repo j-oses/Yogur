@@ -16,7 +16,7 @@ public abstract class Type extends AbstractTreeNode implements MetaType {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
+	public MetaType analyzeType() throws CompilationException {
 		return this;
 	}
 

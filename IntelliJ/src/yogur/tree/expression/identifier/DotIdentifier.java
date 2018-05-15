@@ -37,15 +37,15 @@ public class DotIdentifier extends VarIdentifier {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
-		MetaType left = expression.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType left = expression.performTypeAnalysis();
 		if (left instanceof ClassType) {
 			ClassType classT = (ClassType) left;
 			declaration = classT.getDeclaration().getDeclaration(identifier);
-			return declaration.performTypeAnalysis(idTable);
+			return declaration.performTypeAnalysis();
 		}
 
-		throw new CompilationException("Trying to member access (." + identifier + ") on a compound type " + left,
+		throw new CompilationException("Trying to member access (." + identifier + ") on a non-class type " + left,
 				getLine(), getColumn(), TypeAnalyzer);
 	}
 
@@ -60,7 +60,7 @@ public class DotIdentifier extends VarIdentifier {
 		if (declaration instanceof Argument) {
 			stream.appendInstruction("inc", ((Argument)declaration).getOffset());
 		} else {
-			// FIXME: Currently does nothing for a function
+			// For a function, generate just the code of the class
 		}
 	}
 }

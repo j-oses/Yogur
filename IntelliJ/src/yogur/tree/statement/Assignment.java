@@ -28,9 +28,9 @@ public class Assignment extends Statement {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
-		MetaType decType = declarator.performTypeAnalysis(idTable);
-		MetaType expType = expression.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType decType = declarator.performTypeAnalysis();
+		MetaType expType = expression.performTypeAnalysis();
 
 		if (!expType.equals(decType)) {
 			throw new CompilationException("Could not assign result of type " + expType

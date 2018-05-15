@@ -29,15 +29,15 @@ public class WhileStructure extends Statement {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
-		MetaType condType = condition.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType condType = condition.performTypeAnalysis();
 
 		if (!new BaseType(Bool).equals(condType)) {
 			throw new CompilationException("Invalid type on while condition: " + condType, condition.getLine(),
 					condition.getColumn(), TypeAnalyzer);
 		}
 
-		block.performTypeAnalysis(idTable);
+		block.performTypeAnalysis();
 
 		return null;
 	}

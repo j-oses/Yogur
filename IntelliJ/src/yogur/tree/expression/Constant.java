@@ -22,7 +22,7 @@ public class Constant extends Expression {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
+	public MetaType analyzeType() throws CompilationException {
 		if (value instanceof Integer) {
 			return new BaseType(BaseType.PredefinedType.Int);
 		} else if (value instanceof Boolean) {

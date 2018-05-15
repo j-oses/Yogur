@@ -12,12 +12,12 @@ public abstract class AbstractTreeNode implements AbstractTreeNodeInterface {
 
 	public abstract void performIdentifierAnalysis(IdentifierTable table) throws CompilationException;
 
-	public abstract MetaType analyzeType(IdentifierTable idTable) throws CompilationException;
+	public abstract MetaType analyzeType() throws CompilationException;
 
 	@Override
-	public MetaType performTypeAnalysis(IdentifierTable idTable) throws CompilationException {
+	public MetaType performTypeAnalysis() throws CompilationException {
 		if (getMetaType() == null) {
-			metaType = analyzeType(idTable);
+			metaType = analyzeType();
 		}
 
 		return getMetaType();

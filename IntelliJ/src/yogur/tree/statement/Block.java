@@ -32,9 +32,9 @@ public class Block extends Statement {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
+	public MetaType analyzeType() throws CompilationException {
 		for (Statement s: statements) {
-			s.performTypeAnalysis(idTable);
+			s.performTypeAnalysis();
 		}
 		return null;
 	}

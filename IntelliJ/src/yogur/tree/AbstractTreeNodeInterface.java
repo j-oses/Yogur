@@ -7,8 +7,8 @@ import yogur.typeidentification.MetaType;
 
 public interface AbstractTreeNodeInterface {
 	void performIdentifierAnalysis(IdentifierTable table) throws CompilationException;
-	MetaType analyzeType(IdentifierTable idTable) throws CompilationException;
-	MetaType performTypeAnalysis(IdentifierTable idTable) throws CompilationException;
+	MetaType analyzeType() throws CompilationException;
+	MetaType performTypeAnalysis() throws CompilationException;
 	void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth);
 
 	void setLine(int line);

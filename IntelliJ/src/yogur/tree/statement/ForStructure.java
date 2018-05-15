@@ -40,10 +40,10 @@ public class ForStructure extends Statement {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
-		MetaType argType = argument.performTypeAnalysis(idTable);
-		MetaType startType = start.performTypeAnalysis(idTable);
-		MetaType endType = end.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType argType = argument.performTypeAnalysis();
+		MetaType startType = start.performTypeAnalysis();
+		MetaType endType = end.performTypeAnalysis();
 
 		if (!argType.equals(startType)) {
 			throw new CompilationException("Invalid iteration limits on for loop start, with type: " + startType,
@@ -55,7 +55,7 @@ public class ForStructure extends Statement {
 					end.getLine(), end.getColumn(), TypeAnalyzer);
 		}
 
-		block.performTypeAnalysis(idTable);
+		block.performTypeAnalysis();
 		return null;
 	}
 

@@ -44,8 +44,8 @@ public class BaseDeclarator extends Declarator {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
-		return declaration.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		return declaration.performTypeAnalysis();
 	}
 
 	@Override
@@ -56,6 +56,7 @@ public class BaseDeclarator extends Declarator {
 
 	@Override
 	public void generateCodeL(PMachineOutputStream stream) throws IOException {
-		stream.appendInstruction("ldc", declaration.getOffset());
+		stream.appendInstruction("lda", nestingDepth - declaration.getNestingDepth(), declaration.getOffset());
+		// FIXME: If it references to a class inside a function...
 	}
 }

@@ -73,10 +73,10 @@ public class BinaryOperation extends Expression {
 	}
 
 	@Override
-	public MetaType analyzeType(IdentifierTable idTable) throws CompilationException {
+	public MetaType analyzeType() throws CompilationException {
 		MetaType argType = operator.getArgumentsType();
-		MetaType leftType = left.performTypeAnalysis(idTable);
-		MetaType rightType = right.performTypeAnalysis(idTable);
+		MetaType leftType = left.performTypeAnalysis();
+		MetaType rightType = right.performTypeAnalysis();
 
 		if (argType.equals(leftType) && argType.equals(rightType)) {
 			return operator.getReturnType();
