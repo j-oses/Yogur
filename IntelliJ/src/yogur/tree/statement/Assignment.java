@@ -43,6 +43,7 @@ public class Assignment extends Statement {
 
 	@Override
 	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		declarator.performMemoryAssignment(currentOffset, nestingDepth);
 		expression.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 

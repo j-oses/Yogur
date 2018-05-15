@@ -64,7 +64,7 @@ public class Argument extends AbstractTreeNode implements Declaration {
 		currentOffset.add(type.getSize());
 		this.nestingDepth = nestingDepth.getValue();
 		Log.debug("Assigned offset " + offset + " to variable " + declarator.getIdentifier() + " with size " + type.getSize());
-		Log.debug("Assigned nesting depth " + this.nestingDepth + " to variable " + declarator.getIdentifier());
+		Log.debug("Assigned DEFINITION nesting depth " + this.nestingDepth + " to variable " + declarator.getIdentifier());
 	}
 
 	@Override

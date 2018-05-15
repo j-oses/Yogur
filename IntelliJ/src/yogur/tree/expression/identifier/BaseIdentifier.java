@@ -7,6 +7,7 @@ import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Argument;
 import yogur.tree.declaration.Declaration;
 import yogur.typeidentification.MetaType;
+import yogur.utils.Log;
 
 import java.io.IOException;
 
@@ -47,6 +48,7 @@ public class BaseIdentifier extends VarIdentifier {
 	@Override
 	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		this.nestingDepth = nestingDepth.getValue();
+		Log.debug("Assigned USE nesting depth " + this.nestingDepth + " for identifier " + name + " in line " + getLine());
 	}
 
 	@Override

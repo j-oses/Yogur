@@ -9,6 +9,7 @@ import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.typeidentification.MetaType;
+import yogur.utils.Log;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -50,6 +51,7 @@ public class BaseDeclarator extends Declarator {
 	@Override
 	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		this.nestingDepth = nestingDepth.getValue();
+		Log.debug("Assigned USE nesting depth " + this.nestingDepth + " for identifier " + identifier + " in line " + getLine());
 	}
 
 	@Override
