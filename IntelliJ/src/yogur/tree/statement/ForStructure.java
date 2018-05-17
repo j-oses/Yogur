@@ -9,7 +9,6 @@ import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.type.BaseType;
 import yogur.tree.declaration.Argument;
-import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
 

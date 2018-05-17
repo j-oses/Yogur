@@ -4,7 +4,6 @@ import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
-import yogur.tree.declaration.declarator.Declarator;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
 

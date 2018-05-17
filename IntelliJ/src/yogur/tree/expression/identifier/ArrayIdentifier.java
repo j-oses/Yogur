@@ -15,12 +15,12 @@ import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class ArrayIdentifier extends VarIdentifier {
 	private Expression leftExpression;
-	private ArrayIndex index;
+	private Expression index;
 
 	int length;
 	int elementSize;
 
-	public ArrayIdentifier(Expression expression, ArrayIndex index) {
+	public ArrayIdentifier(Expression expression, Expression index) {
 		this.leftExpression = expression;
 		this.index = index;
 	}
@@ -45,15 +45,10 @@ public class ArrayIdentifier extends VarIdentifier {
 	public MetaType analyzeType() throws CompilationException {
 		MetaType leftType = leftExpression.performTypeAnalysis();
 		if (leftType instanceof ArrayType) {
-			if (index.returnsSingleElement()) {
-				ArrayType leftT = (ArrayType)leftType;
-				MetaType internalType = leftT.getInternalType();
-				length = leftT.getLength();
-				elementSize = internalType.getSize();
-				return internalType;
-			} else {
-				return leftType;
-			}
+			ArrayType leftT = (ArrayType)leftType;
+			MetaType internalType = leftT.getInternalType();
+			length = leftT.getLength();
+			elementSize = internalType.getSize();return internalType;
 		}
 
 		throw new CompilationException("Performing [] operator on a non-array type: " + leftType,
@@ -74,7 +69,7 @@ public class ArrayIdentifier extends VarIdentifier {
 
 	public void generateCodeI(PMachineOutputStream stream) throws IOException {
 		// TODO: We will suppose all indices are singular
-		index.getOffset().generateCodeR(stream);
+		index.generateCodeR(stream);
 		stream.appendInstruction("chk", 0, length - 1);
 		stream.appendInstruction("ixa", elementSize);
 	}

@@ -10,7 +10,6 @@ import java.util.*;
 import yogur.utils.CompilationException;
 import yogur.tree.*;
 import yogur.tree.declaration.*;
-import yogur.tree.declaration.declarator.*;
 import yogur.tree.expression.*;
 import yogur.tree.expression.identifier.*;
 import yogur.tree.statement.*;
@@ -55,7 +54,6 @@ non terminal Expression Exp, Exp0, Exp1, Exp2, Exp3, Exp4, Exp5, Exp6, Exp7;
 non terminal BinaryOperation.Operator Op, Op0, Op1, Op2, Op3, Op4;
 non terminal UnaryOperation.Operator Op5;
 non terminal Type VarType;
-non terminal ArrayIndex Index;
 non terminal List<Expression> CommaExp;
 non terminal ArrayList<Argument> ArgList, Args;
 non terminal Argument Arg;
@@ -134,7 +132,7 @@ Exp5 ::= Op5:o Exp5:e			{: RESULT = new UnaryOperation(e, o); RESULT.setLineCol(
 	| Exp6:e					{: RESULT = e; :}
 ;
 Exp6 ::= Exp6:e DOT:d ID:id					{: RESULT = new DotIdentifier(e, id); RESULT.setLineCol(dleft, dright); :}
-	| Exp6:e Index:i						{: RESULT = new ArrayIdentifier(e, i); RESULT.setLineCol(ileft, iright); :}
+	| Exp6:e LSQUARE Exp:i RSQUARE			{: RESULT = new ArrayIdentifier(e, i); RESULT.setLineCol(ileft, iright); :}
 	| Exp6:e LPAREN:l CommaExp:exps RPAREN	{: RESULT = new FunctionCall(e, exps); RESULT.setLineCol(lleft, lright); :}
 	| Exp6:e LPAREN:l RPAREN				{: RESULT = new FunctionCall(e, new ArrayList<>()); RESULT.setLineCol(lleft, lright); :}
 	| Exp7:e								{: RESULT = e; :}
@@ -170,8 +168,6 @@ Op5 ::= SUBS	{: RESULT = UnaryOperation.Operator.NEG; :}
 
 VarType ::= VarType:t LSQUARE INT:i RSQUARE		{: RESULT = new ArrayType(t, i); :}
 	| TYPE:t									{: RESULT = Type.fromName(t); RESULT.setLineCol(tleft, tright); :}
-;
-Index ::= LSQUARE Exp:e RSQUARE				{: RESULT = new ArrayIndex(e, ArrayIndex.AccessType.INDEX); :}
 ;
 CommaExp ::= CommaExp:exps COMMA Exp:e		{: exps.add(e); RESULT = exps; :}
 	| Exp:e									{: RESULT = new ArrayList<>(); RESULT.add(e); :}
