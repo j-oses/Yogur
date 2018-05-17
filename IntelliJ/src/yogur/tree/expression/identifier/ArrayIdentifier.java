@@ -26,6 +26,11 @@ public class ArrayIdentifier extends VarIdentifier {
 	}
 
 	@Override
+	public boolean isAssignable() {
+		return leftExpression.isAssignable();
+	}
+
+	@Override
 	public Declaration getDeclaration() {
 		return null;
 	}
@@ -58,6 +63,7 @@ public class ArrayIdentifier extends VarIdentifier {
 	@Override
 	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		leftExpression.performMemoryAssignment(currentOffset, nestingDepth);
+		index.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 
 	@Override
@@ -71,5 +77,12 @@ public class ArrayIdentifier extends VarIdentifier {
 		index.getOffset().generateCodeR(stream);
 		stream.appendInstruction("chk", 0, length - 1);
 		stream.appendInstruction("ixa", elementSize);
+	}
+
+	@Override
+	public void generateCodeL(PMachineOutputStream stream) throws IOException {
+		// TODO: We will suppose all indices are singular
+		leftExpression.generateCodeL(stream);
+		generateCodeI(stream);
 	}
 }

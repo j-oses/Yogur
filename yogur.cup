@@ -34,7 +34,7 @@ terminal Integer INT;
 terminal Boolean BOOL;
 terminal String ID, TYPE;
 terminal DELIMITER, COMMA;
-terminal ASSIGN, SUM, SUBS, PROD, DIV, MOD, AND, OR, NOT, DOT, LRANGE, RRANGE, EQ, NEQ, GEQ, GT, LEQ, LT, COLON, ARROW;
+terminal ASSIGN, SUM, SUBS, PROD, DIV, MOD, AND, OR, NOT, DOT, EQ, NEQ, GEQ, GT, LEQ, LT, COLON, ARROW;
 terminal LPAREN, RPAREN, LSQUARE, RSQUARE, LBRACKET, RBRACKET;
 terminal DEF, VAR, CLASS, IF, ELSE, WHILE, FOR, IN, TO;
 
@@ -54,7 +54,6 @@ non terminal Assignment Ass;
 non terminal Expression Exp, Exp0, Exp1, Exp2, Exp3, Exp4, Exp5, Exp6, Exp7;
 non terminal BinaryOperation.Operator Op, Op0, Op1, Op2, Op3, Op4;
 non terminal UnaryOperation.Operator Op5;
-non terminal Declarator Declarator, Declarator0;
 non terminal Type VarType;
 non terminal ArrayIndex Index;
 non terminal List<Expression> CommaExp;
@@ -77,7 +76,8 @@ S ::= S:p DELIMITER Inst:i				{: RESULT = new Program(p, i); :}
 Inst ::= If:i							{: RESULT = i; :}
 	| While:i							{: RESULT = i; :}
 	| For:i								{: RESULT = i; :}
-	| Ass:i								{: RESULT = i; :}
+	| Ass:i 							{: RESULT = i; :}
+	| Exp:i								{: RESULT = i; :}
 	| Block:i							{: RESULT = i; :}
 	| DVar:i							{: RESULT = i; :}
 ;
@@ -107,17 +107,9 @@ Else ::= ELSE If:ife						{: List<Statement> insts = new ArrayList<>(); insts.ad
 ;
 While ::= WHILE Exp:e Block:b				{: RESULT = new WhileStructure(e, b); :}
 ;
-For ::= FOR ID:id IN Exp:start TO Exp:end Block:b		{: RESULT = new ForStructure(new BaseDeclarator(id), start, end, b); :}
+For ::= FOR ID:id IN Exp:start TO Exp:end Block:b		{: RESULT = new ForStructure(new BaseIdentifier(id), start, end, b); :}
 ;
-Ass ::= Declarator:d ASSIGN:eq Exp:e			{: RESULT = new Assignment(d, e); RESULT.setLineCol(eqleft, eqright); :}
-;
-
-Declarator ::= Declarator:d DOT:dt ID:id		{: RESULT = new DotDeclarator(d, id); RESULT.setLineCol(dtleft, dtright); :}
-	| Declarator:d Index:i						{: RESULT = new ArrayDeclarator(d, i); RESULT.setLineCol(ileft, iright); :}
-	| Declarator0:d								{: RESULT = d; :}
-;
-Declarator0 ::= LPAREN Declarator:d RPAREN		{: RESULT = d; :}
-	| ID:id										{: RESULT = new BaseDeclarator(id); RESULT.setLineCol(idleft, idright); :}
+Ass ::= Exp:e1 ASSIGN:eq Exp:e2		{: RESULT = new Assignment(e1, e2); RESULT.setLineCol(eqleft, eqright); :}
 ;
 
 Exp ::= Exp:e1 Op:o Exp0:e2		{: RESULT = new BinaryOperation(e1, e2, o); RESULT.setLineCol(oleft, oright); :}
@@ -180,9 +172,6 @@ VarType ::= VarType:t LSQUARE INT:i RSQUARE		{: RESULT = new ArrayType(t, i); :}
 	| TYPE:t									{: RESULT = Type.fromName(t); RESULT.setLineCol(tleft, tright); :}
 ;
 Index ::= LSQUARE Exp:e RSQUARE				{: RESULT = new ArrayIndex(e, ArrayIndex.AccessType.INDEX); :}
-	| LSQUARE Exp:e RRANGE					{: RESULT = new ArrayIndex(e, ArrayIndex.AccessType.LEFT_RANGE); :}
-	| LRANGE Exp:e RSQUARE					{: RESULT = new ArrayIndex(e, ArrayIndex.AccessType.RIGHT_RANGE); :}
-	| LSQUARE Exp:e1 COLON Exp:e2 RSQUARE	{: RESULT = new ArrayIndex(e1, e2, ArrayIndex.AccessType.LEFT_RIGHT_RANGE); :}
 ;
 CommaExp ::= CommaExp:exps COMMA Exp:e		{: exps.add(e); RESULT = exps; :}
 	| Exp:e									{: RESULT = new ArrayList<>(); RESULT.add(e); :}

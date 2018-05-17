@@ -13,10 +13,10 @@ import java.io.IOException;
 import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class Assignment extends Statement {
-	private Declarator declarator;
+	private Expression declarator;
 	private Expression expression;
 
-	public Assignment(Declarator declarator, Expression e) {
+	public Assignment(Expression declarator, Expression e) {
 		this.declarator = declarator;
 		this.expression = e;
 	}
@@ -31,6 +31,11 @@ public class Assignment extends Statement {
 	public MetaType analyzeType() throws CompilationException {
 		MetaType decType = declarator.performTypeAnalysis();
 		MetaType expType = expression.performTypeAnalysis();
+
+		if (!declarator.isAssignable()) {
+			throw new CompilationException("Expected a var declaration", getLine(), getColumn(),
+					CompilationException.Scope.TypeAnalyzer);
+		}
 
 		if (!expType.equals(decType)) {
 			throw new CompilationException("Could not assign result of type " + expType

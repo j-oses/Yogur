@@ -3,6 +3,7 @@ package yogur.tree.expression.identifier;
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.tree.declaration.Argument;
+import yogur.tree.statement.VarDeclaration;
 import yogur.tree.type.ArrayType;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
@@ -10,6 +11,7 @@ import yogur.tree.declaration.Declaration;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.ClassType;
 import yogur.typeidentification.MetaType;
+import yogur.utils.Log;
 
 import java.io.IOException;
 
@@ -24,6 +26,11 @@ public class DotIdentifier extends VarIdentifier {
 	public DotIdentifier(Expression left, String right) {
 		this.expression = left;
 		this.identifier = right;
+	}
+
+	@Override
+	public boolean isAssignable() {
+		return expression.isAssignable() && declaration instanceof Argument;
 	}
 
 	@Override
@@ -62,5 +69,14 @@ public class DotIdentifier extends VarIdentifier {
 		} else {
 			// For a function, generate just the code of the class
 		}
+	}
+
+	@Override
+	public void generateCodeL(PMachineOutputStream stream) throws IOException {
+		expression.generateCodeL(stream);
+		if (!(declaration instanceof Argument)) {
+			Log.warning("NotAnArgument");
+		}
+		stream.appendInstruction("inc", ((Argument)declaration).getOffset());
 	}
 }

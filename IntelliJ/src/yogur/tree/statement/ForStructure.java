@@ -23,7 +23,7 @@ public class ForStructure extends Statement {
 	private Expression end;
 	private Block block;
 
-	public ForStructure(BaseDeclarator declarator, Expression s, Expression e, Block b) {
+	public ForStructure(BaseIdentifier declarator, Expression s, Expression e, Block b) {
 		this.argument = new Argument(declarator, new BaseType(BaseType.PredefinedType.Int));
 		this.start = s;
 		this.end = e;

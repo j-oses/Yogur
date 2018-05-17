@@ -63,7 +63,11 @@ public class ClassDeclaration extends AbstractTreeNode implements Declaration {
 			d.setDeclaredOnClass(this);
 
 			// We save the declarations in a map to make querying easier
-			declarationMap.put(d.getName(), d);
+			if (d instanceof VarDeclaration) {
+				declarationMap.put(d.getName(), ((VarDeclaration) d).getArgument());
+			} else {
+				declarationMap.put(d.getName(), d);
+			}
 		}
 
 		for (FunctionOrVarDeclaration d: declarations) {

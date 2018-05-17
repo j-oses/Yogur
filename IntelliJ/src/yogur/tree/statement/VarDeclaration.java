@@ -29,7 +29,7 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 
 	@Override
 	public String getName() {
-		return argument.getDeclarator().getIdentifier();
+		return argument.getDeclarator().getName();
 	}
 
 	@Override
@@ -39,6 +39,10 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 
 	public int getOffset() {
 		return argument.getOffset();
+	}
+
+	public Argument getArgument() {
+		return argument;
 	}
 
 	@Override

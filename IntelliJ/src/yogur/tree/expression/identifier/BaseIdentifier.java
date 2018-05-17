@@ -3,6 +3,7 @@ package yogur.tree.expression.identifier;
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.tree.declaration.FuncDeclaration;
+import yogur.tree.statement.VarDeclaration;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Argument;
@@ -28,12 +29,21 @@ public class BaseIdentifier extends VarIdentifier {
 	 * @param argument the declaration associated to this identifier.
 	 */
 	public BaseIdentifier(Argument argument) {
-		this.name = argument.getDeclarator().getIdentifier();
+		this.name = argument.getDeclarator().getName();
 		this.declaration = argument;
+	}
+
+	@Override
+	public boolean isAssignable() {
+		return declaration instanceof Argument;
 	}
 
 	public Declaration getDeclaration() {
 		return declaration;
+	}
+
+	public String getName() {
+		return name;
 	}
 
 	@Override
@@ -66,5 +76,12 @@ public class BaseIdentifier extends VarIdentifier {
 		} else {
 			// FIXME: Currently does nothing for a function
 		}
+	}
+
+	@Override
+	public void generateCodeL(PMachineOutputStream stream) throws IOException {
+		Argument arg = (Argument)declaration;
+		stream.appendInstruction("lda", nestingDepth - arg.getNestingDepth(), arg.getOffset());
+		// FIXME: If it references to a class inside a function...
 	}
 }

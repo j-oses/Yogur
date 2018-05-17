@@ -2,6 +2,7 @@ package yogur.tree.declaration;
 
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
+import yogur.tree.expression.identifier.BaseIdentifier;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
@@ -13,7 +14,7 @@ import yogur.utils.Log;
 import java.io.IOException;
 
 public class Argument extends AbstractTreeNode implements Declaration {
-	private BaseDeclarator declarator;
+	private BaseIdentifier declarator;
 	private Type type;
 
 	private int offset;
@@ -21,15 +22,15 @@ public class Argument extends AbstractTreeNode implements Declaration {
 	private ClassDeclaration declaredOnClass = null;
 
 	public Argument(String declarator, Type type) {
-		this(new BaseDeclarator(declarator), type);
+		this(new BaseIdentifier(declarator), type);
 	}
 
-	public Argument(BaseDeclarator declarator, Type type) {
+	public Argument(BaseIdentifier declarator, Type type) {
 		this.declarator = declarator;
 		this.type = type;
 	}
 
-	public BaseDeclarator getDeclarator() {
+	public BaseIdentifier getDeclarator() {
 		return declarator;
 	}
 
@@ -48,7 +49,7 @@ public class Argument extends AbstractTreeNode implements Declaration {
 	public void setDeclaredOnClass(ClassDeclaration clazz) {
 		this.declaredOnClass = clazz;
 		if (isDeclaredOnClass()) {
-			Log.debug("Set declaredOnClass to true for variable " + declarator.getIdentifier());
+			Log.debug("Set declaredOnClass to true for variable " + declarator.getName());
 		}
 	}
 
@@ -59,7 +60,7 @@ public class Argument extends AbstractTreeNode implements Declaration {
 
 	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
-		table.insertId(declarator.getIdentifier(), this);
+		table.insertId(declarator.getName(), this);
 		declarator.performIdentifierAnalysis(table);
 		type.performIdentifierAnalysis(table);
 	}
@@ -74,8 +75,8 @@ public class Argument extends AbstractTreeNode implements Declaration {
 		offset = currentOffset.getValue();
 		currentOffset.add(type.getSize());
 		this.nestingDepth = nestingDepth.getValue();
-		Log.debug("Assigned offset " + offset + " to variable " + declarator.getIdentifier() + " with size " + type.getSize());
-		Log.debug("Assigned DEFINITION nesting depth " + this.nestingDepth + " to variable " + declarator.getIdentifier());
+		Log.debug("Assigned offset " + offset + " to variable " + declarator.getName() + " with size " + type.getSize());
+		Log.debug("Assigned DEFINITION nesting depth " + this.nestingDepth + " to variable " + declarator.getName());
 	}
 
 	@Override

@@ -8,6 +8,7 @@ import yogur.typeidentification.TypeAnalyzer;
 import yogur.utils.Log;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
@@ -24,7 +25,12 @@ public class TestTypes {
 	public static void testAll(){
 		File dir = new File(TESTDIR);
 
-		File[] directoryListing = dir.listFiles();
+		File[] directoryListing = dir.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File pathname) {
+				return pathname.getPath().endsWith(".yogur");
+			}
+		});
 		if (directoryListing != null) {
 			for (File file : directoryListing) {
 				System.out.println(">>>> TESTING FILE " + file.getName() + " <<<<");
