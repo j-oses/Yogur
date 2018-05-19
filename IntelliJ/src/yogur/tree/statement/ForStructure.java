@@ -80,10 +80,10 @@ public class ForStructure extends Statement {
 		startAssignment.generateCode(stream);
 		stream.appendLabel(labelStart);
 		condition.generateCodeR(stream);
-		stream.appendInstruction("fjp", labelEnd);
+		stream.appendLabelledInstruction("fjp", labelEnd);
 		block.generateCode(stream);
 		incrementAssignment.generateCode(stream);
-		stream.appendInstruction("ujp", labelStart);
+		stream.appendLabelledInstruction("ujp", labelStart);
 		stream.appendLabel(labelEnd);
 	}
 }

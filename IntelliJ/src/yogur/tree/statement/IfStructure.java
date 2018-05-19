@@ -70,15 +70,15 @@ public class IfStructure extends Statement {
 		condition.generateCodeR(stream);
 
 		if (elseClause != null) {
-			stream.appendInstruction("fjp", labelElse);
+			stream.appendLabelledInstruction("fjp", labelElse);
 		} else {
-			stream.appendInstruction("fjp", labelEndif);
+			stream.appendLabelledInstruction("fjp", labelEndif);
 		}
 
 		ifClause.generateCode(stream);
 
 		if (elseClause != null) {
-			stream.appendInstruction("ujp", labelEndif);
+			stream.appendLabelledInstruction("ujp", labelEndif);
 			stream.appendLabel(labelElse);
 			elseClause.generateCode(stream);
 		}

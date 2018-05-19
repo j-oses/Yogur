@@ -1,9 +1,13 @@
 package yogur.codegen;
 
 import java.io.*;
+import java.util.*;
 
 public class PMachineOutputStream extends FileWriter {
-	private int lineCount = 0;
+	private int instructionCount = 0;
+
+	private Map<String, Integer> labelAddresses = new HashMap<>();
+	private Deque<POutputLine> queuedInstructions = new ArrayDeque<>();
 
 	private int currentLabel = 0;
 
@@ -29,21 +33,26 @@ public class PMachineOutputStream extends FileWriter {
 
 
 	public void appendInstruction(String name, Object... arguments) throws IOException {
-		this.append(" " + padRight("{" + String.valueOf(lineCount) + "}", 7));
+		queuedInstructions.add(new PNonLabelledInstruction(name, arguments));
+		instructionCount++;
+	}
 
-		this.append(name);
-		for (Object o: arguments) {
-			this.append(" " + o);
-		}
-		this.append(";\n");
-		lineCount++;
+	public void appendLabelledInstruction(String name, String label) throws IOException {
+		queuedInstructions.add(new PLabelledInstruction(name, label));
+		instructionCount++;
+	}
+
+	public void appendLabelledInstruction(String name, Object arg, String label) throws IOException {
+		queuedInstructions.add(new PLabelledInstruction(name, arg, label));
+		instructionCount++;
 	}
 
 	public void appendLabel(String name) throws IOException {
-		this.append(name + ":\n");
+		labelAddresses.put(name, instructionCount);
+		appendComment(name + ":");
 	}
 
-	public int unusedLabelId() {
+	private int unusedLabelId() {
 		currentLabel++;
 		return currentLabel;
 	}
@@ -56,12 +65,8 @@ public class PMachineOutputStream extends FileWriter {
 		return prefix + unusedLabelId();
 	}
 
-	public void appendComment(String string, boolean forceMultiline) throws IOException {
-		if (forceMultiline || string.contains("\n")) {
-			this.append("{" + string + "}");
-		} else {
-			this.append("\\\\ " + string + "\n");
-		}
+	public void appendComment(String string) throws IOException {
+		queuedInstructions.add(new PComment(string));
 	}
 
 	private String padRight(String s, int n) {
@@ -70,6 +75,19 @@ public class PMachineOutputStream extends FileWriter {
 
 	@Override
 	public void close() throws IOException {
-		this.appendInstruction("stp");
+		queuedInstructions.add(new PNonLabelledInstruction("stp"));
+
+		int count = 0;
+		for (POutputLine instr: queuedInstructions) {
+			if (!instr.isComment()) {
+				this.append(" " + padRight("{" + String.valueOf(count) + "}", 7));
+				count++;
+			}
+
+			this.append(instr.generateCode(labelAddresses));
+			this.append("\n");
+		}
+
+		super.close();
 	}
 }

@@ -90,6 +90,6 @@ public class FunctionCall extends Expression {
 			e.generateCodeA(stream);
 		}
 
-		stream.appendInstruction("cup", declaration.getFormalParameterLength(), declaration.getLabel());
+		stream.appendLabelledInstruction("cup", declaration.getFormalParameterLength(), declaration.getLabel());
 	}
 }

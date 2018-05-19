@@ -54,9 +54,9 @@ public class WhileStructure extends Statement {
 		String labelEnd = stream.generateLabel("endWhile");
 
 		stream.appendLabel(labelStart);
-		stream.appendInstruction("fjp", labelEnd);
+		stream.appendLabelledInstruction("fjp", labelEnd);
 		block.generateCode(stream);
-		stream.appendInstruction("ujp", labelStart);
+		stream.appendLabelledInstruction("ujp", labelStart);
 		stream.appendLabel(labelEnd);
 	}
 }

@@ -22,7 +22,7 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 
 	private ClassDeclaration declaredOnClass = null;
 	private int frameStaticLength;
-	private static final int MAX_DEPTH_LOCAL_STACK = 1024;
+	private static final int MAX_DEPTH_LOCAL_STACK = 1024;	// FIXME: Should not be static. Precalculate.
 	private String label;
 	public static final int START_PARAMETER_INDEX = 5;
 	private int formalParameterLength;
@@ -146,8 +146,8 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 		String endLabel = stream.generateLabelWithUnusedId("endFun");
 		label = stream.generateLabel("fun");
 
-		stream.appendInstruction("ujp", endLabel);
-		stream.appendComment("def " + identifier, false);
+		stream.appendLabelledInstruction("ujp", endLabel);
+		stream.appendComment("def " + identifier);
 
 		// Actual function code
 		stream.appendLabel(label);
