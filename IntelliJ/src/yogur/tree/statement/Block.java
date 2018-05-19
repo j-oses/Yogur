@@ -2,9 +2,12 @@ package yogur.tree.statement;
 
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
+import yogur.tree.type.Type;
+import yogur.typeidentification.VoidType;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.typeidentification.MetaType;
+import yogur.utils.Log;
 
 import java.io.IOException;
 import java.util.List;
@@ -14,6 +17,15 @@ public class Block extends Statement {
 
 	public Block(List<Statement> s) {
 		statements = s;
+	}
+
+	@Override
+	public int getMaxDepthOnStack() {
+		int result = 0;
+		for (Statement s: statements) {
+			result = Math.max(result, s.getMaxDepthOnStack());
+		}
+		return result;
 	}
 
 	@Override
@@ -34,7 +46,12 @@ public class Block extends Statement {
 	@Override
 	public MetaType analyzeType() throws CompilationException {
 		for (Statement s: statements) {
-			s.performTypeAnalysis();
+			MetaType type = s.performTypeAnalysis();
+
+			if (!(type == null || type instanceof VoidType)) {
+				throw new CompilationException("Found statement-level expression with non-void type",
+						getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
+			}
 		}
 		return null;
 	}

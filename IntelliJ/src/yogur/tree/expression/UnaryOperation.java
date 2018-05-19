@@ -28,6 +28,11 @@ public class UnaryOperation extends Expression {
 	}
 
 	@Override
+	public int getDepthOnStack() {
+		return expression.getDepthOnStack();
+	}
+
+	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		expression.performIdentifierAnalysis(table);
 	}

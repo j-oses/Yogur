@@ -45,7 +45,7 @@ public class ClassDeclaration extends AbstractTreeNode implements Declaration {
 			return declarationMap.get(id);
 		} else {
 			throw new CompilationException("Class " + name + " does not have a field nor a function called " + id,
-					getLine(), getColumn(), CompilationException.Scope.IdentificatorIdentification);
+					getLine(), getColumn(), CompilationException.Scope.IdentifierIdentification);
 		}
 	}
 

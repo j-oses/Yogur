@@ -39,7 +39,7 @@ public class ClassType extends Type {
 			declaration = (ClassDeclaration)dec;
 		} else {
 			throw new CompilationException("Expected class identifier", getLine(), getColumn(),
-					CompilationException.Scope.IdentificatorIdentification);
+					CompilationException.Scope.IdentifierIdentification);
 		}
 	}
 

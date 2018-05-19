@@ -21,6 +21,11 @@ public class Assignment extends Statement {
 	}
 
 	@Override
+	public int getMaxDepthOnStack() {
+		return Math.max(declarator.getDepthOnStack(), expression.getDepthOnStack());
+	}
+
+	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		declarator.performIdentifierAnalysis(table);
 		expression.performIdentifierAnalysis(table);

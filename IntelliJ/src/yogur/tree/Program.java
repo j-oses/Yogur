@@ -2,6 +2,8 @@ package yogur.tree;
 
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
+import yogur.tree.expression.Expression;
+import yogur.typeidentification.VoidType;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.typeidentification.MetaType;
@@ -12,6 +14,7 @@ import java.util.List;
 
 public class Program extends AbstractTreeNode {
 	private List<StatementOrDeclaration> instructions;
+	int staticDataLength;
 
 	public Program() {
 		instructions = new ArrayList<>();
@@ -37,7 +40,12 @@ public class Program extends AbstractTreeNode {
 	@Override
 	public MetaType analyzeType() throws CompilationException {
 		for (StatementOrDeclaration s: instructions) {
-			s.performTypeAnalysis();
+			MetaType type = s.performTypeAnalysis();
+
+			if ((s instanceof Expression) && !(type == null || type instanceof VoidType)) {
+				throw new CompilationException("Found statement-level expression with non-void type",
+						getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
+			}
 		}
 		return null;
 	}
@@ -47,9 +55,12 @@ public class Program extends AbstractTreeNode {
 		for (StatementOrDeclaration s: instructions) {
 			s.performMemoryAssignment(currentOffset, nestingDepth);
 		}
+
+		staticDataLength = currentOffset.getValue();
 	}
 
 	public void generateCode(PMachineOutputStream stream) throws IOException {
+		stream.appendInstruction("ssp", staticDataLength);
 		for (StatementOrDeclaration s: instructions) {
 			s.generateCode(stream);
 		}

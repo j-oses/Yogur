@@ -3,6 +3,7 @@ package yogur.tree.declaration;
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.tree.expression.identifier.BaseIdentifier;
+import yogur.tree.type.ClassType;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
@@ -17,6 +18,7 @@ public class Argument extends AbstractTreeNode implements Declaration {
 	private int offset;
 	private int nestingDepth;
 	private ClassDeclaration declaredOnClass = null;
+	private boolean isFunctionParameter = false;
 
 	public Argument(String declarator, Type type) {
 		this(new BaseIdentifier(declarator), type);
@@ -50,6 +52,14 @@ public class Argument extends AbstractTreeNode implements Declaration {
 		}
 	}
 
+	public void setFunctionParameter(boolean functionParameter) {
+		isFunctionParameter = functionParameter;
+	}
+
+	public boolean isPassedByReference() {
+		return isFunctionParameter && (type instanceof ClassType);
+	}
+
 	@Override
 	public String getDeclarationDescription() {
 		return "Var declaration";
@@ -70,7 +80,15 @@ public class Argument extends AbstractTreeNode implements Declaration {
 	@Override
 	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		offset = currentOffset.getValue();
-		currentOffset.add(type.getSize());
+
+		if (isPassedByReference()) {
+			// Passed by reference
+			currentOffset.add(1);
+		} else {
+			// Not a function argument or passed by value
+			currentOffset.add(type.getSize());
+		}
+
 		this.nestingDepth = nestingDepth.getValue();
 		Log.debug("Assigned offset " + offset + " to variable " + declarator.getName() + " with size " + type.getSize());
 		Log.debug("Assigned DEFINITION nesting depth " + this.nestingDepth + " to variable " + declarator.getName());

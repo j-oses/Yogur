@@ -22,7 +22,6 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 
 	private ClassDeclaration declaredOnClass = null;
 	private int frameStaticLength;
-	private static final int MAX_DEPTH_LOCAL_STACK = 1024;	// FIXME: Should not be static. Precalculate.
 	private String label;
 	public static final int START_PARAMETER_INDEX = 5;
 	private int formalParameterLength;
@@ -36,6 +35,10 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 		this.arguments = arguments;
 		this.returnArg = returnArg;
 		this.block = block;
+
+		for (Argument a: arguments) {
+			a.setFunctionParameter(true);
+		}
 	}
 
 	@Override
@@ -57,7 +60,7 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 		return declaredOnClass;
 	}
 
-	public boolean getIsDeclaredOnClass() {
+	public boolean isDeclaredOnClass() {
 		return declaredOnClass != null;
 	}
 
@@ -121,12 +124,14 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 
 		if (returnArg != null) {
 			// The return argument has the first word of the frame
+			// It can only be a simple type, so there is no worries about its size
 			returnArg.performMemoryAssignment(new IntegerReference(0), internalDepth);
 		}
 
-		if (getIsDeclaredOnClass()) {
+		if (isDeclaredOnClass()) {
 			// Will take the class as the first parameter
-			internalOffset.add(declaredOnClass.getSize());
+			// Classes are passed by reference
+			internalOffset.add(1);
 		}
 
 		for (Argument a: arguments) {
@@ -152,7 +157,7 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 		// Actual function code
 		stream.appendLabel(label);
 		stream.appendInstruction("ssp", frameStaticLength);
-		stream.appendInstruction("sep", MAX_DEPTH_LOCAL_STACK);
+		stream.appendInstruction("sep", block.getMaxDepthOnStack());
 		block.generateCode(stream);
 
 		if (returnArg == null) {

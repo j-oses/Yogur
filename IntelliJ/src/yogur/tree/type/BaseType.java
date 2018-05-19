@@ -31,6 +31,14 @@ public class BaseType extends Type {
 		return type.name();
 	}
 
+	public String defaultValue() {
+		if (PredefinedType.Int.equals(type)) {
+			return "0";
+		} else {
+			return "false";
+		}
+	}
+
 	@Override
 	public int getSize() {
 		return 1;

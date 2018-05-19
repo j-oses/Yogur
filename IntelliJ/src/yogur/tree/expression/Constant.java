@@ -17,6 +17,11 @@ public class Constant extends Expression {
 	}
 
 	@Override
+	public int getDepthOnStack() {
+		return 1;
+	}
+
+	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		// Do nothing
 	}

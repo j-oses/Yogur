@@ -67,6 +67,15 @@ public class BinaryOperation extends Expression {
 	}
 
 	@Override
+	public int getDepthOnStack() {
+		if (Operator.MOD.equals(operator)) {
+			return generateModExpression().getDepthOnStack();
+		} else {
+			return left.getDepthOnStack() + right.getDepthOnStack();
+		}
+	}
+
+	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		left.performIdentifierAnalysis(table);
 		right.performIdentifierAnalysis(table);

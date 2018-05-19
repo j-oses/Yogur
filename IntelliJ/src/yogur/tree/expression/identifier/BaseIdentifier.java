@@ -47,6 +47,11 @@ public class BaseIdentifier extends VarIdentifier {
 	}
 
 	@Override
+	public int getDepthOnStack() {
+		return 2;	// At most 2, may be less
+	}
+
+	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		declaration = table.searchId(name, getLine(), getColumn());
 	}
@@ -63,25 +68,17 @@ public class BaseIdentifier extends VarIdentifier {
 	}
 
 	@Override
-	public void generateCodeR(PMachineOutputStream stream) throws IOException {
-		if (declaration instanceof Argument) {
-			Argument arg = (Argument)declaration;
-			int offset = arg.getOffset();
-
-			if (arg.isDeclaredOnClass()) {
-				offset += FuncDeclaration.START_PARAMETER_INDEX;
-			}
-
-			stream.appendInstruction("lda", nestingDepth - arg.getNestingDepth(), offset);
-		} else {
-			// FIXME: Currently does nothing for a function
-		}
-	}
-
-	@Override
 	public void generateCodeL(PMachineOutputStream stream) throws IOException {
 		Argument arg = (Argument)declaration;
-		stream.appendInstruction("lda", nestingDepth - arg.getNestingDepth(), arg.getOffset());
-		// FIXME: If it references to a class inside a function...
+		if (arg.isDeclaredOnClass()) {
+			// We are accessing a class field within a function
+			// We have to load the class (which is the first parameter), and then get the argument on it
+			stream.appendInstruction("lod", 0, FuncDeclaration.START_PARAMETER_INDEX);
+			stream.appendInstruction("lda", nestingDepth - arg.getNestingDepth(), arg.getOffset());
+		} else if (arg.isPassedByReference()) {
+			stream.appendInstruction("lod", 0, arg.getOffset());
+		} else {
+			stream.appendInstruction("lda", nestingDepth - arg.getNestingDepth(), arg.getOffset());
+		}
 	}
 }

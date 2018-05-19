@@ -39,6 +39,11 @@ public class DotIdentifier extends VarIdentifier {
 	}
 
 	@Override
+	public int getDepthOnStack() {
+		return expression.getDepthOnStack() + 1;
+	}
+
+	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		expression.performIdentifierAnalysis(table);
 	}
@@ -62,21 +67,13 @@ public class DotIdentifier extends VarIdentifier {
 	}
 
 	@Override
-	public void generateCodeR(PMachineOutputStream stream) throws IOException {
-		expression.generateCodeR(stream);
-		if (declaration instanceof Argument) {
-			stream.appendInstruction("inc", ((Argument)declaration).getOffset());
-		} else {
-			// For a function, generate just the code of the class
-		}
-	}
-
-	@Override
 	public void generateCodeL(PMachineOutputStream stream) throws IOException {
 		expression.generateCodeL(stream);
-		if (!(declaration instanceof Argument)) {
-			Log.warning("NotAnArgument");
+		if (declaration instanceof Argument) {
+			stream.appendInstruction("inc", ((Argument)declaration).getOffset());
 		}
-		stream.appendInstruction("inc", ((Argument)declaration).getOffset());
+
+		// For a function, we have to do nothing more. We only want to identify the class that is on the left of
+		// this dot operator, and this is already done with codeL(exp).
 	}
 }

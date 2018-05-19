@@ -3,12 +3,14 @@ package yogur.tree.statement;
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.tree.declaration.ClassDeclaration;
+import yogur.tree.type.BaseType;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Argument;
 import yogur.tree.declaration.FunctionOrVarDeclaration;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
+import yogur.utils.Log;
 
 import java.io.IOException;
 
@@ -43,6 +45,11 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 
 	public Argument getArgument() {
 		return argument;
+	}
+
+	@Override
+	public int getMaxDepthOnStack() {
+		return assignTo != null ? (assignTo.getDepthOnStack() + 1) : 2;
 	}
 
 	@Override

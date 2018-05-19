@@ -3,15 +3,12 @@ package yogur.tree.expression;
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.tree.declaration.FuncDeclaration;
-import yogur.tree.expression.identifier.DotIdentifier;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
-import yogur.tree.declaration.Declaration;
 import yogur.tree.expression.identifier.VarIdentifier;
 import yogur.typeidentification.FunctionType;
 import yogur.typeidentification.MetaType;
 import yogur.typeidentification.VoidType;
-import yogur.utils.Log;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,6 +25,15 @@ public class FunctionCall extends Expression {
 	public FunctionCall(Expression function, List<Expression> expressions) {
 		this.function = function;
 		this.expressions = expressions;
+	}
+
+	@Override
+	public int getDepthOnStack() {
+		int result = function.getDepthOnStack();
+		for (Expression e: expressions) {
+			result += e.getDepthOnStack();
+		}
+		return result;
 	}
 
 	@Override
@@ -80,10 +86,10 @@ public class FunctionCall extends Expression {
 	public void generateCodeR(PMachineOutputStream stream) throws IOException {
 		stream.appendInstruction("mst", nestingDepth);
 
-		if (declaration.getIsDeclaredOnClass()) {
+		if (declaration.isDeclaredOnClass()) {
+			// The first parameter should be the class on which is declared
 			// function should be a DotIdentifier and thus generate the correct code for the class
-			function.generateCodeR(stream);
-			stream.appendInstruction("movs", declaration.getDeclaredOnClass().getSize());
+			function.generateCodeL(stream);
 		}
 
 		for (Expression e: expressions) {

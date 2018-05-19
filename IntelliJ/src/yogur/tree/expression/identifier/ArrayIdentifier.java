@@ -36,6 +36,11 @@ public class ArrayIdentifier extends VarIdentifier {
 	}
 
 	@Override
+	public int getDepthOnStack() {
+		return leftExpression.getDepthOnStack() + index.getDepthOnStack() + 2;
+	}
+
+	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		leftExpression.performIdentifierAnalysis(table);
 		index.performIdentifierAnalysis(table);
@@ -61,14 +66,7 @@ public class ArrayIdentifier extends VarIdentifier {
 		index.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 
-	@Override
-	public void generateCodeR(PMachineOutputStream stream) throws IOException {
-		leftExpression.generateCodeR(stream);
-		generateCodeI(stream);
-	}
-
 	public void generateCodeI(PMachineOutputStream stream) throws IOException {
-		// TODO: We will suppose all indices are singular
 		index.generateCodeR(stream);
 		stream.appendInstruction("chk", 0, length - 1);
 		stream.appendInstruction("ixa", elementSize);
@@ -76,7 +74,6 @@ public class ArrayIdentifier extends VarIdentifier {
 
 	@Override
 	public void generateCodeL(PMachineOutputStream stream) throws IOException {
-		// TODO: We will suppose all indices are singular
 		leftExpression.generateCodeL(stream);
 		generateCodeI(stream);
 	}

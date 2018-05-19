@@ -8,7 +8,7 @@ import yogur.cup.sym;
 
 public class CompilationException extends IOException {
 	public enum Scope {
-		LexicalAnalyzer, SyntacticalAnalyzer, TypeAnalyzer, IdentificatorIdentification, CodeGeneration
+		LexicalAnalyzer, SyntacticalAnalyzer, TypeAnalyzer, IdentifierIdentification
 	}
 
 	private Scope scope;

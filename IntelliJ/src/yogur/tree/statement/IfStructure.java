@@ -18,14 +18,16 @@ public class IfStructure extends Statement {
 	private Block ifClause;
 	private Block elseClause;	// May be null
 
-	public IfStructure(Expression condition, Block ifClause) {
-		this(condition, ifClause, null);
-	}
-
 	public IfStructure(Expression condition, Block ifClause, Block elseClause) {
 		this.condition = condition;
 		this.ifClause = ifClause;
 		this.elseClause = elseClause;
+	}
+
+	@Override
+	public int getMaxDepthOnStack() {
+		return Math.max(condition.getDepthOnStack(),
+				Math.max(ifClause.getMaxDepthOnStack(), elseClause.getMaxDepthOnStack()));
 	}
 
 	@Override

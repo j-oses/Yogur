@@ -23,6 +23,11 @@ public class WhileStructure extends Statement {
 	}
 
 	@Override
+	public int getMaxDepthOnStack() {
+		return Math.max(condition.getDepthOnStack(), block.getMaxDepthOnStack());
+	}
+
+	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		condition.performIdentifierAnalysis(table);
 		block.performIdentifierAnalysis(table);

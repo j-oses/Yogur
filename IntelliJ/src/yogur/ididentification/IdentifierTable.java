@@ -43,7 +43,7 @@ public class IdentifierTable {
 	public void insertId(String id, Declaration declaration) throws CompilationException {
         if (idTable.peek().containsKey(id)) {
             throw new CompilationException("Invalid redeclaration of identifier: " + id, declaration.getLine(),
-					declaration.getColumn(), CompilationException.Scope.IdentificatorIdentification);
+					declaration.getColumn(), CompilationException.Scope.IdentifierIdentification);
         } else {
 			idTable.peek().put(id, declaration);
         }
@@ -64,7 +64,7 @@ public class IdentifierTable {
 
 		if (dec == null) {
 			throw new CompilationException("Identifier not found ", line, col,
-					CompilationException.Scope.IdentificatorIdentification);
+					CompilationException.Scope.IdentifierIdentification);
 		}
 
 		return dec;

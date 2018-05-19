@@ -30,6 +30,12 @@ public class ForStructure extends Statement {
 	}
 
 	@Override
+	public int getMaxDepthOnStack() {
+		// The 4 is to take in consideration the assignment i = i + 1.
+		return Math.max(Math.max(4, block.getMaxDepthOnStack()), Math.max(start.getDepthOnStack(), end.getDepthOnStack()));
+	}
+
+	@Override
 	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		table.openBlock();
 		argument.performIdentifierAnalysis(table);
