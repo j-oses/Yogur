@@ -1,8 +1,9 @@
 package yogur.tree.expression.identifier;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.utils.CompilationException;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.ArrayType;
@@ -10,16 +11,23 @@ import yogur.typeidentification.MetaType;
 
 import java.io.IOException;
 
-import static yogur.error.CompilationException.Scope;
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class ArrayIdentifier extends VarIdentifier {
 	private Expression leftExpression;
-	private ArrayIndex index;
+	private Expression index;
 
-	public ArrayIdentifier(Expression expression, ArrayIndex index) {
+	int length;
+	int elementSize;
+
+	public ArrayIdentifier(Expression expression, Expression index) {
 		this.leftExpression = expression;
 		this.index = index;
+	}
+
+	@Override
+	public boolean isAssignable() {
+		return leftExpression.isAssignable();
 	}
 
 	@Override
@@ -28,20 +36,24 @@ public class ArrayIdentifier extends VarIdentifier {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public int getDepthOnStack() {
+		return leftExpression.getDepthOnStack() + index.getDepthOnStack() + 2;
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		leftExpression.performIdentifierAnalysis(table);
 		index.performIdentifierAnalysis(table);
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
-		MetaType leftType = leftExpression.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType leftType = leftExpression.performTypeAnalysis();
 		if (leftType instanceof ArrayType) {
-			if (index.returnsSingleElement()) {
-				return ((ArrayType) leftType).getInternalType();
-			} else {
-				return leftType;
-			}
+			ArrayType leftT = (ArrayType)leftType;
+			MetaType internalType = leftT.getInternalType();
+			length = leftT.getLength();
+			elementSize = internalType.getSize();return internalType;
 		}
 
 		throw new CompilationException("Performing [] operator on a non-array type: " + leftType,
@@ -49,14 +61,20 @@ public class ArrayIdentifier extends VarIdentifier {
 	}
 
 	@Override
-	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
-		leftExpression.performMemoryAnalysis(currentOffset, currentDepth);
-		index.performMemoryAnalysis(currentOffset, currentDepth);
-		return currentOffset;
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		leftExpression.performMemoryAssignment(currentOffset, nestingDepth);
+		index.performMemoryAssignment(currentOffset, nestingDepth);
+	}
+
+	public void generateCodeI(PMachineOutputStream stream) throws IOException {
+		index.generateCodeR(stream);
+		stream.appendInstruction("chk", 0, length - 1);
+		stream.appendInstruction("ixa", elementSize);
 	}
 
 	@Override
-	public void generateCodeR(PMachineOutputStream stream) {
-		// FIXME: Unimplemented method stub
+	public void generateCodeL(PMachineOutputStream stream) throws IOException {
+		leftExpression.generateCodeL(stream);
+		generateCodeI(stream);
 	}
 }

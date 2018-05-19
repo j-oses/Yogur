@@ -1,8 +1,9 @@
 package yogur.tree.expression;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.utils.CompilationException;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
@@ -10,7 +11,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class BinaryOperation extends Expression {
 	public enum Operator {
@@ -66,16 +67,25 @@ public class BinaryOperation extends Expression {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public int getDepthOnStack() {
+		if (Operator.MOD.equals(operator)) {
+			return generateModExpression().getDepthOnStack();
+		} else {
+			return left.getDepthOnStack() + right.getDepthOnStack();
+		}
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		left.performIdentifierAnalysis(table);
 		right.performIdentifierAnalysis(table);
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType() throws CompilationException {
 		MetaType argType = operator.getArgumentsType();
-		MetaType leftType = left.performTypeAnalysis(idTable);
-		MetaType rightType = right.performTypeAnalysis(idTable);
+		MetaType leftType = left.performTypeAnalysis();
+		MetaType rightType = right.performTypeAnalysis();
 
 		if (argType.equals(leftType) && argType.equals(rightType)) {
 			return operator.getReturnType();
@@ -86,25 +96,27 @@ public class BinaryOperation extends Expression {
 	}
 
 	@Override
-	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
-		left.performMemoryAnalysis(currentOffset, currentDepth);
-		right.performMemoryAnalysis(currentOffset, currentDepth);
-		return currentOffset;
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		left.performMemoryAssignment(currentOffset, nestingDepth);
+		right.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 
 	@Override
 	public void generateCodeR(PMachineOutputStream stream) throws IOException {
 		if (operator.equals(Operator.MOD)) {
-			Expression generatedExp = new BinaryOperation(left,
-					new BinaryOperation(right,
-							new BinaryOperation(left, right, operator.DIV),
-							Operator.PROD),
-					Operator.SUBS);
+			Expression generatedExp = generateModExpression();
 			generatedExp.generateCodeR(stream);
 		} else {
 			left.generateCodeR(stream);
 			right.generateCodeR(stream);
 			stream.appendInstruction(instructionName.get(operator));
 		}
+	}
+
+	private Expression generateModExpression() {
+		// l % r is equivalent to l - ((l / r) * r)
+		Expression division = new BinaryOperation(left, right, operator.DIV);	// l / r
+		Expression product = new BinaryOperation(division, right, Operator.PROD);	// (l / r) * r
+		return new BinaryOperation(left, product, Operator.SUBS);	// l - ((l / r) * r)
 	}
 }

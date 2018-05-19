@@ -4,6 +4,7 @@ import yogur.cup.YogurParser;
 import yogur.ididentification.IdentifierAnalyzer;
 import yogur.jlex.YogurLex;
 import yogur.tree.Program;
+import yogur.utils.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,6 +41,21 @@ public class TestIdentifiers {
 			YogurLex jlex = new YogurLex(new InputStreamReader(is));
 			p = new YogurParser(jlex);
 			Program prog = (Program)p.parse().value;
+
+			if (!jlex.getExceptions().isEmpty()) {
+				for (Exception e: jlex.getExceptions()) {
+					Log.error(e);
+				}
+				return;
+			}
+
+			if (!p.getExceptions().isEmpty()) {
+				for (Exception e: jlex.getExceptions()) {
+					Log.error(e);
+				}
+				return;
+			}
+
 			IdentifierAnalyzer identifierAnalyzer = new IdentifierAnalyzer(prog);
 			identifierAnalyzer.decorateTree();
 			System.out.println("Success!" + prog);

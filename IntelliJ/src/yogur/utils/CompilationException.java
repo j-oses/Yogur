@@ -1,4 +1,4 @@
-package yogur.error;
+package yogur.utils;
 
 import java_cup.runtime.Symbol;
 
@@ -8,7 +8,7 @@ import yogur.cup.sym;
 
 public class CompilationException extends IOException {
 	public enum Scope {
-		LexicalAnalyzer, SyntacticalAnalyzer, TypeAnalyzer, IdentificatorIdentification, CodeGeneration
+		LexicalAnalyzer, SyntacticalAnalyzer, TypeAnalyzer, IdentifierIdentification
 	}
 
 	private Scope scope;
@@ -48,4 +48,6 @@ public class CompilationException extends IOException {
 		}
 		return lineString + scope.name() + " error - " + super.getMessage();
 	}
+
+
 }

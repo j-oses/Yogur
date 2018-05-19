@@ -94,7 +94,7 @@ showSTORE st = showString $ L.intercalate "\n" (map show s)
 
 
 -- The default size of the data store (If you need more memory, change it)
-stSize = 5000
+stSize = 100
 
 
 -- The initial P-machine state. All memory positions are set to Null
@@ -235,7 +235,7 @@ interpret (LDC v) (St (pc,mp,sp,ep,np,store,cds)) =
 interpret i@IND  st@(St (pc,mp,sp,ep,np,store,cds)) =
           if not (int v) 
              then E.throw (AddressNotInt i st)
-             else if orig > sp || orig >= stSize
+             else if orig > sp && orig < np
                   then E.throw (AdressOutOfRange i st) 
                   else St (pc,mp,sp,ep,np,M.insert sp (store M.! orig) store,cds)
           where v@ ~(Int orig) = store M.! sp         
@@ -248,7 +248,7 @@ interpret i@(SRO q) st@(St (pc,mp,sp,ep,np,store,cds)) =
 interpret i@STO st@(St (pc,mp,sp,ep,np,store,cds)) =
           if not (int v)
              then E.throw (AddressNotInt i st)
-             else if q > sp || q >= stSize
+             else if q > sp && q < np
                   then E.throw (AdressOutOfRange i st) 
                   else St (pc,mp,sp-2,ep,np,M.insert q (store M.! sp) store,cds)
           where v@ ~(Int q) = store M.! (sp-1)
@@ -323,7 +323,7 @@ interpret i@OR  st@(St (pc,mp,sp,ep,np,store,cds)) =
 interpret i@NOT  st@(St (pc,mp,sp,ep,np,store,cds)) =
           if not (bool v) 
              then E.throw (NonBooleanValue i st)
-             else St (pc,mp,sp,ep,np,M.insert sp (Bool (not b)) store,cds)
+             else St (pc,mp,sp,ep,np,M.insert (sp) (Bool (not b)) store,cds)
           where v@ ~(Bool b) = store M.! sp
 
 interpret EQU  (St (pc,mp,sp,ep,np,store,cds)) =
@@ -380,10 +380,10 @@ interpret i@(FJP q) st@(St (pc,mp,sp,ep,np,store,cds)) =
           where v@ ~(Bool b) = store M.! sp
 
 interpret i@(IXJ q) st@(St (pc,mp,sp,ep,np,store,cds)) =
-       if q < 0|| q >= cds 
-          then E.throw (LabelOutOfRange i st)
-          else if not (int v)
-               then E.throw (NonArithmeticValue i st)
+       if not (int v)
+          then E.throw (NonArithmeticValue i st)
+          else if a + q < 0|| a + q >= cds 
+               then E.throw (LabelOutOfRange i st)
                else St (a + q,mp,sp-1,ep,np,store,cds)
           where v@ ~(Int a) = store M.! sp
 
@@ -440,7 +440,7 @@ interpret SLI (St (pc,mp,sp,ep,np,store,cds)) =
 interpret i@NEW  st@(St (pc,mp,sp,ep,np,store,cds)) =
     if not (int v1) || not (int v2)
        then E.throw (AddressNotInt i st)
-       else if addr > sp || addr >= stSize
+       else if addr > sp && addr < np
             then E.throw (AdressOutOfRange i st) 
             else if np - size <= ep
                  then E.throw (StackHeapCollision i st)

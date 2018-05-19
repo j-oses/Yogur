@@ -1,6 +1,10 @@
 class Container {
     var one : Int
     var two : Int
+
+    def compare(b: Int) -> result : Bool {
+    	result = one < b
+    }
 }
 def sum(one : Int, two : Int) -> result : Int {
     result = one + two
@@ -8,6 +12,7 @@ def sum(one : Int, two : Int) -> result : Int {
 var cont : Container
 cont.two = 2
 cont.one = 1
+var a: Bool = cont.compare(1)
 var estaeluno : Bool = false
 var estaeldos : Bool = false
 var numbers : Int[4]

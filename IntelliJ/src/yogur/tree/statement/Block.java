@@ -1,9 +1,13 @@
 package yogur.tree.statement;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.tree.type.Type;
+import yogur.typeidentification.VoidType;
+import yogur.utils.CompilationException;
+import yogur.ididentification.IdentifierTable;
 import yogur.typeidentification.MetaType;
+import yogur.utils.Log;
 
 import java.io.IOException;
 import java.util.List;
@@ -11,28 +15,25 @@ import java.util.List;
 public class Block extends Statement {
 	private List<Statement> statements;
 
-	private int decSize;	// Size of declarations on its level
-
 	public Block(List<Statement> s) {
 		statements = s;
 	}
 
-	public int getMaxSize() {
-		int max = -1;
+	@Override
+	public int getMaxDepthOnStack() {
+		int result = 0;
 		for (Statement s: statements) {
-			if (s instanceof Block) {
-				max = Math.max(max, ((Block) s).getMaxSize());
-			}
+			result = Math.max(result, s.getMaxDepthOnStack());
 		}
-		return max + decSize;
+		return result;
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		performIdentifierAnalysis(table, true);
 	}
 
-	public void performIdentifierAnalysis(IdIdentifier table, boolean open) throws CompilationException {
+	public void performIdentifierAnalysis(IdentifierTable table, boolean open) throws CompilationException {
 		if (open) {
 			table.openBlock();
 		}
@@ -43,21 +44,23 @@ public class Block extends Statement {
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType() throws CompilationException {
 		for (Statement s: statements) {
-			s.performTypeAnalysis(idTable);
+			MetaType type = s.performTypeAnalysis();
+
+			if (!(type == null || type instanceof VoidType)) {
+				throw new CompilationException("Found statement-level expression with non-void type",
+						getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
+			}
 		}
 		return null;
 	}
 
 	@Override
-	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
-		int offset = currentOffset;
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
 		for (Statement s: statements) {
-			offset = s.performMemoryAnalysis(offset, currentDepth);
+			s.performMemoryAssignment(currentOffset, nestingDepth);
 		}
-		decSize = offset - currentOffset;
-		return currentOffset;
 	}
 
 	@Override

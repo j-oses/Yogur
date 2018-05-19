@@ -5,8 +5,10 @@ import yogur.ididentification.IdentifierAnalyzer;
 import yogur.jlex.YogurLex;
 import yogur.tree.Program;
 import yogur.typeidentification.TypeAnalyzer;
+import yogur.utils.Log;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 
@@ -14,16 +16,21 @@ public class TestTypes {
 	private static String TESTDIR = "./../tests/";
 
 	public static void main(String args[]) {
-		File file = new File("./../tests/simple.yogur");
+		File file = new File("./../tests/exampleOne.yogur");
 
-		testFile(file);
-		//testAll();
+		//testFile(file);
+		testAll();
 	}
 
 	public static void testAll(){
 		File dir = new File(TESTDIR);
 
-		File[] directoryListing = dir.listFiles();
+		File[] directoryListing = dir.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File pathname) {
+				return pathname.getPath().endsWith(".yogur");
+			}
+		});
 		if (directoryListing != null) {
 			for (File file : directoryListing) {
 				System.out.println(">>>> TESTING FILE " + file.getName() + " <<<<");
@@ -41,19 +48,31 @@ public class TestTypes {
 		try (FileInputStream is = new FileInputStream(file)) {
 			YogurLex jlex = new YogurLex(new InputStreamReader(is));
 			p = new YogurParser(jlex);
-
 			Program prog = (Program)p.parse().value;
+
+			if (!jlex.getExceptions().isEmpty()) {
+				for (Exception e: jlex.getExceptions()) {
+					Log.error(e);
+				}
+				return;
+			}
+
+			if (!p.getExceptions().isEmpty()) {
+				for (Exception e: jlex.getExceptions()) {
+					Log.error(e);
+				}
+				return;
+			}
 
 			IdentifierAnalyzer identifierAnalyzer = new IdentifierAnalyzer(prog);
 			identifierAnalyzer.decorateTree();
 
-			TypeAnalyzer typeAnalyzer = new TypeAnalyzer(prog, identifierAnalyzer.getIdentifierTable());
+			TypeAnalyzer typeAnalyzer = new TypeAnalyzer(prog);
 			typeAnalyzer.decorateTree();
 
 			System.out.println("Success!" + prog);
 		} catch (Exception e) {
-			System.err.println("Parsing error " + p.getExceptions() + " on file " + file.getName());
-			e.printStackTrace();
+			Log.error(e);
 		}
 	}
 }

@@ -5,7 +5,7 @@ CLASSPATH = "java_cup_jars/java-cup-11b.jar:java_cup_jars/java-cup-11b-runtime.j
 init:
 	$(JAVAC) JLex/*.java
 
-parse: yogur.cup YogurLex.java
+parse: yogur.cup
 	$(JAVA) -cp java_cup_jars/java-cup-11b.jar java_cup.Main -parser YogurParser yogur.cup
 	mv YogurParser.java IntelliJ/src/yogur/cup/YogurParser.java
 	mv sym.java IntelliJ/src/yogur/cup/sym.java

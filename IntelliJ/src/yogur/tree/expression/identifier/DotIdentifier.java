@@ -1,13 +1,21 @@
 package yogur.tree.expression.identifier;
 
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.codegen.IntegerReference;
+import yogur.codegen.PMachineOutputStream;
+import yogur.tree.declaration.Argument;
+import yogur.tree.statement.VarDeclaration;
+import yogur.tree.type.ArrayType;
+import yogur.utils.CompilationException;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.tree.expression.Expression;
-import yogur.tree.type.BaseType;
+import yogur.tree.type.ClassType;
 import yogur.typeidentification.MetaType;
+import yogur.utils.Log;
 
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import java.io.IOException;
+
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class DotIdentifier extends VarIdentifier {
 	private Expression expression;
@@ -21,31 +29,51 @@ public class DotIdentifier extends VarIdentifier {
 	}
 
 	@Override
+	public boolean isAssignable() {
+		return expression.isAssignable() && declaration instanceof Argument;
+	}
+
+	@Override
 	public Declaration getDeclaration() {
 		return declaration;
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public int getDepthOnStack() {
+		return expression.getDepthOnStack() + 1;
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		expression.performIdentifierAnalysis(table);
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
-		MetaType left = expression.performTypeAnalysis(idTable);
-		if (left instanceof BaseType) {
-			String name = ((BaseType) left).getName();
-			declaration = idTable.searchIdOnClass(identifier, name, getLine(), getColumn());
-			return declaration.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType left = expression.performTypeAnalysis();
+		if (left instanceof ClassType) {
+			ClassType classT = (ClassType) left;
+			declaration = classT.getDeclaration().getDeclaration(identifier);
+			return declaration.performTypeAnalysis();
 		}
 
-		throw new CompilationException("Trying to member access (." + identifier + ") on a compound type " + left,
+		throw new CompilationException("Trying to member access (." + identifier + ") on a non-class type " + left,
 				getLine(), getColumn(), TypeAnalyzer);
 	}
 
 	@Override
-	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
-		expression.performMemoryAnalysis(currentOffset, currentDepth);
-		return currentOffset;
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		expression.performMemoryAssignment(currentOffset, nestingDepth);
+	}
+
+	@Override
+	public void generateCodeL(PMachineOutputStream stream) throws IOException {
+		expression.generateCodeL(stream);
+		if (declaration instanceof Argument) {
+			stream.appendInstruction("inc", ((Argument)declaration).getOffset());
+		}
+
+		// For a function, we have to do nothing more. We only want to identify the class that is on the left of
+		// this dot operator, and this is already done with codeL(exp).
 	}
 }

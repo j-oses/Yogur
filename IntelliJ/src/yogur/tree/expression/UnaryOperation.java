@@ -1,14 +1,15 @@
 package yogur.tree.expression;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.utils.CompilationException;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
 import java.io.IOException;
 
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 import static yogur.tree.expression.UnaryOperation.Operator.NOT;
 import static yogur.tree.type.BaseType.PredefinedType.Bool;
 import static yogur.tree.type.BaseType.PredefinedType.Int;
@@ -27,13 +28,18 @@ public class UnaryOperation extends Expression {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public int getDepthOnStack() {
+		return expression.getDepthOnStack();
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		expression.performIdentifierAnalysis(table);
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
-		MetaType argType = expression.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType argType = expression.performTypeAnalysis();
 		MetaType expectedType = new BaseType(
 				operator.equals(NOT) ? Bool : Int);
 
@@ -46,9 +52,8 @@ public class UnaryOperation extends Expression {
 	}
 
 	@Override
-	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
-		expression.performMemoryAnalysis(currentOffset, currentDepth);
-		return currentOffset;
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		expression.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 
 	@Override

@@ -1,11 +1,7 @@
 package yogur.tree.type;
 
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
-import yogur.tree.declaration.Declaration;
-import yogur.typeidentification.MetaType;
-
-import java.util.Map;
+import yogur.utils.CompilationException;
+import yogur.ididentification.IdentifierTable;
 
 public class BaseType extends Type {
 	public enum PredefinedType {
@@ -21,40 +17,36 @@ public class BaseType extends Type {
 		}
 	}
 
-	private String name;
-
-	private Map<String, Declaration> classInfo;
+	private PredefinedType type;
 
 	public BaseType(String name) {
-		this.name = name;
+		this.type = PredefinedType.valueOf(name);
 	}
 
 	public BaseType(PredefinedType preType) {
-		this(preType.name());
+		this.type = preType;
 	}
 
 	public String getName() {
-		return name;
+		return type.name();
 	}
 
-	@Override
-	Type getBaseType() {
-		return this;
-	}
-
-	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
-		// Do nothing
-	}
-
-	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
-		if (PredefinedType.hasValue(name) || idTable.hasClassNamed(name)) {
-			classInfo = idTable.getClassInfo(name);
-			return this;
+	public String defaultValue() {
+		if (PredefinedType.Int.equals(type)) {
+			return "0";
+		} else {
+			return "false";
 		}
-		throw new CompilationException("No type declared with name: " + name, getLine(),
-				getColumn(), CompilationException.Scope.TypeAnalyzer);
+	}
+
+	@Override
+	public int getSize() {
+		return 1;
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
+		// Do nothing
 	}
 
 	@Override
@@ -63,21 +55,11 @@ public class BaseType extends Type {
 			return false;
 		}
 		BaseType other = (BaseType)obj;
-		return other.name.equals(name);
+		return other.type.equals(type);
 	}
 
 	@Override
 	public String toString() {
-		return name;
-	}
-
-	@Override
-	public int sizeOf() {
-		if (PredefinedType.hasValue(name)) {
-			return 1;
-		} else {
-			// FIXME: Return a value
-			return -1;
-		}
+		return type.name();
 	}
 }

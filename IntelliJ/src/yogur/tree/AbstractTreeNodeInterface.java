@@ -1,14 +1,15 @@
 package yogur.tree;
 
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.codegen.IntegerReference;
+import yogur.utils.CompilationException;
+import yogur.ididentification.IdentifierTable;
 import yogur.typeidentification.MetaType;
 
 public interface AbstractTreeNodeInterface {
-	void performIdentifierAnalysis(IdIdentifier table) throws CompilationException;
-	MetaType analyzeType(IdIdentifier idTable) throws CompilationException;
-	MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException;
-	int performMemoryAnalysis(int currentOffset, int currentDepth);
+	void performIdentifierAnalysis(IdentifierTable table) throws CompilationException;
+	MetaType analyzeType() throws CompilationException;
+	MetaType performTypeAnalysis() throws CompilationException;
+	void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth);
 
 	void setLine(int line);
 

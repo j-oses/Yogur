@@ -1,8 +1,11 @@
 package yogur.tree;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.tree.expression.Expression;
+import yogur.typeidentification.VoidType;
+import yogur.utils.CompilationException;
+import yogur.ididentification.IdentifierTable;
 import yogur.typeidentification.MetaType;
 
 import java.io.IOException;
@@ -10,48 +13,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Program extends AbstractTreeNode {
-	private List<StatementOrDeclaration> statements;
+	private List<StatementOrDeclaration> instructions;
+	int staticDataLength;
 
 	public Program() {
-		statements = new ArrayList<>();
+		instructions = new ArrayList<>();
 	}
 
 	public Program(StatementOrDeclaration s) {
-		statements = new ArrayList<>();
-		statements.add(s);
+		instructions = new ArrayList<>();
+		instructions.add(s);
 	}
 
 	public Program(Program p, StatementOrDeclaration s) {
-		statements = p.statements;
-		statements.add(s);
+		instructions = p.instructions;
+		instructions.add(s);
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
-		for (StatementOrDeclaration i: statements) {
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
+		for (StatementOrDeclaration i: instructions) {
 			i.performIdentifierAnalysis(table);
 		}
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
-		for (StatementOrDeclaration s: statements) {
-			s.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		for (StatementOrDeclaration s: instructions) {
+			MetaType type = s.performTypeAnalysis();
+
+			if ((s instanceof Expression) && !(type == null || type instanceof VoidType)) {
+				throw new CompilationException("Found statement-level expression with non-void type",
+						getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
+			}
 		}
 		return null;
 	}
 
 	@Override
-	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
-		int offset = currentOffset;
-		for (StatementOrDeclaration s: statements) {
-			offset = s.performMemoryAnalysis(offset, currentDepth);
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		for (StatementOrDeclaration s: instructions) {
+			s.performMemoryAssignment(currentOffset, nestingDepth);
 		}
-		return offset;
+
+		staticDataLength = currentOffset.getValue();
 	}
 
 	public void generateCode(PMachineOutputStream stream) throws IOException {
-		for (StatementOrDeclaration s: statements) {
+		stream.appendInstruction("ssp", staticDataLength);
+		for (StatementOrDeclaration s: instructions) {
 			s.generateCode(stream);
 		}
 	}

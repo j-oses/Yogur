@@ -1,17 +1,16 @@
 package yogur.tree.statement;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.utils.CompilationException;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
 import java.io.IOException;
 
-import static yogur.error.CompilationException.Scope;
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
-import static yogur.tree.type.BaseType.PredefinedType;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 import static yogur.tree.type.BaseType.PredefinedType.Bool;
 
 public class IfStructure extends Statement {
@@ -26,7 +25,13 @@ public class IfStructure extends Statement {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public int getMaxDepthOnStack() {
+		return Math.max(condition.getDepthOnStack(),
+				Math.max(ifClause.getMaxDepthOnStack(), elseClause.getMaxDepthOnStack()));
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		condition.performIdentifierAnalysis(table);
 		ifClause.performIdentifierAnalysis(table);
 		if (elseClause != null) {
@@ -35,11 +40,11 @@ public class IfStructure extends Statement {
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
-		MetaType condType = condition.performTypeAnalysis(idTable);
-		ifClause.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType condType = condition.performTypeAnalysis();
+		ifClause.performTypeAnalysis();
 		if (elseClause != null) {
-			elseClause.performTypeAnalysis(idTable);
+			elseClause.performTypeAnalysis();
 		}
 
 		if (new BaseType(Bool).equals(condType)) {
@@ -51,34 +56,35 @@ public class IfStructure extends Statement {
 	}
 
 	@Override
-	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
-		int offset = currentOffset;
-		offset = condition.performMemoryAnalysis(offset, currentDepth);
-		offset = ifClause.performMemoryAnalysis(offset, currentDepth);
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		condition.performMemoryAssignment(currentOffset, nestingDepth);
+		ifClause.performMemoryAssignment(currentOffset, nestingDepth);
 		if (elseClause != null) {
-			offset = elseClause.performMemoryAnalysis(offset, currentDepth);
+			elseClause.performMemoryAssignment(currentOffset, nestingDepth);
 		}
-		return offset;
 	}
 
 	@Override
 	public void generateCode(PMachineOutputStream stream) throws IOException {
-		String elseLabel = stream.generateUnusedLabel();
-		String endLabel = stream.generateUnusedLabel();
+		String labelElse = stream.generateLabelWithUnusedId("else");
+		String labelEndif = stream.generateLabelWithUnusedId("endif");
 
 		condition.generateCodeR(stream);
-		stream.appendInstruction("fjp", elseLabel);
+
+		if (elseClause != null) {
+			stream.appendLabelledInstruction("fjp", labelElse);
+		} else {
+			stream.appendLabelledInstruction("fjp", labelEndif);
+		}
+
 		ifClause.generateCode(stream);
 
 		if (elseClause != null) {
-			stream.appendInstruction("ujp", endLabel);
-		}
-
-		stream.appendLabel(elseLabel);
-
-		if (elseClause != null) {
+			stream.appendLabelledInstruction("ujp", labelEndif);
+			stream.appendLabel(labelElse);
 			elseClause.generateCode(stream);
-			stream.appendLabel(endLabel);
 		}
+
+		stream.appendLabel(labelEndif);
 	}
 }

@@ -1,19 +1,20 @@
 package yogur.tree.statement;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.tree.expression.BinaryOperation;
+import yogur.tree.expression.Constant;
 import yogur.tree.expression.identifier.BaseIdentifier;
+import yogur.utils.CompilationException;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.type.BaseType;
 import yogur.tree.declaration.Argument;
-import yogur.tree.declaration.declarator.BaseDeclarator;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
 
 import java.io.IOException;
 
-import static yogur.error.CompilationException.Scope;
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class ForStructure extends Statement {
 	private Argument argument;
@@ -21,7 +22,7 @@ public class ForStructure extends Statement {
 	private Expression end;
 	private Block block;
 
-	public ForStructure(BaseDeclarator declarator, Expression s, Expression e, Block b) {
+	public ForStructure(BaseIdentifier declarator, Expression s, Expression e, Block b) {
 		this.argument = new Argument(declarator, new BaseType(BaseType.PredefinedType.Int));
 		this.start = s;
 		this.end = e;
@@ -29,7 +30,13 @@ public class ForStructure extends Statement {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public int getMaxDepthOnStack() {
+		// The 4 is to take in consideration the assignment i = i + 1.
+		return Math.max(Math.max(4, block.getMaxDepthOnStack()), Math.max(start.getDepthOnStack(), end.getDepthOnStack()));
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		table.openBlock();
 		argument.performIdentifierAnalysis(table);
 		start.performIdentifierAnalysis(table);
@@ -38,10 +45,10 @@ public class ForStructure extends Statement {
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
-		MetaType argType = argument.performTypeAnalysis(idTable);
-		MetaType startType = start.performTypeAnalysis(idTable);
-		MetaType endType = end.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType argType = argument.performTypeAnalysis();
+		MetaType startType = start.performTypeAnalysis();
+		MetaType endType = end.performTypeAnalysis();
 
 		if (!argType.equals(startType)) {
 			throw new CompilationException("Invalid iteration limits on for loop start, with type: " + startType,
@@ -53,40 +60,36 @@ public class ForStructure extends Statement {
 					end.getLine(), end.getColumn(), TypeAnalyzer);
 		}
 
-		block.performIdentifierAnalysis(idTable);
+		block.performTypeAnalysis();
 		return null;
 	}
 
 	@Override
-	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
-		int offset = argument.performMemoryAnalysis(currentOffset, currentDepth);
-		start.performMemoryAnalysis(offset, currentDepth);
-		end.performMemoryAnalysis(offset, currentDepth);
-		offset = block.performMemoryAnalysis(offset, currentDepth);
-		return offset;
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		argument.performMemoryAssignment(currentOffset, nestingDepth);
+		start.performMemoryAssignment(currentOffset, nestingDepth);
+		end.performMemoryAssignment(currentOffset, nestingDepth);
+		block.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 
 	@Override
 	public void generateCode(PMachineOutputStream stream) throws IOException {
-		String startLabel = stream.generateUnusedLabel();
-		String endLabel = stream.generateUnusedLabel();
-		BaseIdentifier iId = new BaseIdentifier(argument.getDeclarator().getIdentifier());	// FIXME: Needs a declaration
+		String labelStart = stream.generateLabelWithUnusedId("for");
+		String labelEnd = stream.generateLabel("endFor");
 
-		// Initial i value
-		argument.getDeclarator().generateCodeL(stream);
-		start.generateCodeR(stream);
-		stream.appendInstruction("sto");
+		BaseIdentifier varId = new BaseIdentifier(argument);
+		Assignment startAssignment = new Assignment(argument.getDeclarator(), start);
+		Assignment incrementAssignment = new Assignment(argument.getDeclarator(),
+				new BinaryOperation(varId, new Constant(1), BinaryOperation.Operator.SUM));
+		Expression condition = new BinaryOperation(varId, end, BinaryOperation.Operator.LEQ);
 
-		// Condition checking
-		stream.appendLabel(startLabel);
-		iId.generateCodeR(stream);
-		end.generateCodeR(stream);
-		stream.appendInstruction("leq");
-		stream.appendInstruction("fjp", end);
-
-		// Body and loop
+		startAssignment.generateCode(stream);
+		stream.appendLabel(labelStart);
+		condition.generateCodeR(stream);
+		stream.appendLabelledInstruction("fjp", labelEnd);
 		block.generateCode(stream);
-		stream.appendInstruction("ujp", start);
-		stream.appendLabel(endLabel);
+		incrementAssignment.generateCode(stream);
+		stream.appendLabelledInstruction("ujp", labelStart);
+		stream.appendLabel(labelEnd);
 	}
 }

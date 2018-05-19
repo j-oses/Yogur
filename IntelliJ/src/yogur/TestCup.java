@@ -3,6 +3,7 @@ package yogur;
 import java_cup.runtime.Symbol;
 import yogur.cup.YogurParser;
 import yogur.jlex.YogurLex;
+import yogur.utils.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -42,6 +43,21 @@ public class TestCup {
 			p = new YogurParser(jlex);
 
 			Symbol s = p.parse();
+
+			if (!jlex.getExceptions().isEmpty()) {
+				for (Exception e: jlex.getExceptions()) {
+					Log.error(e);
+				}
+				return;
+			}
+
+			if (!p.getExceptions().isEmpty()) {
+				for (Exception e: jlex.getExceptions()) {
+					Log.error(e);
+				}
+				return;
+			}
+
 			System.out.println(s);
 		} catch (Exception e) {
 			System.err.println("Parsing error " + p.getExceptions() + " on file " + file.getName());

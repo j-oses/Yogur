@@ -1,24 +1,24 @@
 package yogur.tree.statement;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.tree.declaration.ClassDeclaration;
+import yogur.tree.type.BaseType;
+import yogur.utils.CompilationException;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Argument;
 import yogur.tree.declaration.FunctionOrVarDeclaration;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
+import yogur.utils.Log;
 
 import java.io.IOException;
 
-import static yogur.error.CompilationException.Scope;
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class VarDeclaration extends Statement implements FunctionOrVarDeclaration {
 	private Argument argument;
 	private Expression assignTo;	// May be null
-
-	private int size;
-	private int nestingDepth;
 
 	public VarDeclaration(Argument argument) {
 		this(argument, null);
@@ -29,38 +29,68 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 		this.assignTo = assignTo;
 	}
 
-	public int getSize() {
-		return size;
+	@Override
+	public String getName() {
+		return argument.getDeclarator().getName();
 	}
 
-	public int getNestingDepth() {
-		return nestingDepth;
+	@Override
+	public String getDeclarationDescription() {
+		return "Var declaration";
 	}
 
 	public int getOffset() {
 		return argument.getOffset();
 	}
 
+	public Argument getArgument() {
+		return argument;
+	}
+
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public int getMaxDepthOnStack() {
+		return assignTo != null ? (assignTo.getDepthOnStack() + 1) : 2;
+	}
+
+	@Override
+	public void setDeclaredOnClass(ClassDeclaration clazz) {
+		argument.setDeclaredOnClass(clazz);
+	}
+
+	public boolean isDeclaredOnClass() {
+		return argument.isDeclaredOnClass();
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
+		performInsertIdentifierAnalysis(table);
+		performBodyIdentifierAnalysis(table);
+	}
+
+	@Override
+	public void performInsertIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		argument.performIdentifierAnalysis(table);
+	}
+
+	@Override
+	public void performBodyIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		if (assignTo != null) {
 			assignTo.performIdentifierAnalysis(table);
 		}
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
-		MetaType argType = argument.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType argType = argument.performTypeAnalysis();
 
 		if (assignTo == null) {
-			return null;
+			return argType;
 		}
 
-		MetaType assType = assignTo.performTypeAnalysis(idTable);
+		MetaType assType = assignTo.performTypeAnalysis();
 
 		if (argType.equals(assType)) {
-			return null;
+			return argType;
 		}
 
 		throw new CompilationException("Assigning an expression of type: " + assType +
@@ -68,19 +98,19 @@ public class VarDeclaration extends Statement implements FunctionOrVarDeclaratio
 	}
 
 	@Override
-	public MetaType performTypeAnalysis(IdIdentifier idTable) throws CompilationException {
-		MetaType type = super.performTypeAnalysis(idTable);
-		size = type.sizeOf();
-		return type;
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		argument.performMemoryAssignment(currentOffset, nestingDepth);
+		if (assignTo != null) {
+			assignTo.performMemoryAssignment(currentOffset, nestingDepth);
+		}
 	}
 
 	@Override
-	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
-		nestingDepth = currentDepth;
-		currentOffset = argument.performMemoryAnalysis(currentOffset, currentDepth);
+	public void generateCode(PMachineOutputStream stream) throws IOException {
 		if (assignTo != null) {
-			currentOffset = assignTo.performMemoryAnalysis(currentOffset, currentDepth);
+			argument.getDeclarator().generateCodeL(stream);
+			assignTo.generateCodeR(stream);
+			stream.appendInstruction("sto");
 		}
-		return currentOffset;
 	}
 }

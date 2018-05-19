@@ -1,20 +1,18 @@
 package yogur.typeidentification;
 
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.utils.CompilationException;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.Program;
 
 public class TypeAnalyzer {
     private Program program;
-    private IdIdentifier idTable;
 
-    public TypeAnalyzer(Program program, IdIdentifier idTable) {
+    public TypeAnalyzer(Program program) {
         this.program = program;
-        this.idTable = idTable;
     }
 
     public Program decorateTree() throws CompilationException {
-		program.performTypeAnalysis(idTable);
+		program.performTypeAnalysis();
 
         return program;
     }

@@ -7,7 +7,7 @@ package yogur.jlex;
 import java_cup.runtime.Symbol;
 
 import yogur.cup.sym;
-import yogur.error.CompilationException;
+import yogur.utils.CompilationException;
 
 import java.util.List; 
 import java.util.ArrayList;
@@ -73,8 +73,6 @@ opAnd = ((and)|(&&))
 opOr = ((or)|(\|\|))
 opNot = (\!|(not))
 opDot = \.
-opLRange = \[:
-opRRange = :\]
 opEq = "=="
 opNeq = "!="
 opGeq = ">="
@@ -105,8 +103,6 @@ bloqueCierre = ({separador}*\n{separador}*)*\}
 {opAnd}					{return new Symbol(sym.AND, line(), column()); }
 {opOr}					{return new Symbol(sym.OR, line(), column()); }
 {opNot}					{return new Symbol(sym.NOT, line(), column()); }
-{opLRange}				{return new Symbol(sym.LRANGE, line(), column()); }
-{opRRange}				{return new Symbol(sym.RRANGE, line(), column()); }
 {opDot}					{return new Symbol(sym.DOT, line(), column()); }
 {opEq}					{return new Symbol(sym.EQ, line(), column()); }
 {opNeq}					{return new Symbol(sym.NEQ, line(), column()); }

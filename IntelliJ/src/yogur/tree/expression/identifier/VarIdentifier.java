@@ -9,4 +9,10 @@ import java.io.IOException;
 
 public abstract class VarIdentifier extends Expression {
 	public abstract Declaration getDeclaration();
+
+	@Override
+	public void generateCodeR(PMachineOutputStream stream) throws IOException {
+		generateCodeL(stream);
+		stream.appendInstruction("ind");
+	}
 }

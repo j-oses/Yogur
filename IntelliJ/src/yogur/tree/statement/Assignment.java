@@ -1,35 +1,45 @@
 package yogur.tree.statement;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
-import yogur.tree.declaration.declarator.Declarator;
+import yogur.utils.CompilationException;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.MetaType;
 
 import java.io.IOException;
 
-import static yogur.error.CompilationException.Scope.TypeAnalyzer;
+import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class Assignment extends Statement {
-	private Declarator declarator;
+	private Expression declarator;
 	private Expression expression;
 
-	public Assignment(Declarator declarator, Expression e) {
+	public Assignment(Expression declarator, Expression e) {
 		this.declarator = declarator;
 		this.expression = e;
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public int getMaxDepthOnStack() {
+		return Math.max(declarator.getDepthOnStack(), expression.getDepthOnStack());
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		declarator.performIdentifierAnalysis(table);
 		expression.performIdentifierAnalysis(table);
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
-		MetaType decType = declarator.performTypeAnalysis(idTable);
-		MetaType expType = expression.performTypeAnalysis(idTable);
+	public MetaType analyzeType() throws CompilationException {
+		MetaType decType = declarator.performTypeAnalysis();
+		MetaType expType = expression.performTypeAnalysis();
+
+		if (!declarator.isAssignable()) {
+			throw new CompilationException("Expected a var declaration", getLine(), getColumn(),
+					CompilationException.Scope.TypeAnalyzer);
+		}
 
 		if (!expType.equals(decType)) {
 			throw new CompilationException("Could not assign result of type " + expType
@@ -41,9 +51,9 @@ public class Assignment extends Statement {
 	}
 
 	@Override
-	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
-		expression.performMemoryAnalysis(currentOffset, currentDepth);
-		return currentOffset;
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		declarator.performMemoryAssignment(currentOffset, nestingDepth);
+		expression.performMemoryAssignment(currentOffset, nestingDepth);
 	}
 
 	@Override

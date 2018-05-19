@@ -1,0 +1,26 @@
+class Container {
+    var one : Int
+    var two : Int
+}
+var dondeUno: Int
+var dondeDos: Int
+var cont : Container
+cont.two = 2
+cont.one = 1
+var a: Bool = 1 < 2
+var estaeluno : Bool = false
+var estaeldos : Bool = false
+var numbers : Int[4]
+numbers[0] = 1
+numbers[1] = 2
+numbers[2] = 3
+numbers[3] = 4
+for i in 0 to 3 {
+    if numbers[i] == cont.two {
+        estaeldos = true
+        dondeUno = i
+    } else if numbers[i] == cont.one {
+        estaeluno = true
+        dondeDos = i
+    }
+}

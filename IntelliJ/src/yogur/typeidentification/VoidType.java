@@ -12,7 +12,7 @@ public class VoidType implements MetaType {
 	}
 
 	@Override
-	public int sizeOf() {
+	public int getSize() {
 		return 0;
 	}
 }

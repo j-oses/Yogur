@@ -1,0 +1,113 @@
+ {0}    ssp 13;
+ {1}    lda 0 0;
+ {2}    ldc 1;
+ {3}    neg;
+ {4}    ldc 1;
+ {5}    neg;
+ {6}    ldc 5;
+ {7}    div;
+ {8}    ldc 5;
+ {9}    mul;
+ {10}   sub;
+ {11}   sto;
+ {12}   lda 0 3;
+ {13}   inc 1;
+ {14}   ldc 2;
+ {15}   sto;
+ {16}   lda 0 3;
+ {17}   inc 0;
+ {18}   ldc 1;
+ {19}   sto;
+ {20}   lda 0 5;
+ {21}   ldc 1;
+ {22}   ldc 2;
+ {23}   les;
+ {24}   sto;
+ {25}   lda 0 6;
+ {26}   ldc false;
+ {27}   sto;
+ {28}   lda 0 7;
+ {29}   ldc false;
+ {30}   sto;
+ {31}   lda 0 8;
+ {32}   ldc 0;
+ {33}   chk 0 3;
+ {34}   ixa 1;
+ {35}   ldc 1;
+ {36}   sto;
+ {37}   lda 0 8;
+ {38}   ldc 1;
+ {39}   chk 0 3;
+ {40}   ixa 1;
+ {41}   ldc 2;
+ {42}   sto;
+ {43}   lda 0 8;
+ {44}   ldc 2;
+ {45}   chk 0 3;
+ {46}   ixa 1;
+ {47}   ldc 3;
+ {48}   sto;
+ {49}   lda 0 8;
+ {50}   ldc 3;
+ {51}   chk 0 3;
+ {52}   ixa 1;
+ {53}   ldc 4;
+ {54}   sto;
+ {55}   lda 0 12;
+ {56}   ldc 0;
+ {57}   sto;
+\\ for1:
+ {58}   lda 0 12;
+ {59}   ind;
+ {60}   ldc 3;
+ {61}   leq;
+ {62}   fjp 107; \\ endFor1
+ {63}   lda 0 8;
+ {64}   lda 0 12;
+ {65}   ind;
+ {66}   chk 0 3;
+ {67}   ixa 1;
+ {68}   ind;
+ {69}   lda 0 3;
+ {70}   inc 1;
+ {71}   ind;
+ {72}   equ;
+ {73}   fjp 82; \\ else2
+ {74}   lda 0 7;
+ {75}   ldc true;
+ {76}   sto;
+ {77}   lda 0 1;
+ {78}   lda 0 12;
+ {79}   ind;
+ {80}   sto;
+ {81}   ujp 100; \\ endif3
+\\ else2:
+ {82}   lda 0 8;
+ {83}   lda 0 12;
+ {84}   ind;
+ {85}   chk 0 3;
+ {86}   ixa 1;
+ {87}   ind;
+ {88}   lda 0 3;
+ {89}   inc 0;
+ {90}   ind;
+ {91}   equ;
+ {92}   fjp 100; \\ endif5
+ {93}   lda 0 6;
+ {94}   ldc true;
+ {95}   sto;
+ {96}   lda 0 2;
+ {97}   lda 0 12;
+ {98}   ind;
+ {99}   sto;
+\\ endif5:
+\\ endif3:
+ {100}  lda 0 12;
+ {101}  lda 0 12;
+ {102}  ind;
+ {103}  ldc 1;
+ {104}  add;
+ {105}  sto;
+ {106}  ujp 58; \\ for1
+\\ endFor1:
+ {107}  stp;

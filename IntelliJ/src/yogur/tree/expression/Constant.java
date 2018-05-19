@@ -1,8 +1,9 @@
 package yogur.tree.expression;
 
+import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
+import yogur.utils.CompilationException;
+import yogur.ididentification.IdentifierTable;
 import yogur.tree.type.BaseType;
 import yogur.typeidentification.MetaType;
 
@@ -16,12 +17,17 @@ public class Constant extends Expression {
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public int getDepthOnStack() {
+		return 1;
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		// Do nothing
 	}
 
 	@Override
-	public MetaType analyzeType(IdIdentifier idTable) throws CompilationException {
+	public MetaType analyzeType() throws CompilationException {
 		if (value instanceof Integer) {
 			return new BaseType(BaseType.PredefinedType.Int);
 		} else if (value instanceof Boolean) {
@@ -33,16 +39,16 @@ public class Constant extends Expression {
 	}
 
 	@Override
-	public int performMemoryAnalysis(int currentOffset, int currentDepth) {
-		return currentOffset;
+	public void performMemoryAssignment(IntegerReference currentOffset, IntegerReference nestingDepth) {
+		// Do nothing
 	}
 
 	@Override
 	public void generateCodeR(PMachineOutputStream stream) throws IOException {
-		if (metaType.equals(new BaseType(BaseType.PredefinedType.Bool))) {
-			stream.appendInstruction("ldc", (Boolean)value);
+		if (value instanceof Integer) {
+			stream.appendInstruction("ldc", String.valueOf((int)value));
 		} else {
-			stream.appendInstruction("ldc", (Integer)value);
+			stream.appendInstruction("ldc", (boolean)value ? "true" : "false");
 		}
 	}
 }

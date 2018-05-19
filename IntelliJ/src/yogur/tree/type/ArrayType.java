@@ -1,34 +1,33 @@
 package yogur.tree.type;
 
-import yogur.error.CompilationException;
-import yogur.ididentification.IdIdentifier;
-import yogur.typeidentification.MetaType;
+import yogur.utils.CompilationException;
+import yogur.ididentification.IdentifierTable;
 
 public class ArrayType extends Type {
 	private Type internalType;
-	private int size;
+	private int length;
 
-	public ArrayType(Type t, int size) {
+	public ArrayType(Type t, int length) {
 		this.internalType = t;
-		this.size = size;
+		this.length = length;
 	}
 
 	public Type getInternalType() {
 		return internalType;
 	}
 
-	public Type getBaseType() {
-		return internalType.getBaseType();
+	public int getLength() {
+		return length;
 	}
 
 	@Override
-	public void performIdentifierAnalysis(IdIdentifier table) throws CompilationException {
+	public int getSize() {
+		return length * internalType.getSize();
+	}
+
+	@Override
+	public void performIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		internalType.performIdentifierAnalysis(table);
-	}
-
-	@Override
-	public MetaType analyzeType(IdIdentifier idTable) {
-		return this;
 	}
 
 	@Override
