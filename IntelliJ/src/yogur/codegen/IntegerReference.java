@@ -1,7 +1,7 @@
 package yogur.codegen;
 
 /**
- * A little helper class to be able to pass integers by reference.
+ * A small helper class to be able to pass integers by reference.
  */
 public class IntegerReference {
 	private int value;

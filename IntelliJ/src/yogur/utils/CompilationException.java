@@ -6,7 +6,13 @@ import java.io.IOException;
 
 import yogur.cup.sym;
 
+/**
+ * A custom exception to manage compiler errors.
+ */
 public class CompilationException extends IOException {
+	/**
+	 * An enum representing the scope of a CompilationException.
+	 */
 	public enum Scope {
 		LexicalAnalyzer, SyntacticalAnalyzer, TypeAnalyzer, IdentifierIdentification
 	}
@@ -48,6 +54,4 @@ public class CompilationException extends IOException {
 		}
 		return lineString + scope.name() + " error - " + super.getMessage();
 	}
-
-
 }

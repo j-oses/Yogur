@@ -7,6 +7,11 @@ import yogur.tree.AbstractTreeNode;
 import yogur.typeidentification.MetaType;
 
 public abstract class Type extends AbstractTreeNode implements MetaType {
+	/**
+	 * A helper method to facilitate parsing.
+	 * @param name the name of the type to be parsed.
+	 * @return the type.
+	 */
 	public static Type fromName(String name) {
 		if (BaseType.PredefinedType.hasValue(name)) {
 			return new BaseType(name);

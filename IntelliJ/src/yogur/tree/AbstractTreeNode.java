@@ -4,13 +4,15 @@ import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.typeidentification.MetaType;
 
+/**
+ * The default implementation of an AST node. Contains integers for the line and column and also a variable which
+ * will store the (meta)type after the type analysis has ended.
+ */
 public abstract class AbstractTreeNode implements AbstractTreeNodeInterface {
 	private int line = -1;
 	private int column = -1;
 
 	protected MetaType metaType;
-
-	public abstract void performIdentifierAnalysis(IdentifierTable table) throws CompilationException;
 
 	public abstract MetaType analyzeType() throws CompilationException;
 

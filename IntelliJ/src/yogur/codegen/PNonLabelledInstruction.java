@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A class representing a instruction with no labels on the output file.
+ */
 class PNonLabelledInstruction implements POutputLine {
 	private String name;
 	private List<Object> args;

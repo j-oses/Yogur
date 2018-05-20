@@ -21,6 +21,8 @@ public class BaseIdentifier extends VarIdentifier {
 	private Declaration declaration;
 	private int nestingDepth;
 
+	public static final String THIS_NAME = "this";
+
 	public BaseIdentifier(String name) {
 		this.name = name;
 	}
@@ -49,6 +51,10 @@ public class BaseIdentifier extends VarIdentifier {
 		return name;
 	}
 
+	private boolean isThis() {
+		return THIS_NAME.equals(name);
+	}
+
 	@Override
 	public int getDepthOnStack() {
 		return 2;	// At most 2, may be less
@@ -72,8 +78,15 @@ public class BaseIdentifier extends VarIdentifier {
 
 	@Override
 	public void generateCodeL(PMachineOutputStream stream) throws IOException {
+		if (isThis()) {
+			// Referencing to the class on which the function is declared: load the address at the first parameter
+			stream.appendInstruction("lod", 0, FuncDeclaration.START_PARAMETER_INDEX);
+			return;
+		}
+
 		if (declaration instanceof Argument) {
 			Argument arg = (Argument) declaration;
+
 			if (arg.isDeclaredOnClass()) {
 				// We are accessing a class field within a function
 				// We load the (absolute) direction of the start of the parameter, and we add the actual offset

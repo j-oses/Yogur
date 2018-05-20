@@ -25,6 +25,10 @@ class Matrix {
 		}
 	}
 
+	def sumTo(m: Matrix) {
+		m.sum(this)
+	}
+
 	def times(lambda: Int) {
 		for i in 0 to 1 {
 			for j in 0 to 1 {
@@ -70,25 +74,22 @@ class Matrix {
 	}
 
 	def inverse() {
-		var determ: Int = determinant()
 		adjugate()
-		times(1 / determ)
+		times(1 / determinant())
 	}
 }
 
 var m1: Matrix
-/*
-var m2: Matrix
-
-m1.setToIdentity()
-m2.setToZero()
-
-m2.sum(m1)
-m2.sum(m1)
-*/
-
 m1.contents[0][0] = 2
 m1.contents[0][1] = 1
 m1.contents[1][0] = 1
 m1.contents[1][1] = 1
 m1.inverse()
+
+var m2: Matrix
+var m3: Matrix
+
+m2.setToIdentity()
+m3.setToIdentity()
+m3.times(-7)
+m3.sumTo(m2)

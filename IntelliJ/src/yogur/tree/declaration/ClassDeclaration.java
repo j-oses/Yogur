@@ -59,8 +59,8 @@ public class ClassDeclaration extends AbstractTreeNode implements Declaration {
 		// Two steps. First we "register" all variables and functions
 		// and then we perform the analysis on the rest if needed.
 		for (FunctionOrVarDeclaration d: declarations) {
-			d.performInsertIdentifierAnalysis(table);
 			d.setDeclaredOnClass(this);
+			d.performInsertIdentifierAnalysis(table);
 
 			// We save the declarations in a map to make querying easier
 			if (d instanceof VarDeclaration) {

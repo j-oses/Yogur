@@ -2,6 +2,9 @@ package yogur.codegen;
 
 import java.util.Map;
 
+/**
+ * A class representing a labelled instruction on the output file.
+ */
 class PLabelledInstruction implements POutputLine {
 	private String label;
 	private Object arg;
@@ -19,6 +22,7 @@ class PLabelledInstruction implements POutputLine {
 
 	@Override
 	public String generateCode(Map<String, Integer> labelAddresses) {
+		// Manages the translation from label to offset, using the map received as an argument.
 		return name + " " + (arg != null ? arg + " " : "") + labelAddresses.get(label) + ";" + " \\\\ " + label;
 	}
 

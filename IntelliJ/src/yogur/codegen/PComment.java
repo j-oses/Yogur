@@ -2,6 +2,9 @@ package yogur.codegen;
 
 import java.util.Map;
 
+/**
+ * A class representing a single-line comment on the output file.
+ */
 class PComment implements POutputLine {
 	private String comment;
 

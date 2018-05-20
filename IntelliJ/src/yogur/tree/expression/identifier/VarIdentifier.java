@@ -7,7 +7,14 @@ import yogur.tree.expression.Expression;
 
 import java.io.IOException;
 
+/**
+ * Abstract class representing an identifier.
+ */
 public abstract class VarIdentifier extends Expression {
+	/**
+	 * Returns the reference to the node of the AST where the identifier was originally declarated.
+	 * @return the node.
+	 */
 	public abstract Declaration getDeclaration();
 
 	@Override

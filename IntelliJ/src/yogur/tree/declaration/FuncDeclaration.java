@@ -2,7 +2,9 @@ package yogur.tree.declaration;
 
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
+import yogur.tree.expression.identifier.BaseIdentifier;
 import yogur.tree.type.BaseType;
+import yogur.tree.type.ClassType;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
@@ -26,6 +28,7 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 	private String endLabel;
 	public static final int START_PARAMETER_INDEX = 5;
 	private int formalParameterLength;
+	private Argument thisArgument;	// May be null
 
 	public FuncDeclaration(String identifier, List<Argument> arguments, Block block) {
 		this(identifier, arguments, null, block);
@@ -85,6 +88,14 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 
 	public void performBodyIdentifierAnalysis(IdentifierTable table) throws CompilationException {
 		table.openBlock();
+
+		// Add a dummy declaration for the this keyword, if this is a class function
+		if (isDeclaredOnClass()) {
+			thisArgument = new Argument(BaseIdentifier.THIS_NAME, new ClassType(declaredOnClass));
+			thisArgument.setFunctionParameter(true);
+			table.insertUncheckedId(BaseIdentifier.THIS_NAME, thisArgument);
+		}
+
 		for (Argument a: arguments) {
 			a.performIdentifierAnalysis(table);
 		}
@@ -100,6 +111,11 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 		for (Argument a: arguments) {
 			argTypes.add(a.performTypeAnalysis());
 		}
+
+		if (thisArgument != null) {
+			thisArgument.analyzeType();
+		}
+
 		MetaType returnType = null;
 		if (returnArg != null) {
 			returnType = returnArg.performTypeAnalysis();
@@ -122,6 +138,10 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 		// The normal arguments are given words from index 5
 		IntegerReference internalOffset = new IntegerReference(START_PARAMETER_INDEX);
 		IntegerReference internalDepth = new IntegerReference(nestingDepth.getValue() + 1);
+
+		if (thisArgument != null) {
+			thisArgument.performMemoryAssignment(new IntegerReference(START_PARAMETER_INDEX), internalDepth);
+		}
 
 		if (returnArg != null) {
 			// The return argument has the first word of the frame

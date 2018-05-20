@@ -1,4 +1,4 @@
- {0}    ssp 4;
+ {0}    ssp 12;
  {1}    ujp 47; \\ endFun1
 \\ def setToZero
 \\ fun1:
@@ -7,21 +7,21 @@
  {4}    lda 0 6;
  {5}    ldc 0;
  {6}    sto;
-\\ for10:
+\\ for11:
  {7}    lda 0 6;
  {8}    ind;
  {9}    ldc 1;
  {10}   leq;
- {11}   fjp 46; \\ endFor10
+ {11}   fjp 46; \\ endFor11
  {12}   lda 0 7;
  {13}   ldc 0;
  {14}   sto;
-\\ for11:
+\\ for12:
  {15}   lda 0 7;
  {16}   ind;
  {17}   ldc 1;
  {18}   leq;
- {19}   fjp 39; \\ endFor11
+ {19}   fjp 39; \\ endFor12
  {20}   lod 0 5;
  {21}   inc 0;
  {22}   lda 0 6;
@@ -40,16 +40,16 @@
  {35}   ldc 1;
  {36}   add;
  {37}   sto;
- {38}   ujp 15; \\ for11
-\\ endFor11:
+ {38}   ujp 15; \\ for12
+\\ endFor12:
  {39}   lda 0 6;
  {40}   lda 0 6;
  {41}   ind;
  {42}   ldc 1;
  {43}   add;
  {44}   sto;
- {45}   ujp 7; \\ for10
-\\ endFor10:
+ {45}   ujp 7; \\ for11
+\\ endFor11:
  {46}   retp;
 \\ endFun1:
  {47}   ujp 111; \\ endFun2
@@ -60,21 +60,21 @@
  {50}   lda 0 6;
  {51}   ldc 0;
  {52}   sto;
-\\ for12:
+\\ for13:
  {53}   lda 0 6;
  {54}   ind;
  {55}   ldc 1;
  {56}   leq;
- {57}   fjp 110; \\ endFor12
+ {57}   fjp 110; \\ endFor13
  {58}   lda 0 7;
  {59}   ldc 0;
  {60}   sto;
-\\ for13:
+\\ for14:
  {61}   lda 0 7;
  {62}   ind;
  {63}   ldc 1;
  {64}   leq;
- {65}   fjp 103; \\ endFor13
+ {65}   fjp 103; \\ endFor14
  {66}   lod 0 5;
  {67}   inc 0;
  {68}   lda 0 6;
@@ -111,16 +111,16 @@
  {99}   ldc 1;
  {100}  add;
  {101}  sto;
- {102}  ujp 61; \\ for13
-\\ endFor13:
+ {102}  ujp 61; \\ for14
+\\ endFor14:
  {103}  lda 0 6;
  {104}  lda 0 6;
  {105}  ind;
  {106}  ldc 1;
  {107}  add;
  {108}  sto;
- {109}  ujp 53; \\ for12
-\\ endFor12:
+ {109}  ujp 53; \\ for13
+\\ endFor13:
  {110}  retp;
 \\ endFun2:
  {111}  ujp 179; \\ endFun3
@@ -131,21 +131,21 @@
  {114}  lda 0 7;
  {115}  ldc 0;
  {116}  sto;
-\\ for14:
+\\ for15:
  {117}  lda 0 7;
  {118}  ind;
  {119}  ldc 1;
  {120}  leq;
- {121}  fjp 178; \\ endFor14
+ {121}  fjp 178; \\ endFor15
  {122}  lda 0 8;
  {123}  ldc 0;
  {124}  sto;
-\\ for15:
+\\ for16:
  {125}  lda 0 8;
  {126}  ind;
  {127}  ldc 1;
  {128}  leq;
- {129}  fjp 171; \\ endFor15
+ {129}  fjp 171; \\ endFor16
  {130}  lod 0 5;
  {131}  inc 0;
  {132}  lda 0 7;
@@ -186,461 +186,483 @@
  {167}  ldc 1;
  {168}  add;
  {169}  sto;
- {170}  ujp 125; \\ for15
-\\ endFor15:
+ {170}  ujp 125; \\ for16
+\\ endFor16:
  {171}  lda 0 7;
  {172}  lda 0 7;
  {173}  ind;
  {174}  ldc 1;
  {175}  add;
  {176}  sto;
- {177}  ujp 117; \\ for14
-\\ endFor14:
+ {177}  ujp 117; \\ for15
+\\ endFor15:
  {178}  retp;
 \\ endFun3:
- {179}  ujp 238; \\ endFun4
-\\ def times
+ {179}  ujp 187; \\ endFun4
+\\ def sumTo
 \\ fun4:
- {180}  ssp 9;
- {181}  sep 12;
- {182}  lda 0 7;
- {183}  ldc 0;
- {184}  sto;
-\\ for16:
- {185}  lda 0 7;
- {186}  ind;
- {187}  ldc 1;
- {188}  leq;
- {189}  fjp 237; \\ endFor16
- {190}  lda 0 8;
+ {180}  ssp 7;
+ {181}  sep 5;
+ {182}  mst 1;
+ {183}  lod 0 6;
+ {184}  lod 0 5;
+ {185}  cup 2 112; \\ fun3
+ {186}  retp;
+\\ endFun4:
+ {187}  ujp 246; \\ endFun5
+\\ def times
+\\ fun5:
+ {188}  ssp 9;
+ {189}  sep 12;
+ {190}  lda 0 7;
  {191}  ldc 0;
  {192}  sto;
 \\ for17:
- {193}  lda 0 8;
+ {193}  lda 0 7;
  {194}  ind;
  {195}  ldc 1;
  {196}  leq;
- {197}  fjp 230; \\ endFor17
- {198}  lod 0 5;
- {199}  inc 0;
- {200}  lda 0 7;
- {201}  ind;
- {202}  chk 0 1;
- {203}  ixa 2;
- {204}  lda 0 8;
- {205}  ind;
- {206}  chk 0 1;
- {207}  ixa 1;
- {208}  lda 0 6;
+ {197}  fjp 245; \\ endFor17
+ {198}  lda 0 8;
+ {199}  ldc 0;
+ {200}  sto;
+\\ for18:
+ {201}  lda 0 8;
+ {202}  ind;
+ {203}  ldc 1;
+ {204}  leq;
+ {205}  fjp 238; \\ endFor18
+ {206}  lod 0 5;
+ {207}  inc 0;
+ {208}  lda 0 7;
  {209}  ind;
- {210}  lod 0 5;
- {211}  inc 0;
- {212}  lda 0 7;
+ {210}  chk 0 1;
+ {211}  ixa 2;
+ {212}  lda 0 8;
  {213}  ind;
  {214}  chk 0 1;
- {215}  ixa 2;
- {216}  lda 0 8;
+ {215}  ixa 1;
+ {216}  lda 0 6;
  {217}  ind;
- {218}  chk 0 1;
- {219}  ixa 1;
- {220}  ind;
- {221}  mul;
- {222}  sto;
- {223}  lda 0 8;
+ {218}  lod 0 5;
+ {219}  inc 0;
+ {220}  lda 0 7;
+ {221}  ind;
+ {222}  chk 0 1;
+ {223}  ixa 2;
  {224}  lda 0 8;
  {225}  ind;
- {226}  ldc 1;
- {227}  add;
- {228}  sto;
- {229}  ujp 193; \\ for17
-\\ endFor17:
- {230}  lda 0 7;
- {231}  lda 0 7;
- {232}  ind;
- {233}  ldc 1;
- {234}  add;
- {235}  sto;
- {236}  ujp 185; \\ for16
-\\ endFor16:
- {237}  retp;
-\\ endFun4:
- {238}  ujp 294; \\ endFun5
-\\ def copy
-\\ fun5:
- {239}  ssp 9;
- {240}  sep 11;
- {241}  lda 0 7;
- {242}  ldc 0;
+ {226}  chk 0 1;
+ {227}  ixa 1;
+ {228}  ind;
+ {229}  mul;
+ {230}  sto;
+ {231}  lda 0 8;
+ {232}  lda 0 8;
+ {233}  ind;
+ {234}  ldc 1;
+ {235}  add;
+ {236}  sto;
+ {237}  ujp 201; \\ for18
+\\ endFor18:
+ {238}  lda 0 7;
+ {239}  lda 0 7;
+ {240}  ind;
+ {241}  ldc 1;
+ {242}  add;
  {243}  sto;
-\\ for18:
- {244}  lda 0 7;
- {245}  ind;
- {246}  ldc 1;
- {247}  leq;
- {248}  fjp 293; \\ endFor18
- {249}  lda 0 8;
+ {244}  ujp 193; \\ for17
+\\ endFor17:
+ {245}  retp;
+\\ endFun5:
+ {246}  ujp 302; \\ endFun6
+\\ def copy
+\\ fun6:
+ {247}  ssp 9;
+ {248}  sep 11;
+ {249}  lda 0 7;
  {250}  ldc 0;
  {251}  sto;
 \\ for19:
- {252}  lda 0 8;
+ {252}  lda 0 7;
  {253}  ind;
  {254}  ldc 1;
  {255}  leq;
- {256}  fjp 286; \\ endFor19
- {257}  lod 0 5;
- {258}  inc 0;
- {259}  lda 0 7;
- {260}  ind;
- {261}  chk 0 1;
- {262}  ixa 2;
- {263}  lda 0 8;
- {264}  ind;
- {265}  chk 0 1;
- {266}  ixa 1;
- {267}  lod 0 6;
- {268}  inc 0;
- {269}  lda 0 7;
- {270}  ind;
- {271}  chk 0 1;
- {272}  ixa 2;
- {273}  lda 0 8;
- {274}  ind;
- {275}  chk 0 1;
- {276}  ixa 1;
- {277}  ind;
- {278}  sto;
- {279}  lda 0 8;
- {280}  lda 0 8;
- {281}  ind;
- {282}  ldc 1;
- {283}  add;
- {284}  sto;
- {285}  ujp 252; \\ for19
-\\ endFor19:
- {286}  lda 0 7;
- {287}  lda 0 7;
- {288}  ind;
- {289}  ldc 1;
- {290}  add;
- {291}  sto;
- {292}  ujp 244; \\ for18
-\\ endFor18:
- {293}  retp;
-\\ endFun5:
- {294}  ujp 339; \\ endFun6
-\\ def determinant
-\\ fun6:
- {295}  ssp 6;
- {296}  sep 32;
- {297}  lda 0 0;
- {298}  lod 0 5;
- {299}  inc 0;
- {300}  ldc 0;
- {301}  chk 0 1;
- {302}  ixa 2;
- {303}  ldc 0;
- {304}  chk 0 1;
- {305}  ixa 1;
- {306}  ind;
- {307}  lod 0 5;
- {308}  inc 0;
- {309}  ldc 1;
- {310}  chk 0 1;
- {311}  ixa 2;
- {312}  ldc 1;
- {313}  chk 0 1;
- {314}  ixa 1;
- {315}  ind;
- {316}  mul;
- {317}  lod 0 5;
- {318}  inc 0;
- {319}  ldc 1;
- {320}  chk 0 1;
- {321}  ixa 2;
- {322}  ldc 0;
- {323}  chk 0 1;
- {324}  ixa 1;
- {325}  ind;
- {326}  lod 0 5;
- {327}  inc 0;
- {328}  ldc 0;
- {329}  chk 0 1;
- {330}  ixa 2;
- {331}  ldc 1;
- {332}  chk 0 1;
- {333}  ixa 1;
- {334}  ind;
- {335}  mul;
- {336}  sub;
- {337}  sto;
- {338}  retf;
-\\ endFun6:
- {339}  ujp 444; \\ endFun7
-\\ def adjugate
-\\ fun7:
- {340}  ssp 12;
- {341}  sep 12;
- {342}  lda 0 10;
- {343}  ldc 0;
- {344}  sto;
+ {256}  fjp 301; \\ endFor19
+ {257}  lda 0 8;
+ {258}  ldc 0;
+ {259}  sto;
 \\ for20:
- {345}  lda 0 10;
- {346}  ind;
- {347}  ldc 1;
- {348}  leq;
- {349}  fjp 436; \\ endFor20
- {350}  lda 0 11;
+ {260}  lda 0 8;
+ {261}  ind;
+ {262}  ldc 1;
+ {263}  leq;
+ {264}  fjp 294; \\ endFor20
+ {265}  lod 0 5;
+ {266}  inc 0;
+ {267}  lda 0 7;
+ {268}  ind;
+ {269}  chk 0 1;
+ {270}  ixa 2;
+ {271}  lda 0 8;
+ {272}  ind;
+ {273}  chk 0 1;
+ {274}  ixa 1;
+ {275}  lod 0 6;
+ {276}  inc 0;
+ {277}  lda 0 7;
+ {278}  ind;
+ {279}  chk 0 1;
+ {280}  ixa 2;
+ {281}  lda 0 8;
+ {282}  ind;
+ {283}  chk 0 1;
+ {284}  ixa 1;
+ {285}  ind;
+ {286}  sto;
+ {287}  lda 0 8;
+ {288}  lda 0 8;
+ {289}  ind;
+ {290}  ldc 1;
+ {291}  add;
+ {292}  sto;
+ {293}  ujp 260; \\ for20
+\\ endFor20:
+ {294}  lda 0 7;
+ {295}  lda 0 7;
+ {296}  ind;
+ {297}  ldc 1;
+ {298}  add;
+ {299}  sto;
+ {300}  ujp 252; \\ for19
+\\ endFor19:
+ {301}  retp;
+\\ endFun6:
+ {302}  ujp 347; \\ endFun7
+\\ def determinant
+\\ fun7:
+ {303}  ssp 6;
+ {304}  sep 32;
+ {305}  lda 0 0;
+ {306}  lod 0 5;
+ {307}  inc 0;
+ {308}  ldc 0;
+ {309}  chk 0 1;
+ {310}  ixa 2;
+ {311}  ldc 0;
+ {312}  chk 0 1;
+ {313}  ixa 1;
+ {314}  ind;
+ {315}  lod 0 5;
+ {316}  inc 0;
+ {317}  ldc 1;
+ {318}  chk 0 1;
+ {319}  ixa 2;
+ {320}  ldc 1;
+ {321}  chk 0 1;
+ {322}  ixa 1;
+ {323}  ind;
+ {324}  mul;
+ {325}  lod 0 5;
+ {326}  inc 0;
+ {327}  ldc 1;
+ {328}  chk 0 1;
+ {329}  ixa 2;
+ {330}  ldc 0;
+ {331}  chk 0 1;
+ {332}  ixa 1;
+ {333}  ind;
+ {334}  lod 0 5;
+ {335}  inc 0;
+ {336}  ldc 0;
+ {337}  chk 0 1;
+ {338}  ixa 2;
+ {339}  ldc 1;
+ {340}  chk 0 1;
+ {341}  ixa 1;
+ {342}  ind;
+ {343}  mul;
+ {344}  sub;
+ {345}  sto;
+ {346}  retf;
+\\ endFun7:
+ {347}  ujp 452; \\ endFun8
+\\ def adjugate
+\\ fun8:
+ {348}  ssp 12;
+ {349}  sep 12;
+ {350}  lda 0 10;
  {351}  ldc 0;
  {352}  sto;
 \\ for21:
- {353}  lda 0 11;
+ {353}  lda 0 10;
  {354}  ind;
  {355}  ldc 1;
  {356}  leq;
- {357}  fjp 429; \\ endFor21
- {358}  lda 0 6;
- {359}  inc 0;
- {360}  lda 0 10;
- {361}  ind;
- {362}  chk 0 1;
- {363}  ixa 2;
- {364}  lda 0 11;
- {365}  ind;
- {366}  chk 0 1;
- {367}  ixa 1;
- {368}  lod 0 5;
- {369}  inc 0;
- {370}  ldc 1;
- {371}  lda 0 10;
- {372}  ind;
- {373}  sub;
+ {357}  fjp 444; \\ endFor21
+ {358}  lda 0 11;
+ {359}  ldc 0;
+ {360}  sto;
+\\ for22:
+ {361}  lda 0 11;
+ {362}  ind;
+ {363}  ldc 1;
+ {364}  leq;
+ {365}  fjp 437; \\ endFor22
+ {366}  lda 0 6;
+ {367}  inc 0;
+ {368}  lda 0 10;
+ {369}  ind;
+ {370}  chk 0 1;
+ {371}  ixa 2;
+ {372}  lda 0 11;
+ {373}  ind;
  {374}  chk 0 1;
- {375}  ixa 2;
- {376}  ldc 1;
- {377}  lda 0 11;
- {378}  ind;
- {379}  sub;
- {380}  chk 0 1;
- {381}  ixa 1;
- {382}  ind;
- {383}  sto;
- {384}  lda 0 10;
- {385}  ind;
- {386}  lda 0 11;
- {387}  ind;
- {388}  lda 0 11;
- {389}  ind;
- {390}  ldc 2;
- {391}  div;
- {392}  ldc 2;
- {393}  mul;
- {394}  sub;
- {395}  add;
- {396}  ldc 1;
- {397}  equ;
- {398}  fjp 422; \\ endif23
- {399}  lda 0 6;
- {400}  inc 0;
- {401}  lda 0 10;
- {402}  ind;
- {403}  chk 0 1;
- {404}  ixa 2;
- {405}  lda 0 11;
- {406}  ind;
- {407}  chk 0 1;
- {408}  ixa 1;
- {409}  lda 0 6;
- {410}  inc 0;
- {411}  lda 0 10;
- {412}  ind;
- {413}  chk 0 1;
- {414}  ixa 2;
- {415}  lda 0 11;
- {416}  ind;
- {417}  chk 0 1;
- {418}  ixa 1;
- {419}  ind;
- {420}  neg;
- {421}  sto;
-\\ endif23:
- {422}  lda 0 11;
+ {375}  ixa 1;
+ {376}  lod 0 5;
+ {377}  inc 0;
+ {378}  ldc 1;
+ {379}  lda 0 10;
+ {380}  ind;
+ {381}  sub;
+ {382}  chk 0 1;
+ {383}  ixa 2;
+ {384}  ldc 1;
+ {385}  lda 0 11;
+ {386}  ind;
+ {387}  sub;
+ {388}  chk 0 1;
+ {389}  ixa 1;
+ {390}  ind;
+ {391}  sto;
+ {392}  lda 0 10;
+ {393}  ind;
+ {394}  lda 0 11;
+ {395}  ind;
+ {396}  lda 0 11;
+ {397}  ind;
+ {398}  ldc 2;
+ {399}  div;
+ {400}  ldc 2;
+ {401}  mul;
+ {402}  sub;
+ {403}  add;
+ {404}  ldc 1;
+ {405}  equ;
+ {406}  fjp 430; \\ endif24
+ {407}  lda 0 6;
+ {408}  inc 0;
+ {409}  lda 0 10;
+ {410}  ind;
+ {411}  chk 0 1;
+ {412}  ixa 2;
+ {413}  lda 0 11;
+ {414}  ind;
+ {415}  chk 0 1;
+ {416}  ixa 1;
+ {417}  lda 0 6;
+ {418}  inc 0;
+ {419}  lda 0 10;
+ {420}  ind;
+ {421}  chk 0 1;
+ {422}  ixa 2;
  {423}  lda 0 11;
  {424}  ind;
- {425}  ldc 1;
- {426}  add;
- {427}  sto;
- {428}  ujp 353; \\ for21
+ {425}  chk 0 1;
+ {426}  ixa 1;
+ {427}  ind;
+ {428}  neg;
+ {429}  sto;
+\\ endif24:
+ {430}  lda 0 11;
+ {431}  lda 0 11;
+ {432}  ind;
+ {433}  ldc 1;
+ {434}  add;
+ {435}  sto;
+ {436}  ujp 361; \\ for22
+\\ endFor22:
+ {437}  lda 0 10;
+ {438}  lda 0 10;
+ {439}  ind;
+ {440}  ldc 1;
+ {441}  add;
+ {442}  sto;
+ {443}  ujp 353; \\ for21
 \\ endFor21:
- {429}  lda 0 10;
- {430}  lda 0 10;
- {431}  ind;
- {432}  ldc 1;
- {433}  add;
- {434}  sto;
- {435}  ujp 345; \\ for20
-\\ endFor20:
- {436}  mst 1;
- {437}  lda 0 6;
- {438}  cup 1 445; \\ fun8
- {439}  mst 1;
- {440}  lod 0 5;
- {441}  lda 0 6;
- {442}  cup 2 239; \\ fun5
- {443}  retp;
-\\ endFun7:
- {444}  ujp 527; \\ endFun8
+ {444}  mst 1;
+ {445}  lda 0 6;
+ {446}  cup 1 453; \\ fun9
+ {447}  mst 1;
+ {448}  lod 0 5;
+ {449}  lda 0 6;
+ {450}  cup 2 247; \\ fun6
+ {451}  retp;
+\\ endFun8:
+ {452}  ujp 535; \\ endFun9
 \\ def transpose
-\\ fun8:
- {445}  ssp 9;
- {446}  sep 11;
- {447}  lda 0 6;
- {448}  ldc 0;
- {449}  sto;
-\\ for24:
- {450}  lda 0 6;
- {451}  ind;
- {452}  ldc 1;
- {453}  leq;
- {454}  fjp 526; \\ endFor24
- {455}  lda 0 7;
+\\ fun9:
+ {453}  ssp 9;
+ {454}  sep 11;
+ {455}  lda 0 6;
  {456}  ldc 0;
  {457}  sto;
 \\ for25:
- {458}  lda 0 7;
+ {458}  lda 0 6;
  {459}  ind;
- {460}  lda 0 6;
- {461}  ind;
- {462}  leq;
- {463}  fjp 519; \\ endFor25
- {464}  lda 0 8;
- {465}  lod 0 5;
- {466}  inc 0;
- {467}  lda 0 6;
- {468}  ind;
- {469}  chk 0 1;
- {470}  ixa 2;
- {471}  lda 0 7;
- {472}  ind;
- {473}  chk 0 1;
- {474}  ixa 1;
- {475}  ind;
- {476}  sto;
- {477}  lod 0 5;
- {478}  inc 0;
- {479}  lda 0 6;
+ {460}  ldc 1;
+ {461}  leq;
+ {462}  fjp 534; \\ endFor25
+ {463}  lda 0 7;
+ {464}  ldc 0;
+ {465}  sto;
+\\ for26:
+ {466}  lda 0 7;
+ {467}  ind;
+ {468}  lda 0 6;
+ {469}  ind;
+ {470}  leq;
+ {471}  fjp 527; \\ endFor26
+ {472}  lda 0 8;
+ {473}  lod 0 5;
+ {474}  inc 0;
+ {475}  lda 0 6;
+ {476}  ind;
+ {477}  chk 0 1;
+ {478}  ixa 2;
+ {479}  lda 0 7;
  {480}  ind;
  {481}  chk 0 1;
- {482}  ixa 2;
- {483}  lda 0 7;
- {484}  ind;
- {485}  chk 0 1;
- {486}  ixa 1;
- {487}  lod 0 5;
- {488}  inc 0;
- {489}  lda 0 7;
- {490}  ind;
- {491}  chk 0 1;
- {492}  ixa 2;
- {493}  lda 0 6;
- {494}  ind;
- {495}  chk 0 1;
- {496}  ixa 1;
- {497}  ind;
- {498}  sto;
- {499}  lod 0 5;
- {500}  inc 0;
- {501}  lda 0 7;
+ {482}  ixa 1;
+ {483}  ind;
+ {484}  sto;
+ {485}  lod 0 5;
+ {486}  inc 0;
+ {487}  lda 0 6;
+ {488}  ind;
+ {489}  chk 0 1;
+ {490}  ixa 2;
+ {491}  lda 0 7;
+ {492}  ind;
+ {493}  chk 0 1;
+ {494}  ixa 1;
+ {495}  lod 0 5;
+ {496}  inc 0;
+ {497}  lda 0 7;
+ {498}  ind;
+ {499}  chk 0 1;
+ {500}  ixa 2;
+ {501}  lda 0 6;
  {502}  ind;
  {503}  chk 0 1;
- {504}  ixa 2;
- {505}  lda 0 6;
- {506}  ind;
- {507}  chk 0 1;
- {508}  ixa 1;
- {509}  lda 0 8;
+ {504}  ixa 1;
+ {505}  ind;
+ {506}  sto;
+ {507}  lod 0 5;
+ {508}  inc 0;
+ {509}  lda 0 7;
  {510}  ind;
- {511}  sto;
- {512}  lda 0 7;
- {513}  lda 0 7;
+ {511}  chk 0 1;
+ {512}  ixa 2;
+ {513}  lda 0 6;
  {514}  ind;
- {515}  ldc 1;
- {516}  add;
- {517}  sto;
- {518}  ujp 458; \\ for25
+ {515}  chk 0 1;
+ {516}  ixa 1;
+ {517}  lda 0 8;
+ {518}  ind;
+ {519}  sto;
+ {520}  lda 0 7;
+ {521}  lda 0 7;
+ {522}  ind;
+ {523}  ldc 1;
+ {524}  add;
+ {525}  sto;
+ {526}  ujp 466; \\ for26
+\\ endFor26:
+ {527}  lda 0 6;
+ {528}  lda 0 6;
+ {529}  ind;
+ {530}  ldc 1;
+ {531}  add;
+ {532}  sto;
+ {533}  ujp 458; \\ for25
 \\ endFor25:
- {519}  lda 0 6;
- {520}  lda 0 6;
- {521}  ind;
- {522}  ldc 1;
- {523}  add;
- {524}  sto;
- {525}  ujp 450; \\ for24
-\\ endFor24:
- {526}  retp;
-\\ endFun8:
- {527}  ujp 546; \\ endFun9
+ {534}  retp;
+\\ endFun9:
+ {535}  ujp 550; \\ endFun10
 \\ def inverse
-\\ fun9:
- {528}  ssp 7;
- {529}  sep 5;
- {530}  lda 0 6;
- {531}  mst 1;
- {532}  lod 0 5;
- {533}  cup 1 295; \\ fun6
- {534}  sto;
- {535}  mst 1;
- {536}  lod 0 5;
- {537}  cup 1 340; \\ fun7
+\\ fun10:
+ {536}  ssp 6;
+ {537}  sep 5;
  {538}  mst 1;
  {539}  lod 0 5;
- {540}  ldc 1;
- {541}  lda 0 6;
- {542}  ind;
- {543}  div;
- {544}  cup 2 180; \\ fun4
- {545}  retp;
-\\ endFun9:
- {546}  lda 0 0;
- {547}  inc 0;
- {548}  ldc 0;
- {549}  chk 0 1;
- {550}  ixa 2;
- {551}  ldc 0;
- {552}  chk 0 1;
- {553}  ixa 1;
- {554}  ldc 2;
- {555}  sto;
- {556}  lda 0 0;
- {557}  inc 0;
- {558}  ldc 0;
- {559}  chk 0 1;
- {560}  ixa 2;
- {561}  ldc 1;
- {562}  chk 0 1;
- {563}  ixa 1;
- {564}  ldc 1;
- {565}  sto;
- {566}  lda 0 0;
- {567}  inc 0;
+ {540}  cup 1 348; \\ fun8
+ {541}  mst 1;
+ {542}  lod 0 5;
+ {543}  ldc 1;
+ {544}  mst 1;
+ {545}  lod 0 5;
+ {546}  cup 1 303; \\ fun7
+ {547}  div;
+ {548}  cup 2 188; \\ fun5
+ {549}  retp;
+\\ endFun10:
+ {550}  lda 0 0;
+ {551}  inc 0;
+ {552}  ldc 0;
+ {553}  chk 0 1;
+ {554}  ixa 2;
+ {555}  ldc 0;
+ {556}  chk 0 1;
+ {557}  ixa 1;
+ {558}  ldc 2;
+ {559}  sto;
+ {560}  lda 0 0;
+ {561}  inc 0;
+ {562}  ldc 0;
+ {563}  chk 0 1;
+ {564}  ixa 2;
+ {565}  ldc 1;
+ {566}  chk 0 1;
+ {567}  ixa 1;
  {568}  ldc 1;
- {569}  chk 0 1;
- {570}  ixa 2;
- {571}  ldc 0;
- {572}  chk 0 1;
- {573}  ixa 1;
- {574}  ldc 1;
- {575}  sto;
- {576}  lda 0 0;
- {577}  inc 0;
+ {569}  sto;
+ {570}  lda 0 0;
+ {571}  inc 0;
+ {572}  ldc 1;
+ {573}  chk 0 1;
+ {574}  ixa 2;
+ {575}  ldc 0;
+ {576}  chk 0 1;
+ {577}  ixa 1;
  {578}  ldc 1;
- {579}  chk 0 1;
- {580}  ixa 2;
- {581}  ldc 1;
- {582}  chk 0 1;
- {583}  ixa 1;
- {584}  ldc 1;
- {585}  sto;
- {586}  mst 0;
- {587}  lda 0 0;
- {588}  cup 1 528; \\ fun9
- {589}  stp;
+ {579}  sto;
+ {580}  lda 0 0;
+ {581}  inc 0;
+ {582}  ldc 1;
+ {583}  chk 0 1;
+ {584}  ixa 2;
+ {585}  ldc 1;
+ {586}  chk 0 1;
+ {587}  ixa 1;
+ {588}  ldc 1;
+ {589}  sto;
+ {590}  mst 0;
+ {591}  lda 0 0;
+ {592}  cup 1 536; \\ fun10
+ {593}  mst 0;
+ {594}  lda 0 4;
+ {595}  cup 1 48; \\ fun2
+ {596}  mst 0;
+ {597}  lda 0 8;
+ {598}  cup 1 48; \\ fun2
+ {599}  mst 0;
+ {600}  lda 0 8;
+ {601}  ldc 7;
+ {602}  neg;
+ {603}  cup 2 188; \\ fun5
+ {604}  mst 0;
+ {605}  lda 0 8;
+ {606}  lda 0 4;
+ {607}  cup 2 180; \\ fun4
+ {608}  stp;
