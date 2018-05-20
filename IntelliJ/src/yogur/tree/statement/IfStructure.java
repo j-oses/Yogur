@@ -26,8 +26,12 @@ public class IfStructure extends Statement {
 
 	@Override
 	public int getMaxDepthOnStack() {
-		return Math.max(condition.getDepthOnStack(),
-				Math.max(ifClause.getMaxDepthOnStack(), elseClause.getMaxDepthOnStack()));
+		int clausesDepth = ifClause.getMaxDepthOnStack();
+
+		if (elseClause != null) {
+			clausesDepth = Math.max(clausesDepth, elseClause.getMaxDepthOnStack());
+		}
+		return Math.max(condition.getDepthOnStack(), clausesDepth);
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package yogur.tree.expression.identifier;
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.tree.declaration.FuncDeclaration;
+import yogur.tree.expression.FunctionCall;
 import yogur.tree.statement.VarDeclaration;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
@@ -12,6 +13,7 @@ import yogur.typeidentification.MetaType;
 import yogur.utils.Log;
 
 import java.io.IOException;
+import java.util.spi.AbstractResourceBundleProvider;
 
 public class BaseIdentifier extends VarIdentifier {
 	private String name;
@@ -31,6 +33,7 @@ public class BaseIdentifier extends VarIdentifier {
 	public BaseIdentifier(Argument argument) {
 		this.name = argument.getDeclarator().getName();
 		this.declaration = argument;
+		this.nestingDepth = argument.getNestingDepth();
 	}
 
 	@Override
@@ -69,16 +72,24 @@ public class BaseIdentifier extends VarIdentifier {
 
 	@Override
 	public void generateCodeL(PMachineOutputStream stream) throws IOException {
-		Argument arg = (Argument)declaration;
-		if (arg.isDeclaredOnClass()) {
-			// We are accessing a class field within a function
-			// We have to load the class (which is the first parameter), and then get the argument on it
-			stream.appendInstruction("lod", 0, FuncDeclaration.START_PARAMETER_INDEX);
-			stream.appendInstruction("lda", nestingDepth - arg.getNestingDepth(), arg.getOffset());
-		} else if (arg.isPassedByReference()) {
-			stream.appendInstruction("lod", 0, arg.getOffset());
+		if (declaration instanceof Argument) {
+			Argument arg = (Argument) declaration;
+			if (arg.isDeclaredOnClass()) {
+				// We are accessing a class field within a function
+				// We load the (absolute) direction of the start of the parameter, and we add the actual offset
+				// inside the class to it.
+				stream.appendInstruction("lod", 0, FuncDeclaration.START_PARAMETER_INDEX);
+				stream.appendInstruction("inc", arg.getOffset());
+			} else if (arg.isPassedByReference()) {
+				stream.appendInstruction("lod", 0, arg.getOffset());
+			} else {
+				stream.appendInstruction("lda", nestingDepth - arg.getNestingDepth(), arg.getOffset());
+			}
 		} else {
-			stream.appendInstruction("lda", nestingDepth - arg.getNestingDepth(), arg.getOffset());
+			// For a function, that the code has reached this point means that we are calling a class function
+			// from the same class. In that case, the value we want is on the location of the first parameter
+			// of the current function
+			stream.appendInstruction("lod", 0, FuncDeclaration.START_PARAMETER_INDEX);
 		}
 	}
 }

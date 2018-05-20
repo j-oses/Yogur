@@ -23,6 +23,7 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 	private ClassDeclaration declaredOnClass = null;
 	private int frameStaticLength;
 	private String label;
+	private String endLabel;
 	public static final int START_PARAMETER_INDEX = 5;
 	private int formalParameterLength;
 
@@ -145,12 +146,14 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 		frameStaticLength = internalOffset.getValue();
 	}
 
+	public void generateLabel(PMachineOutputStream stream) {
+		endLabel = stream.generateLabelWithUnusedId("endFun");
+		label = stream.generateLabel("fun");
+	}
+
 	@Override
 	public void generateCode(PMachineOutputStream stream) throws IOException {
 		// Our procedures may be intermingled with normal code, so we generate them with a jump
-		String endLabel = stream.generateLabelWithUnusedId("endFun");
-		label = stream.generateLabel("fun");
-
 		stream.appendLabelledInstruction("ujp", endLabel);
 		stream.appendComment("def " + identifier);
 

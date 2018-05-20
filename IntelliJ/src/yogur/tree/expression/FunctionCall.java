@@ -88,7 +88,8 @@ public class FunctionCall extends Expression {
 
 		if (declaration.isDeclaredOnClass()) {
 			// The first parameter should be the class on which is declared
-			// function should be a DotIdentifier and thus generate the correct code for the class
+			// There are two options: either function should be a DotIdentifier and thus generate the correct
+			// code for the class, or it is a BaseIdentifier and it should do the same thing.
 			function.generateCodeL(stream);
 		}
 

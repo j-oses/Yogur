@@ -1,0 +1,34 @@
+ {0}    ssp 2;
+ {1}    ujp 13; \\ endFun1
+\\ def incr
+\\ fun1:
+ {2}    ssp 6;
+ {3}    sep 3;
+ {4}    lod 0 5;
+ {5}    inc 0;
+ {6}    lod 0 5;
+ {7}    inc 0;
+ {8}    ind;
+ {9}    ldc 1;
+ {10}   add;
+ {11}   sto;
+ {12}   retp;
+\\ endFun1:
+ {13}   lda 0 0;
+ {14}   inc 0;
+ {15}   ldc 70;
+ {16}   sto;
+ {17}   lda 0 1;
+ {18}   inc 0;
+ {19}   ldc 90;
+ {20}   sto;
+ {21}   mst 0;
+ {22}   lda 0 0;
+ {23}   cup 1 2; \\ fun1
+ {24}   mst 0;
+ {25}   lda 0 0;
+ {26}   cup 1 2; \\ fun1
+ {27}   mst 0;
+ {28}   lda 0 1;
+ {29}   cup 1 2; \\ fun1
+ {30}   stp;

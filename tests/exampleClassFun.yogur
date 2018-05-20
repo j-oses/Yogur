@@ -1,0 +1,94 @@
+class Matrix {
+	var contents: Int[2][2]
+
+	def setToZero() {
+		for i in 0 to 1 {
+			for j in 0 to 1 {
+				contents[i][j] = 0
+			}
+		}
+	}
+
+	def setToIdentity() {
+		for i in 0 to 1 {
+			for j in 0 to 1 {
+				contents[i][j] = (i + j + 1) % 2
+			}
+		}
+	}
+
+	def sum(another: Matrix) {
+		for i in 0 to 1 {
+			for j in 0 to 1 {
+				contents[i][j] = contents[i][j] + another.contents[i][j]
+			}
+		}
+	}
+
+	def times(lambda: Int) {
+		for i in 0 to 1 {
+			for j in 0 to 1 {
+				contents[i][j] = lambda * contents[i][j]
+			}
+		}
+	}
+
+	def copy(another: Matrix) {
+		for i in 0 to 1 {
+			for j in 0 to 1 {
+				contents[i][j] = another.contents[i][j]
+			}
+		}
+	}
+
+	def determinant() -> det: Int {
+		det = contents[0][0] * contents[1][1] - contents[1][0] * contents[0][1]
+	}
+
+	def adjugate() {
+		var new: Matrix
+		for i in 0 to 1 {
+			for j in 0 to 1 {
+				new.contents[i][j] = contents[1 - i][1 - j]
+				if (i + j % 2 == 1) {
+					new.contents[i][j] = -new.contents[i][j]
+				}
+			}
+		}
+		new.transpose()
+		copy(new)
+	}
+
+	def transpose() {
+		for i in 0 to 1 {
+			for j in 0 to i {
+				var aux: Int = contents[i][j]
+				contents[i][j] = contents[j][i]
+				contents[j][i] = aux
+			}
+		}
+	}
+
+	def inverse() {
+		var determ: Int = determinant()
+		adjugate()
+		times(1 / determ)
+	}
+}
+
+var m1: Matrix
+/*
+var m2: Matrix
+
+m1.setToIdentity()
+m2.setToZero()
+
+m2.sum(m1)
+m2.sum(m1)
+*/
+
+m1.contents[0][0] = 2
+m1.contents[0][1] = 1
+m1.contents[1][0] = 1
+m1.contents[1][1] = 1
+m1.inverse()

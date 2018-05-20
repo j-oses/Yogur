@@ -106,6 +106,11 @@ public class ClassDeclaration extends AbstractTreeNode implements Declaration {
 	@Override
 	public void generateCode(PMachineOutputStream stream) throws IOException {
 		for (FunctionOrVarDeclaration d: declarations) {
+			if (d instanceof FuncDeclaration) {
+				((FuncDeclaration)d).generateLabel(stream);
+			}
+		}
+		for (FunctionOrVarDeclaration d: declarations) {
 			d.generateCode(stream);
 		}
 	}

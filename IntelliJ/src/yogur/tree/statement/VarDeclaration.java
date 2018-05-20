@@ -3,6 +3,8 @@ package yogur.tree.statement;
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.tree.declaration.ClassDeclaration;
+import yogur.tree.expression.identifier.BaseIdentifier;
+import yogur.tree.expression.identifier.VarIdentifier;
 import yogur.tree.type.BaseType;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;

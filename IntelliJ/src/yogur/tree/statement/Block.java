@@ -2,6 +2,7 @@ package yogur.tree.statement;
 
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
+import yogur.tree.expression.Expression;
 import yogur.tree.type.Type;
 import yogur.typeidentification.VoidType;
 import yogur.utils.CompilationException;
@@ -48,9 +49,9 @@ public class Block extends Statement {
 		for (Statement s: statements) {
 			MetaType type = s.performTypeAnalysis();
 
-			if (!(type == null || type instanceof VoidType)) {
+			if ((s instanceof Expression) && !(type == null || type instanceof VoidType)) {
 				throw new CompilationException("Found statement-level expression with non-void type",
-						getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
+						s.getLine(), s.getColumn(), CompilationException.Scope.TypeAnalyzer);
 			}
 		}
 		return null;

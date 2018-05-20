@@ -78,8 +78,8 @@ public class ForStructure extends Statement {
 		String labelEnd = stream.generateLabel("endFor");
 
 		BaseIdentifier varId = new BaseIdentifier(argument);
-		Assignment startAssignment = new Assignment(argument.getDeclarator(), start);
-		Assignment incrementAssignment = new Assignment(argument.getDeclarator(),
+		Assignment startAssignment = new Assignment(varId, start);
+		Assignment incrementAssignment = new Assignment(varId,
 				new BinaryOperation(varId, new Constant(1), BinaryOperation.Operator.SUM));
 		Expression condition = new BinaryOperation(varId, end, BinaryOperation.Operator.LEQ);
 

@@ -44,7 +44,7 @@ public class Program extends AbstractTreeNode {
 
 			if ((s instanceof Expression) && !(type == null || type instanceof VoidType)) {
 				throw new CompilationException("Found statement-level expression with non-void type",
-						getLine(), getColumn(), CompilationException.Scope.TypeAnalyzer);
+						s.getLine(), s.getColumn(), CompilationException.Scope.TypeAnalyzer);
 			}
 		}
 		return null;
