@@ -2,6 +2,7 @@ package yogur.tree;
 
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
+import yogur.tree.declaration.FuncDeclaration;
 import yogur.tree.expression.Expression;
 import yogur.typeidentification.VoidType;
 import yogur.utils.CompilationException;

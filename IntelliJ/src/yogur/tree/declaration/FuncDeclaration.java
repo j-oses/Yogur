@@ -173,6 +173,10 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 
 	@Override
 	public void generateCode(PMachineOutputStream stream) throws IOException {
+		if (endLabel == null) {
+			generateLabel(stream);
+		}
+
 		// Our procedures may be intermingled with normal code, so we generate them with a jump
 		stream.appendLabelledInstruction("ujp", endLabel);
 		stream.appendComment("def " + identifier);

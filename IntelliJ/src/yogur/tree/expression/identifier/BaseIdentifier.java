@@ -40,7 +40,7 @@ public class BaseIdentifier extends VarIdentifier {
 
 	@Override
 	public boolean isAssignable() {
-		return declaration instanceof Argument;
+		return declaration instanceof Argument && !THIS_NAME.equals(name);
 	}
 
 	public Declaration getDeclaration() {

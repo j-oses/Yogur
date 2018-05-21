@@ -45,14 +45,14 @@ public class YogurLex implements java_cup.runtime.Scanner {
    * Translates characters to character classes
    */
   private static final char [] ZZ_CMAP = {
-     0,  0,  0,  0,  0,  0,  0,  0, 12, 12, 13,  0,  0, 12,  0,  0, 
+     0,  0,  0,  0,  0,  0,  0,  0, 15, 15, 16,  0,  0, 15,  0,  0, 
      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-    12, 27,  0,  0,  0, 21, 24,  0, 34, 35, 15, 19, 17, 20, 28, 14, 
-     3,  3,  3,  3,  3,  3,  3,  3,  3,  3, 31,  0, 30, 18, 29,  0, 
+    15, 29,  0,  0,  0,  0, 26,  0, 36, 37, 18, 22, 20, 23, 30, 17, 
+     4,  3,  3,  3,  3,  3,  3,  3,  3,  3, 33,  0, 32, 21, 31,  0, 
      0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 
-     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 32,  0, 33,  0, 16, 
-     0,  9,  2,  2, 23,  7,  8,  2,  2,  2,  2,  2, 10,  2, 22, 25, 
-     2,  2,  5, 11,  4,  6,  2,  2,  2,  2,  2, 36, 26, 37,  0,  0
+     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 34,  0, 35,  0, 19, 
+     0, 12,  6,  6, 25, 10, 11,  2,  2,  2,  2,  2, 13,  2, 24, 27, 
+     2,  2,  8, 14,  7,  9,  2,  2,  5,  2,  2, 38, 28, 39,  0,  0
   };
 
   /** 
@@ -61,13 +61,13 @@ public class YogurLex implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\1\2\1\3\1\4\3\3\1\5\1\6"+
-    "\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\3"+
-    "\1\1\1\3\1\1\1\16\1\17\1\20\1\21\1\22"+
-    "\1\23\1\24\1\25\1\26\1\27\1\30\3\3\1\0"+
-    "\1\5\1\0\1\31\1\32\1\3\1\33\2\34\1\35"+
-    "\1\36\1\37\1\0\1\27\2\3\1\33\1\0\1\16"+
-    "\1\40\1\5";
+    "\1\0\1\1\1\2\1\3\2\4\3\3\1\5\1\6"+
+    "\1\7\1\10\1\11\1\12\1\13\1\14\1\3\1\1"+
+    "\1\3\1\1\1\15\1\16\1\17\1\20\1\21\1\22"+
+    "\1\23\1\24\1\25\1\26\1\27\1\0\3\3\1\0"+
+    "\1\5\1\0\1\30\1\31\1\3\1\32\2\33\1\34"+
+    "\1\35\1\36\1\4\2\3\1\32\1\0\1\15\1\37"+
+    "\1\5";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[56];
@@ -95,13 +95,13 @@ public class YogurLex implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\46\0\114\0\162\0\230\0\276\0\344\0\u010a"+
-    "\0\u0130\0\u0156\0\u017c\0\46\0\46\0\u01a2\0\46\0\u01c8"+
-    "\0\46\0\u01ee\0\u0214\0\u023a\0\u0260\0\u0286\0\46\0\u02ac"+
-    "\0\u02d2\0\46\0\46\0\46\0\46\0\46\0\u02f8\0\46"+
-    "\0\u031e\0\u0344\0\u036a\0\u0130\0\u0390\0\u03b6\0\46\0\46"+
-    "\0\u03dc\0\46\0\162\0\46\0\46\0\46\0\46\0\u02f8"+
-    "\0\u0402\0\u0428\0\u044e\0\162\0\u0474\0\162\0\162\0\u03b6";
+    "\0\0\0\50\0\120\0\170\0\240\0\310\0\360\0\u0118"+
+    "\0\u0140\0\u0168\0\u0190\0\u01b8\0\50\0\50\0\u01e0\0\50"+
+    "\0\u0208\0\u0230\0\u0258\0\u0280\0\u02a8\0\u02d0\0\50\0\u02f8"+
+    "\0\u0320\0\50\0\50\0\50\0\50\0\50\0\50\0\50"+
+    "\0\u0348\0\u0370\0\u0398\0\u03c0\0\u0168\0\u03e8\0\u0410\0\50"+
+    "\0\50\0\u0438\0\50\0\170\0\50\0\50\0\50\0\50"+
+    "\0\u0348\0\u0460\0\u0488\0\170\0\u04b0\0\170\0\170\0\u0410";
 
   private static int [] zzUnpackRowMap() {
     int [] result = new int[56];
@@ -127,34 +127,35 @@ public class YogurLex implements java_cup.runtime.Scanner {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\2\1\3\1\4\1\5\1\6\3\4\1\7\1\10"+
-    "\2\4\1\11\1\12\1\13\1\14\1\2\1\15\1\16"+
-    "\1\17\1\20\1\21\1\22\1\4\1\23\1\24\1\25"+
-    "\1\26\1\27\1\30\1\31\1\32\1\33\1\34\1\35"+
-    "\1\36\1\37\1\40\47\0\13\3\4\0\1\3\5\0"+
-    "\2\3\1\0\1\3\15\0\13\4\4\0\1\4\5\0"+
-    "\2\4\1\0\1\4\17\0\1\5\43\0\4\4\1\41"+
-    "\6\4\4\0\1\4\5\0\2\4\1\0\1\4\15\0"+
-    "\10\4\1\42\2\4\4\0\1\4\5\0\2\4\1\0"+
-    "\1\4\15\0\13\4\4\0\1\4\5\0\1\43\1\4"+
-    "\1\0\1\4\30\0\1\44\1\12\44\0\2\12\27\0"+
-    "\1\40\16\0\1\45\1\46\50\0\1\47\60\0\1\50"+
-    "\11\0\13\4\4\0\1\4\5\0\2\4\1\0\1\51"+
-    "\44\0\1\52\16\0\4\4\1\53\6\4\4\0\1\4"+
-    "\5\0\2\4\1\0\1\4\46\0\1\54\35\0\1\55"+
-    "\45\0\1\56\45\0\1\57\37\0\1\60\1\61\31\0"+
-    "\5\4\1\62\5\4\4\0\1\4\5\0\2\4\1\0"+
-    "\1\4\15\0\11\4\1\63\1\4\4\0\1\4\5\0"+
-    "\2\4\1\0\1\4\15\0\13\4\4\0\1\4\5\0"+
-    "\1\4\1\64\1\0\1\4\14\0\15\45\1\0\30\45"+
-    "\17\46\1\65\26\46\1\0\3\4\1\66\7\4\4\0"+
-    "\1\4\5\0\2\4\1\0\1\4\30\0\2\61\31\0"+
-    "\6\4\1\67\4\4\4\0\1\4\5\0\2\4\1\0"+
-    "\1\4\15\0\12\4\1\62\4\0\1\4\5\0\2\4"+
-    "\1\0\1\4\14\0\16\46\1\70\1\65\26\46";
+    "\1\2\1\3\1\4\1\5\1\6\2\4\1\7\3\4"+
+    "\1\10\1\11\2\4\1\12\1\13\1\14\1\15\1\2"+
+    "\1\16\1\17\1\20\1\21\1\22\1\4\1\23\1\24"+
+    "\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34"+
+    "\1\35\1\36\1\37\1\40\51\0\16\3\4\0\1\3"+
+    "\4\0\2\3\1\0\1\3\15\0\16\4\4\0\1\4"+
+    "\4\0\2\4\1\0\1\4\17\0\2\5\46\0\2\5"+
+    "\1\41\43\0\7\4\1\42\6\4\4\0\1\4\4\0"+
+    "\2\4\1\0\1\4\15\0\13\4\1\43\2\4\4\0"+
+    "\1\4\4\0\2\4\1\0\1\4\15\0\16\4\4\0"+
+    "\1\4\4\0\1\44\1\4\1\0\1\4\33\0\1\45"+
+    "\1\13\46\0\2\13\50\0\1\46\1\47\52\0\1\50"+
+    "\61\0\1\51\11\0\16\4\4\0\1\4\4\0\2\4"+
+    "\1\0\1\52\46\0\1\53\16\0\7\4\1\54\6\4"+
+    "\4\0\1\4\4\0\2\4\1\0\1\4\50\0\1\55"+
+    "\40\0\1\56\47\0\1\57\47\0\1\60\25\0\2\61"+
+    "\1\0\1\61\3\0\3\61\14\0\1\61\17\0\10\4"+
+    "\1\62\5\4\4\0\1\4\4\0\2\4\1\0\1\4"+
+    "\15\0\14\4\1\63\1\4\4\0\1\4\4\0\2\4"+
+    "\1\0\1\4\15\0\16\4\4\0\1\4\4\0\1\4"+
+    "\1\64\1\0\1\4\14\0\20\46\1\0\27\46\22\47"+
+    "\1\65\25\47\1\0\6\4\1\66\7\4\4\0\1\4"+
+    "\4\0\2\4\1\0\1\4\15\0\11\4\1\67\4\4"+
+    "\4\0\1\4\4\0\2\4\1\0\1\4\15\0\15\4"+
+    "\1\62\4\0\1\4\4\0\2\4\1\0\1\4\14\0"+
+    "\21\47\1\70\1\65\25\47";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[1178];
+    int [] result = new int[1240];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -192,10 +193,9 @@ public class YogurLex implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\1\0\1\11\11\1\2\11\1\1\1\11\1\1\1\11"+
-    "\5\1\1\11\2\1\5\11\1\1\1\11\3\1\1\0"+
-    "\1\1\1\0\2\11\1\1\1\11\1\1\4\11\1\0"+
-    "\4\1\1\0\3\1";
+    "\1\0\1\11\12\1\2\11\1\1\1\11\6\1\1\11"+
+    "\2\1\7\11\1\0\3\1\1\0\1\1\1\0\2\11"+
+    "\1\1\1\11\1\1\4\11\4\1\1\0\3\1";
 
   private static int [] zzUnpackAttribute() {
     int [] result = new int[56];
@@ -656,11 +656,11 @@ public class YogurLex implements java_cup.runtime.Scanner {
           case 1: 
             { exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", line(), column(), CompilationException.Scope.LexicalAnalyzer));
             }
-          case 33: break;
+          case 32: break;
           case 2: 
             { return new Symbol(sym.TYPE, line(), column(), yytext());
             }
-          case 34: break;
+          case 33: break;
           case 3: 
             { if (reservedWords.containsKey(yytext())) {
 							return new Symbol(reservedWords.get(yytext()), line(), column());
@@ -668,123 +668,119 @@ public class YogurLex implements java_cup.runtime.Scanner {
 							return new Symbol(sym.ID, line(), column(), yytext());
 						}
             }
-          case 35: break;
+          case 34: break;
           case 4: 
-            { return new Symbol(sym.INT, line(), column(), new Integer(yytext()));
+            { return new Symbol(sym.INT, line(), column(), Integer.decode(yytext()));
             }
-          case 36: break;
+          case 35: break;
           case 5: 
             { 
             }
-          case 37: break;
+          case 36: break;
           case 6: 
             { return new Symbol(sym.DELIMITER, line(), column());
             }
-          case 38: break;
+          case 37: break;
           case 7: 
             { return new Symbol(sym.DIV, line(), column());
             }
-          case 39: break;
+          case 38: break;
           case 8: 
             { return new Symbol(sym.PROD, line(), column());
             }
-          case 40: break;
+          case 39: break;
           case 9: 
             { return new Symbol(sym.COMMA, line(), column());
             }
-          case 41: break;
+          case 40: break;
           case 10: 
             { return new Symbol(sym.ASSIGN, line(), column());
             }
-          case 42: break;
+          case 41: break;
           case 11: 
             { return new Symbol(sym.SUM, line(), column());
             }
-          case 43: break;
+          case 42: break;
           case 12: 
             { return new Symbol(sym.SUBS, line(), column());
             }
-          case 44: break;
+          case 43: break;
           case 13: 
-            { return new Symbol(sym.MOD, line(), column());
-            }
-          case 45: break;
-          case 14: 
             { return new Symbol(sym.NOT, line(), column());
             }
-          case 46: break;
-          case 15: 
+          case 44: break;
+          case 14: 
             { return new Symbol(sym.DOT, line(), column());
             }
-          case 47: break;
-          case 16: 
+          case 45: break;
+          case 15: 
             { return new Symbol(sym.GT, line(), column());
             }
-          case 48: break;
-          case 17: 
+          case 46: break;
+          case 16: 
             { return new Symbol(sym.LT, line(), column());
             }
-          case 49: break;
-          case 18: 
+          case 47: break;
+          case 17: 
             { return new Symbol(sym.COLON, line(), column());
             }
-          case 50: break;
-          case 19: 
+          case 48: break;
+          case 18: 
             { return new Symbol(sym.LSQUARE, line(), column());
             }
-          case 51: break;
-          case 20: 
+          case 49: break;
+          case 19: 
             { return new Symbol(sym.RSQUARE, line(), column());
             }
-          case 52: break;
-          case 21: 
+          case 50: break;
+          case 20: 
             { return new Symbol(sym.LPAREN, line(), column());
             }
-          case 53: break;
-          case 22: 
+          case 51: break;
+          case 21: 
             { return new Symbol(sym.RPAREN, line(), column());
             }
-          case 54: break;
-          case 23: 
+          case 52: break;
+          case 22: 
             { return new Symbol(sym.LBRACKET, line(), column());
             }
-          case 55: break;
-          case 24: 
+          case 53: break;
+          case 23: 
             { return new Symbol(sym.RBRACKET, line(), column());
             }
-          case 56: break;
-          case 25: 
+          case 54: break;
+          case 24: 
             { return new Symbol(sym.EQ, line(), column());
             }
-          case 57: break;
-          case 26: 
+          case 55: break;
+          case 25: 
             { return new Symbol(sym.ARROW, line(), column());
             }
-          case 58: break;
-          case 27: 
+          case 56: break;
+          case 26: 
             { return new Symbol(sym.AND, line(), column());
             }
-          case 59: break;
-          case 28: 
+          case 57: break;
+          case 27: 
             { return new Symbol(sym.OR, line(), column());
             }
-          case 60: break;
-          case 29: 
+          case 58: break;
+          case 28: 
             { return new Symbol(sym.NEQ, line(), column());
             }
-          case 61: break;
-          case 30: 
+          case 59: break;
+          case 29: 
             { return new Symbol(sym.GEQ, line(), column());
             }
-          case 62: break;
-          case 31: 
+          case 60: break;
+          case 30: 
             { return new Symbol(sym.LEQ, line(), column());
             }
-          case 63: break;
-          case 32: 
+          case 61: break;
+          case 31: 
             { return new Symbol(sym.BOOL, line(), column(), new Boolean(yytext()));
             }
-          case 64: break;
+          case 62: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }

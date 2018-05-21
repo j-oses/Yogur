@@ -2,6 +2,7 @@ package yogur.tree.statement;
 
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
+import yogur.tree.type.BaseType;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.expression.Expression;
@@ -45,6 +46,12 @@ public class Assignment extends Statement {
 			throw new CompilationException("Could not assign result of type " + expType
 					+ " to variable of type " + decType, getLine(), getColumn(),
 					TypeAnalyzer);
+		}
+
+		if (!(decType instanceof BaseType)) {
+			// TODO: Make it so it can be done!
+			throw new CompilationException("Could not assign result of non-base type " + expType,
+					getLine(), getColumn(), TypeAnalyzer);
 		}
 
 		return null;

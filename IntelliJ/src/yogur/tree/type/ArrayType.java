@@ -36,7 +36,7 @@ public class ArrayType extends Type {
 			return false;
 		}
 		ArrayType other = (ArrayType)obj;
-		return other.internalType.equals(internalType);
+		return other.internalType.equals(internalType) && other.length == length;
 	}
 
 	@Override

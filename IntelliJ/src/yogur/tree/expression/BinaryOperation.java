@@ -15,7 +15,7 @@ import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
 public class BinaryOperation extends Expression {
 	public enum Operator {
-		SUM, SUBS, PROD, DIV, MOD,
+		SUM, SUBS, PROD, DIV,
 		LT, LEQ, GT, GEQ, EQ, NEQ,
 		AND, OR;
 
@@ -23,7 +23,7 @@ public class BinaryOperation extends Expression {
 		static MetaType intT = new BaseType(BaseType.PredefinedType.Int.name());
 
 		public MetaType getReturnType() {
-			if (ordinal() < 5) {
+			if (ordinal() < 4) {
 				return intT;
 			} else {
 				return boolT;
@@ -68,11 +68,7 @@ public class BinaryOperation extends Expression {
 
 	@Override
 	public int getDepthOnStack() {
-		if (Operator.MOD.equals(operator)) {
-			return generateModExpression().getDepthOnStack();
-		} else {
-			return left.getDepthOnStack() + right.getDepthOnStack();
-		}
+		return left.getDepthOnStack() + right.getDepthOnStack();
 	}
 
 	@Override
@@ -103,20 +99,8 @@ public class BinaryOperation extends Expression {
 
 	@Override
 	public void generateCodeR(PMachineOutputStream stream) throws IOException {
-		if (operator.equals(Operator.MOD)) {
-			Expression generatedExp = generateModExpression();
-			generatedExp.generateCodeR(stream);
-		} else {
-			left.generateCodeR(stream);
-			right.generateCodeR(stream);
-			stream.appendInstruction(instructionName.get(operator));
-		}
-	}
-
-	private Expression generateModExpression() {
-		// l % r is equivalent to l - ((l / r) * r)
-		Expression division = new BinaryOperation(left, right, operator.DIV);	// l / r
-		Expression product = new BinaryOperation(division, right, Operator.PROD);	// (l / r) * r
-		return new BinaryOperation(left, product, Operator.SUBS);	// l - ((l / r) * r)
+		left.generateCodeR(stream);
+		right.generateCodeR(stream);
+		stream.appendInstruction(instructionName.get(operator));
 	}
 }

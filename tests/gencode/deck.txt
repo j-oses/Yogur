@@ -1,0 +1,283 @@
+ {0}    ssp 45;
+ {1}    lda 0 0;
+ {2}    ldc 23456;
+ {3}    sto;
+ {4}    ujp 21; \\ endFun1
+\\ def mod
+\\ fun1:
+ {5}    ssp 7;
+ {6}    sep 8;
+ {7}    lda 0 0;
+ {8}    lda 0 5;
+ {9}    ind;
+ {10}   lda 0 5;
+ {11}   ind;
+ {12}   lda 0 6;
+ {13}   ind;
+ {14}   div;
+ {15}   lda 0 6;
+ {16}   ind;
+ {17}   mul;
+ {18}   sub;
+ {19}   sto;
+ {20}   retf;
+\\ endFun1:
+ {21}   ujp 40; \\ endFun2
+\\ def random
+\\ fun2:
+ {22}   ssp 5;
+ {23}   sep 7;
+ {24}   lda 1 0;
+ {25}   mst 1;
+ {26}   lda 1 0;
+ {27}   ind;
+ {28}   ldc 15245;
+ {29}   mul;
+ {30}   ldc 3784;
+ {31}   add;
+ {32}   ldc 65535;
+ {33}   cup 2 5; \\ fun1
+ {34}   sto;
+ {35}   lda 0 0;
+ {36}   lda 1 0;
+ {37}   ind;
+ {38}   sto;
+ {39}   retf;
+\\ endFun2:
+ {40}   ujp 56; \\ endFun3
+\\ def copy
+\\ fun3:
+ {41}   ssp 7;
+ {42}   sep 3;
+ {43}   lod 0 5;
+ {44}   inc 0;
+ {45}   lod 0 6;
+ {46}   inc 0;
+ {47}   ind;
+ {48}   sto;
+ {49}   lod 0 5;
+ {50}   inc 1;
+ {51}   lod 0 6;
+ {52}   inc 1;
+ {53}   ind;
+ {54}   sto;
+ {55}   retp;
+\\ endFun3:
+ {56}   ujp 125; \\ endFun4
+\\ def generateDeck
+\\ fun4:
+ {57}   ssp 9;
+ {58}   sep 7;
+ {59}   lda 0 6;
+ {60}   ldc 0;
+ {61}   sto;
+\\ for8:
+ {62}   lda 0 6;
+ {63}   ind;
+ {64}   ldc 3;
+ {65}   leq;
+ {66}   fjp 120; \\ endFor8
+ {67}   lda 0 7;
+ {68}   ldc 1;
+ {69}   sto;
+\\ for9:
+ {70}   lda 0 7;
+ {71}   ind;
+ {72}   ldc 5;
+ {73}   leq;
+ {74}   fjp 113; \\ endFor9
+ {75}   lda 0 8;
+ {76}   lda 0 6;
+ {77}   ind;
+ {78}   ldc 5;
+ {79}   mul;
+ {80}   lda 0 7;
+ {81}   ind;
+ {82}   add;
+ {83}   ldc 1;
+ {84}   sub;
+ {85}   sto;
+ {86}   lod 0 5;
+ {87}   inc 0;
+ {88}   lda 0 8;
+ {89}   ind;
+ {90}   chk 0 19;
+ {91}   ixa 2;
+ {92}   inc 0;
+ {93}   lda 0 6;
+ {94}   ind;
+ {95}   sto;
+ {96}   lod 0 5;
+ {97}   inc 0;
+ {98}   lda 0 8;
+ {99}   ind;
+ {100}  chk 0 19;
+ {101}  ixa 2;
+ {102}  inc 1;
+ {103}  lda 0 7;
+ {104}  ind;
+ {105}  sto;
+ {106}  lda 0 7;
+ {107}  lda 0 7;
+ {108}  ind;
+ {109}  ldc 1;
+ {110}  add;
+ {111}  sto;
+ {112}  ujp 70; \\ for9
+\\ endFor9:
+ {113}  lda 0 6;
+ {114}  lda 0 6;
+ {115}  ind;
+ {116}  ldc 1;
+ {117}  add;
+ {118}  sto;
+ {119}  ujp 62; \\ for8
+\\ endFor8:
+ {120}  lod 0 5;
+ {121}  inc 40;
+ {122}  ldc 20;
+ {123}  sto;
+ {124}  retp;
+\\ endFun4:
+ {125}  ujp 170; \\ endFun5
+\\ def shuffle
+\\ fun5:
+ {126}  ssp 8;
+ {127}  sep 11;
+ {128}  lda 0 6;
+ {129}  ldc 0;
+ {130}  sto;
+\\ for10:
+ {131}  lda 0 6;
+ {132}  ind;
+ {133}  lod 0 5;
+ {134}  inc 40;
+ {135}  ind;
+ {136}  ldc 2;
+ {137}  sub;
+ {138}  leq;
+ {139}  fjp 169; \\ endFor10
+ {140}  lda 0 7;
+ {141}  mst 1;
+ {142}  mst 1;
+ {143}  cup 0 22; \\ fun2
+ {144}  lod 0 5;
+ {145}  inc 40;
+ {146}  ind;
+ {147}  lda 0 6;
+ {148}  ind;
+ {149}  sub;
+ {150}  cup 2 5; \\ fun1
+ {151}  lda 0 6;
+ {152}  ind;
+ {153}  add;
+ {154}  sto;
+ {155}  mst 1;
+ {156}  lod 0 5;
+ {157}  lda 0 6;
+ {158}  ind;
+ {159}  lda 0 7;
+ {160}  ind;
+ {161}  cup 3 171; \\ fun6
+ {162}  lda 0 6;
+ {163}  lda 0 6;
+ {164}  ind;
+ {165}  ldc 1;
+ {166}  add;
+ {167}  sto;
+ {168}  ujp 131; \\ for10
+\\ endFor10:
+ {169}  retp;
+\\ endFun5:
+ {170}  ujp 206; \\ endFun6
+\\ def swapAt
+\\ fun6:
+ {171}  ssp 10;
+ {172}  sep 13;
+ {173}  mst 1;
+ {174}  lda 0 8;
+ {175}  lod 0 5;
+ {176}  inc 0;
+ {177}  lda 0 6;
+ {178}  ind;
+ {179}  chk 0 19;
+ {180}  ixa 2;
+ {181}  cup 2 41; \\ fun3
+ {182}  mst 1;
+ {183}  lod 0 5;
+ {184}  inc 0;
+ {185}  lda 0 6;
+ {186}  ind;
+ {187}  chk 0 19;
+ {188}  ixa 2;
+ {189}  lod 0 5;
+ {190}  inc 0;
+ {191}  lda 0 7;
+ {192}  ind;
+ {193}  chk 0 19;
+ {194}  ixa 2;
+ {195}  cup 2 41; \\ fun3
+ {196}  mst 1;
+ {197}  lod 0 5;
+ {198}  inc 0;
+ {199}  lda 0 7;
+ {200}  ind;
+ {201}  chk 0 19;
+ {202}  ixa 2;
+ {203}  lda 0 8;
+ {204}  cup 2 41; \\ fun3
+ {205}  retp;
+\\ endFun6:
+ {206}  ujp 241; \\ endFun7
+\\ def getTopCard
+\\ fun7:
+ {207}  ssp 7;
+ {208}  sep 9;
+ {209}  lod 0 5;
+ {210}  inc 40;
+ {211}  ind;
+ {212}  ldc 0;
+ {213}  grt;
+ {214}  fjp 237; \\ else11
+ {215}  lod 0 5;
+ {216}  inc 40;
+ {217}  lod 0 5;
+ {218}  inc 40;
+ {219}  ind;
+ {220}  ldc 1;
+ {221}  sub;
+ {222}  sto;
+ {223}  mst 1;
+ {224}  lod 0 6;
+ {225}  lod 0 5;
+ {226}  inc 0;
+ {227}  lod 0 5;
+ {228}  inc 40;
+ {229}  ind;
+ {230}  chk 0 19;
+ {231}  ixa 2;
+ {232}  cup 2 41; \\ fun3
+ {233}  lda 0 0;
+ {234}  ldc true;
+ {235}  sto;
+ {236}  ujp 240; \\ endif12
+\\ else11:
+ {237}  lda 0 0;
+ {238}  ldc false;
+ {239}  sto;
+\\ endif12:
+ {240}  retf;
+\\ endFun7:
+ {241}  mst 0;
+ {242}  lda 0 1;
+ {243}  cup 1 57; \\ fun4
+ {244}  mst 0;
+ {245}  lda 0 1;
+ {246}  cup 1 126; \\ fun5
+ {247}  lda 0 44;
+ {248}  mst 0;
+ {249}  lda 0 1;
+ {250}  lda 0 42;
+ {251}  cup 2 207; \\ fun7
+ {252}  sto;
+ {253}  stp;

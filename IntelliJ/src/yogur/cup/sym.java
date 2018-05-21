@@ -9,46 +9,45 @@ package yogur.cup;
 public class sym {
   /* terminals */
   public static final int DELIMITER = 6;
-  public static final int LBRACKET = 30;
-  public static final int LPAREN = 26;
+  public static final int LBRACKET = 29;
+  public static final int LPAREN = 25;
   public static final int INT = 2;
-  public static final int FOR = 38;
-  public static final int RPAREN = 27;
-  public static final int NOT = 16;
-  public static final int AND = 14;
-  public static final int LT = 23;
+  public static final int FOR = 37;
+  public static final int RPAREN = 26;
+  public static final int NOT = 15;
+  public static final int AND = 13;
+  public static final int LT = 22;
   public static final int TYPE = 5;
-  public static final int IN = 39;
-  public static final int OR = 15;
+  public static final int IN = 38;
+  public static final int OR = 14;
   public static final int BOOL = 3;
   public static final int COMMA = 7;
-  public static final int CLASS = 34;
+  public static final int CLASS = 33;
   public static final int DIV = 12;
-  public static final int GEQ = 20;
-  public static final int IF = 35;
+  public static final int GEQ = 19;
   public static final int ASSIGN = 8;
-  public static final int DOT = 17;
+  public static final int IF = 34;
+  public static final int DOT = 16;
   public static final int ID = 4;
   public static final int EOF = 0;
-  public static final int RBRACKET = 31;
+  public static final int RBRACKET = 30;
   public static final int error = 1;
-  public static final int MOD = 13;
-  public static final int NEQ = 19;
-  public static final int EQ = 18;
-  public static final int ARROW = 25;
-  public static final int COLON = 24;
-  public static final int ELSE = 36;
-  public static final int LSQUARE = 28;
-  public static final int TO = 40;
-  public static final int WHILE = 37;
-  public static final int RSQUARE = 29;
+  public static final int NEQ = 18;
+  public static final int EQ = 17;
+  public static final int ARROW = 24;
+  public static final int COLON = 23;
+  public static final int ELSE = 35;
+  public static final int LSQUARE = 27;
+  public static final int TO = 39;
+  public static final int WHILE = 36;
+  public static final int RSQUARE = 28;
   public static final int SUBS = 10;
-  public static final int LEQ = 22;
+  public static final int LEQ = 21;
   public static final int SUM = 9;
   public static final int PROD = 11;
-  public static final int DEF = 32;
-  public static final int GT = 21;
-  public static final int VAR = 33;
+  public static final int DEF = 31;
+  public static final int GT = 20;
+  public static final int VAR = 32;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -63,7 +62,6 @@ public class sym {
   "SUBS",
   "PROD",
   "DIV",
-  "MOD",
   "AND",
   "OR",
   "NOT",

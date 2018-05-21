@@ -53,7 +53,7 @@ import java.util.HashMap;
 
 letra = ([A-Z]|[a-z])
 digito = [0-9]
-entero = {digito}+
+entero = {digito}+ | (0x[0-9a-f]+)
 boolean = ((true)|(false))
 separador = [ \t\b\r]
 delimitador = ({separador}*\n{separador}*)+
@@ -68,7 +68,6 @@ opSuma = \+
 opResta = \-
 opProducto = \*
 opDivision = "/"
-opMod = %
 opAnd = ((and)|(&&))
 opOr = ((or)|(\|\|))
 opNot = (\!|(not))
@@ -86,8 +85,8 @@ corcheteApertura = \[
 corcheteCierre = \]
 parentesisApertura = \(
 parentesisCierre = \)
-bloqueApertura = \{({separador}*\n{separador}*)*
-bloqueCierre = ({separador}*\n{separador}*)*\}
+bloqueApertura = "{"
+bloqueCierre = "}"
 
 %%
 
@@ -99,7 +98,6 @@ bloqueCierre = ({separador}*\n{separador}*)*\}
 {opResta}				{return new Symbol(sym.SUBS, line(), column()); }
 {opProducto}			{return new Symbol(sym.PROD, line(), column()); }
 {opDivision}			{return new Symbol(sym.DIV, line(), column()); }
-{opMod}					{return new Symbol(sym.MOD, line(), column()); }
 {opAnd}					{return new Symbol(sym.AND, line(), column()); }
 {opOr}					{return new Symbol(sym.OR, line(), column()); }
 {opNot}					{return new Symbol(sym.NOT, line(), column()); }
@@ -113,7 +111,7 @@ bloqueCierre = ({separador}*\n{separador}*)*\}
 {opColon}				{return new Symbol(sym.COLON, line(), column()); }
 {opArrow}				{return new Symbol(sym.ARROW, line(), column()); }
 
-{entero}				{return new Symbol(sym.INT, line(), column(), new Integer(yytext())); }
+{entero}				{return new Symbol(sym.INT, line(), column(), Integer.decode(yytext())); }
 {boolean}				{return new Symbol(sym.BOOL, line(), column(), new Boolean(yytext())); }
 {identificador} 		{if (reservedWords.containsKey(yytext())) {
 							return new Symbol(reservedWords.get(yytext()), line(), column());

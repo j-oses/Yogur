@@ -33,7 +33,7 @@ terminal Integer INT;
 terminal Boolean BOOL;
 terminal String ID, TYPE;
 terminal DELIMITER, COMMA;
-terminal ASSIGN, SUM, SUBS, PROD, DIV, MOD, AND, OR, NOT, DOT, EQ, NEQ, GEQ, GT, LEQ, LT, COLON, ARROW;
+terminal ASSIGN, SUM, SUBS, PROD, DIV, AND, OR, NOT, DOT, EQ, NEQ, GEQ, GT, LEQ, LT, COLON, ARROW;
 terminal LPAREN, RPAREN, LSQUARE, RSQUARE, LBRACKET, RBRACKET;
 terminal DEF, VAR, CLASS, IF, ELSE, WHILE, FOR, IN, TO;
 
@@ -160,7 +160,6 @@ Op3 ::=	SUM		{: RESULT = BinaryOperation.Operator.SUM; :}
 ;
 Op4 ::= PROD	{: RESULT = BinaryOperation.Operator.PROD; :}
 	| DIV		{: RESULT = BinaryOperation.Operator.DIV; :}
-	| MOD		{: RESULT = BinaryOperation.Operator.MOD; :}
 ;
 Op5 ::= SUBS	{: RESULT = UnaryOperation.Operator.NEG; :}
 	| NOT		{: RESULT = UnaryOperation.Operator.NOT; :}
@@ -182,10 +181,13 @@ Arg ::= ID:id COLON:c VarType:t				{: RESULT = new Argument(id, t); RESULT.setLi
 ;
 ClassBody ::= ClassBody:b DELIMITER Dec:d	{: b.add(d); RESULT = b; :}
 	| ClassBody:b DELIMITER DVarN:d			{: b.add(d); RESULT = b; :}
+	| ClassBody:b DELIMITER					{: RESULT = b; :}
 	| Dec:d									{: RESULT = new ArrayList<>(); RESULT.add(d); :}
 	| DVarN:d								{: RESULT = new ArrayList<>(); RESULT.add(d); :}
+	| 										{: RESULT = new ArrayList<>(); :}
 ;
 BlockBody ::= BlockBody:is DELIMITER Inst:i			{: is.add(i); RESULT = is; :}
+	| BlockBody:is DELIMITER						{: RESULT = is; :}
 	| Inst:i										{: RESULT = new ArrayList<>(); RESULT.add(i); :}
 	|												{: RESULT = new ArrayList<>(); :}
 ;
