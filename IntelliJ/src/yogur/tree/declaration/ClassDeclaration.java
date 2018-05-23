@@ -7,7 +7,7 @@ import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
 import yogur.tree.statement.VarDeclaration;
 import yogur.tree.type.ClassType;
-import yogur.typeidentification.MetaType;
+import yogur.typeanalysis.MetaType;
 import yogur.utils.Log;
 
 import java.io.IOException;

@@ -1,7 +1,6 @@
-package yogur.typeidentification;
+package yogur.typeanalysis;
 
 import yogur.utils.CompilationException;
-import yogur.ididentification.IdentifierTable;
 import yogur.tree.Program;
 
 public class TypeAnalyzer {

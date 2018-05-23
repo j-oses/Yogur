@@ -2,13 +2,12 @@ package yogur;
 
 import java_cup.runtime.Symbol;
 import yogur.cup.YogurParser;
-import yogur.jlex.YogurLex;
+import yogur.jflex.YogurLex;
 import yogur.utils.Log;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.time.format.TextStyle;
 
 public class TestCup {
 

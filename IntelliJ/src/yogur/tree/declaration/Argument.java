@@ -8,7 +8,7 @@ import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
 import yogur.tree.type.Type;
-import yogur.typeidentification.MetaType;
+import yogur.typeanalysis.MetaType;
 import yogur.utils.Log;
 
 public class Argument extends AbstractTreeNode implements Declaration {

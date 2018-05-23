@@ -2,9 +2,8 @@ package yogur.tree.type;
 
 import yogur.codegen.IntegerReference;
 import yogur.utils.CompilationException;
-import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
-import yogur.typeidentification.MetaType;
+import yogur.typeanalysis.MetaType;
 
 public abstract class Type extends AbstractTreeNode implements MetaType {
 	/**

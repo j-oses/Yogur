@@ -5,7 +5,7 @@ import yogur.codegen.PMachineOutputStream;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.type.BaseType;
-import yogur.typeidentification.MetaType;
+import yogur.typeanalysis.MetaType;
 
 import java.io.IOException;
 

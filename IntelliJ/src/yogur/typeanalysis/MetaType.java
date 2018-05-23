@@ -1,4 +1,4 @@
-package yogur.typeidentification;
+package yogur.typeanalysis;
 
 /**
  * An interface representing types that can be used by the type system, but which may not necessarily be

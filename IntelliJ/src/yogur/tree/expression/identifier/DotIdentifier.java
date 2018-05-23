@@ -3,21 +3,18 @@ package yogur.tree.expression.identifier;
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.tree.declaration.Argument;
-import yogur.tree.statement.VarDeclaration;
-import yogur.tree.type.ArrayType;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.ClassType;
-import yogur.typeidentification.MetaType;
-import yogur.utils.Log;
+import yogur.typeanalysis.MetaType;
 
 import java.io.IOException;
 
 import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
-public class DotIdentifier extends VarIdentifier {
+public class DotIdentifier extends Identifier {
 	private Expression expression;
 	private String identifier;
 

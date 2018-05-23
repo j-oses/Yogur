@@ -1,4 +1,4 @@
-package yogur.typeidentification;
+package yogur.typeanalysis;
 
 public class VoidType implements MetaType {
 	@Override

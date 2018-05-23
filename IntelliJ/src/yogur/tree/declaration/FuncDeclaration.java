@@ -9,8 +9,8 @@ import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.AbstractTreeNode;
 import yogur.tree.statement.Block;
-import yogur.typeidentification.FunctionType;
-import yogur.typeidentification.MetaType;
+import yogur.typeanalysis.FunctionType;
+import yogur.typeanalysis.MetaType;
 
 import java.io.IOException;
 import java.util.ArrayList;

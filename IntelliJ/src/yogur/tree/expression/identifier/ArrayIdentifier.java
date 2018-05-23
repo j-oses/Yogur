@@ -7,13 +7,13 @@ import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Declaration;
 import yogur.tree.expression.Expression;
 import yogur.tree.type.ArrayType;
-import yogur.typeidentification.MetaType;
+import yogur.typeanalysis.MetaType;
 
 import java.io.IOException;
 
 import static yogur.utils.CompilationException.Scope.TypeAnalyzer;
 
-public class ArrayIdentifier extends VarIdentifier {
+public class ArrayIdentifier extends Identifier {
 	private Expression leftExpression;
 	private Expression index;
 

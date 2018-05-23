@@ -1,4 +1,4 @@
-package yogur.typeidentification;
+package yogur.typeanalysis;
 
 import java.util.List;
 

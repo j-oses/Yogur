@@ -10,7 +10,7 @@ import yogur.ididentification.IdentifierTable;
 import yogur.tree.type.BaseType;
 import yogur.tree.declaration.Argument;
 import yogur.tree.expression.Expression;
-import yogur.typeidentification.MetaType;
+import yogur.typeanalysis.MetaType;
 
 import java.io.IOException;
 

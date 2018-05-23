@@ -2,7 +2,7 @@ package yogur;
 
 import java_cup.runtime.Symbol;
 import yogur.cup.sym;
-import yogur.jlex.YogurLex;
+import yogur.jflex.YogurLex;
 import yogur.utils.Log;
 
 import java.io.*;

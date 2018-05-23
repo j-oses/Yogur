@@ -2,12 +2,11 @@ package yogur.tree;
 
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
-import yogur.tree.declaration.FuncDeclaration;
 import yogur.tree.expression.Expression;
-import yogur.typeidentification.VoidType;
+import yogur.typeanalysis.VoidType;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
-import yogur.typeidentification.MetaType;
+import yogur.typeanalysis.MetaType;
 
 import java.io.IOException;
 import java.util.ArrayList;

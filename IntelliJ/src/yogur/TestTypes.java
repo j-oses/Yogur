@@ -2,9 +2,9 @@ package yogur;
 
 import yogur.cup.YogurParser;
 import yogur.ididentification.IdentifierAnalyzer;
-import yogur.jlex.YogurLex;
+import yogur.jflex.YogurLex;
 import yogur.tree.Program;
-import yogur.typeidentification.TypeAnalyzer;
+import yogur.typeanalysis.TypeAnalyzer;
 import yogur.utils.Log;
 
 import java.io.File;

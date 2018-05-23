@@ -5,10 +5,10 @@ import yogur.codegen.PMachineOutputStream;
 import yogur.tree.declaration.FuncDeclaration;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
-import yogur.tree.expression.identifier.VarIdentifier;
-import yogur.typeidentification.FunctionType;
-import yogur.typeidentification.MetaType;
-import yogur.typeidentification.VoidType;
+import yogur.tree.expression.identifier.Identifier;
+import yogur.typeanalysis.FunctionType;
+import yogur.typeanalysis.MetaType;
+import yogur.typeanalysis.VoidType;
 
 import java.io.IOException;
 import java.util.List;
@@ -49,9 +49,9 @@ public class FunctionCall extends Expression {
 		MetaType type = function.performTypeAnalysis();
 
 		if (type instanceof FunctionType) {
-			if (function instanceof VarIdentifier) {
+			if (function instanceof Identifier) {
 				// If the type is a function type, the declaration must be a FuncDeclaration
-				declaration = (FuncDeclaration) ((VarIdentifier) function).getDeclaration();
+				declaration = (FuncDeclaration) ((Identifier) function).getDeclaration();
 			}
 
 			FunctionType fType = (FunctionType) type;

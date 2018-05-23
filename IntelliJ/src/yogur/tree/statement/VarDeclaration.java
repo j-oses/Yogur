@@ -3,16 +3,12 @@ package yogur.tree.statement;
 import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.tree.declaration.ClassDeclaration;
-import yogur.tree.expression.identifier.BaseIdentifier;
-import yogur.tree.expression.identifier.VarIdentifier;
-import yogur.tree.type.BaseType;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
 import yogur.tree.declaration.Argument;
 import yogur.tree.declaration.FunctionOrVarDeclaration;
 import yogur.tree.expression.Expression;
-import yogur.typeidentification.MetaType;
-import yogur.utils.Log;
+import yogur.typeanalysis.MetaType;
 
 import java.io.IOException;
 

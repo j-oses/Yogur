@@ -1,8 +1,7 @@
 package yogur.tree;
 
 import yogur.utils.CompilationException;
-import yogur.ididentification.IdentifierTable;
-import yogur.typeidentification.MetaType;
+import yogur.typeanalysis.MetaType;
 
 /**
  * The default implementation of an AST node. Contains integers for the line and column and also a variable which

@@ -4,7 +4,7 @@ import yogur.codegen.IntegerReference;
 import yogur.codegen.PMachineOutputStream;
 import yogur.cup.YogurParser;
 import yogur.ididentification.IdentifierAnalyzer;
-import yogur.jlex.YogurLex;
+import yogur.jflex.YogurLex;
 import yogur.tree.Program;
 import yogur.utils.CompilationException;
 import yogur.utils.Log;

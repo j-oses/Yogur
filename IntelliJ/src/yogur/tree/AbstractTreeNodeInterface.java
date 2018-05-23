@@ -3,7 +3,7 @@ package yogur.tree;
 import yogur.codegen.IntegerReference;
 import yogur.utils.CompilationException;
 import yogur.ididentification.IdentifierTable;
-import yogur.typeidentification.MetaType;
+import yogur.typeanalysis.MetaType;
 
 /**
  * The interface which all AST nodes must conform to. A default implementation is provided in
