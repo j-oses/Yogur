@@ -1,0 +1,65 @@
+// The RNG seed
+var seed: Int = 23456
+
+// A mod function
+def mod(a: Int, b: Int) -> m: Int {
+	m = a - (a / b) * b
+}
+
+// A function which generates a pseudorandom value using a linear generator
+def random() -> n: Int {
+    seed = mod(seed * 15245 + 3784, 0xffff)
+    n = seed
+}
+
+// Class representing a card of a small deck
+class Book {
+    var words: Int[3]
+    var id : Int
+
+	def randomize() {
+        for i in 0 to 2 {
+            words[i] = mod(random(), 3)
+        }
+        id = mod(random(),20)
+    }
+
+	def copy(some: Book) {
+        for i in 0 to 2 {
+            words[i] = some.words[i]
+        }
+		id = some.id
+	}
+}
+
+class Library {
+    var books: Book[3]
+    var tolo: Int
+	var num: Bool
+
+	def replace(some: Book[3]) {
+        for i in 0 to 2 {
+            books[i].copy(some[i])
+        }
+	}
+    def randomize() {
+        for i in 0 to 2 {
+            books[i].randomize()
+        }
+
+    }
+}
+
+
+var lib: Library
+lib.tolo = 22
+lib.num = false
+lib.randomize()
+
+var books : Book[3]
+for i in 0 to 2 {
+    books[i].randomize()
+}
+
+lib.randomize()
+lib.replace(books)
