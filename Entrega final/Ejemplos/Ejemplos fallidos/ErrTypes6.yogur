@@ -1,0 +1,15 @@
+// Class representing a card of a small deck
+class Card {
+	var suit: Int	// 0 to 3
+	var num: Int	// 1 to 5
+
+	def copy(another: Card) {
+		suit = another.suit
+		num = another.num
+	}
+}
+
+var c1: Card
+var c2: Card
+
+var a: Int = c1.copy(c2)

@@ -1,7 +1,0 @@
-var a: Int = 3
-var b: Int = 4
-var c: Int
-c = a * b + b
-
-var d: Bool
-d = c < a

@@ -1,0 +1,5 @@
+var a: Int[10]
+
+def f(arg1: Int[3]) -> c: Int {
+	c = f[0]
+}

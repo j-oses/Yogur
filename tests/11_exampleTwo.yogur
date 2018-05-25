@@ -1,6 +1,0 @@
-var fact : Int = 1
-var n : Int = 5
-while n > 1 {
-    fact = fact * n
-	n=n-1
-}

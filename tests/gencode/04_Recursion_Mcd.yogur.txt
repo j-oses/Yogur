@@ -1,0 +1,59 @@
+ {0}    ssp 1;
+ {1}    ujp 18; \\ endFun1
+\\ def mod
+\\ fun1:
+ {2}    ssp 7;
+ {3}    sep 3;
+ {4}    lda 0 0;
+ {5}    lda 0 5;
+ {6}    ind;
+ {7}    lda 0 5;
+ {8}    ind;
+ {9}    lda 0 6;
+ {10}   ind;
+ {11}   div;
+ {12}   lda 0 6;
+ {13}   ind;
+ {14}   mul;
+ {15}   sub;
+ {16}   sto;
+ {17}   retf;
+\\ endFun1:
+ {18}   ujp 44; \\ endFun2
+\\ def mcd
+\\ fun2:
+ {19}   ssp 7;
+ {20}   sep 2;
+ {21}   lda 0 6;
+ {22}   ind;
+ {23}   ldc 0;
+ {24}   equ;
+ {25}   fjp 31; \\ else3
+ {26}   lda 0 0;
+ {27}   lda 0 5;
+ {28}   ind;
+ {29}   sto;
+ {30}   ujp 43; \\ endif4
+\\ else3:
+ {31}   lda 0 0;
+ {32}   mst 1;
+ {33}   lda 0 6;
+ {34}   ind;
+ {35}   mst 1;
+ {36}   lda 0 5;
+ {37}   ind;
+ {38}   lda 0 6;
+ {39}   ind;
+ {40}   cup 2 2; \\ fun1
+ {41}   cup 2 19; \\ fun2
+ {42}   sto;
+\\ endif4:
+ {43}   retf;
+\\ endFun2:
+ {44}   lda 0 0;
+ {45}   mst 0;
+ {46}   ldc 7;
+ {47}   ldc 15;
+ {48}   cup 2 19; \\ fun2
+ {49}   sto;
+ {50}   stp;

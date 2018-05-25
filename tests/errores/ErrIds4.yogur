@@ -1,0 +1,7 @@
+def foo(a: Int, b: Int) -> c: Int {
+	if b == 0 {
+		c = a
+	} else {
+		var this: Int
+	}
+}

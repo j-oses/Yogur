@@ -12,15 +12,50 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="BaseIdentifier.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/yogur/tree/expression/identifier/BaseIdentifier.java">
+      <file leaf-file-name="TestCodeGen.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/yogur/TestCodeGen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="56" column="17" lean-forward="false" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="17" />
+            <state relative-caret-position="300">
+              <caret line="20" column="35" lean-forward="false" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
               <folding>
-                <element signature="e#1326#1327#0" expanded="true" />
-                <element signature="e#1362#1363#0" expanded="true" />
+                <element signature="e#245#246#0" expanded="true" />
+                <element signature="e#261#262#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Compiler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/yogur/Compiler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="630">
+              <caret line="42" column="42" lean-forward="false" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CompilationException.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/yogur/utils/CompilationException.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="20" column="77" lean-forward="false" selection-start-line="20" selection-start-column="77" selection-end-line="20" selection-end-column="77" />
+              <folding>
+                <element signature="e#433#434#0" expanded="true" />
+                <element signature="e#507#508#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PComment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/yogur/codegen/PComment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -51,6 +86,12 @@
       <find>lda</find>
       <find>found stat</find>
       <find>&quot;cup&quot;</find>
+      <find>report_fatal_error</find>
+      <find>unrecovered_syntax_error</find>
+      <find>unrecov</find>
+      <find>throw</find>
+      <find>debug_message</find>
+      <find>report_expected_token_ids</find>
     </findStrings>
     <replaceStrings>
       <replace>performTypeAnalysis();</replace>
@@ -66,16 +107,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/yogur/TestJLex.java" />
         <option value="$PROJECT_DIR$/src/yogur/TestIdentifiers.java" />
         <option value="$PROJECT_DIR$/src/yogur/TestCup.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/declaration/declarator/Declarator.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/declaration/declarator/ArrayDeclarator.java" />
         <option value="$PROJECT_DIR$/src/yogur/typeidentification/TypeAnalyzer.java" />
-        <option value="$PROJECT_DIR$/src/yogur/TestCodeGen.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/declaration/declarator/BaseDeclarator.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/declaration/declarator/DotDeclarator.java" />
-        <option value="$PROJECT_DIR$/src/yogur/Compiler.java" />
         <option value="$PROJECT_DIR$/src/yogur/TestTypes.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/expression/identifier/ArrayIndex.java" />
         <option value="$PROJECT_DIR$/src/yogur/codegen/PInstruction.java" />
@@ -88,10 +126,8 @@
         <option value="$PROJECT_DIR$/src/yogur/tree/statement/VarDeclaration.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/declaration/Argument.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/expression/identifier/ThisIdentifier.java" />
-        <option value="$PROJECT_DIR$/src/yogur/tree/declaration/ClassDeclaration.java" />
         <option value="$PROJECT_DIR$/src/yogur/codegen/PMachineOutputStream.java" />
         <option value="$PROJECT_DIR$/src/yogur/codegen/POutputLine.java" />
-        <option value="$PROJECT_DIR$/src/yogur/utils/CompilationException.java" />
         <option value="$PROJECT_DIR$/src/yogur/utils/Log.java" />
         <option value="$PROJECT_DIR$/src/yogur/typeidentification/MetaType.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/AbstractTreeNode.java" />
@@ -100,23 +136,28 @@
         <option value="$PROJECT_DIR$/src/yogur/codegen/PLabelledInstruction.java" />
         <option value="$PROJECT_DIR$/src/yogur/codegen/PNonLabelledInstruction.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/AbstractTreeNodeInterface.java" />
-        <option value="$PROJECT_DIR$/src/yogur/ididentification/IdentifierTable.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/type/Type.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/statement/Statement.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/expression/Expression.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/expression/identifier/VarIdentifier.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/declaration/FunctionOrVarDeclaration.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/StatementOrDeclaration.java" />
-        <option value="$PROJECT_DIR$/src/yogur/tree/type/ArrayType.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/Program.java" />
-        <option value="$PROJECT_DIR$/src/yogur/tree/declaration/FuncDeclaration.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/statement/WhileStructure.java" />
-        <option value="$PROJECT_DIR$/src/yogur/tree/statement/Assignment.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/expression/BinaryOperation.java" />
-        <option value="$PROJECT_DIR$/src/yogur/tree/expression/FunctionCall.java" />
-        <option value="$PROJECT_DIR$/src/yogur/tree/expression/identifier/DotIdentifier.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/expression/identifier/ArrayIdentifier.java" />
         <option value="$PROJECT_DIR$/src/yogur/tree/expression/identifier/BaseIdentifier.java" />
+        <option value="$PROJECT_DIR$/src/yogur/tree/declaration/FuncDeclaration.java" />
+        <option value="$PROJECT_DIR$/src/yogur/tree/statement/Assignment.java" />
+        <option value="$PROJECT_DIR$/src/yogur/tree/expression/FunctionCall.java" />
+        <option value="$PROJECT_DIR$/src/yogur/cup/YogurParser.java" />
+        <option value="$PROJECT_DIR$/src/yogur/utils/CompilationException.java" />
+        <option value="$PROJECT_DIR$/src/yogur/ididentification/IdentifierTable.java" />
+        <option value="$PROJECT_DIR$/src/yogur/tree/type/ArrayType.java" />
+        <option value="$PROJECT_DIR$/src/yogur/tree/declaration/ClassDeclaration.java" />
+        <option value="$PROJECT_DIR$/src/yogur/tree/expression/identifier/DotIdentifier.java" />
+        <option value="$PROJECT_DIR$/src/yogur/Compiler.java" />
+        <option value="$PROJECT_DIR$/src/yogur/TestCodeGen.java" />
       </list>
     </option>
   </component>
@@ -241,10 +282,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -296,54 +336,6 @@
               <item name="IntelliJ" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="yogur" type="462c0819:PsiDirectoryNode" />
-              <item name="tree" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Yogur" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IntelliJ" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="yogur" type="462c0819:PsiDirectoryNode" />
-              <item name="tree" type="462c0819:PsiDirectoryNode" />
-              <item name="declaration" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Yogur" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IntelliJ" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="yogur" type="462c0819:PsiDirectoryNode" />
-              <item name="tree" type="462c0819:PsiDirectoryNode" />
-              <item name="expression" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Yogur" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IntelliJ" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="yogur" type="462c0819:PsiDirectoryNode" />
-              <item name="tree" type="462c0819:PsiDirectoryNode" />
-              <item name="expression" type="462c0819:PsiDirectoryNode" />
-              <item name="identifier" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Yogur" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IntelliJ" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="yogur" type="462c0819:PsiDirectoryNode" />
-              <item name="tree" type="462c0819:PsiDirectoryNode" />
-              <item name="statement" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Yogur" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IntelliJ" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="yogur" type="462c0819:PsiDirectoryNode" />
-              <item name="tree" type="462c0819:PsiDirectoryNode" />
-              <item name="type" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Yogur" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IntelliJ" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="yogur" type="462c0819:PsiDirectoryNode" />
               <item name="typeanalysis" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -357,6 +349,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -391,7 +384,7 @@
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <module />
     </configuration>
-    <configuration name="Compiler" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="Compiler" type="Application" factoryName="Application" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="yogur.*" />
@@ -400,7 +393,7 @@
       </extension>
       <option name="MAIN_CLASS_NAME" value="yogur.Compiler" />
       <option name="VM_PARAMETERS" value="" />
-      <option name="PROGRAM_PARAMETERS" value="./../tests/17_BinOps.yogur ./../tests/gencode/17_BinOps.txt" />
+      <option name="PROGRAM_PARAMETERS" value="../tests/errores/ErrTypes7.yogur ../tests/gencode/ErrTypes7.txt" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
@@ -429,7 +422,7 @@
       <module name="Yogur" />
       <envs />
     </configuration>
-    <configuration name="TestCup" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="TestCup" type="Application" factoryName="Application" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="yogur.ididentification.*" />
@@ -561,19 +554,17 @@
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Application.TestCup" />
-      <item index="1" class="java.lang.String" itemvalue="Application.TestIdentifiers" />
-      <item index="2" class="java.lang.String" itemvalue="Application.TestTypes" />
-      <item index="3" class="java.lang.String" itemvalue="Application.TestCodeGen" />
-      <item index="4" class="java.lang.String" itemvalue="Application.Compiler" />
+      <item index="0" class="java.lang.String" itemvalue="Application.Compiler" />
+      <item index="1" class="java.lang.String" itemvalue="Application.TestCup" />
+      <item index="2" class="java.lang.String" itemvalue="Application.TestIdentifiers" />
+      <item index="3" class="java.lang.String" itemvalue="Application.TestTypes" />
+      <item index="4" class="java.lang.String" itemvalue="Application.TestCodeGen" />
     </list>
     <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.Compiler" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Application.TestCodeGen" />
         <item index="1" class="java.lang.String" itemvalue="Application.TestTypes" />
-        <item index="2" class="java.lang.String" itemvalue="Application.TestCodeGen" />
-        <item index="3" class="java.lang.String" itemvalue="Application.TestCup" />
-        <item index="4" class="java.lang.String" itemvalue="Application.TestIdentifiers" />
+        <item index="2" class="java.lang.String" itemvalue="Application.TestIdentifiers" />
       </list>
     </recent_temporary>
   </component>
@@ -643,13 +634,14 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28897715" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28897715" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17465389" sideWeight="0.5837989" order="5" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17465389" sideWeight="0.4162011" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1315229" sideWeight="0.57122904" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969216" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1315229" sideWeight="0.42877096" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -661,7 +653,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32969216" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -682,7 +673,7 @@
           <option name="timeStamp" value="79" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="80" />
+      <option name="time" value="92" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -714,11 +705,35 @@
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>inputFile.getCanonicalPath()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>inputFile.getAbsolutePath()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>inputFile.exists()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>generalEx.printStackTrace()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>generalEx.printStackTrace();</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/yogur/tree/declaration/declarator/DotDeclarator.java" />
-    <entry file="file://$PROJECT_DIR$/src/yogur/tree/declaration/declarator/BaseDeclarator.java" />
-    <entry file="file://$PROJECT_DIR$/src/yogur/tree/declaration/declarator/ArrayDeclarator.java" />
     <entry file="file://$PROJECT_DIR$/Yogur.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -730,24 +745,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="31" column="13" lean-forward="false" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
-          <folding>
-            <element signature="e#719#720#0" expanded="false" />
-            <element signature="e#774#775#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/yogur/tree/expression/identifier/ArrayIndex.java" />
-    <entry file="file://$PROJECT_DIR$/src/yogur/cup/YogurParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="38" column="26" lean-forward="false" selection-start-line="38" selection-start-column="26" selection-end-line="38" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/yogur/typeanalysis/FunctionType.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-261">
@@ -767,13 +769,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
           <caret line="32" column="0" lean-forward="true" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../java_cup_jars/java-cup-11b-runtime.jar!/java_cup/runtime/lr_parser.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="262">
-          <caret line="101" column="0" lean-forward="false" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -805,14 +800,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/yogur/tree/expression/identifier/ThisIdentifier.java" />
-    <entry file="file://$PROJECT_DIR$/src/yogur/tree/declaration/ClassDeclaration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="61" column="39" lean-forward="false" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/yogur/tree/declaration/Argument.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -825,45 +812,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="16" column="46" lean-forward="false" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yogur/utils/CompilationException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="549">
-          <caret line="55" column="5" lean-forward="false" selection-start-line="55" selection-start-column="5" selection-end-line="55" selection-end-column="5" />
-          <folding>
-            <element signature="e#688#689#0" expanded="false" />
-            <element signature="e#717#718#0" expanded="false" />
-            <element signature="e#905#906#0" expanded="false" />
-            <element signature="e#923#924#0" expanded="false" />
-            <element signature="e#955#956#0" expanded="false" />
-            <element signature="e#975#976#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yogur/utils/Log.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="56" column="41" lean-forward="false" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
-          <folding>
-            <element signature="e#1159#1160#0" expanded="false" />
-            <element signature="e#1189#1190#0" expanded="false" />
-            <element signature="e#1522#1523#0" expanded="false" />
-            <element signature="e#1554#1555#0" expanded="false" />
-            <element signature="e#1598#1599#0" expanded="false" />
-            <element signature="e#1629#1630#0" expanded="false" />
-            <element signature="e#1676#1677#0" expanded="false" />
-            <element signature="e#1710#1711#0" expanded="false" />
-            <element signature="e#1755#1756#0" expanded="false" />
-            <element signature="e#1787#1788#0" expanded="false" />
-            <element signature="e#1845#1846#0" expanded="false" />
-            <element signature="e#1901#1902#0" expanded="false" />
-            <element signature="e#1943#1944#0" expanded="false" />
-            <element signature="e#1982#1983#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -871,7 +819,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="27" lean-forward="true" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -891,26 +838,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/yogur/codegen/PComment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-          <folding>
-            <element signature="e#213#214#0" expanded="false" />
-            <element signature="e#242#243#0" expanded="false" />
-            <element signature="e#321#322#0" expanded="false" />
-            <element signature="e#352#353#0" expanded="false" />
-            <element signature="e#394#395#0" expanded="false" />
-            <element signature="e#412#413#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/yogur/codegen/PLabelledInstruction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="24" column="95" lean-forward="false" selection-start-line="24" selection-start-column="95" selection-end-line="24" selection-end-column="95" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -937,20 +868,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="7" column="52" lean-forward="false" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yogur/ididentification/IdentifierTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="81" column="69" lean-forward="false" selection-start-line="81" selection-start-column="69" selection-end-line="81" selection-end-column="69" />
-          <folding>
-            <element signature="e#802#803#0" expanded="false" />
-            <element signature="e#847#848#0" expanded="false" />
-            <element signature="e#913#914#0" expanded="false" />
-            <element signature="e#936#937#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -966,7 +883,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="7" column="115" lean-forward="false" selection-start-line="7" selection-start-column="115" selection-end-line="7" selection-end-column="115" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -974,7 +890,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="15" column="24" lean-forward="false" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -996,15 +911,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="10" column="64" lean-forward="false" selection-start-line="10" selection-start-column="64" selection-end-line="10" selection-end-column="64" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yogur/tree/type/ArrayType.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="36" column="9" lean-forward="true" selection-start-line="36" selection-start-column="9" selection-end-line="36" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1012,30 +918,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="645">
           <caret line="56" column="33" lean-forward="false" selection-start-line="56" selection-start-column="33" selection-end-line="56" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yogur/tree/declaration/FuncDeclaration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2250">
-          <caret line="178" column="0" lean-forward="false" selection-start-line="178" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yogur/tree/statement/Assignment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="66" column="78" lean-forward="false" selection-start-line="66" selection-start-column="78" selection-end-line="66" selection-end-column="78" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yogur/jflex/YogurLex.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8850">
-          <caret line="617" column="63" lean-forward="false" selection-start-line="617" selection-start-column="63" selection-end-line="617" selection-end-column="63" />
           <folding />
         </state>
       </provider>
@@ -1052,15 +934,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="735">
           <caret line="52" column="18" lean-forward="false" selection-start-line="52" selection-start-column="18" selection-end-line="52" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/yogur/Compiler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="67" column="0" lean-forward="false" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1085,17 +958,27 @@
         <state relative-caret-position="446">
           <caret line="72" column="76" lean-forward="false" selection-start-line="72" selection-start-column="76" selection-end-line="72" selection-end-column="76" />
           <folding>
-            <element signature="e#1997#1998#0" expanded="true" />
-            <element signature="e#2072#2073#0" expanded="true" />
+            <element signature="e#1997#1998#0" expanded="false" />
+            <element signature="e#2072#2073#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/yogur/tree/expression/FunctionCall.java">
+    <entry file="file://$PROJECT_DIR$/src/yogur/tree/expression/Constant.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="31" column="29" lean-forward="false" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
-          <folding />
+        <state relative-caret-position="150">
+          <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yogur/tree/expression/identifier/BaseIdentifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="56" column="17" lean-forward="false" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="17" />
+          <folding>
+            <element signature="e#1326#1327#0" expanded="false" />
+            <element signature="e#1362#1363#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1107,18 +990,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/yogur/tree/expression/Constant.java">
+    <entry file="file://$PROJECT_DIR$/src/yogur/utils/Log.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="20" column="17" lean-forward="false" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="17" />
+        <state relative-caret-position="238">
+          <caret line="56" column="41" lean-forward="false" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/yogur/tree/expression/identifier/DotIdentifier.java">
+    <entry file="file://$PROJECT_DIR$/src/yogur/ididentification/IdentifierAnalyzer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="39" column="43" lean-forward="false" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="43" />
+        <state relative-caret-position="60">
+          <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yogur/tree/expression/FunctionCall.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1140">
+          <caret line="89" column="43" lean-forward="true" selection-start-line="89" selection-start-column="43" selection-end-line="89" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yogur/tree/declaration/FuncDeclaration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="651">
+          <caret line="67" column="33" lean-forward="false" selection-start-line="67" selection-start-column="33" selection-end-line="67" selection-end-column="33" />
+          <folding>
+            <element signature="e#1788#1789#0" expanded="true" />
+            <element signature="e#1817#1818#0" expanded="true" />
+            <element signature="e#1850#1851#0" expanded="true" />
+            <element signature="e#1881#1882#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yogur/tree/statement/Assignment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../java_cup_jars/java-cup-11b-runtime.jar!/java_cup/runtime/Symbol.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1126,19 +1046,112 @@
     <entry file="file://$PROJECT_DIR$/src/yogur/tree/expression/identifier/ArrayIdentifier.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
-          <caret line="40" column="86" lean-forward="false" selection-start-line="40" selection-start-column="86" selection-end-line="40" selection-end-column="86" />
+          <caret line="39" column="11" lean-forward="false" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/yogur/tree/expression/identifier/BaseIdentifier.java">
+    <entry file="file://$PROJECT_DIR$/src/yogur/jflex/YogurLex.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="56" column="17" lean-forward="false" selection-start-line="56" selection-start-column="17" selection-end-line="56" selection-end-column="17" />
+        <state relative-caret-position="214">
+          <caret line="706" column="68" lean-forward="false" selection-start-line="706" selection-start-column="67" selection-end-line="706" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../java_cup_jars/java-cup-11b-runtime.jar!/java_cup/runtime/lr_parser.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="91" column="60" lean-forward="true" selection-start-line="91" selection-start-column="60" selection-end-line="91" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yogur/cup/YogurParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="444" column="74" lean-forward="true" selection-start-line="444" selection-start-column="74" selection-end-line="444" selection-end-column="74" />
           <folding>
-            <element signature="e#1326#1327#0" expanded="true" />
-            <element signature="e#1362#1363#0" expanded="true" />
+            <element signature="e#23221#23222#0" expanded="true" />
+            <element signature="e#23252#23253#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yogur/ididentification/IdentifierTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="658">
+          <caret line="68" column="79" lean-forward="true" selection-start-line="68" selection-start-column="79" selection-end-line="68" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yogur/tree/type/ArrayType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="534">
+          <caret line="43" column="56" lean-forward="false" selection-start-line="43" selection-start-column="56" selection-end-line="43" selection-end-column="56" />
+          <folding>
+            <element signature="e#914#915#0" expanded="true" />
+            <element signature="e#972#973#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yogur/tree/declaration/ClassDeclaration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="47" column="44" lean-forward="false" selection-start-line="47" selection-start-column="44" selection-end-line="47" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yogur/tree/expression/identifier/DotIdentifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="50" column="100" lean-forward="false" selection-start-line="50" selection-start-column="100" selection-end-line="50" selection-end-column="100" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yogur/TestCodeGen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="35" lean-forward="false" selection-start-line="20" selection-start-column="35" selection-end-line="20" selection-end-column="35" />
+          <folding>
+            <element signature="e#245#246#0" expanded="true" />
+            <element signature="e#261#262#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yogur/Compiler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" column="42" lean-forward="false" selection-start-line="42" selection-start-column="42" selection-end-line="42" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yogur/utils/CompilationException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="20" column="77" lean-forward="false" selection-start-line="20" selection-start-column="77" selection-end-line="20" selection-end-column="77" />
+          <folding>
+            <element signature="e#433#434#0" expanded="true" />
+            <element signature="e#507#508#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/yogur/codegen/PComment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="3" lean-forward="true" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
+          <folding />
         </state>
       </provider>
     </entry>

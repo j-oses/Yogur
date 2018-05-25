@@ -1,0 +1,34 @@
+// Un ejemplo de clases simples para comprobar el funcionamiento básico
+
+class Container {
+    var one : Int
+    var two : Int
+    def sum(one : Int, two : Int) -> result : Int {
+        result = one - two
+    }
+    
+}
+
+def sum(one : Int, two : Int) -> result : Int {
+    var useful : Container
+    useful.one  = 3
+    useful.two = 4
+    result = one + two
+}
+
+var one : Int 
+one = 1
+var two : Int
+two = 2
+
+var damn : Container
+var it : Container
+
+damn.one  = 3
+damn.two = 4
+it.one = 5
+it.two = 6
+
+damn.one  = it.sum(damn.one,one)
+damn.two = sum(damn.two,two)
+

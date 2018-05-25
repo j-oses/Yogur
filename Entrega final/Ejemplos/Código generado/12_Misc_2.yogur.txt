@@ -1,0 +1,102 @@
+ {0}    ssp 14;
+ {1}    lda 0 0;
+ {2}    ldc 3;
+ {3}    sto;
+ {4}    lda 0 1;
+ {5}    ldc 5;
+ {6}    sto;
+ {7}    lda 0 2;
+ {8}    ldc 0;
+ {9}    sto;
+\\ while1:
+ {10}   lda 0 0;
+ {11}   ind;
+ {12}   lda 0 1;
+ {13}   ind;
+ {14}   equ;
+ {15}   ldc true;
+ {16}   and;
+ {17}   fjp 40; \\ endWhile1
+ {18}   lda 0 3;
+ {19}   ldc 1;
+ {20}   sto;
+\\ for2:
+ {21}   lda 0 3;
+ {22}   ind;
+ {23}   ldc 10;
+ {24}   leq;
+ {25}   fjp 39; \\ endFor2
+ {26}   lda 0 2;
+ {27}   lda 0 2;
+ {28}   ind;
+ {29}   ldc 1;
+ {30}   add;
+ {31}   sto;
+ {32}   lda 0 3;
+ {33}   lda 0 3;
+ {34}   ind;
+ {35}   ldc 1;
+ {36}   add;
+ {37}   sto;
+ {38}   ujp 21; \\ for2
+\\ endFor2:
+ {39}   ujp 10; \\ while1
+\\ endWhile1:
+ {40}   ujp 54; \\ endFun3
+\\ def patata
+\\ fun3:
+ {41}   ssp 7;
+ {42}   sep 0;
+ {43}   mst 1;
+ {44}   lda 0 5;
+ {45}   ind;
+ {46}   ldc 1;
+ {47}   add;
+ {48}   lda 0 6;
+ {49}   ind;
+ {50}   ldc true;
+ {51}   or;
+ {52}   cup 2 41; \\ fun3
+ {53}   retp;
+\\ endFun3:
+ {54}   ujp 91; \\ endFun4
+\\ def classPatata
+\\ fun4:
+ {55}   ssp 7;
+ {56}   sep 2;
+ {57}   lda 1 2;
+ {58}   lda 1 2;
+ {59}   ind;
+ {60}   ldc 1;
+ {61}   add;
+ {62}   sto;
+ {63}   lda 1 1;
+ {64}   lda 1 1;
+ {65}   ind;
+ {66}   lda 1 1;
+ {67}   ind;
+ {68}   div;
+ {69}   sto;
+ {70}   lod 0 5;
+ {71}   inc 0;
+ {72}   lda 1 1;
+ {73}   ind;
+ {74}   chk 0 9;
+ {75}   ixa 1;
+ {76}   lod 0 5;
+ {77}   inc 0;
+ {78}   ldc 3;
+ {79}   chk 0 9;
+ {80}   ixa 1;
+ {81}   ind;
+ {82}   sto;
+ {83}   lda 0 0;
+ {84}   lda 1 2;
+ {85}   ind;
+ {86}   lda 1 1;
+ {87}   ind;
+ {88}   equ;
+ {89}   sto;
+ {90}   retf;
+\\ endFun4:
+ {91}   stp;

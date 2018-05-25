@@ -1,0 +1,4 @@
+var a: Int
+var b: Int
+
+a = b + c

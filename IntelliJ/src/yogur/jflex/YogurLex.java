@@ -44,16 +44,19 @@ public class YogurLex implements java_cup.runtime.Scanner {
   /** 
    * Translates characters to character classes
    */
-  private static final char [] ZZ_CMAP = {
-     0,  0,  0,  0,  0,  0,  0,  0, 15, 15, 16,  0,  0, 15,  0,  0, 
-     0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0, 
-    15, 29,  0,  0,  0,  0, 26,  0, 36, 37, 18, 22, 20, 23, 30, 17, 
-     4,  3,  3,  3,  3,  3,  3,  3,  3,  3, 33,  0, 32, 21, 31,  0, 
-     0,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 
-     1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  1, 34,  0, 35,  0, 19, 
-     0, 12,  6,  6, 25, 10, 11,  2,  2,  2,  2,  2, 13,  2, 24, 27, 
-     2,  2,  8, 14,  7,  9,  2,  2,  5,  2,  2, 38, 28, 39,  0,  0
-  };
+  private static final String ZZ_CMAP_PACKED = 
+    "\10\0\2\17\1\20\1\50\1\50\1\17\22\0\1\17\1\35\4\0"+
+    "\1\32\1\0\1\44\1\45\1\22\1\26\1\24\1\27\1\36\1\21"+
+    "\1\4\11\3\1\41\1\0\1\40\1\25\1\37\2\0\32\1\1\42"+
+    "\1\0\1\43\1\0\1\23\1\0\1\14\2\6\1\31\1\12\1\13"+
+    "\5\2\1\15\1\2\1\30\1\33\2\2\1\10\1\16\1\7\1\11"+
+    "\2\2\1\5\2\2\1\46\1\34\1\47\7\0\1\50\u1fa2\0\1\50"+
+    "\1\50\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\uffff\0\udfe6\0";
+
+  /** 
+   * Translates characters to character classes
+   */
+  private static final char [] ZZ_CMAP = zzUnpackCMap(ZZ_CMAP_PACKED);
 
   /** 
    * Translates DFA states to action switch labels.
@@ -95,13 +98,13 @@ public class YogurLex implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\50\0\120\0\170\0\240\0\310\0\360\0\u0118"+
-    "\0\u0140\0\u0168\0\u0190\0\u01b8\0\50\0\50\0\u01e0\0\50"+
-    "\0\u0208\0\u0230\0\u0258\0\u0280\0\u02a8\0\u02d0\0\50\0\u02f8"+
-    "\0\u0320\0\50\0\50\0\50\0\50\0\50\0\50\0\50"+
-    "\0\u0348\0\u0370\0\u0398\0\u03c0\0\u0168\0\u03e8\0\u0410\0\50"+
-    "\0\50\0\u0438\0\50\0\170\0\50\0\50\0\50\0\50"+
-    "\0\u0348\0\u0460\0\u0488\0\170\0\u04b0\0\170\0\170\0\u0410";
+    "\0\0\0\51\0\122\0\173\0\244\0\315\0\366\0\u011f"+
+    "\0\u0148\0\u0171\0\u019a\0\u01c3\0\51\0\51\0\u01ec\0\51"+
+    "\0\u0215\0\u023e\0\u0267\0\u0290\0\u02b9\0\u02e2\0\51\0\u030b"+
+    "\0\u0334\0\51\0\51\0\51\0\51\0\51\0\51\0\51"+
+    "\0\u035d\0\u0386\0\u03af\0\u03d8\0\u0171\0\u0401\0\u042a\0\51"+
+    "\0\51\0\u0453\0\51\0\173\0\51\0\51\0\51\0\51"+
+    "\0\u035d\0\u047c\0\u04a5\0\173\0\u04ce\0\173\0\173\0\u042a";
 
   private static int [] zzUnpackRowMap() {
     int [] result = new int[56];
@@ -131,31 +134,31 @@ public class YogurLex implements java_cup.runtime.Scanner {
     "\1\10\1\11\2\4\1\12\1\13\1\14\1\15\1\2"+
     "\1\16\1\17\1\20\1\21\1\22\1\4\1\23\1\24"+
     "\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\34"+
-    "\1\35\1\36\1\37\1\40\51\0\16\3\4\0\1\3"+
-    "\4\0\2\3\1\0\1\3\15\0\16\4\4\0\1\4"+
-    "\4\0\2\4\1\0\1\4\17\0\2\5\46\0\2\5"+
-    "\1\41\43\0\7\4\1\42\6\4\4\0\1\4\4\0"+
-    "\2\4\1\0\1\4\15\0\13\4\1\43\2\4\4\0"+
-    "\1\4\4\0\2\4\1\0\1\4\15\0\16\4\4\0"+
-    "\1\4\4\0\1\44\1\4\1\0\1\4\33\0\1\45"+
-    "\1\13\46\0\2\13\50\0\1\46\1\47\52\0\1\50"+
-    "\61\0\1\51\11\0\16\4\4\0\1\4\4\0\2\4"+
-    "\1\0\1\52\46\0\1\53\16\0\7\4\1\54\6\4"+
-    "\4\0\1\4\4\0\2\4\1\0\1\4\50\0\1\55"+
-    "\40\0\1\56\47\0\1\57\47\0\1\60\25\0\2\61"+
-    "\1\0\1\61\3\0\3\61\14\0\1\61\17\0\10\4"+
+    "\1\35\1\36\1\37\1\40\53\0\16\3\4\0\1\3"+
+    "\4\0\2\3\1\0\1\3\16\0\16\4\4\0\1\4"+
+    "\4\0\2\4\1\0\1\4\20\0\2\5\47\0\2\5"+
+    "\1\41\44\0\7\4\1\42\6\4\4\0\1\4\4\0"+
+    "\2\4\1\0\1\4\16\0\13\4\1\43\2\4\4\0"+
+    "\1\4\4\0\2\4\1\0\1\4\16\0\16\4\4\0"+
+    "\1\4\4\0\1\44\1\4\1\0\1\4\34\0\1\45"+
+    "\1\13\47\0\2\13\51\0\1\46\1\47\53\0\1\50"+
+    "\62\0\1\51\12\0\16\4\4\0\1\4\4\0\2\4"+
+    "\1\0\1\52\47\0\1\53\17\0\7\4\1\54\6\4"+
+    "\4\0\1\4\4\0\2\4\1\0\1\4\51\0\1\55"+
+    "\41\0\1\56\50\0\1\57\50\0\1\60\26\0\2\61"+
+    "\1\0\1\61\3\0\3\61\14\0\1\61\20\0\10\4"+
     "\1\62\5\4\4\0\1\4\4\0\2\4\1\0\1\4"+
-    "\15\0\14\4\1\63\1\4\4\0\1\4\4\0\2\4"+
-    "\1\0\1\4\15\0\16\4\4\0\1\4\4\0\1\4"+
-    "\1\64\1\0\1\4\14\0\20\46\1\0\27\46\22\47"+
-    "\1\65\25\47\1\0\6\4\1\66\7\4\4\0\1\4"+
-    "\4\0\2\4\1\0\1\4\15\0\11\4\1\67\4\4"+
-    "\4\0\1\4\4\0\2\4\1\0\1\4\15\0\15\4"+
-    "\1\62\4\0\1\4\4\0\2\4\1\0\1\4\14\0"+
-    "\21\47\1\70\1\65\25\47";
+    "\16\0\14\4\1\63\1\4\4\0\1\4\4\0\2\4"+
+    "\1\0\1\4\16\0\16\4\4\0\1\4\4\0\1\4"+
+    "\1\64\1\0\1\4\15\0\20\46\1\0\30\46\22\47"+
+    "\1\65\26\47\1\0\6\4\1\66\7\4\4\0\1\4"+
+    "\4\0\2\4\1\0\1\4\16\0\11\4\1\67\4\4"+
+    "\4\0\1\4\4\0\2\4\1\0\1\4\16\0\15\4"+
+    "\1\62\4\0\1\4\4\0\2\4\1\0\1\4\15\0"+
+    "\21\47\1\70\1\65\26\47";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[1240];
+    int [] result = new int[1271];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -309,6 +312,24 @@ public class YogurLex implements java_cup.runtime.Scanner {
     this.zzReader = in;
   }
 
+
+  /** 
+   * Unpacks the compressed character translation table.
+   *
+   * @param packed   the packed character translation table
+   * @return         the unpacked character translation table
+   */
+  private static char [] zzUnpackCMap(String packed) {
+    char [] map = new char[0x110000];
+    int i = 0;  /* index in packed string  */
+    int j = 0;  /* index in unpacked array */
+    while (i < 156) {
+      int  count = packed.charAt(i++);
+      char value = packed.charAt(i++);
+      do map[j++] = value; while (--count > 0);
+    }
+    return map;
+  }
 
 
   /**
@@ -506,6 +527,18 @@ public class YogurLex implements java_cup.runtime.Scanner {
 
 
   /**
+   * Contains user EOF-code, which will be executed exactly once,
+   * when the end of file is reached
+   */
+  private void zzDoEOF() throws java.io.IOException {
+    if (!zzEOFDone) {
+      zzEOFDone = true;
+      yyclose();
+    }
+  }
+
+
+  /**
    * Resumes scanning until the next regular expression is matched,
    * the end of input is encountered or an I/O-Error occurs.
    *
@@ -648,13 +681,14 @@ public class YogurLex implements java_cup.runtime.Scanner {
 
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
+            zzDoEOF();
           { 	return new Symbol(sym.EOF, line(), column());
  }
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            { exceptions.add(new CompilationException("Extraneous character '" + yytext() + "'", line(), column(), CompilationException.Scope.LexicalAnalyzer));
+            { exceptions.add(new CompilationException("Extraneous character or string '" + yytext() + "'", line(), column(), CompilationException.Scope.LexicalAnalyzer)); throw exceptions.get(0);
             }
           case 32: break;
           case 2: 

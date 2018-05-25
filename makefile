@@ -11,13 +11,8 @@ parse: yogur.cup
 	mv sym.java IntelliJ/src/yogur/cup/sym.java
 
 jflex: yogur.lex
-	$(JAVA) -classpath $(CLASSPATH) jflex.Main --jlex yogur.lex
-	cp YogurLex.java IntelliJ/src/yogur/jlex/YogurLex.java
-	
-lex: yogur.lex
-	$(JAVA) JLex.Main yogur.lex
-	cp yogur.lex.java IntelliJ/src/yogur/jlex/YogurLex.java
-	mv yogur.lex.java YogurLex.java
+	$(JAVA) -classpath $(CLASSPATH) jflex.Main yogur.lex
+	cp YogurLex.java IntelliJ/src/yogur/jflex/YogurLex.java
 
 build: sym.java parser.java YogurLex.java
 	$(JAVAC) Program.java
