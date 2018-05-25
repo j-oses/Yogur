@@ -54,7 +54,7 @@ public class BaseIdentifier extends Identifier {
 
 	@Override
 	public int getDepthOnStack() {
-		return 2;	// At most 2, may be less
+		return 1;
 	}
 
 	@Override

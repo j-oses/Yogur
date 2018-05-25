@@ -30,11 +30,13 @@ public class BinaryOperation extends Expression {
 			}
 		}
 
-		public MetaType getArgumentsType() {
-			if (ordinal() < 10) {
-				return intT;
+		public boolean areValidArgumentTypes(MetaType arg1, MetaType arg2) {
+			if (ordinal() < 8) {
+				return intT.equals(arg1) && intT.equals(arg2);
+			} else if (ordinal() >= 10) {
+				return boolT.equals(arg1) && boolT.equals(arg2);
 			} else {
-				return boolT;
+				return (arg1 instanceof BaseType) && arg1.equals(arg2);
 			}
 		}
 	}
@@ -68,7 +70,7 @@ public class BinaryOperation extends Expression {
 
 	@Override
 	public int getDepthOnStack() {
-		return left.getDepthOnStack() + right.getDepthOnStack();
+		return Math.max(left.getDepthOnStack(), right.getDepthOnStack() + 1);
 	}
 
 	@Override
@@ -79,11 +81,11 @@ public class BinaryOperation extends Expression {
 
 	@Override
 	public MetaType analyzeType() throws CompilationException {
-		MetaType argType = operator.getArgumentsType();
 		MetaType leftType = left.performTypeAnalysis();
 		MetaType rightType = right.performTypeAnalysis();
+		boolean validArgs = operator.areValidArgumentTypes(leftType, rightType);
 
-		if (argType.equals(leftType) && argType.equals(rightType)) {
+		if (validArgs) {
 			return operator.getReturnType();
 		}
 

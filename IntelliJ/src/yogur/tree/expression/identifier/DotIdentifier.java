@@ -37,7 +37,7 @@ public class DotIdentifier extends Identifier {
 
 	@Override
 	public int getDepthOnStack() {
-		return expression.getDepthOnStack() + 1;
+		return expression.getDepthOnStack();
 	}
 
 	@Override

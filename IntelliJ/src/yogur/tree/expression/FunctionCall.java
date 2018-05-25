@@ -29,6 +29,7 @@ public class FunctionCall extends Expression {
 
 	@Override
 	public int getDepthOnStack() {
+		// FIXME: Not correct
 		int result = function.getDepthOnStack();
 		for (Expression e: expressions) {
 			result += e.getDepthOnStack();

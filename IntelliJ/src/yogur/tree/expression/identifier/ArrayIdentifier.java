@@ -37,7 +37,8 @@ public class ArrayIdentifier extends Identifier {
 
 	@Override
 	public int getDepthOnStack() {
-		return leftExpression.getDepthOnStack() + index.getDepthOnStack() + 2;
+		// FIXME: check correctness
+		return Math.max(leftExpression.getDepthOnStack(), index.getDepthOnStack() + 1);
 	}
 
 	@Override
