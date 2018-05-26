@@ -3,7 +3,7 @@
 \\ def sum
 \\ fun1:
  {2}    ssp 8;
- {3}    sep 2;
+ {3}    sep 3;
  {4}    lda 0 0;
  {5}    lda 0 6;
  {6}    ind;
@@ -17,7 +17,7 @@
 \\ def sum
 \\ fun2:
  {13}   ssp 9;
- {14}   sep 2;
+ {14}   sep 3;
  {15}   lda 0 7;
  {16}   inc 0;
  {17}   ldc 3;

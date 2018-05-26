@@ -46,7 +46,7 @@
 \\ def patata
 \\ fun3:
  {41}   ssp 7;
- {42}   sep 0;
+ {42}   sep 8;
  {43}   mst 1;
  {44}   lda 0 5;
  {45}   ind;
@@ -63,7 +63,7 @@
 \\ def classPatata
 \\ fun4:
  {55}   ssp 7;
- {56}   sep 2;
+ {56}   sep 3;
  {57}   lda 1 2;
  {58}   lda 1 2;
  {59}   ind;

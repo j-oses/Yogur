@@ -3,7 +3,7 @@
 \\ def fibonacci
 \\ fun1:
  {2}    ssp 6;
- {3}    sep 3;
+ {3}    sep 9;
  {4}    lda 0 5;
  {5}    ind;
  {6}    ldc 0;

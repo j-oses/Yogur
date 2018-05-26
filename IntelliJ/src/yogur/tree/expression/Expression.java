@@ -28,6 +28,17 @@ public abstract class Expression extends Statement {
 		return getDepthOnStack();
 	}
 
+	public int getDepthOnStackAsArgument() {
+		int lDepth = getDepthOnStack();
+
+		if (!(metaType instanceof ClassType) && !(metaType instanceof BaseType)) {
+			// It is an array
+			return Math.max(lDepth, metaType.getSize());
+		}
+
+		return lDepth;
+	}
+
 	/**
 	 * Generate code for the right hand side of an assignment.
 	 * @param stream the output code stream.
@@ -55,6 +66,7 @@ public abstract class Expression extends Statement {
 		} else {
 			generateCodeL(stream);
 			if (!(metaType instanceof ClassType)) {
+				// It is an array
 				stream.appendInstruction("movs", metaType.getSize());
 			}
 		}

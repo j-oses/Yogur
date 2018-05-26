@@ -11,6 +11,7 @@ import yogur.tree.AbstractTreeNode;
 import yogur.tree.statement.Block;
 import yogur.typeanalysis.FunctionType;
 import yogur.typeanalysis.MetaType;
+import yogur.utils.Log;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,14 +59,6 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 	@Override
 	public void setDeclaredOnClass(ClassDeclaration clazz) {
 		this.declaredOnClass = clazz;
-	}
-
-	public ClassDeclaration getDeclaredOnClass() {
-		return declaredOnClass;
-	}
-
-	public boolean isProcedure() {
-		return returnArg == null;
 	}
 
 	public boolean isDeclaredOnClass() {
@@ -181,6 +174,9 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 			generateLabel(stream);
 		}
 
+		int maxDepthOnStack = block.getMaxDepthOnStack();
+		Log.debug("Max depth on stack for function " + identifier + ": " + maxDepthOnStack);
+
 		// Our procedures may be intermingled with normal code, so we generate them with a jump
 		stream.appendLabelledInstruction("ujp", endLabel);
 		stream.appendComment("def " + identifier);
@@ -188,7 +184,7 @@ public class FuncDeclaration extends AbstractTreeNode implements FunctionOrVarDe
 		// Actual function code
 		stream.appendLabel(label);
 		stream.appendInstruction("ssp", frameStaticLength);
-		stream.appendInstruction("sep", block.getMaxDepthOnStack());
+		stream.appendInstruction("sep", maxDepthOnStack);
 		block.generateCode(stream);
 
 		if (returnArg == null) {

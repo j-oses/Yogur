@@ -23,7 +23,7 @@ public class Assignment extends Statement {
 
 	@Override
 	public int getMaxDepthOnStack() {
-		return Math.max(declarator.getDepthOnStack(), expression.getDepthOnStack());
+		return Math.max(declarator.getDepthOnStack(), 1 + expression.getDepthOnStack());
 	}
 
 	@Override

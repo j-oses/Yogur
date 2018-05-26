@@ -6,7 +6,7 @@
 \\ def mod
 \\ fun1:
  {5}    ssp 7;
- {6}    sep 3;
+ {6}    sep 4;
  {7}    lda 0 0;
  {8}    lda 0 5;
  {9}    ind;
@@ -26,7 +26,7 @@
 \\ def random
 \\ fun2:
  {22}   ssp 5;
- {23}   sep 1;
+ {23}   sep 8;
  {24}   lda 1 0;
  {25}   mst 1;
  {26}   lda 1 0;
@@ -48,7 +48,7 @@
 \\ def copy
 \\ fun3:
  {41}   ssp 7;
- {42}   sep 1;
+ {42}   sep 2;
  {43}   lod 0 5;
  {44}   inc 0;
  {45}   lod 0 6;
@@ -143,7 +143,7 @@
 \\ def shuffle
 \\ fun5:
  {126}  ssp 8;
- {127}  sep 4;
+ {127}  sep 11;
  {128}  lda 0 6;
  {129}  ldc 0;
  {130}  sto;
@@ -193,7 +193,7 @@
 \\ def swapAt
 \\ fun6:
  {171}  ssp 10;
- {172}  sep 2;
+ {172}  sep 8;
  {173}  mst 1;
  {174}  lda 0 8;
  {175}  lod 0 5;
@@ -232,7 +232,7 @@
 \\ def getTopCard
 \\ fun7:
  {207}  ssp 7;
- {208}  sep 2;
+ {208}  sep 8;
  {209}  lod 0 5;
  {210}  inc 40;
  {211}  ind;

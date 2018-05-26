@@ -3,7 +3,7 @@
 \\ def mod
 \\ fun1:
  {2}    ssp 7;
- {3}    sep 3;
+ {3}    sep 4;
  {4}    lda 0 0;
  {5}    lda 0 5;
  {6}    ind;
@@ -23,7 +23,7 @@
 \\ def mcd
 \\ fun2:
  {19}   ssp 7;
- {20}   sep 2;
+ {20}   sep 14;
  {21}   lda 0 6;
  {22}   ind;
  {23}   ldc 0;

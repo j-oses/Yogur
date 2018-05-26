@@ -29,8 +29,21 @@ public class FunctionCall extends Expression {
 
 	@Override
 	public int getDepthOnStack() {
-		// The function call ignores the current EP limits. We only have to consider the return value it may leave.
-		return declaration.isProcedure() ? 0 : 1;
+		// When we call a function, we use automatically 5 words and then we may use more to compute the arguments.
+		// All this happens before the actual call, so we have to take care of it in the current function.
+		int depth = 5;
+		int accSize = 5;
+
+		if (declaration.isDeclaredOnClass()) {
+			depth = Math.max(depth, accSize + function.getDepthOnStack());
+			accSize++;	// The class parameter is always a reference
+		}
+
+		for (Expression arg: expressions) {
+			depth = Math.max(depth, accSize + arg.getDepthOnStackAsArgument());
+			accSize += arg.getMetaType().getSize();
+		}
+		return depth;
 	}
 
 	@Override

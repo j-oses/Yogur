@@ -3,7 +3,7 @@
 \\ def mod
 \\ fun1:
  {2}    ssp 7;
- {3}    sep 3;
+ {3}    sep 4;
  {4}    lda 0 0;
  {5}    lda 0 5;
  {6}    ind;
@@ -76,7 +76,7 @@
 \\ def setToIdentity
 \\ fun3:
  {65}   ssp 8;
- {66}   sep 4;
+ {66}   sep 8;
  {67}   lda 0 6;
  {68}   ldc 0;
  {69}   sto;
@@ -213,7 +213,7 @@
 \\ def sumTo
 \\ fun5:
  {188}  ssp 7;
- {189}  sep 0;
+ {189}  sep 7;
  {190}  mst 1;
  {191}  lod 0 6;
  {192}  lod 0 5;
@@ -353,7 +353,7 @@
 \\ def determinant
 \\ fun8:
  {311}  ssp 6;
- {312}  sep 4;
+ {312}  sep 5;
  {313}  lda 0 0;
  {314}  lod 0 5;
  {315}  inc 0;
@@ -401,7 +401,7 @@
 \\ def adjugate
 \\ fun9:
  {356}  ssp 12;
- {357}  sep 4;
+ {357}  sep 7;
  {358}  lda 0 10;
  {359}  ldc 0;
  {360}  sto;
@@ -600,7 +600,7 @@
 \\ def inverse
 \\ fun11:
  {540}  ssp 6;
- {541}  sep 0;
+ {541}  sep 13;
  {542}  mst 1;
  {543}  lod 0 5;
  {544}  cup 1 356; \\ fun9
