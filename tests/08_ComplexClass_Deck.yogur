@@ -1,5 +1,5 @@
-// Una clase que representa una baraja de cartas.
-// Para probar clases anidadas, llamadas a funciones de clase...
+// A class representing a deck of cards.
+// Testing nested classes, class function calls...
 
 // The RNG seed
 var seed: Int = 23456

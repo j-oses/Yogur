@@ -1,6 +1,6 @@
-/* Utiliza todos los operadores binarios, con sus argumentos correctos.
-Para el == y !=, utiliza las dos combinaciones de argumentos posibles:
-bool, bool e int, int */
+/* Tries all binary operators with correct arguments.
+For equals and not equals, it uses both possible combinations:
+bool, bool and int, int */
 
 var a: Int = 0
 var b: Int = 1

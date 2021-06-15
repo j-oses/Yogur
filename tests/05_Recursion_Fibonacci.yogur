@@ -1,4 +1,4 @@
-// Calculamos los 8 primeros números de fibonacci "inocentemente", para probar de nuevo la recursión
+// We compute the first 8 fibonacci numbers naively, again to verify recursion
 
 def fibonacci(i: Int) -> result: Int {
 	if i == 0 || i == 1 {

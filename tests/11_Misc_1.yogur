@@ -1,4 +1,4 @@
-// El ejemplo que aparecía en la primera especificación de nuestro lenguaje
+// A little bit of everything
 
 class Container {
     var one : Int

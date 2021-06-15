@@ -1,5 +1,5 @@
-// Otro par de clases con pruebas pesadas que aseguran que a pesar de "mover mucho" 
-// los datos, todo funciona bien.
+// A pair of classes with heavy tests ensuring that everything works correctly,
+// even after moving data vigorously.
 
 // The RNG seed
 var seed: Int = 23456

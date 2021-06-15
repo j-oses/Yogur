@@ -1,4 +1,4 @@
-// Una jerarquía de clases un poco más profunda, principalmente para probar los accesos '.' anidados
+// A deep class hierarchy, mainly to test the nested '.' operator.
 
 class Top {
 	var spinning : Bool

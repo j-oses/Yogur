@@ -7,12 +7,12 @@ init:
 
 parse: yogur.cup
 	$(JAVA) -cp java_cup_jars/java-cup-11b.jar java_cup.Main -parser YogurParser yogur.cup
-	mv YogurParser.java IntelliJ/src/yogur/cup/YogurParser.java
-	mv sym.java IntelliJ/src/yogur/cup/sym.java
+	mv YogurParser.java src/yogur/cup/YogurParser.java
+	mv sym.java src/yogur/cup/sym.java
 
 jflex: yogur.lex
 	$(JAVA) -classpath $(CLASSPATH) jflex.Main yogur.lex
-	cp YogurLex.java IntelliJ/src/yogur/jflex/YogurLex.java
+	cp YogurLex.java src/yogur/jflex/YogurLex.java
 
 build: sym.java parser.java YogurLex.java
 	$(JAVAC) Program.java

@@ -1,5 +1,5 @@
-/* Una serie de operaciones básicas para comprobar el correcto funcionamiento
-de las expresiones simples */
+/* A series of operations to check that simple operations work
+correctly */
 
 var tolo : Int = 2 + 3
 tolo = 2 - 6

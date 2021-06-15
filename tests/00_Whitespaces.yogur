@@ -1,4 +1,4 @@
-// Una prueba simple que simplemente comprueba que los espacios en blanco y saltos se ignoran correctamente
+// A simple test checking that whitespaces and line breaks are correctly ignored
 
 var a: Int = 3
 

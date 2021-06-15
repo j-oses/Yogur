@@ -1,4 +1,4 @@
-// Un ejemplo de clases simples para comprobar el funcionamiento básico
+// The first example with classes, to check the foundations
 
 class Container {
     var one : Int

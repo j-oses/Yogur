@@ -3,65 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="c422320f-f9c9-4a4e-9951-448273ad10ad" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/.idea/workspace.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/Yogur.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/Compiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/Compiler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/TestCodeGen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/TestCodeGen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/codegen/IntegerReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/codegen/IntegerReference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/codegen/PComment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/codegen/PComment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/codegen/PLabelledInstruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/codegen/PLabelledInstruction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/codegen/PMachineOutputStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/codegen/PMachineOutputStream.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/codegen/PNonLabelledInstruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/codegen/PNonLabelledInstruction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/codegen/POutputLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/codegen/POutputLine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/cup/YogurParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/cup/YogurParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/cup/sym.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/cup/sym.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/ididentification/IdentifierTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/ididentification/IdentifierTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/jflex/YogurLex.java" beforeDir="false" afterPath="$PROJECT_DIR$/JFLex/YogurLex.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/AbstractTreeNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/AbstractTreeNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/AbstractTreeNodeInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/AbstractTreeNodeInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/Program.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/Program.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/StatementOrDeclaration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/StatementOrDeclaration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/declaration/Argument.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/declaration/Argument.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/declaration/ClassDeclaration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/declaration/ClassDeclaration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/declaration/Declaration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/declaration/Declaration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/declaration/FuncDeclaration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/declaration/FuncDeclaration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/declaration/FunctionOrVarDeclaration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/declaration/FunctionOrVarDeclaration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/expression/BinaryOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/expression/BinaryOperation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/expression/Constant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/expression/Constant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/expression/Expression.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/expression/Expression.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/expression/FunctionCall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/expression/FunctionCall.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/expression/UnaryOperation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/expression/UnaryOperation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/expression/identifier/ArrayIdentifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/expression/identifier/ArrayIdentifier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/expression/identifier/BaseIdentifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/expression/identifier/BaseIdentifier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/expression/identifier/DotIdentifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/expression/identifier/DotIdentifier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/expression/identifier/Identifier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/expression/identifier/Identifier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/statement/Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/statement/Assignment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/statement/Block.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/statement/Block.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/statement/ForStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/statement/ForStructure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/statement/IfStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/statement/IfStructure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/statement/Statement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/statement/Statement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/statement/VarDeclaration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/statement/VarDeclaration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/statement/WhileStructure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/statement/WhileStructure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/type/ArrayType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/type/ArrayType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/type/BaseType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/type/BaseType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/type/ClassType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/type/ClassType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/tree/type/Type.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/tree/type/Type.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/typeanalysis/FunctionType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/typeanalysis/FunctionType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/typeanalysis/MetaType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/typeanalysis/MetaType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/typeanalysis/VoidType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/typeanalysis/VoidType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/utils/CompilationException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/utils/CompilationException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/IntelliJ/src/yogur/utils/Log.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/utils/Log.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Jorge Oses y Alvaro Rodriguez.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Memoria/Memoria.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Memoria/Memoria.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Yogur.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/YogurLex.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/yogur/jflex/YogurLex.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/00_Whitespaces.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/00_Whitespaces.yogur" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/01_AllBinaryOps.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/01_AllBinaryOps.yogur" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/02_SimpleExpressions.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/02_SimpleExpressions.yogur" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/03_SimpleExpr_Factorial.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/03_SimpleExpr_Factorial.yogur" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/04_Recursion_Mcd.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/04_Recursion_Mcd.yogur" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/05_Recursion_Fibonacci.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/05_Recursion_Fibonacci.yogur" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/06_SimpleClass.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/06_SimpleClass.yogur" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/07_ComplexClass_Matrix.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/07_ComplexClass_Matrix.yogur" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/08_ComplexClass_Deck.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/08_ComplexClass_Deck.yogur" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/09_ComplexClass_Library.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/09_ComplexClass_Library.yogur" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/10_NestedClasses.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/10_NestedClasses.yogur" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/11_Misc_1.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/11_Misc_1.yogur" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/12_Misc_2.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/12_Misc_2.yogur" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,6 +132,9 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Alvaro\IntelliJProjects\Yogur\JFLex" />
       <recent name="C:\Users\Alvaro\IntelliJProjects\Yogur" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="yogur.jflex" />
     </key>
   </component>
   <component name="RunManager">
@@ -299,6 +256,15 @@
     <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="editorHistoryManager">

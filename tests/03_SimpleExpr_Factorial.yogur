@@ -1,4 +1,4 @@
-// Un pequeño cálculo del factorial para ir calentando motores
+// Moving on to a classic example, an iterative factorial.
 
 var fact : Int = 1
 var n : Int = 5

@@ -1,4 +1,4 @@
-// Cálculo del máximo común divisor. Comprueba el correcto funcionamiento de la recursión.
+// Calculates GCD. Useful to check that recursion behaves correctly.
 
 def mod(a: Int, b: Int) -> c: Int {
 	c = a - (a / b) * b
