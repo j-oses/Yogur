@@ -1,4 +1,0 @@
-var a: Int[10]
-var b: Int[10]
-
-b = a

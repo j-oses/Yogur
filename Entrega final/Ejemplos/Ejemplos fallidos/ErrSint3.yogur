@@ -1,5 +1,0 @@
-def fun(j: Bool) {
-	def nested() -> i: Int {
-		var a: Int
-	}
-}

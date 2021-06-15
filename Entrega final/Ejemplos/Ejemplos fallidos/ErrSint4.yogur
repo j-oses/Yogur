@@ -1,5 +1,0 @@
-var a: Int
-var b: Int
-var c: Int
-
-a = b = c

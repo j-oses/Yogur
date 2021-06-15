@@ -1,7 +1,0 @@
-var a: Int[10]
-
-def f(arg1: Int[3]) -> c: Int {
-	c = arg1[0]
-}
-
-var b: Int = f(a)
