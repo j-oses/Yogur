@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c422320f-f9c9-4a4e-9951-448273ad10ad" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/P-machine/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/00_Whitespaces.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/00_Whitespaces.yogur" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/01_AllBinaryOps.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/01_AllBinaryOps.yogur" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/02_SimpleExpressions.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/02_SimpleExpressions.yogur" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/03_SimpleExpr_Factorial.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/03_SimpleExpr_Factorial.yogur" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/04_Recursion_Mcd.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/04_Recursion_Mcd.yogur" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/05_Recursion_Fibonacci.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/05_Recursion_Fibonacci.yogur" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/06_SimpleClass.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/06_SimpleClass.yogur" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/07_ComplexClass_Matrix.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/07_ComplexClass_Matrix.yogur" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/08_ComplexClass_Deck.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/08_ComplexClass_Deck.yogur" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/09_ComplexClass_Library.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/09_ComplexClass_Library.yogur" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/10_NestedClasses.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/10_NestedClasses.yogur" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/11_Misc_1.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/11_Misc_1.yogur" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/12_Misc_2.yogur" beforeDir="false" afterPath="$PROJECT_DIR$/tests/12_Misc_2.yogur" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
